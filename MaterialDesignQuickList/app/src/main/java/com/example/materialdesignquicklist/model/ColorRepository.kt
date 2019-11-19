@@ -1,6 +1,17 @@
 package com.example.materialdesignquicklist.model
 
+/*
+ * Google推奨マテリアルデザイン配色保持用Repository
+ */
+
 interface ColorRepository {
+
+    //メインカラー初期化
+    fun createMainColor():ArrayList<String>
+    //メインカラー初期化
+    fun createSubColor():ArrayList<String>
+    //アクセントカラー初期化
+    fun createAccentColor():ArrayList<String>
 
     //メインカラーを返す
     fun getMainColor():ArrayList<String>

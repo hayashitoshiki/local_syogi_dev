@@ -1,9 +1,8 @@
 package com.example.materialdesignquicklist.di
 
 import android.app.Application
-import com.example.materialdesignquicklist.contact.HomeContact
 import com.example.materialdesignquicklist.model.*
-import com.example.materialdesignquicklist.presenter.HomePresenter
+import com.example.materialdesignquicklist.viewmodel.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -24,8 +23,8 @@ class MyApplication: Application() {
 
     // Koinモジュール
     private val module: Module = module  {
-        factory <HomeContact.Presenter>{ (v: HomeContact.View) -> HomePresenter(v,get()) }
         factory <ColorRepository>{ ColorRepositoryImp() }
+        factory <MainViewModel>{ MainViewModel() }
     }
 
 

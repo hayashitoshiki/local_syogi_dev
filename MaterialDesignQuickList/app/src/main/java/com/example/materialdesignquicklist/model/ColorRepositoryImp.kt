@@ -11,23 +11,33 @@ class ColorRepositoryImp: ColorRepository {
     private var accentColorItems:ArrayList<String> = arrayListOf()
 
 
-
-    //メインカラーを返す
-    override fun getMainColor():ArrayList<String>{
+    //メインカラー初期化
+    override fun createMainColor():ArrayList<String>{
         mainColorItems.addAll(color.mainColor)
         return mainColorItems
     }
-
-    //サブカラーを返す
-    override fun getSubColor():ArrayList<String>{
+    //サブカラー初期化
+    override fun createSubColor():ArrayList<String>{
         subColorItems.addAll(color.subColorItemsRed)
         return subColorItems
     }
-
-    //アクセントカラーを返す
-    override fun getAccentColor():ArrayList<String>{
+    //アクセントカラー初期化
+    override fun createAccentColor():ArrayList<String>{
         accentColorItems.addAll(color.mainColor)
         accentColorItems.removeAt(0)
+        return accentColorItems
+    }
+
+    //メインカラーを返す
+    override fun getMainColor():ArrayList<String>{
+        return mainColorItems
+    }
+    //サブカラーを返す
+    override fun getSubColor():ArrayList<String>{
+        return subColorItems
+    }
+    //アクセントカラーを返す
+    override fun getAccentColor():ArrayList<String>{
         return accentColorItems
     }
 
