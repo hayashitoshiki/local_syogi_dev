@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Local_Syogi</string>
+
+    <!-- 設定画面 -->
+    <string name="syogi"><u>本将棋</u></string>
+    <string name="check_syogi"><u>王手将棋</u></string>
+    <string name="annnan_syogi"><u>安南将棋</u></string>
+    <string name="secound_syogi"><u>2手差し将棋</u></string>
+    <string name="quiin_syogi"><u>クイーン将棋</u></string>
+    <string name="piece_syogi"><u>持駒制限将棋</u></string>
+    <string name="chaos_syogi"><u>カオス将棋</u></string>
+    <string name="button">Button</string>
+</resources>

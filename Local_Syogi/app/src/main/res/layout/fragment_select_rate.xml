@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.SelectNormalFragment">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="400px"
+        android:layout_height="match_parent"
+        android:background="@drawable/tab_red_shadow"
+        android:orientation="vertical"
+        android:scaleType="centerInside"
+        android:transitionName="share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/usualyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:text="@string/syogi"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/annnanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="@null"
+            android:text="@string/annnan_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/seccondButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:text="@string/secound_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/pieceLimitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:text="@string/piece_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/queenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:text="@string/quiin_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/checkmateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:text="@string/check_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/chaosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:text="@string/chaos_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
