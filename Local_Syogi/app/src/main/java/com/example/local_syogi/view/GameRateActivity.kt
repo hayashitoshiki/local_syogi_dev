@@ -11,37 +11,43 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import com.example.local_syogi.R
 import com.example.local_syogi.com.example.syogibase.View.WinLoseModal
+import com.example.local_syogi.syogibase.Model.SocketRepository
+import com.example.local_syogi.syogibase.Model.SocketRepositoryImp
+import com.example.syogibase.Model.Data.GameLog
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 
 
-class GameRateActivity : AppCompatActivity(){
+class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
 
     var frame: FrameLayout? = null
     lateinit var view: GameRateView
+    private lateinit var socketRepository: SocketRepositoryImp
+    private lateinit var button2: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_rate)
+        socketRepository = SocketRepositoryImp(this)
+        socketRepository.start()
         //画面作成
-        view = GameRateView(this,this)
         frame = this.findViewById(R.id.frame) as FrameLayout
-        frame!!.addView(view, 0)
-        Log.d("Main","presenter生成")
+        button2 = findViewById(R.id.surrender_black)
+        button2.visibility = View.INVISIBLE
+
     }
 
     //投了ボタン
     fun surrenderBlack(v: View){
         surrender(2)
     }
-    fun surrenderWhite(v: View){
-        surrender(1)
-    }
     private fun surrender(turn:Int){
         AlertDialog.Builder(this)
             .setMessage("投了しますか？")
             .setPositiveButton("はい") { _, _ ->
                 gameEnd(turn)
-                view.gameEndEmit(turn)
+                gameEndEmit(turn)
             }
             .setNegativeButton("いいえ", null)
             .show()
@@ -49,14 +55,11 @@ class GameRateActivity : AppCompatActivity(){
 
     //ゲーム終了後画面
     fun gameEnd(turn:Int){
-        val button: Button = findViewById(R.id.surrender_white)
-        val button2: Button = findViewById(R.id.surrender_black)
         val viewGroup = this.findViewById(R.id.frame2) as FrameLayout
         val endView: View = layoutInflater.inflate(R.layout.modal_game_end, viewGroup)
         val winLoseView: View = WinLoseModal(this, turn)
         val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
-        button.visibility = View.INVISIBLE
         button2.visibility = View.INVISIBLE
         frame!!.addView(winLoseView, 1)
         endView.startAnimation(animation)
@@ -70,7 +73,7 @@ class GameRateActivity : AppCompatActivity(){
     //もう一度ボタン
     fun restart(v: View) {
         finish()
-        val intent = Intent(this, MattingActivity()::class.java)
+        val intent = Intent(this, GameRateActivity()::class.java)
         startActivity(intent)
     }
 
@@ -79,12 +82,31 @@ class GameRateActivity : AppCompatActivity(){
 
     override fun onDestroy() {
         super.onDestroy()
-        view.onDestroy()
+        socketRepository.onDestroy()
         Log.d("MainActivity","socketオフ")
     }
-     fun onGameView(){
 
+    //対局開始を受信　自動的 activityの変更
+    override fun socketStartGame(turn:Int){
+        view = GameRateView(this,this)
+        frame!!.addView(view, 0)
+        button2.visibility = View.VISIBLE
+        view.setTurn(turn)
     }
-
+    //駒の動きを受信。受信側は判定を行わない　　viewの変更
+    override fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int){
+        view.socketMove(oldX, oldY, newX, newY)
+    }
+    //勝敗結果を受信
+    override fun socketGameEnd(turn:Int){
+        gameEnd(turn)
+    }
+    //投了通知→勝敗結果通知
+    fun gameEndEmit(turn:Int){
+        socketRepository.gameEndEmit(turn)
+    }
+    fun moveEmit(log: GameLog){
+        socketRepository.moveEmit(log)
+    }
 
 }

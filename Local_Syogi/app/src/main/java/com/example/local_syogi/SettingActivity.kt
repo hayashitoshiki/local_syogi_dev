@@ -110,7 +110,7 @@ class SettingActivity  : AppCompatActivity() {
             if (mode == FREE) {
                 Intent(this, GameActivity::class.java)
             }else{
-                Intent(this, MattingActivity::class.java)
+                Intent(this, GameRateActivity::class.java)
             }
         startActivity(intent)
         val inAnimation = (AnimationUtils.loadAnimation(this, R.anim.fade) as Animation)

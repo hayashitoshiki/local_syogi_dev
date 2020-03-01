@@ -13,6 +13,7 @@ import com.example.local_syogi.contact.GameViewRateContact
 import com.example.local_syogi.syogibase.Model.Data.GameMode
 import com.example.local_syogi.presenter.GameLogicRatePresenter
 import com.example.local_syogi.view.GameRateActivity
+import com.example.syogibase.Model.Data.GameLog
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
@@ -33,6 +34,8 @@ class GameRateView(private val activity: GameRateActivity, context: Context): Vi
 
     private lateinit var soundPool: SoundPool
     private var soundOne = 0
+
+
     //onCreat
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -133,7 +136,6 @@ class GameRateView(private val activity: GameRateActivity, context: Context): Vi
         paint.textSize = cw / 5
         canvas.drawText(stock.toString(), (cw*(7-count))+cw*3/4, ch-cw/8, paint)
         canvas.restore()
-
     }
 
     //ヒント描画
@@ -161,6 +163,8 @@ class GameRateView(private val activity: GameRateActivity, context: Context): Vi
     //終了ダイアログ表示
     override fun gameEnd(turn:Int){
         activity.gameEnd(turn)
+        val winTurn = if (turn == 1) 2 else 1
+        activity.gameEndEmit(winTurn)
     }
 
     //駒音再生
@@ -169,21 +173,16 @@ class GameRateView(private val activity: GameRateActivity, context: Context): Vi
         soundPool.play(soundOne, 1.0f, 1.0f, 0, 0, 1.0f)
     }
 
-
-    override fun reDraw(){
+    //駒の動きを受信。受信側は判定を行わない　　viewの変更
+    fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int) {
+        presenter.socketMove(oldX, oldY, newX, newY)
         invalidate()
     }
-
-    fun gameEndEmit(turn:Int){
-        presenter.gameEndEmit(turn)
+    fun setTurn(turn:Int){
+        presenter.setTurn(turn)
     }
-    fun onDestroy(){
-        presenter.activityDestroy()
+    override fun moveEmit(log: GameLog){
+        activity.moveEmit(log)
     }
-    override fun gameStart(){
-        activity.onGameView()
-    }
-
-
 
 }

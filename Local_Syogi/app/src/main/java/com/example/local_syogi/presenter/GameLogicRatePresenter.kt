@@ -4,14 +4,11 @@ package com.example.local_syogi.presenter
 import android.util.Log
 import com.example.local_syogi.contact.GameViewRateContact
 import com.example.local_syogi.syogibase.Model.Data.GameMode
-import com.example.local_syogi.syogibase.Model.SocketRepository
-import com.example.local_syogi.syogibase.Model.SocketRepositoryImp
-import com.example.syogibase.Model.BoardRepository
-import com.example.syogibase.Model.Data.GameLog
+import com.example.local_syogi.syogibase.Model.BoardRepository
 import com.example.syogibase.Model.Data.Piece.*
 import com.example.syogibase.Model.Data.PieceMove
 
-class GameLogicRatePresenter(private val view: GameViewRateContact.View, private val boardRepository:BoardRepository): GameViewRateContact.Presenter,SocketRepository.presenter {
+class GameLogicRatePresenter(private val view: GameViewRateContact.View, private val boardRepository:BoardRepository): GameViewRateContact.Presenter{
 
     companion object {
         const val BLACK = 1
@@ -20,14 +17,6 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
 
     private var turn:Int = 1
     private var secondTime = false
-    private lateinit var socketRepository: SocketRepositoryImp
-
-    init{
-        Log.d("Main","Ratepresenter生成")
-        socketRepository = SocketRepositoryImp(this)
-        socketRepository.start()
-        Log.d("Main","socket")
-    }
 
     //タッチ判定　ヒント表示 or Move
     override fun onTouchEvent(x:Int, y:Int) {
@@ -40,30 +29,23 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
             else if (x in 0..8 && y in 1..9) {
                 //もしヒント表示がされているマスをタップした場合
                 if (boardRepository.getHint(x, y - 1)) {
-                    //駒を動かす]
                     setMove(x, y - 1)
-                    //socketRepository.moveEmit(boardRepository.getLogList())
-                    val turnOpponent = if (turn == BLACK) WHITE else BLACK
-                    val (kingX: Int, kingY: Int) = boardRepository.findKing(turnOpponent)
-                    //効果音
-                    view.playbackEffect()
-
-                    //もし王手されていて、王手将棋じゃなかったら詰み判定を行い、王手将棋なら終了
-                    if (checkJudg(kingX, kingY, turnOpponent)) {
+                    view.moveEmit(boardRepository.getLogList())
+                    //王手判定
+                    val (kingX: Int, kingY: Int) = boardRepository.findKing(WHITE)
+                    if (checkJudg(kingX, kingY, WHITE)) {
                         //TODO 王手将棋ならここでゲーム終了
                         if (GameMode.getCheckmateMode()) {
-                            view.gameEnd(turn)
-                            gameEndEmit(turn)
+                            view.gameEnd(BLACK)
                         } else if (checkmate()) {
-                            view.gameEnd(turn)
-                            gameEndEmit(turn)
+                            view.gameEnd(BLACK)
                         }
                     }
-                    turn = if (turn == BLACK) WHITE else BLACK
+
                     //TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
                     if (GameMode.twoTimes) {
-                        if (boardRepository.getTakePice() == None && !checkJudg(kingX, kingY, turnOpponent) && !secondTime) {
-                            turn = if (turn == BLACK) WHITE else BLACK
+                        if (boardRepository.getTakePice() == None && !checkJudg(kingX, kingY, WHITE) && !secondTime) {
+                            turn = BLACK
                             secondTime = true
                         } else {
                             secondTime = false
@@ -116,13 +98,14 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
     private fun setMove(x:Int, y:Int){
         boardRepository.setMove(x, y, turn)
         boardRepository.setHoldPiece()
+        boardRepository.resetHint()
         //成り判定
         val preY = boardRepository.findLogY()
         if((preY in 0..8 && boardRepository.findEvolutionBy(x,y))&&
             ((turn == BLACK && (y<= 2 || preY<=2)) ||
              (turn == WHITE && (6<=y  || 6<=preY)))) evolutionCheck()
-
-        boardRepository.resetHint()
+        view.playbackEffect()
+        turn = if (turn == BLACK) WHITE else BLACK
     }
 
     //キャンセル
@@ -280,7 +263,6 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
 
     //逃げる場所判定
     private fun checkmate():Boolean{
-        val turn = if(this.turn == BLACK) WHITE else BLACK
 
         //逃げる場所 or 防げる駒があるか判定
         for(i in 0..8)for(j in 0..8)if(boardRepository.getTurn(i,j) == turn){
@@ -384,28 +366,10 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
     override fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int){
         boardRepository.setPre(oldX, oldY)
         setMove(newX,newY)
-        view.playbackEffect()
-        view.reDraw()
     }
 
-    //対局開始
-    override fun socketStartGame(turn:Int){
+    override fun setTurn(turn:Int){
         this.turn = turn
-        view.gameStart()
     }
 
-    //ソケット側からの投了通知
-    override fun socketGameEnd(turn:Int){
-        view.gameEnd(turn)
-    }
-
-    //投了通知→勝敗結果通知
-    override fun gameEndEmit(turn:Int){
-        socketRepository.gameEndEmit(turn)
-    }
-
-    //Activityが破棄されたとき
-    override fun activityDestroy(){
-        socketRepository.onDestroy()
-    }
 }

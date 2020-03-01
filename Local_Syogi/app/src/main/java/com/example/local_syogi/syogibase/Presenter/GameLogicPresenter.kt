@@ -4,7 +4,7 @@ package com.example.syogibase.Presenter
 import android.util.Log
 import com.example.local_syogi.syogibase.Model.Data.GameMode
 import com.example.syogibase.Contact.GameViewContact
-import com.example.syogibase.Model.BoardRepository
+import com.example.local_syogi.syogibase.Model.BoardRepository
 import com.example.syogibase.Model.Data.Piece.*
 import com.example.syogibase.Model.Data.PieceMove
 

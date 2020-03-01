@@ -1,4 +1,4 @@
-package com.example.syogibase.Model
+package com.example.local_syogi.syogibase.Model
 
 
 import android.util.Log

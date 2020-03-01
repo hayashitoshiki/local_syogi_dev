@@ -1,6 +1,7 @@
 package com.example.local_syogi.contact
 
 import com.example.syogibase.Contact.GameViewContact
+import com.example.syogibase.Model.Data.GameLog
 
 interface GameViewRateContact {
 
@@ -23,8 +24,7 @@ interface GameViewRateContact {
         fun gameEnd(turn:Int)
         //効果音を鳴らす
         fun playbackEffect()
-        fun reDraw()
-        fun gameStart()
+        fun moveEmit(log: GameLog)
     }
 
     interface Presenter{
@@ -35,7 +35,9 @@ interface GameViewRateContact {
         //成り
         fun evolutionPiece(bool:Boolean)
 
-        fun gameEndEmit(turn:Int)
-        fun activityDestroy()
+        //駒の動きを受信。受信側は判定を行わない　　viewの変更
+        fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int)
+        //ターン変更
+        fun setTurn(turn:Int)
     }
 }

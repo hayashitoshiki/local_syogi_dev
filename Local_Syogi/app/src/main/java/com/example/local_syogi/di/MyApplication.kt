@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.local_syogi.contact.*
 import com.example.local_syogi.presenter.*
 import com.example.syogibase.Contact.GameViewContact
-import com.example.syogibase.Model.BoardRepository
+import com.example.local_syogi.syogibase.Model.BoardRepository
 import com.example.syogibase.Presenter.GameLogicPresenter
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
