@@ -248,4 +248,9 @@ class BoardRepository {
     fun findDiagonalDown(x:Int, y:Int):Boolean{
         return board.cells[x][y].piece.equalDiagonalDown()
     }
+
+    fun getCellInformation(x:Int, y:Int):Cell{
+        return board.cells[x][y]
+    }
+
 }

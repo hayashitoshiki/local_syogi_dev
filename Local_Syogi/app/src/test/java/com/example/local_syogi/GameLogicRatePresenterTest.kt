@@ -21,23 +21,9 @@ class GameLogicRatePresenterTest {
     //テストクラス
     private val presenter:GameLogicRatePresenter = GameLogicRatePresenter(view,repositoryMock)
 
-    //画面タッチ　自分の盤上の駒　盤上のヒント or 盤上のその他 or 持ち駒　or 盤外
-
-    //ヒント取得 全種類の駒で全通りの行ける場所のテスト
-
-    //駒を動かす
-
-    //王手判定
+    //画面タッチ
 
     //将棋盤描画
-
-    //成り判定
-
-    //成る
-
-    //詰み判定
-
-    //持ち駒を使う
 
 
 

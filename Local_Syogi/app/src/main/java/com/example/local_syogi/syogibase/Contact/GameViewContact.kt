@@ -31,8 +31,7 @@ interface GameViewContact {
         fun onTouchEvent(x:Int,y:Int)
         //描画ロジック
         fun drawView()
-        //成り
+        //成り判定
         fun evolutionPiece(bool:Boolean)
-
     }
 }
