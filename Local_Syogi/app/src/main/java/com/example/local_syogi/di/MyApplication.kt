@@ -5,7 +5,9 @@ import com.example.local_syogi.contact.*
 import com.example.local_syogi.presenter.*
 import com.example.syogibase.Contact.GameViewContact
 import com.example.local_syogi.syogibase.Model.BoardRepository
-import com.example.syogibase.Presenter.GameLogicPresenter
+import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
+import com.example.local_syogi.syogibase.domain.SyogiLogicUsecase
+import com.example.local_syogi.syogibase.Presenter.GameLogicPresenter
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -34,6 +36,7 @@ class MyApplication : Application() {
         factory <PieceLimitSyogiContact.Presenter>{ (v: PieceLimitSyogiContact.View) -> PieceLimitSyogiPresenter(v) }
         factory <GameViewContact.Presenter>{ (v: GameViewContact.View) -> GameLogicPresenter(v,get()) }
         factory <GameViewRateContact.Presenter>{ (v: GameViewRateContact.View) -> GameLogicRatePresenter(v,get()) }
+        factory{ SyogiLogicUseCaseImp(get()) }
         factory { BoardRepository() }
 
     }

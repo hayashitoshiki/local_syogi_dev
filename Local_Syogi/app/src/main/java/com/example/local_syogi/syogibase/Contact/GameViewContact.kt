@@ -13,17 +13,16 @@ interface GameViewContact {
         fun drawWhitePiece(name:String, i:Int, j:Int)
         //ヒント描画
         fun drawHint(i:Int,j:Int)
+        //先手の持ち駒描画
+        fun drawHoldPieceBlack(nameJP:String, stock:Int, count:Int)
+        //後手の持ち駒描画
+        fun drawHoldPieceWhite(nameJP:String, stock:Int, count:Int)
         //成るか判断するダイアログ生成
         fun showDialog()
-        //先手の持ち駒セット
-        fun drawHoldPieceBlack(nameJP:String, stock:Int, count:Int)
-        //後手の持ち駒セット
-        fun drawHoldPieceWhite(nameJP:String, stock:Int, count:Int)
-        //詰んだことをActivityに知らせる
+        //対局終了モーダル生成
         fun gameEnd(turn:Int)
         //効果音を鳴らす
         fun playbackEffect()
-
     }
 
     interface Presenter{
@@ -31,8 +30,7 @@ interface GameViewContact {
         fun onTouchEvent(x:Int,y:Int)
         //描画ロジック
         fun drawView()
-        //成り
+        //成り判定
         fun evolutionPiece(bool:Boolean)
-
     }
 }
