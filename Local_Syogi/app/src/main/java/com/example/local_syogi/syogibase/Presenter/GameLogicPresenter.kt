@@ -1,4 +1,4 @@
-package com.example.syogibase.Presenter
+package com.example.local_syogi.syogibase.Presenter
 
 
 import com.example.syogibase.Contact.GameViewContact
