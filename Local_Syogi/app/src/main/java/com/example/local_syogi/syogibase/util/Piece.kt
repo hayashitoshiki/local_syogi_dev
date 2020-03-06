@@ -98,7 +98,7 @@ enum class Piece(val nameJP:String) {
         }
     }
 
-    //横へ動ける駒
+    //下へ動ける駒
     fun equalDownMovePiece():Boolean{
         return when(this){
             TO,N_KYO,N_KEI,N_GIN,KIN,OU,GYOKU,HISYA,RYU,UMA -> true
@@ -110,6 +110,14 @@ enum class Piece(val nameJP:String) {
     fun equalLRMovePiece():Boolean{
         return when(this){
             TO,N_KYO,N_KEI,N_GIN,KIN,OU,GYOKU,HISYA,RYU,UMA -> true
+            else -> false
+        }
+    }
+
+    //横へ2マス以上動ける駒
+    fun equalLongLRMovePiece():Boolean{
+        return when(this){
+            HISYA,RYU -> true
             else -> false
         }
     }
