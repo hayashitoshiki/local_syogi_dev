@@ -249,6 +249,7 @@ class BoardRepository {
         return board.cells[x][y].piece.equalDiagonalDown()
     }
 
+    //指定したマスの情報を返す
     fun getCellInformation(x:Int, y:Int):Cell{
         return board.cells[x][y]
     }

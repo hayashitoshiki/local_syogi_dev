@@ -6,7 +6,7 @@ import com.example.local_syogi.presenter.*
 import com.example.syogibase.Contact.GameViewContact
 import com.example.local_syogi.syogibase.Model.BoardRepository
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
-import com.example.local_syogi.syogibase.domain.SyogiLogicUsecase
+import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.Presenter.GameLogicPresenter
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

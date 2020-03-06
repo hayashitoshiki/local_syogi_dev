@@ -2,9 +2,9 @@ package com.example.local_syogi.syogibase.Presenter
 
 
 import com.example.syogibase.Contact.GameViewContact
-import com.example.local_syogi.syogibase.domain.SyogiLogicUsecase
+import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
 
-class GameLogicPresenter(private val view: GameViewContact.View,private val usecase: SyogiLogicUsecase): GameViewContact.Presenter {
+class GameLogicPresenter(private val view: GameViewContact.View,private val usecase: SyogiLogicUseCase): GameViewContact.Presenter {
 
     companion object {
         const val BLACK = 1
@@ -15,7 +15,7 @@ class GameLogicPresenter(private val view: GameViewContact.View,private val usec
     //タッチ判定
     override fun onTouchEvent(x:Int, y:Int) {
         //持ち駒
-        if(y == 0 || y == 10)usecase.getHintHoldPiece(x,y)
+        if(y == 0 || y == 10)usecase.setHintHoldPiece(x,y)
         //盤上
         else if( x in 0..8 && y in 1..9 ){
             when (usecase.getCellTrun(x, y-1)){
@@ -30,7 +30,7 @@ class GameLogicPresenter(private val view: GameViewContact.View,private val usec
                     }
                     usecase.twohandRule()
                 }
-                usecase.getTurn() -> usecase.setHint(x, y-1)
+                usecase.getTurn() -> usecase.setTouchHint(x, y-1)
                 else ->usecase.cancel()
             }
         }

@@ -3,12 +3,14 @@ package com.example.local_syogi.syogibase.domain
 
 import com.example.syogibase.Model.Data.Piece
 
-interface SyogiLogicUsecase {
+interface SyogiLogicUseCase {
 
     //TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
     fun twohandRule()
     //ヒントセットする
-    fun setHint(x:Int,y:Int)
+    fun setTouchHint(x:Int,y:Int)
+    //持ち駒を使う場合
+    fun setHintHoldPiece(x: Int, y: Int)
     //駒を動かす
     fun setMove(x: Int, y: Int)
     //成り判定
@@ -21,8 +23,6 @@ interface SyogiLogicUsecase {
     fun checkGameEnd():Boolean
     //キャンセル
     fun cancel()
-    //持ち駒を使う場合
-    fun getHintHoldPiece(x: Int, y: Int)
     //(駒の名前,手番,ヒントの表示)を返す
     fun getCellInformation(x:Int,y:Int):Triple<String,Int,Boolean>
     //(駒の名前,手番,ヒントの表示)を返す

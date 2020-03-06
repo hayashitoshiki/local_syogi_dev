@@ -7,7 +7,7 @@ import com.example.syogibase.Model.Data.Piece
 import com.example.syogibase.Model.Data.Piece.*
 import com.example.syogibase.Model.Data.PieceMove
 
-class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLogicUsecase {
+class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLogicUseCase {
 
     companion object {
         const val BLACK = 1
@@ -19,68 +19,68 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
 
 
     //駒を動かした後～王手判定
-    override fun checkGameEnd():Boolean{
+    override fun checkGameEnd(): Boolean {
         val turnOpponent = if (turn == BLACK) WHITE else BLACK
         val (kingX: Int, kingY: Int) = boardRepository.findKing(turnOpponent)
 
-        //もし王手されていて、王手将棋じゃなかったら詰み判定を行い、王手将棋なら終了
-        if (checkJudg(kingX, kingY, turnOpponent)) {
-            //TODO 王手将棋ならここでゲーム終了
-            if (GameMode.getCheckmateMode()) {
-                return true
-            } else if (checkmate()) {
-                return true
-            }
+        //もし王手&詰み判定
+        if (checkJudg(kingX, kingY, turnOpponent) && (GameMode.getCheckmateMode() || checkmate())) {
+            return true
         }
         turn = if (turn == BLACK) WHITE else BLACK
-
         return false
     }
 
     //TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
-    override fun twohandRule(){
-        if (GameMode.twoTimes) {
-            if (boardRepository.getTakePice() == None && !secondTime) {
-                turn = if (turn == BLACK) WHITE else BLACK
-                secondTime = true
-            } else {
-                secondTime = false
-            }
+    override fun twohandRule() {
+        if (GameMode.twoTimes && boardRepository.getTakePice() == None && !secondTime) {
+            turn = if (turn == BLACK) WHITE else BLACK
+            secondTime = true
+        } else {
+            secondTime = false
         }
     }
 
-    //ヒントセットする
-    override fun setHint(x:Int,y:Int){
+    //指定したマスのヒント探す
+    override fun setTouchHint(x: Int, y: Int) {
         boardRepository.resetHint()
-        getHint(x, y, turn)
+        searchHint(x, y, turn)
     }
 
     //ヒント取得
-    private fun getHint(touchX:Int, touchY:Int,turn:Int){
+    private fun searchHint(touchX: Int, touchY: Int, turn: Int) {
+        val moveList: Array<Array<PieceMove>> = boardRepository.getMove(touchX, touchY)
 
-        val moveList:Array<Array<PieceMove>> = boardRepository.getMove(touchX, touchY)
-
-        for(moveDirection in moveList){
-            for(move in moveDirection){
-                val (newX:Int, newY:Int) =
-                    if(turn == BLACK) Pair(touchX+move.x, touchY+move.y)
-                    else              Pair(touchX-move.x, touchY-move.y)
+        for (moveDirection in moveList) {
+            for (move in moveDirection) {
+                val (newX: Int, newY: Int) =
+                    if (turn == BLACK) Pair(touchX + move.x, touchY + move.y)
+                    else Pair(touchX - move.x, touchY - move.y)
                 //駒を動かしたとき自分の王様が王手にならなかったらヒントを表示
-                if(newX in 0..8 && newY in 0..8 && boardRepository.getTurn(newX,newY) != turn) {
+                if (newX in 0..8 && newY in 0..8 && boardRepository.getTurn(newX, newY) != turn) {
                     // TODO 持ち駒制限将棋
-                    if(GameMode.pieceLimit && boardRepository.getTurn(newX,newY) != 0 && boardRepository.getCountHoldPiece(turn) + 1 >= GameMode.pieceLimitCount ){
-                        break
-                    }
-                    boardRepository.setPre(touchX, touchY)
-                    boardRepository.setMove(newX, newY, turn)
-                    val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
-                    if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(newX, newY)
-                    boardRepository.setBackMove()
+                    if (pieceLimitJudg(newX, newY)) break
+
+                    setHint(touchX, touchY, newX, newY, turn)
                 }
-                if(newX in 0..8 && newY in 0..8 && boardRepository.getTurn(newX,newY) != 0)break
+                if (newX in 0..8 && newY in 0..8 && boardRepository.getTurn(newX, newY) != 0) break
             }
         }
-        boardRepository.getCountByHint()
+    }
+
+    //ヒントを設定する
+    private fun setHint(x:Int, y:Int, newX:Int, newY:Int, turn:Int) {
+        boardRepository.setPre(x, y)
+        boardRepository.setMove(newX, newY, turn)
+        val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
+        if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(newX, newY)
+        boardRepository.setBackMove()
+    }
+
+    //持ち駒制限将棋
+    fun pieceLimitJudg(x:Int, y:Int):Boolean{
+        if(GameMode.pieceLimit && boardRepository.getTurn(x,y) != 0 && boardRepository.getCountHoldPiece(turn) + 1 >= GameMode.pieceLimitCount )return true
+        return false
     }
 
     //駒を動かす
@@ -109,15 +109,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //↑
         for (j in 1..8) {
             if (0 <= r - j) {
-                if (j == 1 && boardRepository.getTurn(c, r - j) != turnKing &&
-                    ((boardRepository.findUpMovePiece(c, r - j) && turnKing == BLACK) ||
-                            (boardRepository.findDownMovePiece(c, r - j) && turnKing == WHITE))
-                ) return true
-                else if (((boardRepository.getPiece(c, r - j) == HISYA ||
-                            boardRepository.getPiece(c, r - j) == RYU) && boardRepository.getTurn(c, r - j) != turnKing) ||
-                    (boardRepository.getPiece(c, r - j) == KYO && boardRepository.getTurn(c, r - j) == WHITE && turnKing == BLACK)
-                ) return true
-                else if (boardRepository.getTurn(c, r - j) != 0) break
+                val cellTurn = boardRepository.getTurn(c, r-j)
+                val cellPiece = boardRepository.getPiece(c, r-j)
+                if (cellTurn == turnKing) break
+                else if (j == 1 && ((cellPiece.equalUpMovePiece() && turnKing == BLACK) || (cellPiece.equalDownMovePiece() && turnKing == WHITE))) return true
+                else if ((cellPiece == HISYA || cellPiece == RYU) || (cellPiece == KYO && cellTurn == BLACK && turnKing == WHITE)) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -126,17 +123,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //↓
         for (j in 1..8) {
             if (r + j < 9) {
-                if (j == 1 && boardRepository.getTurn(c, r + j) != turnKing &&
-                    ((boardRepository.findDownMovePiece(c, r + j) && turnKing == BLACK) ||
-                            (boardRepository.findUpMovePiece(c, r + j) && turnKing == WHITE))
-                ) return true
-                else if (((boardRepository.getPiece(c, r + j
-                    ) == HISYA || boardRepository.getPiece(c, r + j
-                    ) == RYU) && boardRepository.getTurn(c, r + j) != turnKing) ||
-                    (boardRepository.getPiece(c, r + j) == KYO && boardRepository.getTurn(c, r + j
-                    ) == BLACK && turnKing == WHITE)
-                ) return true
-                else if (boardRepository.getTurn(c, r + j) != 0) break
+                val cellTurn = boardRepository.getTurn(c, r+j)
+                val cellPiece = boardRepository.getPiece(c, r+j)
+                if (cellTurn == turnKing) break
+                else if (j == 1 && ((cellPiece.equalDownMovePiece() && turnKing == BLACK) || (cellPiece.equalUpMovePiece() && turnKing == WHITE))) return true
+                else if ((cellPiece == HISYA || cellPiece == RYU) || (cellPiece == KYO && cellTurn == BLACK && turnKing == WHITE)) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -145,14 +137,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //←
         for (j in 1..8) {
             if (0 <= c - j) {
-                if (j == 1 && boardRepository.getTurn(c - j, r) != turnKing &&
-                    boardRepository.findLRMovePiece(c - j, r)
-                ) return true
-                else if ((boardRepository.getPiece(c - j, r
-                    ) == HISYA || boardRepository.getPiece(c - j, r
-                    ) == RYU) && boardRepository.getTurn(c - j, r) != turnKing
-                ) return true
-                else if (boardRepository.getTurn(c - j, r) != 0) break
+                val cellTurn = boardRepository.getTurn(c-j, r)
+                val cellPiece = boardRepository.getPiece(c -j, r)
+                if (cellTurn == turnKing) break
+                else if (j == 1 && cellPiece.equalLRMovePiece()) return true
+                else if (cellPiece.equalLongLRMovePiece()) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -161,15 +151,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //→
         for (j in 1..8) {
             if (c + j < 9) {
-                if (boardRepository.getTurn(c + j, r) == turnKing) break
-                else if (j == 1 && boardRepository.getTurn(c + j, r) != turnKing &&
-                    boardRepository.findLRMovePiece(c + j, r)
-                ) return true
-                else if ((boardRepository.getPiece(c + j, r
-                    ) == HISYA || boardRepository.getPiece(c + j, r
-                    ) == RYU) && boardRepository.getTurn(c + j, r) != turnKing
-                ) return true
-                else if (boardRepository.getTurn(c + j, r) != 0) break
+                val cellTurn = boardRepository.getTurn(c + j, r)
+                val cellPiece = boardRepository.getPiece(c + j, r)
+                if (cellTurn == turnKing) break
+                else if (cellPiece.equalLRMovePiece() && j == 1) return true
+                else if (cellPiece.equalLongLRMovePiece()) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -178,16 +165,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //↖
         for (j in 1..8) {
             if (0 <= c - j && 0 <= r - j) {
-                if (boardRepository.getTurn(c - j, r - j) == turnKing) break
-                else if (j == 1 && boardRepository.getTurn(c - j, r - j) != turnKing &&
-                    ((boardRepository.findDiagonalUp(c - j, r - j) && turnKing == BLACK) ||
-                            (boardRepository.findDiagonalDown(c - j, r - j) && turnKing == WHITE))
-                ) return true
-                else if ((boardRepository.getPiece(c - j, r - j
-                    ) == KAKU || boardRepository.getPiece(c - j, r - j
-                    ) == UMA) && boardRepository.getTurn(c - j, r - j) != turnKing
-                ) return true
-                else if (boardRepository.getTurn(c - j, r - j) != 0) break
+                val cellTurn = boardRepository.getTurn(c-j, r-j)
+                val cellPiece = boardRepository.getPiece(c -j, r-j)
+                if (cellTurn == turnKing) break
+                else if (j == 1 && ((cellPiece.equalDiagonalUp() && turnKing == BLACK) || (cellPiece.equalDiagonalDown() && turnKing == WHITE))) return true
+                else if (cellPiece == KAKU || cellPiece == UMA) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -196,15 +179,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //↙
         for (j in 1..8) {
             if (0 <= c - j && r + j < 9) {
-                if (j == 1 && boardRepository.getTurn(c - j, r + j) != turnKing &&
-                    ((boardRepository.findDiagonalDown(c - j, r + j) && turnKing == BLACK) ||
-                            (boardRepository.findDiagonalUp(c - j, r + j) && turnKing == WHITE))
-                ) return true
-                else if ((boardRepository.getPiece(c - j, r + j
-                    ) == KAKU || boardRepository.getPiece(c - j, r + j
-                    ) == UMA) && boardRepository.getTurn(c - j, r + j) != turnKing
-                ) return true
-                else if (boardRepository.getTurn(c - j, r + j) != 0) break
+                val cellTurn = boardRepository.getTurn(c-j, r+j)
+                val cellPiece = boardRepository.getPiece(c -j, r+j)
+                if (cellTurn == turnKing) break
+                else if (j == 1 && ((cellPiece.equalDiagonalDown() && turnKing == BLACK) || (cellPiece.equalDiagonalUp() && turnKing == WHITE))) return true
+                else if (cellPiece == KAKU || cellPiece == UMA) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -213,15 +193,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //↗
         for (j in 1..8) {
             if (c + j < 9 && 0 <= r - j) {
-                if (j == 1 && boardRepository.getTurn(c + j, r - j) != turnKing &&
-                    ((boardRepository.findDiagonalUp(c + j, r - j) && turnKing == BLACK) ||
-                            (boardRepository.findDiagonalDown(c + j, r - j) && turnKing == WHITE))
-                ) return true
-                else if ((boardRepository.getPiece(c + j, r - j
-                    ) == KAKU || boardRepository.getPiece(c + j, r - j
-                    ) == UMA) && boardRepository.getTurn(c + j, r - j) != turnKing
-                ) return true
-                else if (boardRepository.getTurn(c + j, r - j) != 0) break
+                val cellTurn = boardRepository.getTurn(c+j, r-j)
+                val cellPiece = boardRepository.getPiece(c+j, r-j)
+                if (cellTurn == turnKing) break
+                else if (j == 1 && ((cellPiece.equalDiagonalUp() && turnKing == BLACK) || (cellPiece.equalDiagonalDown() && turnKing == WHITE))) return true
+                else if (cellPiece == KAKU || cellPiece == UMA) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -230,9 +207,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //↘
         for (j in 1..8) {
             if (c + j < 9 && r + j < 9) {
-                if (j == 1 && boardRepository.getTurn(c + j, r + j) != turnKing && ((boardRepository.findDiagonalDown(c + j, r + j) && turnKing == BLACK) || (boardRepository.findDiagonalUp(c + j, r + j) && turnKing == WHITE))) return true
-                else if ((boardRepository.getPiece(c + j, r + j) == KAKU || boardRepository.getPiece(c + j, r + j) == UMA) && boardRepository.getTurn(c + j, r + j) != turnKing) return true
-                else if (boardRepository.getTurn(c + j, r + j) != 0) break
+                val cellTurn = boardRepository.getTurn(c+j, r+j)
+                val cellPiece = boardRepository.getPiece(c+j, r+j)
+                if (cellTurn == turnKing) break
+                else if (j == 1 && ((cellPiece.equalDiagonalDown() && turnKing == BLACK) || (cellPiece.equalDiagonalUp() && turnKing == WHITE))) return true
+                else if (cellPiece == KAKU || cellPiece == UMA) return true
+                else if (cellTurn != 0) break
             } else {
                 //盤外
                 break
@@ -241,7 +221,6 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
 
         //桂馬のきき
         if (turn == BLACK && 0 <= r - 2) {
-            val cell = boardRepository.getCellInformation(c-1,r-2)
             if (0 <= c - 1 && boardRepository.getPiece(c - 1, r - 2) == KEI && boardRepository.getTurn(c - 1, r - 2) != turnKing) return true
             if (c + 1 < 9 && boardRepository.getPiece(c + 1, r - 2) == KEI && boardRepository.getTurn(c + 1, r - 2) != turnKing) return true
         } else if (r + 2 < 9) {
@@ -261,7 +240,7 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
 
         //逃げる場所 or 防げる駒があるか判定
         for (i in 0..8) for (j in 0..8) if (boardRepository.getTurn(i, j) == turn) {
-            getHint(i, j, turn)
+            searchHint(i, j, turn)
         }
 
         //もしHint(逃げる場所)がなかったら詰み
@@ -286,14 +265,13 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     }
 
     //持ち駒を使う場合
-
-    override fun getHintHoldPiece(x: Int, y: Int) {
+    override fun setHintHoldPiece(x: Int, y: Int) {
+        boardRepository.resetHint()
         val (newX, newY) = if (y == 10) Pair(x, y) else Pair(8 - x, -1)
         val piece =
             if (y == 0 && turn == WHITE) boardRepository.findHoldPieceBy(8 - x, turn)
             else if (y == 10 && turn == BLACK) boardRepository.findHoldPieceBy(x, turn)
             else None
-        boardRepository.resetHint()
         if (piece == None) return
 
         boardRepository.setPre(newX, newY)
@@ -302,24 +280,16 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
                 for (i in 0..8) {
                     for (j in 0..8) {
                         if (boardRepository.getTurn(i, j) == 0) {
-                            boardRepository.setPre(newX, newY)
-                            boardRepository.setMove(i, j, turn)
-                            val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
-                            if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(i, j)
-                            boardRepository.setBackMove()
+                            setHint(newX, newY, i, j, turn)
                         }
                     }
                 }
             KYO ->
                 for (i in 0..8) {
                     for (j in 1..8) {
-                        val J = if (turn == BLACK) j else 8 - j
+                    val J = if (turn == BLACK) j else 8 - j
                         if (boardRepository.getTurn(i, J) == 0) {
-                            boardRepository.setPre(newX, newY)
-                            boardRepository.setMove(i, J, turn)
-                            val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
-                            if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(i, J)
-                            boardRepository.setBackMove()
+                            setHint(newX, newY, i, J, turn)
                         }
                     }
                 }
@@ -328,32 +298,22 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
                     for (j in 2..8) {
                         val J = if (turn == BLACK) j else 8 - j
                         if (boardRepository.getTurn(i, J) == 0) {
-                            boardRepository.setPre(newX, newY)
-                            boardRepository.setMove(i, J, turn)
-                            val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
-                            if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(i, J)
-                            boardRepository.setBackMove()
+                            setHint(newX, newY, i, J, turn)
                         }
                     }
                 }
             FU ->
-                for (i in 0..8) {
-                    for (j in 0..8) {
-                        if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
-                        if (j == 8) {
-                            for (k in 1..8) {
-                                val K = if (y == 10) k else k - 1
-                                if (boardRepository.getTurn(i, K) == 0) {
-                                    boardRepository.setPre(newX, newY)
-                                    boardRepository.setMove(i, K, turn)
-                                    val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
-                                    if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(i, K)
-                                    boardRepository.setBackMove()
-                                }
+                for (i in 0..8) { for (j in 0..8) {
+                    if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
+                    if (j == 8) {
+                        for (k in 1..8) {
+                            val K = if (y == 10) k else k - 1
+                            if (boardRepository.getTurn(i, K) == 0) {
+                                setHint(newX, newY, i, k, turn)
                             }
                         }
                     }
-                }
+                } }
             else -> Log.e("GameLogicPresenter", "不正な持ち駒を取得しようとしています")
         }
     }
@@ -364,22 +324,22 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
 
         return Triple(cell.piece.nameJP, cell.turn, cell.hint)
     }
+
     //(駒の名前,手番,ヒントの表示)を返す
     override fun getCellTrun(x:Int,y:Int):Int{
         val cell = boardRepository.getCellInformation(x,y)
-        val turn =
-            if(cell.hint){
+        return if(cell.hint){
                 3
-            }else if(cell.turn == 1){
-                1
-            }else if(cell.turn == 2){
-                2
+            }else if(cell.turn == BLACK){
+                BLACK
+            }else if(cell.turn == WHITE){
+                WHITE
             }else{
                 4
             }
-        return turn
     }
 
+    //指定した手番の持ち駒を返す
     override  fun getPieceHand(turn:Int):MutableList<Pair<Piece,Int>>{
         val hold = mutableListOf<Pair<Piece,Int>>()
         var i = 0
@@ -390,6 +350,7 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         return hold
     }
 
+    //現在の手番を返す
     override  fun getTurn():Int{
         return turn
     }
