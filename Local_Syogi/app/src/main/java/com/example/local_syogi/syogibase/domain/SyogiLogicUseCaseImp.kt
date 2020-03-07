@@ -1,12 +1,12 @@
 package com.example.local_syogi.syogibase.domain
 
 import android.util.Log
-import com.example.local_syogi.syogibase.Model.Data.GameMode
-import com.example.local_syogi.syogibase.Model.BoardRepository
-import com.example.syogibase.Model.Data.GameLog
-import com.example.syogibase.Model.Data.Piece
-import com.example.syogibase.Model.Data.Piece.*
-import com.example.syogibase.Model.Data.PieceMove
+import com.example.local_syogi.syogibase.data.local.GameMode
+import com.example.local_syogi.syogibase.data.BoardRepository
+import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.util.Piece
+import com.example.local_syogi.syogibase.util.PieceMove
+import com.example.local_syogi.syogibase.util.Piece.*
 
 class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLogicUseCase {
 

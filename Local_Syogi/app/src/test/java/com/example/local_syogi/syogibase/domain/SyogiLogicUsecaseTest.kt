@@ -1,8 +1,8 @@
 package com.example.local_syogi.syogibase.domain
 
-import com.example.local_syogi.syogibase.Model.BoardRepository
-import com.example.syogibase.Model.Data.Cell
-import com.example.syogibase.Model.Data.Piece
+import com.example.local_syogi.syogibase.data.BoardRepository
+import com.example.local_syogi.syogibase.data.local.Cell
+import com.example.local_syogi.syogibase.util.Piece
 import com.nhaarman.mockito_kotlin.*
 import org.junit.Before
 import org.junit.Test
@@ -297,8 +297,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository>{}
         val useCase = SyogiLogicUseCaseImp(repository)
         //実行
-        useCase.setMove(3,3)
-        verify(repository, times(1)).setMove(eq(3),eq(3),anyInt())
+        useCase.setMove(3,3,false)
+        verify(repository, times(1)).setMove(eq(3),eq(3),anyInt(),eq(false))
         verify(repository, times(1)).setHoldPiece()
         verify(repository, times(1)).resetHint()
     }

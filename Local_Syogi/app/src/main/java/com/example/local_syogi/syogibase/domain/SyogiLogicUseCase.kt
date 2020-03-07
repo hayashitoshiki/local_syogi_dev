@@ -1,8 +1,8 @@
 package com.example.local_syogi.syogibase.domain
 
 
-import com.example.syogibase.Model.Data.GameLog
-import com.example.syogibase.Model.Data.Piece
+import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.util.Piece
 
 interface SyogiLogicUseCase {
 

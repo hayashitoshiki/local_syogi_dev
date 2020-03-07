@@ -11,13 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".view.GameRateActivity"></activity>
-        <activity android:name=".view.SelectNormalFragment" />
+        <activity android:name="com.example.local_syogi.presentation.view.GameRateActivity"></activity>
+        <activity android:name="com.example.local_syogi.presentation.view.SelectNormalFragment" />
         <activity android:name="com.example.syogibase.View.WinLoseModal" />
         <activity android:name="com.example.syogibase.View.GameActivity" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".view.MattingActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation.view.SettingActivity" />
+        <activity android:name="com.example.local_syogi.presentation.view.MattingActivity" />
+        <activity android:name=".presentation.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

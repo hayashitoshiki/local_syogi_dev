@@ -1,5 +1,6 @@
-package com.example.syogibase.Model.Data
+package com.example.local_syogi.syogibase.util
 
+import com.example.local_syogi.syogibase.util.PieceMove
 //将棋の駒格納クラス
 /*
  * 駒の名前[
