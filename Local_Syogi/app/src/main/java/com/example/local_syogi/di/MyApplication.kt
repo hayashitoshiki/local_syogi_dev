@@ -37,8 +37,8 @@ class MyApplication : Application() {
         factory <PieceLimitSyogiContact.Presenter>{ (v: PieceLimitSyogiContact.View) -> PieceLimitSyogiPresenter(v) }
         factory <GameViewContact.Presenter>{ (v: GameViewContact.View) -> GameLogicPresenter(v,get()) }
         factory <GameViewRateContact.Presenter>{ (v: GameViewRateContact.View) -> GameLogicRatePresenter(v,get()) }
-        factory{ SyogiLogicUseCaseImp(get()) }
-        factory { BoardRepositoryImp() }
+        factory <SyogiLogicUseCase>{ SyogiLogicUseCaseImp(get()) }
+        factory <BoardRepository>{ BoardRepositoryImp() }
 
     }
 }
