@@ -51,4 +51,7 @@ dependencies {
     //mockit
     testImplementation 'org.mockito:mockito-inline:2.13.0'
     testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+    //PowerMock
+    testImplementation 'org.powermock:powermock-module-junit4:1.6.2'
+    testImplementation 'org.powermock:powermock-api-mockito:1.6.2'
 }

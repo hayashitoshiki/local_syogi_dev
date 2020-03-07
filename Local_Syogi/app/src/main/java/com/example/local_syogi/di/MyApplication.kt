@@ -5,6 +5,7 @@ import com.example.local_syogi.contact.*
 import com.example.local_syogi.presenter.*
 import com.example.syogibase.Contact.GameViewContact
 import com.example.local_syogi.syogibase.Model.BoardRepository
+import com.example.local_syogi.syogibase.Model.BoardRepositoryImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.Presenter.GameLogicPresenter
@@ -37,7 +38,7 @@ class MyApplication : Application() {
         factory <GameViewContact.Presenter>{ (v: GameViewContact.View) -> GameLogicPresenter(v,get()) }
         factory <GameViewRateContact.Presenter>{ (v: GameViewRateContact.View) -> GameLogicRatePresenter(v,get()) }
         factory{ SyogiLogicUseCaseImp(get()) }
-        factory { BoardRepository() }
+        factory { BoardRepositoryImp() }
 
     }
 }
