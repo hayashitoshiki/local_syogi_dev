@@ -1,14 +1,14 @@
 package com.example.local_syogi.di
 
 import android.app.Application
-import com.example.local_syogi.contact.*
-import com.example.local_syogi.presenter.*
-import com.example.syogibase.Contact.GameViewContact
-import com.example.local_syogi.syogibase.Model.BoardRepository
-import com.example.local_syogi.syogibase.Model.BoardRepositoryImp
+import com.example.local_syogi.presentation.contact.*
+import com.example.local_syogi.presentation.presenter.*
+import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
+import com.example.local_syogi.syogibase.data.BoardRepository
+import com.example.local_syogi.syogibase.data.BoardRepositoryImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
-import com.example.local_syogi.syogibase.Presenter.GameLogicPresenter
+import com.example.local_syogi.syogibase.presentation.presenter.GameLogicPresenter
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -37,8 +37,8 @@ class MyApplication : Application() {
         factory <PieceLimitSyogiContact.Presenter>{ (v: PieceLimitSyogiContact.View) -> PieceLimitSyogiPresenter(v) }
         factory <GameViewContact.Presenter>{ (v: GameViewContact.View) -> GameLogicPresenter(v,get()) }
         factory <GameViewRateContact.Presenter>{ (v: GameViewRateContact.View) -> GameLogicRatePresenter(v,get()) }
-        factory{ SyogiLogicUseCaseImp(get()) }
-        factory { BoardRepositoryImp() }
+        factory <SyogiLogicUseCase>{ SyogiLogicUseCaseImp(get()) }
+        factory <BoardRepository>{ BoardRepositoryImp() }
 
     }
 }

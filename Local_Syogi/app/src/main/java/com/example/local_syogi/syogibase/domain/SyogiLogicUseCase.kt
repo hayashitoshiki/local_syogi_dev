@@ -1,7 +1,8 @@
 package com.example.local_syogi.syogibase.domain
 
 
-import com.example.syogibase.Model.Data.Piece
+import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.util.Piece
 
 interface SyogiLogicUseCase {
 
@@ -12,7 +13,7 @@ interface SyogiLogicUseCase {
     //持ち駒を使う場合
     fun setHintHoldPiece(x: Int, y: Int)
     //駒を動かす
-    fun setMove(x: Int, y: Int)
+    fun setMove(x: Int, y: Int, evolution:Boolean)
     //成り判定
     fun evolutionCheck(x:Int, y:Int):Boolean
     //成り判定 強制か否か
@@ -31,4 +32,12 @@ interface SyogiLogicUseCase {
     fun getPieceHand(turn:Int):MutableList<Pair<Piece,Int>>
     //ターンを返す
     fun getTurn():Int
+    //手番を設定する
+    fun setTurn(turn:Int)
+    //ヒントを設定する
+    fun setHint(x:Int, y:Int, newX:Int, newY:Int, turn:Int)
+    //最後のログを取得する
+    fun getLogLast(): GameLog
+    //動かす駒の元の位置をセットする
+    fun setPre(x:Int, y:Int)
 }
