@@ -36,7 +36,7 @@ interface GameViewRateContact {
         fun evolutionPiece(bool:Boolean)
 
         //駒の動きを受信。受信側は判定を行わない　　viewの変更
-        fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int)
+        fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int, evolution:Boolean)
         //ターン変更
         fun setTurn(turn:Int)
     }

@@ -20,7 +20,7 @@ class GameLogicPresenter(private val view: GameViewContact.View,private val usec
         else if( x in 0..8 && y in 1..9 ){
             when (usecase.getCellTrun(x, y-1)){
                 HINT  ->{
-                    usecase.setMove(x, y-1)
+                    usecase.setMove(x, y-1,false)
                     if(usecase.evolutionCheck(x,y-1) && !usecase.compulsionEvolutionCheck()){
                         view.showDialog()
                     }

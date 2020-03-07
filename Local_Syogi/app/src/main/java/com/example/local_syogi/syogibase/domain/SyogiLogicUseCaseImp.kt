@@ -3,6 +3,7 @@ package com.example.local_syogi.syogibase.domain
 import android.util.Log
 import com.example.local_syogi.syogibase.Model.Data.GameMode
 import com.example.local_syogi.syogibase.Model.BoardRepository
+import com.example.syogibase.Model.Data.GameLog
 import com.example.syogibase.Model.Data.Piece
 import com.example.syogibase.Model.Data.Piece.*
 import com.example.syogibase.Model.Data.PieceMove
@@ -59,9 +60,9 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     }
 
     //ヒントを設定する
-    private fun setHint(x:Int, y:Int, newX:Int, newY:Int, turn:Int) {
+    override fun setHint(x:Int, y:Int, newX:Int, newY:Int, turn:Int) {
         boardRepository.setPre(x, y)
-        boardRepository.setMove(newX, newY, turn)
+        boardRepository.setMove(newX, newY, turn,false)
         val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
         if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(newX, newY)
         boardRepository.setBackMove()
@@ -84,8 +85,8 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     }
 
     //駒を動かす
-    override fun setMove(x: Int, y: Int) {
-        boardRepository.setMove(x, y, turn)
+    override fun setMove(x: Int, y: Int,evolution:Boolean) {
+        boardRepository.setMove(x, y, turn,evolution)
         boardRepository.setHoldPiece()
         boardRepository.resetHint()
     }
@@ -355,5 +356,17 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     //現在の手番を返す
     override  fun getTurn():Int{
         return turn
+    }
+    //手番を設定する
+    override fun setTurn(turn:Int){
+        this.turn = turn
+    }
+    //最後のログを取得する
+    override fun getLogLast(): GameLog {
+        return boardRepository.getLogList()
+    }
+    //動かす駒の元の位置をセットする
+    override fun setPre(x:Int, y:Int){
+        boardRepository.setPre(x, y)
     }
 }

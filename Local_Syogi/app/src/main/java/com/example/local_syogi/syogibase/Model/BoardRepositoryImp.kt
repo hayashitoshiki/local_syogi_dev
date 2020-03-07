@@ -7,7 +7,7 @@ import com.example.syogibase.Model.Data.*
 
 class BoardRepositoryImp:BoardRepository {
     private val board: Board = Board()
-    private val logList = arrayListOf<GameLog>()
+    private val logList = mutableListOf<GameLog>()
 
     private var previousX: Int = 0
     private var previousY: Int = 0
@@ -35,22 +35,21 @@ class BoardRepositoryImp:BoardRepository {
     }
 
     //駒を動かす
-    override fun setMove(x: Int, y: Int, turn: Int) {
-        logList.add(
-            GameLog(
-                previousX, previousY, previousPiece, turn,
-                x, y, board.cells[x][y].piece, board.cells[x][y].turn
-            )
-        )
-        board.cells[x][y].piece = previousPiece
+    override fun setMove(x: Int, y: Int, turn: Int,evolution:Boolean) {
+        val piece = changeIntToPiece(previousX)
+        val gameLog = GameLog(previousX, previousY, previousPiece, turn, x, y, board.cells[x][y].piece, board.cells[x][y].turn,evolution)
+        logList.add(gameLog)
+        board.cells[x][y].piece =
+            if(evolution) previousPiece.evolution()
+            else previousPiece
         board.cells[x][y].turn = turn
-        if (previousY == 10) board.holdPieceBlack[changeIntToPiece(previousX)] =
-            board.holdPieceBlack[changeIntToPiece(previousX)]!! - 1
-        else if (previousY == -1) board.holdPieceWhite[changeIntToPiece(previousX)] =
-            board.holdPieceWhite[changeIntToPiece(previousX)]!! - 1
-        else {
-            board.cells[previousX][previousY].piece = Piece.None
-            board.cells[previousX][previousY].turn = 0
+        when(previousY){
+            10   -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
+            -1   -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
+            else -> {
+                board.cells[previousX][previousY].piece = Piece.None
+                board.cells[previousX][previousY].turn = 0
+            }
         }
         Log.d("Main", "駒：" + board.cells[x][y].piece)
     }
@@ -58,13 +57,13 @@ class BoardRepositoryImp:BoardRepository {
     //１手戻す
     override fun setBackMove() {
         val log: GameLog = logList.last()
-        if (log.oldY == 10) board.holdPieceBlack[changeIntToPiece(log.oldX)] =
-            board.holdPieceBlack[changeIntToPiece(log.oldX)]!! + 1
-        else if (log.oldY == -1) board.holdPieceWhite[changeIntToPiece(log.oldX)] =
-            board.holdPieceWhite[changeIntToPiece(log.oldX)]!! + 1
-        else {
-            board.cells[log.oldX][log.oldY].piece = log.afterPiece
-            board.cells[log.oldX][log.oldY].turn = log.afterTurn
+        when(log.oldY){
+            10 -> board.holdPieceBlack[changeIntToPiece(log.oldX)] = board.holdPieceBlack[changeIntToPiece(log.oldX)]!! + 1
+            -1 -> board.holdPieceWhite[changeIntToPiece(log.oldX)] = board.holdPieceWhite[changeIntToPiece(log.oldX)]!! + 1
+            else ->{
+                board.cells[log.oldX][log.oldY].piece = log.afterPiece
+                board.cells[log.oldX][log.oldY].turn = log.afterTurn
+            }
         }
         board.cells[log.newX][log.newY].piece = log.beforpiece
         board.cells[log.newX][log.newY].turn = log.beforturn
@@ -74,6 +73,7 @@ class BoardRepositoryImp:BoardRepository {
     //成る
     override fun setEvolution() {
         val log: GameLog = logList.last()
+        logList.last().evolution = true
         board.cells[log.newX][log.newY].piece = log.afterPiece.evolution()
     }
 

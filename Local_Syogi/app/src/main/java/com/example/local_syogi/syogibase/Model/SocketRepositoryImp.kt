@@ -86,11 +86,16 @@ class SocketRepositoryImp(val presenter:SocketRepository.presenter) :SocketRepos
         val company = Gson().fromJson(data2, GameLog::class.java)
         GlobalScope.launch {
             withContext(Dispatchers.IO) {
-                val oldX = 8 - company.oldX
-                val oldY = 8 - company.oldY
+                val (oldY, oldX) =
+                    when(company.oldY){
+                        -1  ->  Pair(10, company.oldX)
+                        10  ->  Pair(-1, company.oldX)
+                        else -> Pair(8 - company.oldY, 8 - company.oldX)
+                    }
                 val newX = 8 - company.newX
                 val newY = 8 - company.newY
-                presenter.socketMove(oldX, oldY, newX, newY)
+                val evolution = company.evolution
+                presenter.socketMove(oldX, oldY, newX, newY,evolution)
             }
         }
     }

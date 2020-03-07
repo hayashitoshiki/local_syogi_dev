@@ -14,8 +14,6 @@ import com.example.local_syogi.com.example.syogibase.View.WinLoseModal
 import com.example.local_syogi.syogibase.Model.SocketRepository
 import com.example.local_syogi.syogibase.Model.SocketRepositoryImp
 import com.example.syogibase.Model.Data.GameLog
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 
 
 class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
@@ -94,8 +92,8 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
         view.setTurn(turn)
     }
     //駒の動きを受信。受信側は判定を行わない　　viewの変更
-    override fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int){
-        view.socketMove(oldX, oldY, newX, newY)
+    override fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int,evolution:Boolean){
+        view.socketMove(oldX, oldY, newX, newY,evolution)
     }
     //勝敗結果を受信
     override fun socketGameEnd(turn:Int){

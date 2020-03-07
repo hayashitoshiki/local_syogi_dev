@@ -174,8 +174,8 @@ class GameRateView(private val activity: GameRateActivity, context: Context): Vi
     }
 
     //駒の動きを受信。受信側は判定を行わない　　viewの変更
-    fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int) {
-        presenter.socketMove(oldX, oldY, newX, newY)
+    fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int, evolution:Boolean) {
+        presenter.socketMove(oldX, oldY, newX, newY,evolution)
         invalidate()
     }
     fun setTurn(turn:Int){

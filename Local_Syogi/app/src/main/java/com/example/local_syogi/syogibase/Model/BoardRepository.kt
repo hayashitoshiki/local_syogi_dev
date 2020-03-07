@@ -16,7 +16,7 @@ interface BoardRepository {
     fun getLogList():GameLog
 
     //駒を動かす
-    fun setMove(x:Int,y:Int, turn:Int)
+    fun setMove(x:Int,y:Int, turn:Int,evolution:Boolean)
 
     //１手戻す
     fun setBackMove()
