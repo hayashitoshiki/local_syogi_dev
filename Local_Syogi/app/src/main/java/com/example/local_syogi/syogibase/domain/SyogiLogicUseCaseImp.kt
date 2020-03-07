@@ -31,16 +31,6 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         return false
     }
 
-    //TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
-    override fun twohandRule() {
-        if (GameMode.twoTimes && boardRepository.getTakePice() == None && !secondTime) {
-            turn = if (turn == BLACK) WHITE else BLACK
-            secondTime = true
-        } else {
-            secondTime = false
-        }
-    }
-
     //指定したマスのヒント探す
     override fun setTouchHint(x: Int, y: Int) {
         boardRepository.resetHint()
@@ -56,7 +46,7 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
                 val (newX: Int, newY: Int) =
                     if (turn == BLACK) Pair(touchX + move.x, touchY + move.y)
                     else Pair(touchX - move.x, touchY - move.y)
-                //駒を動かしたとき自分の王様が王手にならなかったらヒントを表示
+                //動かした先が盤上で自分の駒以外だったらヒントチェック
                 if (newX in 0..8 && newY in 0..8 && boardRepository.getTurn(newX, newY) != turn) {
                     // TODO 持ち駒制限将棋
                     if (pieceLimitJudg(newX, newY)) break
@@ -81,6 +71,16 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     fun pieceLimitJudg(x:Int, y:Int):Boolean{
         if(GameMode.pieceLimit && boardRepository.getTurn(x,y) != 0 && boardRepository.getCountHoldPiece(turn) + 1 >= GameMode.pieceLimitCount )return true
         return false
+    }
+
+    //TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
+    override fun twohandRule() {
+        if (GameMode.twoTimes && boardRepository.getTakePice() == None && !secondTime) {
+            turn = if (turn == BLACK) WHITE else BLACK
+            secondTime = true
+        } else {
+            secondTime = false
+        }
     }
 
     //駒を動かす
@@ -246,7 +246,9 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         //もしHint(逃げる場所)がなかったら詰み
         val count = boardRepository.getCountByHint()
         boardRepository.resetHint()
-        if (count == 0) return true
+        if (count == 0) {
+            return true
+        }
         return false
     }
 

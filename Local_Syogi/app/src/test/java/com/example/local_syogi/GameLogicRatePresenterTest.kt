@@ -3,6 +3,7 @@ package com.example.local_syogi
 import com.example.local_syogi.contact.GameViewRateContact
 import com.example.local_syogi.presenter.GameLogicRatePresenter
 import com.example.local_syogi.syogibase.Model.BoardRepository
+import com.example.local_syogi.syogibase.Model.BoardRepositoryImp
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.times
@@ -12,7 +13,7 @@ import org.junit.Test
 class GameLogicRatePresenterTest {
 
     //モック
-    private val repository = BoardRepository()
+    private val repository = BoardRepositoryImp()
     private val repositoryMock = mock<BoardRepository>{
         on { getCountHoldPiece(1) } doReturn 1
         //on {getAllHoldPiece(GameLogicRatePresenter.BLACK)} donReturn
