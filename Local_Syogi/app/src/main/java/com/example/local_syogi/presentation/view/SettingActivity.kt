@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.content.Intent
 import android.view.MotionEvent
 import com.example.local_syogi.R
-import com.example.syogibase.View.GameActivity
+import com.example.local_syogi.syogibase.presentation.view.GameActivity
 
 
 class SettingActivity  : AppCompatActivity() {
