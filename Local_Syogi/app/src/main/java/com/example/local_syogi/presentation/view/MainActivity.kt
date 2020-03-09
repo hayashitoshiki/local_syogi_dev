@@ -22,19 +22,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun game(v: View) {
-//        val view: ConstraintLayout = findViewById(R.id.mainLayout)
-//        val inAnimation = (AnimationUtils.loadAnimation(this, R.anim.fade) as Animation)
-//        view.startAnimation(inAnimation)
-//        view.setVisibility(view.INVISIBLE)
-
         val bundle = ActivityOptions.makeSceneTransitionAnimation(this,
             UntilPa.create<View, String>(title, "title"),
             UntilPa.create<View, String>(button,"share")
             ).toBundle()
         startActivity(Intent(this, SettingActivity::class.java), bundle)
+    }
 
-//        val i = Intent(this, SettingActivity::class.java)
-//        startActivity(i)
+    fun setting(v:View){
+        val i = Intent(this, SettingAccountFragment::class.java)
+        startActivity(i)
     }
 
 }

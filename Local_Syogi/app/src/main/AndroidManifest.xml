@@ -13,8 +13,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name="com.example.local_syogi.presentation.view.GameRateActivity"></activity>
         <activity android:name="com.example.local_syogi.presentation.view.SelectNormalFragment" />
-        <activity android:name="com.example.syogibase.View.WinLoseModal" />
-        <activity android:name="com.example.syogibase.View.GameActivity" />
+        <activity android:name="com.example.local_syogi.syogibase.presentation.view.WinLoseModal" />
+        <activity android:name="com.example.local_syogi.syogibase.presentation.view.GameActivity" />
+        <activity android:name="com.example.local_syogi.presentation.view.SettingAccountFragment"/>
         <activity android:name=".presentation.view.SettingActivity" />
         <activity android:name="com.example.local_syogi.presentation.view.MattingActivity" />
         <activity android:name=".presentation.view.MainActivity">
