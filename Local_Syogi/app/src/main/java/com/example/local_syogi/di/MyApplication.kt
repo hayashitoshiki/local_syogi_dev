@@ -1,6 +1,10 @@
 package com.example.local_syogi.di
 
 import android.app.Application
+import com.example.local_syogi.data.FirebaseRepository
+import com.example.local_syogi.data.FirebaseRepositoryImp
+import com.example.local_syogi.domain.AuthenticationUseCase
+import com.example.local_syogi.domain.AuthenticationUseCaseImp
 import com.example.local_syogi.presentation.contact.*
 import com.example.local_syogi.presentation.presenter.*
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
@@ -37,7 +41,12 @@ class MyApplication : Application() {
         factory <PieceLimitSyogiContact.Presenter>{ (v: PieceLimitSyogiContact.View) -> PieceLimitSyogiPresenter(v) }
         factory <GameViewContact.Presenter>{ (v: GameViewContact.View) -> GameLogicPresenter(v,get()) }
         factory <GameViewRateContact.Presenter>{ (v: GameViewRateContact.View) -> GameLogicRatePresenter(v,get()) }
+        factory <SettingAccountContact.Presenter>{ (v: SettingAccountContact.View) -> SettingAccountPresenter(v,get()) }
+
         factory <SyogiLogicUseCase>{ SyogiLogicUseCaseImp(get()) }
+        factory <AuthenticationUseCase>{ AuthenticationUseCaseImp(get())}
+
+        factory <FirebaseRepository>{ FirebaseRepositoryImp() }
         factory <BoardRepository>{ BoardRepositoryImp() }
 
     }
