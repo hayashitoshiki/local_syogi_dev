@@ -13,7 +13,6 @@ import com.example.local_syogi.presentation.contact.SettingAccountContact
 
 class SignInFragment : Fragment() {
 
-   // private lateinit var button:Button
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_sign_in, container, false)
@@ -24,13 +23,13 @@ class SignInFragment : Fragment() {
         //ログインボタン
         val button = view.findViewById(R.id.sign_in_button) as Button
         button.setOnClickListener {
-            presenter.signIn("toshikihayashi4004@ezweb.ne.jp","884884")
+            presenter!!.signIn("toshikihayashi4004@ezweb.ne.jp","884884")
         }
         return view
     }
 
     companion object {
-        private lateinit var presenter: SettingAccountContact.Presenter
+        private var presenter: SettingAccountContact.Presenter? = null
 
         @JvmStatic
         fun newInstance(mPresemter:SettingAccountContact.Presenter): SignInFragment {

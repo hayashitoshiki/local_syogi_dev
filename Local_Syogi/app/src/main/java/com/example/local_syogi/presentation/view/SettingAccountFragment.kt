@@ -27,6 +27,10 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_setting_account)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment, SignInFragment.newInstance(presenter))
+            .commit()
         presenter.onStart()
     }
 
@@ -61,7 +65,4 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
         Toast.makeText(applicationContext, "ログアウト", Toast.LENGTH_LONG).show()
         setLoginView()
     }
-
-
-
 }

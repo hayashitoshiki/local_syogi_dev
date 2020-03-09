@@ -25,17 +25,17 @@ class SecondActivity : Fragment(){
         //ログインボタン
         val button = view.findViewById(R.id.logout) as Button
         button.setOnClickListener {
-            presenter.signOut()
+            presenter!!.signOut()
         }
         return view
     }
 
     companion object {
-        private lateinit var presenter: SettingAccountContact.Presenter
+        private var presenter: SettingAccountContact.Presenter? = null
 
         @JvmStatic
-        fun newInstance(mPresemter: SettingAccountContact.Presenter): SignInFragment {
-            val fragment = SignInFragment()
+        fun newInstance(mPresemter: SettingAccountContact.Presenter): SecondActivity {
+            val fragment = SecondActivity()
             presenter = mPresemter
             return fragment
         }
