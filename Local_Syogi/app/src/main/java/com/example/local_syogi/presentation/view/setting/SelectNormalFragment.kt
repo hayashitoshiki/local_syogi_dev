@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view
+package com.example.local_syogi.presentation.view.setting
 
 import android.graphics.Color
 import android.os.Bundle
@@ -47,13 +47,27 @@ class SelectNormalFragment : Fragment() {
         }
 
         //ボタン押下
-        usuallyButton.setOnClickListener { changeMode(usuallyButton,UsuallySyogiFragment()) }
-        annanButton.setOnClickListener { changeMode(annanButton,AnnnanSyogiFragment()) }
-        queenButton.setOnClickListener { changeMode(queenButton,QueenSyogiFragment()) }
-        secondButton.setOnClickListener { changeMode(secondButton,SeccondSyogiFragment()) }
-        checkmateButton.setOnClickListener { changeMode(checkmateButton,CheckmateSyogiFragment()) }
-        pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,PieceLimitSyogiFragment()) }
-        chaosButton.setOnClickListener { changeMode(chaosButton,ChaosSyogiFragment()) }
+        usuallyButton.setOnClickListener { changeMode(usuallyButton,
+            UsuallySyogiFragment()
+        ) }
+        annanButton.setOnClickListener { changeMode(annanButton,
+            AnnnanSyogiFragment()
+        ) }
+        queenButton.setOnClickListener { changeMode(queenButton,
+            QueenSyogiFragment()
+        ) }
+        secondButton.setOnClickListener { changeMode(secondButton,
+            SeccondSyogiFragment()
+        ) }
+        checkmateButton.setOnClickListener { changeMode(checkmateButton,
+            CheckmateSyogiFragment()
+        ) }
+        pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,
+            PieceLimitSyogiFragment()
+        ) }
+        chaosButton.setOnClickListener { changeMode(chaosButton,
+            ChaosSyogiFragment()
+        ) }
         return view
     }
 
@@ -75,9 +89,10 @@ class SelectNormalFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(mode:Int,tab :Int): SelectNormalFragment {
-            val fragment = SelectNormalFragment()
-            this.mode = mode
-            this.tab = tab
+            val fragment =
+                SelectNormalFragment()
+            Companion.mode = mode
+            Companion.tab = tab
             return fragment
         }
     }

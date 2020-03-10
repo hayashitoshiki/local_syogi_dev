@@ -8,6 +8,8 @@ import android.app.ActivityOptions
 import android.widget.Button
 import android.widget.TextView
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.view.account_information.SettingAccountFragment
+import com.example.local_syogi.presentation.view.setting.SettingActivity
 import android.util.Pair as UntilPa
 
 class MainActivity : AppCompatActivity() {

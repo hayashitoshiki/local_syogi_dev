@@ -1,11 +1,6 @@
-package com.example.local_syogi.presentation.view
+package com.example.local_syogi.presentation.view.account_information
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
@@ -22,34 +17,32 @@ import org.koin.core.parameter.parametersOf
 class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
 
     private val presenter: SettingAccountContact.Presenter by inject { parametersOf(this) }
-
+    private lateinit var rateCard:RateCardFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_setting_account)
+        rateCard = RateCardFragment.newInstance(presenter)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment, SignInFragment.newInstance(presenter))
+            .replace(R.id.fragment, rateCard)
             .commit()
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         presenter.onStart()
     }
 
     //ログイン画面を表示する
     override fun setLoginView() {
-        Log.d("Main","ログイン")
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment, SignInFragment.newInstance(presenter))
-            .commit()
+        rateCard.setLoginView()
     }
 
     //ログイン後(設定)画面を表示する
     override fun setInformationView() {
-        Log.d("Main","設定画面")
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment, SecondActivity.newInstance(presenter))
-            .commit()
+        rateCard.setInformationView()
     }
 
     //エラー表示

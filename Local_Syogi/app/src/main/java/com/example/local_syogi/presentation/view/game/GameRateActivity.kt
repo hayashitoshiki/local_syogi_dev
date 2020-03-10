@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view
+package com.example.local_syogi.presentation.view.game
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -86,7 +86,7 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
 
     //対局開始を受信　自動的 activityの変更
     override fun socketStartGame(turn:Int){
-        view = GameRateView(this,this)
+        view = GameRateView(this, this)
         frame!!.addView(view, 0)
         button2.visibility = View.VISIBLE
         view.setTurn(turn)
