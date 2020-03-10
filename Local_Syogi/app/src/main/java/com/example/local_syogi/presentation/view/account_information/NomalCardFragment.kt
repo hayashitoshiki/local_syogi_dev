@@ -14,7 +14,7 @@ class NomalCardFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_rate_card, container, false)
+        val view = inflater.inflate(R.layout.fragment_select_rate, container, false)
 
         return view
     }

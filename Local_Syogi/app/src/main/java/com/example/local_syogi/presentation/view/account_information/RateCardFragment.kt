@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.RateCardContact
 import com.example.local_syogi.presentation.contact.SettingAccountContact
@@ -24,7 +25,6 @@ class RateCardFragment : Fragment(), RateCardContact.View {
 
     private val presenter: RateCardContact.Presenter by inject { parametersOf(this) }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,7 +36,7 @@ class RateCardFragment : Fragment(), RateCardContact.View {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_rate_card, container, false)
-
+        parentPresenter!!.onStart()
         return view
     }
 
