@@ -41,12 +41,6 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
             .beginTransaction()
             .replace(R.id.fragment, rateCard)
             .commit()
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.onStart()
     }
 
 
@@ -59,16 +53,13 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
             MotionEvent.ACTION_UP -> {
                 x2 = event.x.toInt()
                 y2 = event.y.toInt()
-                if(x <= 400) {
-                    if (x2 - x < -10) {
-                        flipCard(1)
-                    } else if(10 < x2 - x) {
-                        flipCard(2)
-                    }
+                if (x2 - x < -30) {
+                    flipCard(1)
+                } else if(30 < x2 - x) {
+                    flipCard(2)
                 }
             }
         }
-
         return true
     }
 
