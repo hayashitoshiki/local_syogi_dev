@@ -44,9 +44,9 @@ class RateCardFragment : Fragment(), RateCardContact.View {
     fun setLoginView() {
         Log.d("Main","ログイン")
         val signIn =SignInFragment.newInstance(parentPresenter!!)
-//        childFragmentManager.beginTransaction()
-//            .replace(R.id.fragment, signIn)
-//            .commit()
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment, signIn)
+            .commit()
     }
 
     //ログイン後(設定)画面を表示する

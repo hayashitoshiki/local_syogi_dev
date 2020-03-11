@@ -46,7 +46,7 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
 
     override fun onStart() {
         super.onStart()
-
+        presenter.onStart()
     }
 
 
