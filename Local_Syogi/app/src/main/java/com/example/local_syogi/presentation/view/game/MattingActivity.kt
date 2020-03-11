@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view
+package com.example.local_syogi.presentation.view.game
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +15,7 @@ class MattingActivity : AppCompatActivity() {
     }
 
     fun next(v:View){
-        val intent = Intent(this,GameRateActivity::class.java)
+        val intent = Intent(this, GameRateActivity::class.java)
         startActivity(intent)
         finish()
     }

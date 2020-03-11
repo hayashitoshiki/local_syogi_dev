@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view
+package com.example.local_syogi.presentation.view.account_information
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -38,7 +38,8 @@ class SignUpFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(mPresemter: SettingAccountContact.Presenter): SignUpFragment {
-            val fragment = SignUpFragment()
+            val fragment =
+                SignUpFragment()
             presenter = mPresemter
             return fragment
         }

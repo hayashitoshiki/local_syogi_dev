@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view
+package com.example.local_syogi.presentation.view.setting
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.content.Intent
 import android.view.MotionEvent
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.view.game.GameRateActivity
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
 
 
@@ -35,7 +36,12 @@ class SettingActivity  : AppCompatActivity() {
         setContentView(R.layout.activity_game_setting)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.tab, SelectNormalFragment.newInstance(mode,tab))
+            .add(R.id.tab,
+                SelectNormalFragment.newInstance(
+                    mode,
+                    tab
+                )
+            )
             .commit()
         view = findViewById(R.id.test)
     }
@@ -90,7 +96,12 @@ class SettingActivity  : AppCompatActivity() {
                     R.animator.card_flip_right_in,
                     R.animator.card_flip_right_out
                 )
-                .replace(R.id.tab, SelectNormalFragment.newInstance(mode, tab))
+                .replace(R.id.tab,
+                    SelectNormalFragment.newInstance(
+                        mode,
+                        tab
+                    )
+                )
                 .commit()
         }else {
             supportFragmentManager.beginTransaction()
@@ -98,7 +109,12 @@ class SettingActivity  : AppCompatActivity() {
                     R.animator.card_flip_left_in,
                     R.animator.card_flip_left_out
                 )
-                .replace(R.id.tab, SelectNormalFragment.newInstance(mode, tab))
+                .replace(R.id.tab,
+                    SelectNormalFragment.newInstance(
+                        mode,
+                        tab
+                    )
+                )
                 .commit()
         }
         //もう一度現在のfragmentを表示する//modeを変えて、fadeで

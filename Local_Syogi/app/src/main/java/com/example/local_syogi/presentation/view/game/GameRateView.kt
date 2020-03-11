@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view
+package com.example.local_syogi.presentation.view.game
 
 import android.app.AlertDialog
 import android.content.Context
