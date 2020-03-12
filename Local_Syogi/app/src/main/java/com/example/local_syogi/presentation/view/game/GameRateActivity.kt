@@ -24,7 +24,7 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
     lateinit var view: GameRateView
     private lateinit var socketRepository: SocketRepositoryImp
     private lateinit var button2: Button
-    private var isBackButton = ture
+    private var isBackButton = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
