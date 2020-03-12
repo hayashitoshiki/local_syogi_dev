@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         <activity android:name="com.example.local_syogi.presentation.view.game.GameRateActivity"></activity>
         <activity android:name="com.example.local_syogi.presentation.view.setting.SelectNormalFragment" />
         <activity android:name="com.example.local_syogi.syogibase.presentation.view.WinLoseModal" />
