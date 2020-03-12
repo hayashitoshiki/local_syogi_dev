@@ -10,6 +10,8 @@ import android.view.animation.Animation
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.content.Intent
 import android.view.MotionEvent
+import android.widget.FrameLayout
+import android.widget.TextView
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.view.game.GameRateActivity
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
@@ -72,7 +74,11 @@ class SettingActivity  : AppCompatActivity() {
                 y2 = event.y.toInt()
                 if(x <= 400) {
                     if (x2 - x < -10) {
-                        flipCard(1)
+                        if(y in 800..1200){
+                            closeActivity()
+                        }else {
+                            flipCard(1)
+                        }
                     } else if(10 < x2 - x) {
                         flipCard(2)
                     }
@@ -129,10 +135,23 @@ class SettingActivity  : AppCompatActivity() {
                 Intent(this, GameRateActivity::class.java)
             }
         startActivity(intent)
-        val inAnimation = (AnimationUtils.loadAnimation(this, R.anim.fade) as Animation)
-        view.startAnimation(inAnimation)
-        view.setVisibility(View.INVISIBLE)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        closeActivity()
+    }
+
+    //activity終了
+    private fun closeActivity(){
+        val fade: Animation = AnimationUtils.loadAnimation(this, R.anim.fade_out) as Animation
+        val fadeSpeed: Animation = AnimationUtils.loadAnimation(this, R.anim.fade_out_speed) as Animation
+        val fadeUp: Animation = AnimationUtils.loadAnimation(this, R.anim.fade_out_up) as Animation
+        val frame:FrameLayout = findViewById(R.id.tab)
+        val modeFrame:FrameLayout = findViewById(R.id.mode_frame)
+        val title: TextView = findViewById(R.id.title)
+        frame.startAnimation(fade)
+        modeFrame.startAnimation(fadeSpeed)
+        title.startAnimation(fadeUp)
+        frame.visibility = View.INVISIBLE
+        modeFrame.visibility = View.INVISIBLE
+        title.visibility = View.INVISIBLE
         finish()
     }
 
