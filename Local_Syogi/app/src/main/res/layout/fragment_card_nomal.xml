@@ -27,21 +27,29 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <TextView
+        <Button
             android:id="@+id/textView20"
+            android:background="#00000000"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="アカウント情報" />
+            android:text="@string/account_info" />
 
-        <TextView
+        <Button
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="対戦成績" />
+            android:layout_marginTop="18sp"
+            android:background="#00000000"
+            android:text="@string/all_log"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
 
         <Button
             android:id="@+id/usualyButton"
@@ -52,21 +60,18 @@
             android:text="@string/syogi"
             android:textAlignment="viewStart"
             android:textColor="#212121"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/annnanButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:background="@null"
             android:text="@string/annnan_syogi"
             android:textAlignment="viewStart"
             android:textColor="#212121"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/seccondButton"
@@ -77,8 +82,7 @@
             android:text="@string/secound_syogi"
             android:textAlignment="viewStart"
             android:textColor="#212121"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/pieceLimitButton"
@@ -89,8 +93,7 @@
             android:text="@string/piece_syogi"
             android:textAlignment="viewStart"
             android:textColor="#212121"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/queenButton"
@@ -101,8 +104,7 @@
             android:text="@string/quiin_syogi"
             android:textAlignment="viewStart"
             android:textColor="#212121"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/checkmateButton"
@@ -113,8 +115,7 @@
             android:text="@string/check_syogi"
             android:textAlignment="viewStart"
             android:textColor="#212121"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/chaosButton"
@@ -126,7 +127,6 @@
             android:text="@string/chaos_syogi"
             android:textAlignment="viewStart"
             android:textColor="#212121"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textSize="18sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
