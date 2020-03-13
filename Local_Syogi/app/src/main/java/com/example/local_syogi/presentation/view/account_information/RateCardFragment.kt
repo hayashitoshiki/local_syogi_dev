@@ -38,15 +38,15 @@ class RateCardFragment : Fragment(), RateCardContact.View {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_card_rate, container, false)
-        signInButton = view.findViewById(R.id.signInButton) as Button
-        signUpButton = view.findViewById(R.id.signUpButton) as Button
+//        signInButton = view.findViewById(R.id.signInButton) as Button
+//        signUpButton = view.findViewById(R.id.signUpButton) as Button
 
-        signInButton.setOnClickListener{
-            setLoginView()
-        }
-        signUpButton.setOnClickListener{
-            setSignUpView()
-        }
+//        signInButton.setOnClickListener{
+//            setLoginView()
+//        }
+//        signUpButton.setOnClickListener{
+//            setSignUpView()
+//        }
         parentPresenter!!.onStart()
         return view
     }
@@ -54,8 +54,8 @@ class RateCardFragment : Fragment(), RateCardContact.View {
     //ログインViewを表示する
     fun setLoginView() {
         Log.d("Main","ログイン")
-        signInButton.visibility = VISIBLE
-        signUpButton.visibility = VISIBLE
+//        signInButton.visibility = VISIBLE
+//        signUpButton.visibility = VISIBLE
         val signIn = SignInFragment.newInstance(parentPresenter!!)
         childFragmentManager.beginTransaction()
             .replace(R.id.fragment, signIn)
@@ -73,8 +73,8 @@ class RateCardFragment : Fragment(), RateCardContact.View {
     //ログイン後(設定)画面を表示する
     fun setInformationView() {
         Log.d("Main","設定画面")
-        signInButton.visibility = INVISIBLE
-        signUpButton.visibility = INVISIBLE
+//        signInButton.visibility = INVISIBLE
+//        signUpButton.visibility = INVISIBLE
         val signIn =SignOutFragment.newInstance(parentPresenter!!)
         childFragmentManager.beginTransaction()
             .replace(R.id.fragment, signIn)

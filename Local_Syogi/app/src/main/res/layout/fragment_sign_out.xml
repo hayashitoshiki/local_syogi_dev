@@ -120,8 +120,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="アカウント名："
-                android:textSize="24sp" />
+                android:text="account"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -141,8 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="メールアドレス"
-                android:textSize="24sp" />
+                android:text="E-mail"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -162,8 +162,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="パスワード"
-                android:textSize="24sp" />
+                android:text="password"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView27"

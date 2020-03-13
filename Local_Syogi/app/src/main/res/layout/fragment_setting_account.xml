@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/syogi_bg"
     tools:context=".presentation.view.account_information.SettingAccountFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,17 +17,24 @@
         ads:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
+            android:id="@+id/tab"
+            android:layout_width="400px"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
             android:id="@+id/fragment"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintHorizontal_bias="0.6"
-            ads:layout_constraintStart_toStartOf="parent"
+            android:layout_height="0dp"
             ads:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-        </FrameLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tab"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

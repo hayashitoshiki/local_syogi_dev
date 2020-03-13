@@ -9,62 +9,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.6"
         ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/information_card_shadow">
+        ads:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="通信対戦"
-            android:textSize="36sp"
-            ads:layout_constraintBottom_toBottomOf="@+id/fragment"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toTopOf="parent"
-            ads:layout_constraintVertical_bias="0.0" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/textView23"
-            ads:layout_constraintVertical_bias="0.0">
-
-            <Button
-                android:id="@+id/signInButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ログイン" />
-
-            <Button
-                android:id="@+id/signUpButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="新規作成" />
-        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/fragment"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+            ads:layout_constraintTop_toBottomOf="parent">
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
