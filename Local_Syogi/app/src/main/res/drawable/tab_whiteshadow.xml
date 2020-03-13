@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- drop shadow -->
+    <item>
+        <shape>
+            <padding android:right="1dp"/>
+            <solid android:color="#10424242" />
+            <corners
+                android:radius="8dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:right="1dp"/>
+            <solid android:color="#20424242" />
+            <corners
+                android:radius="8dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:right="1dp"/>
+            <solid android:color="#30424242" />
+            <corners
+                android:radius="8dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="1dp" android:right="1dp"/>
+            <solid android:color="#40424242" />
+            <corners
+                android:radius="8dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:right="1dp"/>
+            <solid android:color="#50424242" />
+            <corners
+                android:radius="8dp" />
+        </shape>
+    </item>
+    <item >
+        <shape
+            android:shape="rectangle">
+            <solid android:color="#FAFAFA"/>
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+    <item android:right="5dp">
+        <shape
+            android:shape="rectangle">
+            <solid android:color="#FAFAFA"/>
+        </shape>
+    </item>
+</layer-list>

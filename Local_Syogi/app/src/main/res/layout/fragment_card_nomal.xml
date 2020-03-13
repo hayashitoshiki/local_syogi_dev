@@ -5,31 +5,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="400px"
         android:layout_height="match_parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        ads:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/tab_whiteshadow"
+        android:orientation="vertical"
+        android:scaleType="centerInside"
+        android:transitionName="share"
         ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintHorizontal_bias="0.6"
-        ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/information_card_shadow">
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ローカル対戦"
-            android:textSize="36sp"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toTopOf="parent"
-            ads:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="設定"
+            android:textColor="#212121"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/textView20"
+            android:background="#00000000"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/account_info" />
+
+        <Button
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18sp"
+            android:background="#00000000"
+            android:text="@string/all_log"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/usualyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="#00000000"
+            android:text="@string/syogi"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/annnanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:text="@string/annnan_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/seccondButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="#00000000"
+            android:text="@string/secound_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/pieceLimitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="#00000000"
+            android:text="@string/piece_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/queenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="#00000000"
+            android:text="@string/quiin_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/checkmateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="#00000000"
+            android:text="@string/check_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/chaosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#00000000"
+            android:text="@string/chaos_syogi"
+            android:textAlignment="viewStart"
+            android:textColor="#212121"
+            android:textSize="18sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

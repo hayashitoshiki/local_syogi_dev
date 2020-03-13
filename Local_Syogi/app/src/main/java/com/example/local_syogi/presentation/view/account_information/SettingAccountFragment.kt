@@ -1,7 +1,13 @@
 package com.example.local_syogi.presentation.view.account_information
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
@@ -39,12 +45,22 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
         nomalCard = NomalCardFragment()
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment, rateCard)
+            .add(R.id.fragment, rateCard)
             .commit()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.tab, nomalCard)
+            .commit()
+    }
+
+    override fun onStart() {
+        super.onStart()
+       // presenter.onStart()
     }
 
 
     override fun onTouchEvent(event: MotionEvent) :Boolean {
+
         when(event.action) {
             MotionEvent.ACTION_DOWN -> {
                 x = event.x.toInt()
@@ -53,10 +69,17 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
             MotionEvent.ACTION_UP -> {
                 x2 = event.x.toInt()
                 y2 = event.y.toInt()
-                if (x2 - x < -30) {
-                    flipCard(1)
-                } else if(30 < x2 - x) {
-                    flipCard(2)
+                if(x <= 400) {
+                    if (x2 - x < -10) {
+                        if(y in 800..1200){
+                            Log.d("Setting","閉じる")
+                            closeActivity()
+                        }else {
+                            //flipCard(1)
+                        }
+                    } else if(10 < x2 - x) {
+                        //flipCard(2)
+                    }
                 }
             }
         }
@@ -110,5 +133,14 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
     override fun signOut(){
         Toast.makeText(applicationContext, "ログアウト", Toast.LENGTH_LONG).show()
         setLoginView()
+    }
+
+    //activity終了
+    private fun closeActivity(){
+        val fade: Animation = AnimationUtils.loadAnimation(this, R.anim.fade_out) as Animation
+        val frame: FrameLayout = findViewById(R.id.tab)
+        frame.startAnimation(fade)
+        frame.visibility = View.INVISIBLE
+        finish()
     }
 }

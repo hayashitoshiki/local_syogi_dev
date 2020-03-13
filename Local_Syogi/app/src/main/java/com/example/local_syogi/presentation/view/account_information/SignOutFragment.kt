@@ -1,6 +1,7 @@
 package com.example.local_syogi.presentation.view.account_information
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class SignOutFragment : Fragment(){
 
         val view = inflater.inflate(R.layout.fragment_sign_out, container, false)
 
+        Log.d("SignOut","onCreateView")
         //ログインボタン
         val button = view.findViewById(R.id.logout) as Button
         button.setOnClickListener {
