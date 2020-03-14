@@ -25,16 +25,18 @@ class MainFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-
+        val main = activity as MainActivity
         gameButton = view.findViewById(R.id.game_button)
         settingButton = view.findViewById(R.id.setting_button)
         title = view.findViewById(R.id.title)
 
         gameButton.setOnClickListener{
             closeFragment()
+            main.gameSet()
         }
         settingButton.setOnClickListener{
             closeFragment()
+            main.account()
         }
         return view
     }
@@ -42,12 +44,13 @@ class MainFragment: Fragment() {
     //Fragment表示アニメーション
     override fun onStart() {
         super.onStart()
-        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
-        val fadeIn: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in) as Animation
+        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide) as Animation
+        val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
+        val fadeIn: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_delay) as Animation
 
         gameButton.startAnimation(fade)
         gameButton.visibility = View.VISIBLE
-        settingButton.startAnimation(fade)
+        settingButton.startAnimation(fadeDelay)
         settingButton.visibility = View.VISIBLE
         title.startAnimation(fadeIn)
         title.visibility = View.VISIBLE
@@ -66,8 +69,7 @@ class MainFragment: Fragment() {
         gameButton.visibility = View.INVISIBLE
         title.startAnimation(fadeOut)
         title.visibility = View.INVISIBLE
-        val main = activity as MainActivity
-        main.gameSet()
+
     }
 
     companion object {
