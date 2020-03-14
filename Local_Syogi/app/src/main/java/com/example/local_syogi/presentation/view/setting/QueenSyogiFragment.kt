@@ -33,7 +33,7 @@ class QueenSyogiFragment : Fragment(), QueenSyogiContact.View {
         button.setOnClickListener {
 //            val intent = Intent(activity, GameActivity::class.java)
 //            startActivity(intent)
-            val mActivity: SettingActivity = activity as SettingActivity
+            val mActivity: SettingActivity = parentFragment as SettingActivity
             mActivity.fadeOut()
         }
         return view

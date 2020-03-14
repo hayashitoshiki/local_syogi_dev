@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val HOME = "home"
-        const val SELECTGAME= "setting"
+        const val SELECTGAME = "setting"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mainFragment = MainFragment.newInstance(this)
-        selectFragment = SettingActivity.newInstance(this)
+        mainFragment = MainFragment.newInstance()
+        selectFragment = SettingActivity.newInstance()
         supportFragmentManager.beginTransaction()
             .add(R.id.base_frame,mainFragment,HOME)
             .commit()

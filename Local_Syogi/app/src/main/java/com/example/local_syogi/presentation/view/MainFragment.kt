@@ -66,18 +66,15 @@ class MainFragment: Fragment() {
         gameButton.visibility = View.INVISIBLE
         title.startAnimation(fadeOut)
         title.visibility = View.INVISIBLE
-
-       parentActivity.gameSet()
+        val main = activity as MainActivity
+        main.gameSet()
     }
 
     companion object {
 
-        private lateinit var parentActivity:MainActivity
-
         @JvmStatic
-        fun newInstance(activity:MainActivity): MainFragment {
+        fun newInstance(): MainFragment {
             val fragment = MainFragment()
-            parentActivity = activity
             return fragment
         }
     }

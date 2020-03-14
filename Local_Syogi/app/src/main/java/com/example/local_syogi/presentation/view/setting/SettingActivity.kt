@@ -55,12 +55,15 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
     override fun onStart() {
         super.onStart()
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
+        val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new_delay) as Animation
         val fadeUp: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_up_new) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.VISIBLE
         title.startAnimation(fadeUp)
         title.visibility = View.VISIBLE
+        modeFrame.startAnimation(fadeDelay)
+        modeFrame.visibility = View.VISIBLE
     }
 
     /* タブのボタンを押下
@@ -138,7 +141,6 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
                 Intent(context, GameRateActivity::class.java)
             }
         startActivity(intent)
-        closeActivity()
     }
 
     //activity終了
@@ -153,7 +155,8 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         modeFrame.visibility = View.INVISIBLE
         title.startAnimation(fadeUp)
         title.visibility = View.INVISIBLE
-        parentActivity.backFragment()
+        val act = activity as MainActivity
+        act.backFragment()
     }
 
     override fun onResume(){
@@ -170,12 +173,10 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
     companion object {
         const val FREE = 1
         const val RATE = 2
-        private lateinit var parentActivity: MainActivity
 
         @JvmStatic
-        fun newInstance(activity: MainActivity): SettingActivity {
+        fun newInstance(): SettingActivity {
             val fragment = SettingActivity()
-            parentActivity = activity
             return fragment
         }
     }
