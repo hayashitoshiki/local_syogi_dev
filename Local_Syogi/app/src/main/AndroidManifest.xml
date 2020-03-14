@@ -15,9 +15,8 @@
         <activity android:name="com.example.local_syogi.presentation.view.setting.SelectNormalFragment" />
         <activity android:name="com.example.local_syogi.syogibase.presentation.view.WinLoseModal" />
         <activity android:name="com.example.local_syogi.syogibase.presentation.view.GameActivity" />
-        <activity android:name="com.example.local_syogi.presentation.view.account_information.SettingAccountFragment"/>
-        <activity android:name=".presentation.view.setting.SettingActivity" />
-        <activity android:name="com.example.local_syogi.presentation.view.game.MattingActivity" />
+        <activity android:name="com.example.local_syogi.presentation.view.account.AccountRootFragment"/>
+        <activity android:name=".presentation.view.setting.SettingRootFragment" />
         <activity android:name=".presentation.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

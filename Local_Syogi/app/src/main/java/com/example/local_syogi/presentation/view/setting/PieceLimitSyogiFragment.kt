@@ -36,7 +36,7 @@ class PieceLimitSyogiFragment : Fragment(), PieceLimitSyogiContact.View {
             GameMode.pieceLimit = true
 //            val intent = Intent(activity, GameActivity::class.java)
 //            startActivity(intent)
-            val mActivity: SettingActivity = parentFragment as SettingActivity
+            val mActivity: SettingRootFragment = parentFragment as SettingRootFragment
             mActivity.fadeOut()
         }
         return view

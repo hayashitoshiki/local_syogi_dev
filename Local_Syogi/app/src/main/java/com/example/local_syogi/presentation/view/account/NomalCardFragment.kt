@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view.account_information
+package com.example.local_syogi.presentation.view.account
 
 import android.os.Bundle
 import android.view.LayoutInflater

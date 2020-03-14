@@ -1,18 +1,13 @@
-package com.example.local_syogi.presentation.view.account_information
+package com.example.local_syogi.presentation.view.account
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.SettingAccountContact
@@ -27,7 +22,7 @@ import org.koin.core.parameter.parametersOf
  */
 
 
-class SettingAccountFragment : Fragment(), SettingAccountContact.View,OnBackPressedListener {
+class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressedListener {
 
     private val presenter: SettingAccountContact.Presenter by inject { parametersOf(this) }
     private lateinit var rateCard:RateCardFragment
@@ -164,8 +159,8 @@ class SettingAccountFragment : Fragment(), SettingAccountContact.View,OnBackPres
         const val RATE = 2
 
         @JvmStatic
-        fun newInstance(): SettingAccountFragment {
-            val fragment = SettingAccountFragment()
+        fun newInstance(): AccountRootFragment {
+            val fragment = AccountRootFragment()
             return fragment
         }
     }

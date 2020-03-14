@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.view.account_information.SettingAccountFragment
-import com.example.local_syogi.presentation.view.setting.SettingActivity
+import com.example.local_syogi.presentation.view.account.AccountRootFragment
+import com.example.local_syogi.presentation.view.setting.SettingRootFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainFragment: MainFragment
-    private lateinit var selectFragment:SettingActivity
-    private lateinit var accountFragment:SettingAccountFragment
+    private lateinit var selectFragment:SettingRootFragment
+    private lateinit var accountFragment:AccountRootFragment
 
     var x:Int = 0
     var y:Int = 0
@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainFragment = MainFragment.newInstance()
-        selectFragment = SettingActivity.newInstance()
-        accountFragment = SettingAccountFragment.newInstance()
+        selectFragment = SettingRootFragment.newInstance()
+        accountFragment = AccountRootFragment.newInstance()
         supportFragmentManager.beginTransaction()
             .add(R.id.base_frame,mainFragment,HOME)
             .commit()

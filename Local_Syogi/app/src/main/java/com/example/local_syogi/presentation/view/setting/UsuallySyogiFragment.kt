@@ -9,7 +9,6 @@ import android.widget.Button
 import com.example.local_syogi.presentation.contact.UsuallySyogiContact
 
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.view.setting.SettingActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -34,7 +33,7 @@ class UsuallySyogiFragment : Fragment(), UsuallySyogiContact.View {
         button.setOnClickListener {
 //            val intent = Intent(activity, GameActivity::class.java)
 //            startActivity(intent)
-            val mActivity: SettingActivity = parentFragment as SettingActivity
+            val mActivity: SettingRootFragment = parentFragment as SettingRootFragment
             mActivity.fadeOut()
         }
         return view

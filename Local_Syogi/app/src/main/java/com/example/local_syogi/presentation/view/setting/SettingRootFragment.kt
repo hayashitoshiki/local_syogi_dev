@@ -19,7 +19,7 @@ import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import com.example.local_syogi.util.OnBackPressedListener
 
 
-class SettingActivity  : Fragment(),OnBackPressedListener {
+class SettingRootFragment  : Fragment(),OnBackPressedListener {
 
 
     private lateinit var view2:ConstraintLayout
@@ -175,8 +175,8 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         const val RATE = 2
 
         @JvmStatic
-        fun newInstance(): SettingActivity {
-            val fragment = SettingActivity()
+        fun newInstance(): SettingRootFragment {
+            val fragment = SettingRootFragment()
             return fragment
         }
     }

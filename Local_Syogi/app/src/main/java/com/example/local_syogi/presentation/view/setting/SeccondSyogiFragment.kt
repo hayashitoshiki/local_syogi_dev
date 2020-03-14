@@ -39,7 +39,7 @@ class SeccondSyogiFragment : Fragment(), SeccondSyogiContact.View {
             GameMode.twoTimes = true
 //            val intent = Intent(activity, GameActivity::class.java)
 //            startActivity(intent)
-            val mActivity: SettingActivity = parentFragment as SettingActivity
+            val mActivity: SettingRootFragment = parentFragment as SettingRootFragment
             mActivity.fadeOut()
         }
         return view
