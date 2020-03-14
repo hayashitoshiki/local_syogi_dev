@@ -87,6 +87,8 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
             if (x2 - x < -10) {
                 if(y in 800..1200){
                     closeActivity()
+                    val main = activity as MainActivity
+                    main.backFragment()
                 }else {
                     flipCard(1)
                 }
@@ -145,18 +147,16 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
 
     //activity終了
     private fun closeActivity(){
-        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide) as Animation
+        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide_delay) as Animation
         val fadeSpeed: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_speed) as Animation
         val fadeUp: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_up) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.INVISIBLE
-        modeFrame.startAnimation(fade)
+        modeFrame.startAnimation(fadeSpeed)
         modeFrame.visibility = View.INVISIBLE
         title.startAnimation(fadeUp)
         title.visibility = View.INVISIBLE
-        val act = activity as MainActivity
-        act.backFragment()
     }
 
     override fun onResume(){
