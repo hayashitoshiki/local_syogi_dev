@@ -17,16 +17,13 @@ import com.example.local_syogi.util.OnBackPressedListener
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-/*
- *  DI用クラスに以下の１行を追加してください
- */
 
 
 class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressedListener {
 
     private val presenter: SettingAccountContact.Presenter by inject { parametersOf(this) }
-    private lateinit var rateCard:RateCardFragment
-    private lateinit var nomalCard:NomalCardFragment
+    private lateinit var authFragment:AuthenticationBaseFragment
+    private lateinit var accountTab:AccountCardFragment
     private lateinit var tabFragment:FrameLayout
     private lateinit var mainFrame:FrameLayout
     private lateinit var main :MainActivity
@@ -40,18 +37,18 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressed
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_setting_account, container, false)
         main = activity as MainActivity
-        rateCard = RateCardFragment.newInstance(presenter)
-        nomalCard = NomalCardFragment()
+        authFragment = AuthenticationBaseFragment.newInstance(presenter)
+        accountTab = AccountCardFragment()
         tabFragment = view.findViewById(R.id.tab)
         mainFrame = view.findViewById(R.id.fragment)
 
         childFragmentManager
             .beginTransaction()
-            .add(R.id.fragment, rateCard)
+            .add(R.id.fragment, authFragment)
             .commit()
         childFragmentManager
             .beginTransaction()
-            .replace(R.id.tab, nomalCard)
+            .replace(R.id.tab, accountTab)
             .commit()
         return view
     }
@@ -87,39 +84,14 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressed
         }
     }
 
-    //タブ切り替えモーション
-    private fun flipCard(roll:Int) {
-
-        val fragment =
-            if(roll == 1) {
-                childFragmentManager.beginTransaction()
-                    .setCustomAnimations(
-                        R.anim.card_flip_right_in,
-                        R.anim.card_flip_right_out)
-            }else {
-                childFragmentManager.beginTransaction()
-                    .setCustomAnimations(
-                        R.anim.card_flip_left_in,
-                        R.anim.card_flip_left_out)
-            }
-
-        if(mode == FREE){
-             mode = RATE
-            fragment.replace(R.id.fragment, rateCard).commit()
-        }else{
-             mode = FREE
-            fragment.replace(R.id.fragment, nomalCard).commit()
-        }
-    }
-
     //ログイン画面を表示する
     override fun setLoginView() {
-        rateCard.setLoginView()
+        authFragment.setLoginView()
     }
 
     //ログイン後(設定)画面を表示する
     override fun setInformationView() {
-        rateCard.setInformationView()
+        authFragment.setInformationView()
     }
 
     //エラー表示
