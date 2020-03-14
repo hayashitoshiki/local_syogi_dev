@@ -22,22 +22,12 @@ import com.example.local_syogi.util.OnBackPressedListener
 class SettingActivity  : Fragment(),OnBackPressedListener {
 
 
-    private lateinit var view3:View
     private lateinit var view2:ConstraintLayout
     private lateinit var tabFrame:FrameLayout
+    private lateinit var modeFrame:FrameLayout
+    private lateinit var title:TextView
     private var tab = -1
     private var mode = 1
-
-    var x:Int = 0
-    var y:Int = 0
-    var x2:Int = 0
-    var y2:Int = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +35,10 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.activity_game_setting, container, false)
-        view3 = view
+        modeFrame = view.findViewById(R.id.mode_frame)
+        title = view.findViewById(R.id.title)
         tabFrame = view.findViewById(R.id.tab)
-        tabFrame.visibility = View.INVISIBLE
+
         childFragmentManager.beginTransaction()
             .add(R.id.tab,
                 SelectNormalFragment.newInstance(
@@ -64,10 +55,14 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
     override fun onStart() {
         super.onStart()
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
+        val fadeUp: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_up_new) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.VISIBLE
+        title.startAnimation(fadeUp)
+        title.visibility = View.VISIBLE
     }
+
     /* タブのボタンを押下
        選択していないボタンは白色にして
        選択しているボタンは指定職にする
@@ -75,14 +70,15 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
     fun changeMode(fragment: Fragment,tab:Int){
         childFragmentManager.beginTransaction()
             .setCustomAnimations(
-                R.animator.fade_in_slide,
-                R.animator.fade_out_slide
+                R.anim.fade_in_slide,
+                R.anim.fade_out_slide
             )
             .replace(R.id.mode_frame, fragment)
             .commit()
         this.tab = tab
     }
 
+    //タッチイベント
     fun onTouchEvent(x:Int, y:Int, x2:Int, y2:Int) {
         if(x <= 400) {
             if (x2 - x < -10) {
@@ -107,8 +103,8 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         if(roll == 1) {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
-                    R.animator.card_flip_right_in,
-                    R.animator.card_flip_right_out
+                    R.anim.card_flip_right_in,
+                    R.anim.card_flip_right_out
                 )
                 .replace(R.id.tab,
                     SelectNormalFragment.newInstance(
@@ -120,8 +116,8 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         }else {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
-                    R.animator.card_flip_left_in,
-                    R.animator.card_flip_left_out
+                    R.anim.card_flip_left_in,
+                    R.anim.card_flip_left_out
                 )
                 .replace(R.id.tab,
                     SelectNormalFragment.newInstance(
@@ -131,7 +127,6 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
                 )
                 .commit()
         }
-        //もう一度現在のfragmentを表示する//modeを変えて、fadeで
     }
 
     //対局開始
@@ -151,27 +146,24 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide) as Animation
         val fadeSpeed: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_speed) as Animation
         val fadeUp: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_up) as Animation
-        val frame:FrameLayout = view3.findViewById(R.id.tab)
-        val modeFrame:FrameLayout = view3.findViewById(R.id.mode_frame)
-        val title: TextView = view3.findViewById(R.id.title)
-        frame.startAnimation(fade)
+
+        tabFrame.startAnimation(fade)
+        tabFrame.visibility = View.INVISIBLE
         modeFrame.startAnimation(fade)
-        title.startAnimation(fadeUp)
-        frame.visibility = View.INVISIBLE
         modeFrame.visibility = View.INVISIBLE
+        title.startAnimation(fadeUp)
         title.visibility = View.INVISIBLE
         parentActivity.backFragment()
-       // finish()
     }
 
     override fun onResume(){
         super.onResume()
         GameMode.reset()
-        view2.setVisibility(View.VISIBLE)
+        view2.visibility = View.VISIBLE
     }
 
+    //BackKey
     override fun onBackPressed() {
-        // ここで任意の処理を行う
         closeActivity()
     }
 

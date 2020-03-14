@@ -92,13 +92,13 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
             if(roll == 1) {
                 supportFragmentManager.beginTransaction()
                     .setCustomAnimations(
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out)
+                        R.anim.card_flip_right_in,
+                        R.anim.card_flip_right_out)
             }else {
                 supportFragmentManager.beginTransaction()
                     .setCustomAnimations(
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out)
+                        R.anim.card_flip_left_in,
+                        R.anim.card_flip_left_out)
             }
 
         if(mode == FREE){
