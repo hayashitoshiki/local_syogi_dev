@@ -78,7 +78,7 @@ class SelectNormalFragment : Fragment() {
         }
         button.setTextColor(Color.parseColor("#795548"))
         val tab = buttonList.indexOf(button)
-        val act = activity as SettingActivity
+        val act = parentFragment as SettingActivity
         act.changeMode(fragment,tab)
     }
 

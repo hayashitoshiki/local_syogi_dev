@@ -1,39 +1,88 @@
 package com.example.local_syogi.presentation.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.app.ActivityOptions
-import android.widget.Button
-import android.widget.TextView
+import android.util.Log
+import android.view.MotionEvent
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.view.account_information.SettingAccountFragment
 import com.example.local_syogi.presentation.view.setting.SettingActivity
-import android.util.Pair as UntilPa
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var button:Button
-    lateinit var title:TextView
+    private lateinit var mainFragment: MainFragment
+    private lateinit var selectFragment:SettingActivity
+
+    var x:Int = 0
+    var y:Int = 0
+    var x2:Int = 0
+    var y2:Int = 0
+
+    companion object {
+        const val HOME = "home"
+        const val SELECTGAME = "setting"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        button = findViewById(R.id.button2)
-        title = findViewById(R.id.title)
+        mainFragment = MainFragment.newInstance()
+        selectFragment = SettingActivity.newInstance()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.base_frame,mainFragment,HOME)
+            .commit()
     }
 
-    fun game(v: View) {
-        val bundle = ActivityOptions.makeSceneTransitionAnimation(this,
-            UntilPa.create<View, String>(title, "title"),
-            UntilPa.create<View, String>(button,"share")
-            ).toBundle()
-        startActivity(Intent(this, SettingActivity::class.java), bundle)
+    //モード選択画面へ
+    fun gameSet(){
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                0,
+                R.anim.fade_out_card
+            )
+            .replace(R.id.base_frame, selectFragment,SELECTGAME)
+            .commit()
     }
 
-    fun setting(v:View){
-        val i = Intent(this, SettingAccountFragment::class.java)
-        startActivity(i)
+    //戻る
+    fun backFragment(){
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                0,
+                R.anim.fade_out_card
+            )
+            .replace(R.id.base_frame, mainFragment,HOME)
+            .commit()
     }
 
+    //タッチイベント
+    override fun onTouchEvent(event: MotionEvent) :Boolean {
+        when(event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                x = event.x.toInt()
+                y = event.y.toInt()
+            }
+            MotionEvent.ACTION_UP -> {
+                x2 = event.x.toInt()
+                y2 = event.y.toInt()
+                if (supportFragmentManager.findFragmentByTag(HOME) != null && supportFragmentManager.findFragmentByTag(HOME)!!.isVisible) {
+
+                }else if (supportFragmentManager.findFragmentByTag(SELECTGAME) != null && supportFragmentManager.findFragmentByTag(SELECTGAME)!!.isVisible) {
+                    selectFragment.onTouchEvent(x,y,x2,y2)
+                }else{
+                    Log.d("Main","不一致；")
+                }
+            }
+        }
+        return true
+    }
+
+    //BackKeyイベント
+    override fun onBackPressed() {
+        if (supportFragmentManager.findFragmentByTag(SELECTGAME) != null && supportFragmentManager.findFragmentByTag(SELECTGAME)!!.isVisible) {
+            selectFragment.onBackPressed()
+        }else{
+            super.onBackPressed()
+        }
+
+    }
 }

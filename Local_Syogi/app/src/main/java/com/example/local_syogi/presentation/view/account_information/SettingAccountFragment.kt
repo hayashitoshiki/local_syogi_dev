@@ -7,7 +7,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
@@ -93,13 +92,13 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
             if(roll == 1) {
                 supportFragmentManager.beginTransaction()
                     .setCustomAnimations(
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out)
+                        R.anim.card_flip_right_in,
+                        R.anim.card_flip_right_out)
             }else {
                 supportFragmentManager.beginTransaction()
                     .setCustomAnimations(
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out)
+                        R.anim.card_flip_left_in,
+                        R.anim.card_flip_left_out)
             }
 
         if(mode == FREE){
@@ -137,7 +136,7 @@ class SettingAccountFragment : AppCompatActivity(), SettingAccountContact.View {
 
     //activity終了
     private fun closeActivity(){
-        val fade: Animation = AnimationUtils.loadAnimation(this, R.anim.fade_out) as Animation
+        val fade: Animation = AnimationUtils.loadAnimation(this, R.anim.fade_out_slide) as Animation
         val frame: FrameLayout = findViewById(R.id.tab)
         frame.startAnimation(fade)
         frame.visibility = View.INVISIBLE
