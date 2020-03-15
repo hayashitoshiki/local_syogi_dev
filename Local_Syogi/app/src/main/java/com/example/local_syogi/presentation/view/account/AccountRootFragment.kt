@@ -38,10 +38,12 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressed
         tabFragment = view.findViewById(R.id.tab)
         mainFrame = view.findViewById(R.id.fragment)
 
-        childFragmentManager
-            .beginTransaction()
-            .replace(R.id.tab, accountTab)
-            .commit()
+        if(isAdded) {
+            childFragmentManager
+                .beginTransaction()
+                .replace(R.id.tab, accountTab)
+                .commit()
+        }
         return view
     }
 

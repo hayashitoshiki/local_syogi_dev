@@ -19,45 +19,60 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
 
     private val presenter: RateCardContact.Presenter by inject { parametersOf(this) }
 
+    private var stop = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sign_base, container, false)
+        return view
+    }
 
+    override fun onStart() {
+        super.onStart()
+        stop = false
         if(parentPresenter!!.checkSession()){
             setInformationView()
         }else{
             setLoginView()
         }
-        return view
     }
 
     //ログインViewを表示する
     fun setLoginView() {
         Log.d("Main","ログイン")
         val signIn = SignInUpFragment.newInstance(parentPresenter!!)
-        childFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.fade_in,
-                R.anim.fade_out
-            )
-            .replace(R.id.fragment, signIn)
-            .commit()
+        if(isAdded && !stop) {
+            childFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
+                .replace(R.id.fragment, signIn)
+                .commit()
+        }
     }
 
     //ログイン後(設定)画面を表示する
     fun setInformationView() {
         Log.d("Main","設定画面")
         val signOut =SignOutFragment.newInstance(parentPresenter!!)
-        childFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.fade_in,
-                R.anim.fade_out
-            )
-            .replace(R.id.fragment, signOut)
-            .commit()
+        if(isAdded && !stop) {
+            childFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
+                .replace(R.id.fragment, signOut)
+                .commit()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stop = true
     }
 
 
