@@ -2,6 +2,8 @@ package com.example.local_syogi.data
 
 interface FirebaseRepository {
 
+    //ログイン状態を返す(Boolean型)
+    fun isAuth():Boolean
     //ログイン状態チェック
     fun firstCheck(onSuccess: () -> Unit, onError: () -> Unit)
     //ログイン

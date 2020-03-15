@@ -12,14 +12,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.SettingRootContact
+import com.example.local_syogi.presentation.contact.UsuallySyogiContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.game.GameRateActivity
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import com.example.local_syogi.util.OnBackPressedListener
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
-class SettingRootFragment  : Fragment(),OnBackPressedListener {
+class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedListener {
+
+    private val presenter: SettingRootContact.Presenter by inject { parametersOf(this) }
 
 
     private lateinit var view2:ConstraintLayout
@@ -42,7 +49,7 @@ class SettingRootFragment  : Fragment(),OnBackPressedListener {
         childFragmentManager.beginTransaction()
             .add(R.id.tab,
                 SelectNormalFragment.newInstance(
-                    mode,
+                    FREE,
                     tab
                 )
             )
@@ -136,13 +143,15 @@ class SettingRootFragment  : Fragment(),OnBackPressedListener {
 
     //対局開始
     fun fadeOut(){
-        val intent =
-            if (mode == FREE) {
-                Intent(context, GameActivity::class.java)
-            }else{
-                Intent(context, GameRateActivity::class.java)
-            }
-        startActivity(intent)
+        if (mode == FREE) {
+            val intent = Intent(context, GameActivity::class.java)
+            startActivity(intent)
+        }else if(presenter.isAuth()){
+            val intent = Intent(context, GameRateActivity::class.java)
+            startActivity(intent)
+        }else {
+            showAuthToast()
+        }
     }
 
     //activity終了
@@ -168,6 +177,11 @@ class SettingRootFragment  : Fragment(),OnBackPressedListener {
     //BackKey
     override fun onBackPressed() {
         closeActivity()
+    }
+
+    //エラー表示
+    private fun showAuthToast() {
+        Toast.makeText(context, "ログインしてください", Toast.LENGTH_LONG).show()
     }
 
     companion object {

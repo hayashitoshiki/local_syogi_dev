@@ -4,6 +4,10 @@ import com.example.local_syogi.data.FirebaseRepository
 
 class AuthenticationUseCaseImp(private val firebaseRepository:FirebaseRepository):AuthenticationUseCase {
 
+    //ログイン状態を返す
+    override fun isAuth():Boolean{
+        return firebaseRepository.isAuth()
+    }
     //ログイン状態チェック
     override fun firstCheck(onSuccess: () -> Unit, onError: () -> Unit){
         firebaseRepository.firstCheck(

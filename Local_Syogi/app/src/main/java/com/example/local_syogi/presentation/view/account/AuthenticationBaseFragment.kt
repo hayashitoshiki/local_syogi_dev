@@ -33,7 +33,7 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
     override fun onStart() {
         super.onStart()
         stop = false
-        if(parentPresenter!!.checkSession()){
+        if(parentPresenter!!.isSession()){
             setInformationView()
         }else{
             setLoginView()

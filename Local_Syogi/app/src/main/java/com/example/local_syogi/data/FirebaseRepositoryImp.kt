@@ -18,7 +18,16 @@ class FirebaseRepositoryImp: FirebaseRepository {
         return auth.currentUser!!.email!!
     }
 
-    //自動ログイン認証
+    //ログイン状態を返す(Boolean型)
+    override fun isAuth():Boolean{
+        if (auth.currentUser != null){
+            return true
+        }
+        return false
+
+    }
+
+    //自動ログイン認証(Callback型)
     override fun firstCheck(onSuccess: () -> Unit, onError: () -> Unit) {
         if (auth.currentUser != null) {
             onSuccess()

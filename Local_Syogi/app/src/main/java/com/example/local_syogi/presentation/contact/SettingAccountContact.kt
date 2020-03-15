@@ -18,7 +18,7 @@ interface SettingAccountContact {
 
     interface Presenter {
         //ログイン状態判定
-        fun checkSession():Boolean
+        fun isSession():Boolean
         //ログイン認証
         fun onStart()
         //ログイン

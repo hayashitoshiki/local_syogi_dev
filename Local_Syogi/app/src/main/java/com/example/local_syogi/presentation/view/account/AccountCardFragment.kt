@@ -86,7 +86,7 @@ class AccountCardFragment: Fragment(){
         }
         button.setTextColor(Color.parseColor("#795548"))
         val tab = buttonList.indexOf(button)
-        if(button == accountButton || parentPresenter!!.checkSession()){
+        if(button == accountButton || parentPresenter!!.isSession()){
             rootFragment.changeMode(fragment,tab)
         }else{
             rootFragment.changeMode(NotLoginFragment(),tab)
