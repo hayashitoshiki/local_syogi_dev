@@ -6,15 +6,21 @@ import com.example.local_syogi.presentation.contact.SettingAccountContact
 class SettingAccountPresenter(private val view: SettingAccountContact.View, private val firebase:AuthenticationUseCase) :
     SettingAccountContact.Presenter {
 
-    //ログイン認証
+    //ログイン状態を返す
+    override fun isSession():Boolean{
+        return firebase.isAuth()
+    }
+
+    //自動ログイン認証
     override fun onStart(){
         firebase.firstCheck({
-            view.setInformationView()
+            //view.setInformationView()
         },{
-            view.setLoginView()
+            view.setLoginViewFirst()
         })
     }
 
+    //ログイン認証
     override fun signIn(email:String, password:String){
         if(email != "" && password != ""){
             firebase.signIn(email,password,{

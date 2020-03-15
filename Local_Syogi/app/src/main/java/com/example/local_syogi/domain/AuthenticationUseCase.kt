@@ -1,6 +1,9 @@
 package com.example.local_syogi.domain
 
 interface AuthenticationUseCase {
+
+    //ログイン状態を返す
+    fun isAuth():Boolean
     //ログイン状態チェック
     fun firstCheck(onSuccess: () -> Unit, onError: () -> Unit)
     //ログイン

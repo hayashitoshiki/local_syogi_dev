@@ -2,6 +2,8 @@ package com.example.local_syogi.presentation.contact
 
 interface SettingAccountContact {
     interface View {
+        //正気状態でログイン画面を表示する
+        fun setLoginViewFirst()
         //ログイン画面を表示する
         fun setLoginView()
         //ユーザー情報画面を表示する
@@ -15,6 +17,8 @@ interface SettingAccountContact {
     }
 
     interface Presenter {
+        //ログイン状態判定
+        fun isSession():Boolean
         //ログイン認証
         fun onStart()
         //ログイン

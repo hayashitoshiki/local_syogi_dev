@@ -42,6 +42,7 @@ class MyApplication : Application() {
         factory <GameViewContact.Presenter>{ (v: GameViewContact.View) -> GameLogicPresenter(v,get()) }
         factory <GameViewRateContact.Presenter>{ (v: GameViewRateContact.View) -> GameLogicRatePresenter(v,get()) }
         factory <SettingAccountContact.Presenter>{ (v: SettingAccountContact.View) -> SettingAccountPresenter(v,get()) }
+        factory <SettingRootContact.Presenter>{ (v: SettingRootContact.View) -> SettingRootPresenter(v,get()) }
         factory <RateCardContact.Presenter>{ (v: RateCardContact.View) -> RateCardPresenter(v) }
 
         factory <SyogiLogicUseCase>{ SyogiLogicUseCaseImp(get()) }

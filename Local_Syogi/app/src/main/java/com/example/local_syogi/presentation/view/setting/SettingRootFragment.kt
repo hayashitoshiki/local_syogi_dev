@@ -12,22 +12,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.SettingRootContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.game.GameRateActivity
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import com.example.local_syogi.util.OnBackPressedListener
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
-class SettingActivity  : Fragment(),OnBackPressedListener {
+class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedListener {
+
+    private val presenter: SettingRootContact.Presenter by inject { parametersOf(this) }
 
 
-    private lateinit var view2:ConstraintLayout
-    private lateinit var tabFrame:FrameLayout
-    private lateinit var modeFrame:FrameLayout
-    private lateinit var title:TextView
+    private lateinit var view2: ConstraintLayout
+    private lateinit var tabFrame: FrameLayout
+    private lateinit var modeFrame: FrameLayout
+    private lateinit var title: TextView
     private var tab = -1
-    private var mode = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,9 +45,10 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         tabFrame = view.findViewById(R.id.tab)
 
         childFragmentManager.beginTransaction()
-            .add(R.id.tab,
+            .add(
+                R.id.tab,
                 SelectNormalFragment.newInstance(
-                    mode,
+                    FREE,
                     tab
                 )
             )
@@ -54,9 +60,12 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
 
     override fun onStart() {
         super.onStart()
-        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
-        val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new_delay) as Animation
-        val fadeUp: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_up_new) as Animation
+        val fade: Animation =
+            AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
+        val fadeDelay: Animation =
+            AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new_delay) as Animation
+        val fadeUp: Animation =
+            AnimationUtils.loadAnimation(context, R.anim.fade_in_up_new) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.VISIBLE
@@ -70,7 +79,7 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
        選択していないボタンは白色にして
        選択しているボタンは指定職にする
        また、fragmentを入れ替える */
-    fun changeMode(fragment: Fragment,tab:Int){
+    fun changeMode(fragment: Fragment, tab: Int) {
         childFragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.fade_in_slide,
@@ -82,66 +91,65 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
     }
 
     //タッチイベント
-    fun onTouchEvent(x:Int, y:Int, x2:Int, y2:Int) {
-        if(x <= 400) {
-            if (x2 - x < -10) {
-                if(y in 800..1200){
-                    closeActivity()
-                    val main = activity as MainActivity
-                    main.backFragment()
-                }else {
-                    flipCard(1)
-                }
-            } else if(10 < x2 - x) {
-                flipCard(2)
-            }
-        }
+    fun onTouchEvent(x: Int, y: Int, x2: Int, y2: Int) {
+        presenter.onTouchEvent(x, y, x2, y2)
     }
 
-    //タブ切り替えモーション
-    private fun flipCard(roll:Int) {
-        mode = if(mode == FREE){
-            RATE
-        }else{
-            FREE
-        }
-        if(roll == 1) {
-            childFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.card_flip_right_in,
-                    R.anim.card_flip_right_out
-                )
-                .replace(R.id.tab,
-                    SelectNormalFragment.newInstance(
-                        mode,
-                        tab
-                    )
-                )
-                .commit()
-        }else {
-            childFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.card_flip_left_in,
-                    R.anim.card_flip_left_out
-                )
-                .replace(R.id.tab,
-                    SelectNormalFragment.newInstance(
-                        mode,
-                        tab
-                    )
-                )
-                .commit()
-        }
+    //ホーム画面へ戻る
+    override fun backHome() {
+        closeActivity()
+        val main = activity as MainActivity
+        main.backFragment()
     }
 
-    //対局開始
-    fun fadeOut(){
-        val intent =
-            if (mode == FREE) {
-                Intent(context, GameActivity::class.java)
-            }else{
-                Intent(context, GameRateActivity::class.java)
-            }
+    //タブカード回転
+    override fun flipCardRight(mode: Int) {
+        childFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.card_flip_right_in,
+                R.anim.card_flip_right_out
+            )
+            .replace(
+                R.id.tab,
+                SelectNormalFragment.newInstance(
+                    mode,
+                    tab
+                )
+            )
+            .commit()
+    }
+
+    //タブカード回転
+    override fun flipCardLeft(mode: Int) {
+        childFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.card_flip_left_in,
+                R.anim.card_flip_left_out
+            )
+            .replace(
+                R.id.tab,
+                SelectNormalFragment.newInstance(
+                    mode,
+                    tab
+                )
+            )
+            .commit()
+    }
+
+    //対局開始判定ロジックへ
+    fun fadeOut() {
+        presenter.startGame()
+    }
+
+    //通常対戦画面へ遷移
+    override fun startNomarGame() {
+        val intent = Intent(context, GameActivity::class.java)
+        startActivity(intent)
+    }
+
+    //通信対戦画面へ遷移
+    override fun startRateGame() {
+        val intent = Intent(context, GameRateActivity::class.java)
         startActivity(intent)
     }
 
@@ -170,13 +178,17 @@ class SettingActivity  : Fragment(),OnBackPressedListener {
         closeActivity()
     }
 
+    //エラー表示
+    override fun showAuthToast() {
+        Toast.makeText(context, "ログインしてください", Toast.LENGTH_LONG).show()
+    }
+
     companion object {
         const val FREE = 1
-        const val RATE = 2
 
         @JvmStatic
-        fun newInstance(): SettingActivity {
-            val fragment = SettingActivity()
+        fun newInstance(): SettingRootFragment {
+            val fragment = SettingRootFragment()
             return fragment
         }
     }
