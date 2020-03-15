@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.account.SignOutFragment">
 
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="アカウント"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
@@ -20,85 +33,85 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="0.0" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logout"
-        app:layout_constraintVertical_bias="0.0">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/logout"-->
+<!--        app:layout_constraintVertical_bias="0.0">-->
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="総合レート"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView10"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="総合レート"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="対戦数"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView11"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="対戦数"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="月間レート"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView12"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="月間レート"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="月間対戦数"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView13"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="月間対戦数"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="各対戦数"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView14"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="各対戦数"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="本将棋"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView15"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="本将棋"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="王手将棋"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView16"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="王手将棋"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="安南将棋"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView18"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="安南将棋"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2手差し将棋"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView17"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="2手差し将棋"-->
+<!--            android:textSize="18sp" />-->
 
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="持ち駒制限将棋"
-            android:textSize="18sp" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/textView19"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="持ち駒制限将棋"-->
+<!--            android:textSize="18sp" />-->
+<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -107,7 +120,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.31"
         tools:layout_editor_absoluteX="44dp">
 
         <LinearLayout

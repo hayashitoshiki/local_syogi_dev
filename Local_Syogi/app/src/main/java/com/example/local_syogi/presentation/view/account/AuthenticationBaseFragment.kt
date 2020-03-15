@@ -10,13 +10,8 @@ import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.RateCardContact
 import com.example.local_syogi.presentation.contact.SettingAccountContact
 
-
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-
-/*
- *  DI用クラスに以下の１行を追加してください
- */
 
 
 
@@ -31,7 +26,11 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sign_base, container, false)
 
-        parentPresenter!!.onStart()
+        if(parentPresenter!!.checkSession()){
+            setInformationView()
+        }else{
+            setLoginView()
+        }
         return view
     }
 
@@ -40,6 +39,10 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
         Log.d("Main","ログイン")
         val signIn = SignInUpFragment.newInstance(parentPresenter!!)
         childFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.fade_in,
+                R.anim.fade_out
+            )
             .replace(R.id.fragment, signIn)
             .commit()
     }
@@ -47,9 +50,13 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
     //ログイン後(設定)画面を表示する
     fun setInformationView() {
         Log.d("Main","設定画面")
-        val signIn =SignOutFragment.newInstance(parentPresenter!!)
+        val signOut =SignOutFragment.newInstance(parentPresenter!!)
         childFragmentManager.beginTransaction()
-            .replace(R.id.fragment, signIn)
+            .setCustomAnimations(
+                R.anim.fade_in,
+                R.anim.fade_out
+            )
+            .replace(R.id.fragment, signOut)
             .commit()
     }
 

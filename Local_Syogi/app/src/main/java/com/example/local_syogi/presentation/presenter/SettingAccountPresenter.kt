@@ -6,18 +6,27 @@ import com.example.local_syogi.presentation.contact.SettingAccountContact
 class SettingAccountPresenter(private val view: SettingAccountContact.View, private val firebase:AuthenticationUseCase) :
     SettingAccountContact.Presenter {
 
-    //ログイン認証
+    private var session = false
+
+    //ログイン状態を返す
+    override fun checkSession():Boolean{
+        return session
+    }
+    //自動ログイン認証
     override fun onStart(){
         firebase.firstCheck({
-            view.setInformationView()
+            session = true
+            //view.setInformationView()
         },{
-            view.setLoginView()
+            view.setLoginViewFirst()
         })
     }
 
+    //ログイン認証
     override fun signIn(email:String, password:String){
         if(email != "" && password != ""){
             firebase.signIn(email,password,{
+                session = true
                 view.setInformationView()
             },{
                 view.showErrorToast()
@@ -30,6 +39,7 @@ class SettingAccountPresenter(private val view: SettingAccountContact.View, priv
     //ログアウト
     override fun signOut() {
         firebase.signOut({
+            session = false
             view.signOut()
         },{
             view.showErrorToast()
@@ -40,6 +50,7 @@ class SettingAccountPresenter(private val view: SettingAccountContact.View, priv
     override fun signUp(email:String, password:String){
         if(email != "" && password != "") {
             firebase.signUp(email, password, {
+                session = true
                 view.setInformationView()
             }, {
                 view.showErrorToast()

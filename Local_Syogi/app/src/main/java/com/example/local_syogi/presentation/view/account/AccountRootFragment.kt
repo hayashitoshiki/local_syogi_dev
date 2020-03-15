@@ -22,30 +22,22 @@ import org.koin.core.parameter.parametersOf
 class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressedListener {
 
     private val presenter: SettingAccountContact.Presenter by inject { parametersOf(this) }
-    private lateinit var authFragment:AuthenticationBaseFragment
+    lateinit var authFragment:AuthenticationBaseFragment
     private lateinit var accountTab:AccountCardFragment
     private lateinit var tabFragment:FrameLayout
     private lateinit var mainFrame:FrameLayout
     private lateinit var main :MainActivity
 
-    private var mode = 1
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var tab = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_setting_account, container, false)
         main = activity as MainActivity
         authFragment = AuthenticationBaseFragment.newInstance(presenter)
-        accountTab = AccountCardFragment()
+        accountTab = AccountCardFragment.newInstance(presenter)
         tabFragment = view.findViewById(R.id.tab)
         mainFrame = view.findViewById(R.id.fragment)
 
-        childFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment, authFragment)
-            .commit()
         childFragmentManager
             .beginTransaction()
             .replace(R.id.tab, accountTab)
@@ -55,7 +47,7 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressed
 
     override fun onStart() {
         super.onStart()
-        // presenter.onStart()
+        presenter.onStart()
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
         val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_delay) as Animation
 
@@ -82,6 +74,14 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressed
                 //flipCard(2)
             }
         }
+    }
+
+    //初期状態でログイン画面を表示する
+    override fun setLoginViewFirst(){
+        childFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment, NotLoginFragment())
+            .commit()
     }
 
     //ログイン画面を表示する
@@ -121,14 +121,23 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressed
         //main.backFragment()
     }
 
+    fun changeMode(fragment: Fragment,tab:Int){
+        childFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.fade_in_slide,
+                R.anim.fade_out_slide
+            )
+            .replace(R.id.fragment, fragment)
+            .commit()
+        this.tab = tab
+    }
+
     //BackKey
     override fun onBackPressed() {
         closeActivity()
     }
 
     companion object {
-        const val FREE = 1
-        const val RATE = 2
 
         @JvmStatic
         fun newInstance(): AccountRootFragment {
