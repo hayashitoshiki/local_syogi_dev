@@ -21,6 +21,23 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
     private lateinit var canvas:Canvas
     private val paint:Paint = Paint()
 
+    //画像定義
+    private val kingBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_king)
+    private val kinBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_kin)
+    private val ginBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_gin)
+    private val nariginBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_narigin)
+    private val keiBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_kei)
+    private val narikeiBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_narikei)
+    private val kyoBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_kyo)
+    private val narikyoBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_narikyo)
+    private val hisyaBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_hisya)
+    private val ryuBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_ryu)
+    private val kakuBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_kaku)
+    private val umaBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_uma)
+    private val fuBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_fu)
+    private val tokinBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_to)
+    private val rect1 = Rect(0, 0, kingBmp.width, kingBmp.height)
+
     private val bw:Float = if(width < height){
         width.toFloat()
     }else{
@@ -100,39 +117,59 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
         for (i in 0 until 9) canvas.drawLine(0f, ch * (i + 1), bw, ch * (i + 1), paint)
     }
 
-    //後手の駒描画
-    override fun drawWhitePiece(name:String, i:Int, j:Int){
-        paint.textSize = cw/2
-        canvas.save()
-        canvas.rotate(180f, (cw * i) + cw /2, ch*2 + (ch * j) - cw / 2)
-        canvas.drawText(name, (cw*i)+cw/5, ch*2+(ch*j)-cw/4, paint)
-        canvas.restore()
+    //駒の名前→画像へ変換
+    private fun changeImageByPiece(name:String):Bitmap{
+        return when(name){
+            "歩" -> fuBmp
+            "と" -> tokinBmp
+            "香" -> kyoBmp
+            "杏" -> narikyoBmp
+            "桂" -> keiBmp
+            "圭" -> narikeiBmp
+            "銀" -> ginBmp
+            "全" -> nariginBmp
+            "金" -> kinBmp
+            "王" -> kingBmp
+            "角" -> kakuBmp
+            "馬" -> umaBmp
+            "飛" -> hisyaBmp
+            "龍" -> ryuBmp
+            else -> fuBmp
+        }
     }
 
     //先手の駒描画
     override fun drawBlackPiece(name:String, i:Int, j:Int){
-        paint.textSize = cw/2
-        canvas.drawText(name, (cw*i)+cw/5, ch*2+(ch*j)-cw/4, paint)
+        val rect2 = Rect((cw*i + cw/8).toInt(), (ch+(ch*j) + cw/10).toInt(), (cw*(i+1) - cw/8).toInt(), (ch+(ch*(j+1)) - cw/10).toInt())
+        canvas.drawBitmap(changeImageByPiece(name), rect1, rect2, paint)
+    }
+
+    //後手の駒描画
+    override fun drawWhitePiece(name:String, i:Int, j:Int){
+        val rect2 = Rect((cw*i + cw/8).toInt(), (ch+(ch*j) + cw/10).toInt(), (cw*(i+1) - cw/8).toInt(), (ch+(ch*(j+1)) - cw/10).toInt())
+        canvas.save()
+        canvas.rotate(180f, (cw * i) + cw /2, ch*2 + (ch * j) - cw / 2)
+        canvas.drawBitmap(changeImageByPiece(name), rect1, rect2, paint)
+        canvas.restore()
     }
 
     //先手の持ち駒描画
     override fun drawHoldPieceBlack(nameJP:String,stock:Int, count:Int){
-        paint.textSize = cw / 2
-        canvas.drawText(nameJP, (cw*(count+2))+cw/5, ch*2+(ch*9)-cw/4, paint)
+        val rect2 = Rect((cw*(count+2) + cw/8).toInt(), (ch+(ch*9) + cw/10).toInt(), (cw*(count+3) - cw/8).toInt(), (ch+(ch*10) - cw/10).toInt())
+        canvas.drawBitmap(changeImageByPiece(nameJP), rect1, rect2, paint)
         paint.textSize = cw / 5
         canvas.drawText(stock.toString(), (cw*(count+2))+cw*3/4, ch*2+(ch*9)-cw/8, paint)
     }
 
     //後手の持ち駒描画
     override fun drawHoldPieceWhite(nameJP:String, stock:Int, count:Int){
+        val rect2 = Rect((cw*(7-count) + cw/8).toInt(), (0 + cw/10).toInt(), (cw*(8 -count) - cw/8).toInt(), (ch - cw/10).toInt())
+        paint.textSize = cw / 5
         canvas.save()
         canvas.rotate(180f, cw*(7-count), ch-cw/2)
-        paint.textSize = cw / 2
-        canvas.drawText(nameJP, (cw*(7-count))+cw/5, ch-cw/4, paint)
-        paint.textSize = cw / 5
+        canvas.drawBitmap(changeImageByPiece(nameJP), rect1, rect2, paint)
         canvas.drawText(stock.toString(), (cw*(7-count))+cw*3/4, ch-cw/8, paint)
         canvas.restore()
-
     }
 
     //ヒント描画メソッド

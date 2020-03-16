@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/syogi_bg"
     tools:context=".presentation.view.account.AccountRootFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
