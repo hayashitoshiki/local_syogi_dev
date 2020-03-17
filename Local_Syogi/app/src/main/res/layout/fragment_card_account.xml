@@ -23,20 +23,24 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="設定"
-            android:textColor="#212121"
-            android:textSize="24sp"
+            android:textColor="#000000"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/accountButton"
             android:background="#00000000"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
+            android:textColor="#616161"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="@string/account_info" />
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:textSize="18sp"
+            android:text="アカウント"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/allButton"
@@ -44,89 +48,118 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="18sp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:background="#00000000"
-            android:text="@string/all_log"
+            android:text="対戦記録"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
+            android:textColor="#616161"
             android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/usualyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:background="#00000000"
-            android:text="@string/syogi"
+            android:text="本将棋"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
-            android:textSize="18sp" />
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/annnanButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@null"
-            android:text="@string/annnan_syogi"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:background="#00000000"
+            android:text="安南将棋"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
-            android:textSize="18sp" />
+            android:textColor="#757575"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
 
         <Button
             android:id="@+id/seccondButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:background="#00000000"
-            android:text="@string/secound_syogi"
+            android:text="2手差し将棋"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
-            android:textSize="18sp" />
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/pieceLimitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:background="#00000000"
-            android:text="@string/piece_syogi"
+            android:text="持駒制限将棋"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
-            android:textSize="18sp" />
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
 
         <Button
             android:id="@+id/queenButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:background="#00000000"
-            android:text="@string/quiin_syogi"
+            android:text="クイーン将棋"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
-            android:textSize="18sp" />
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
 
         <Button
             android:id="@+id/checkmateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:background="#00000000"
-            android:text="@string/check_syogi"
+            android:text="王手将棋"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
-            android:textSize="18sp" />
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
 
         <Button
             android:id="@+id/chaosButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:background="#00000000"
-            android:text="@string/chaos_syogi"
+            android:text="カオス将棋"
             android:textAlignment="viewStart"
-            android:textColor="#212121"
-            android:textSize="18sp" />
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.local_syogi.presentation.view.account
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ class AccountCardFragment: Fragment(){
     private val buttonList = arrayListOf<Button>()
     private lateinit var rootFragment:AccountRootFragment
     private var tab = -1
+    private var colorPrevious:Int = Color.parseColor("#795548")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,11 +83,19 @@ class AccountCardFragment: Fragment(){
 
     //タブ選択
     private fun changeMode(button:Button, fragment: Fragment) {
-        for (btn in buttonList) {
-            btn.setTextColor(Color.BLACK)
+//        for (btn in buttonList) {
+//           // btn.setTextColor(Color.BLACK)
+//        }
+        if(tab != -1) {
+            buttonList[tab].setTextColor(colorPrevious)
+            buttonList[tab].setTypeface(null, Typeface.ITALIC)
         }
+        tab = buttonList.indexOf(button)
+        colorPrevious = buttonList[tab].currentTextColor
         button.setTextColor(Color.parseColor("#795548"))
-        val tab = buttonList.indexOf(button)
+        button.typeface = Typeface.DEFAULT_BOLD
+
+
         if(button == accountButton || parentPresenter!!.isSession()){
             rootFragment.changeMode(fragment,tab)
         }else{
