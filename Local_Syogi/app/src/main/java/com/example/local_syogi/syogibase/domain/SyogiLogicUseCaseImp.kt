@@ -306,17 +306,19 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
                     }
                 }
             FU ->
-                for (i in 0..8) { for (j in 0..8) {
-                    if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
-                    if (j == 8) {
-                        for (k in 1..8) {
-                            val K = if (y == 10) k else k - 1
-                            if (boardRepository.getTurn(i, K) == 0) {
-                                setHint(newX, newY, i, k, turn)
+                for (i in 0..8) {
+                    for (j in 0..8) {
+                        if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
+                        if (j == 8) {
+                            for (k in 1..8) {
+                                val K = if (y == 10) k else k - 1
+                                if (boardRepository.getTurn(i, K) == 0) {
+                                    setHint(newX, newY, i, K, turn)
+                                }
                             }
                         }
                     }
-                } }
+                }
             else -> Log.e("GameLogicPresenter", "不正な持ち駒を取得しようとしています")
         }
     }
