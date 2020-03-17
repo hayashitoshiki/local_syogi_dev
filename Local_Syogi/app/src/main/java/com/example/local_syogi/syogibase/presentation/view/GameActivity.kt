@@ -58,7 +58,7 @@ class GameActivity : AppCompatActivity() {
 
         button.visibility = View.INVISIBLE
         button2.visibility = View.INVISIBLE
-        frame!!.addView(winLoseView, 1)
+        frame!!.addView(winLoseView,2)
         endView.startAnimation(animation)
     }
 
