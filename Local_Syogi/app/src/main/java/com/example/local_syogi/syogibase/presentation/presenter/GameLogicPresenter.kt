@@ -1,6 +1,8 @@
 package com.example.local_syogi.syogibase.presentation.presenter
 
 
+import android.util.Log
+import com.example.local_syogi.syogibase.data.local.GameLog
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
 
@@ -66,6 +68,14 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
     //成り判定
     override fun evolutionPiece(bool:Boolean){
         usecase.evolutionPiece(bool)
+    }
+
+
+    //対局ログを返す
+    override fun getLog():MutableList<GameLog>{
+        val log = usecase.getLog()
+        Log.d("Main","(presenter)サイズ："+ log.size)
+        return log
     }
 
 }

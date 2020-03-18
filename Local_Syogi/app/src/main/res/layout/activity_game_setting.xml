@@ -12,9 +12,9 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="モード設定"
-        android:textColor="#795548"
-        android:textSize="36sp"
+        android:text="モード設定..."
+        android:textColor="#616161"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:transitionName="title"
         android:visibility="invisible"
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tab"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.374" />
 
     <FrameLayout
         android:id="@+id/tab"
@@ -39,10 +39,11 @@
         android:id="@+id/mode_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tab"
-        app:layout_constraintTop_toBottomOf="@+id/title"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

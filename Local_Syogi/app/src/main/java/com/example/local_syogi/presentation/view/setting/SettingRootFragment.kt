@@ -33,6 +33,7 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
     private lateinit var modeFrame: FrameLayout
     private lateinit var title: TextView
     private var tab = -1
+    private var first = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,16 +61,13 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
 
     override fun onStart() {
         super.onStart()
-        val fade: Animation =
-            AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
-        val fadeDelay: Animation =
-            AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new_delay) as Animation
-        val fadeUp: Animation =
-            AnimationUtils.loadAnimation(context, R.anim.fade_in_up_new) as Animation
+        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
+        val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new_delay) as Animation
+        val fadeIn: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_delay) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.VISIBLE
-        title.startAnimation(fadeUp)
+        title.startAnimation(fadeIn)
         title.visibility = View.VISIBLE
         modeFrame.startAnimation(fadeDelay)
         modeFrame.visibility = View.VISIBLE
@@ -80,6 +78,9 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
        選択しているボタンは指定職にする
        また、fragmentを入れ替える */
     fun changeMode(fragment: Fragment, tab: Int) {
+        if(first){
+            firstChoice()
+        }
         childFragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.fade_in_slide,
@@ -100,6 +101,14 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
         closeActivity()
         val main = activity as MainActivity
         main.backFragment()
+    }
+
+    //「モード選択」(タイトル)Viewを非表示にする
+    override fun firstChoice(){
+        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
+        title.startAnimation(fade)
+        title.visibility = View.INVISIBLE
+        first = false
     }
 
     //タブカード回転
@@ -157,20 +166,23 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
     private fun closeActivity(){
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide_delay) as Animation
         val fadeSpeed: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_speed) as Animation
-        val fadeUp: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_up) as Animation
+        val fadeOut: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.INVISIBLE
         modeFrame.startAnimation(fadeSpeed)
         modeFrame.visibility = View.INVISIBLE
-        title.startAnimation(fadeUp)
-        title.visibility = View.INVISIBLE
+        if(title.visibility == View.VISIBLE) {
+            title.startAnimation(fadeOut)
+            title.visibility = View.INVISIBLE
+        }
     }
 
     override fun onResume(){
         super.onResume()
         GameMode.reset()
         view2.visibility = View.VISIBLE
+        first = true
     }
 
     //BackKey

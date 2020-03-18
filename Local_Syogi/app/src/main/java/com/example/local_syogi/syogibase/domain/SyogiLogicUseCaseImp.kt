@@ -306,17 +306,19 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
                     }
                 }
             FU ->
-                for (i in 0..8) { for (j in 0..8) {
-                    if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
-                    if (j == 8) {
-                        for (k in 1..8) {
-                            val K = if (y == 10) k else k - 1
-                            if (boardRepository.getTurn(i, K) == 0) {
-                                setHint(newX, newY, i, k, turn)
+                for (i in 0..8) {
+                    for (j in 0..8) {
+                        if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
+                        if (j == 8) {
+                            for (k in 1..8) {
+                                val K = if (y == 10) k else k - 1
+                                if (boardRepository.getTurn(i, K) == 0) {
+                                    setHint(newX, newY, i, K, turn)
+                                }
                             }
                         }
                     }
-                } }
+                }
             else -> Log.e("GameLogicPresenter", "不正な持ち駒を取得しようとしています")
         }
     }
@@ -368,5 +370,13 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     //動かす駒の元の位置をセットする
     override fun setPre(x:Int, y:Int){
         boardRepository.setPre(x, y)
+    }
+
+    //対局ログを返す
+    override fun getLog():MutableList<GameLog>{
+        val log = boardRepository.getLog()
+        Log.d("Main","サイズ："+ log.size)
+        return log
+
     }
 }

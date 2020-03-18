@@ -28,6 +28,7 @@ class BoardRepositoryImp:BoardRepository {
         previousX = x
         previousY = y
         Log.d("Main", "駒：" + ",x:" + previousX + ",y:" + previousY)
+        Log.d("Main","駒セット。サイズ："+ logList.size)
         if (y == 10 || y == -1) previousPiece = changeIntToPiece(x)
         else previousPiece = board.cells[previousX][previousY].piece
         //Log.d("Main","駒："+ board.cells[x][y].piece + ",x:" + previousX +",y:" + previousY)
@@ -36,6 +37,12 @@ class BoardRepositoryImp:BoardRepository {
     //最新手を返す
     override fun getLogList(): GameLog {
         return logList.last()
+    }
+
+    //対局ログを返す
+    override fun getLog():MutableList<GameLog>{
+        Log.d("Main","サイズ："+ logList.size)
+        return logList
     }
 
     //駒を動かす
@@ -56,6 +63,7 @@ class BoardRepositoryImp:BoardRepository {
             }
         }
         Log.d("Main", "駒：" + board.cells[x][y].piece)
+        Log.d("Main","サイズ："+ logList.size)
     }
 
     //１手戻す

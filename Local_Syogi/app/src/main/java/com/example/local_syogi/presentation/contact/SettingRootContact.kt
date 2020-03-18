@@ -4,6 +4,8 @@ interface SettingRootContact {
     interface View{
         //ホーム画面へ戻る
         fun backHome()
+        //「モード選択」(タイトル)Viewを非表示にする
+        fun firstChoice()
         //タブカード回転
         fun flipCardRight(mode:Int)
         //タブカード回転
