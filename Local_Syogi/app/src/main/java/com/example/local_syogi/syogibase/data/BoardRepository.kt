@@ -55,4 +55,7 @@ interface BoardRepository {
     fun findKing(turn:Int):Pair<Int, Int>
     //指定したマスの情報を返す
     fun getCellInformation(x:Int, y:Int): Cell
+
+    //対局ログを返す
+    fun getLog():MutableList<GameLog>
 }

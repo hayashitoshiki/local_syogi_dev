@@ -1,5 +1,7 @@
 package com.example.local_syogi.syogibase.presentation.contact
 
+import com.example.local_syogi.syogibase.data.local.GameLog
+
 
 interface GameViewContact {
 
@@ -31,5 +33,8 @@ interface GameViewContact {
         fun drawView()
         //成り判定
         fun evolutionPiece(bool:Boolean)
+
+        //対局ログを返す
+        fun getLog():MutableList<GameLog>
     }
 }

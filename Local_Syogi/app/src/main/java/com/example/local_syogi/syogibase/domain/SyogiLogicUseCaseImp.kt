@@ -371,4 +371,12 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     override fun setPre(x:Int, y:Int){
         boardRepository.setPre(x, y)
     }
+
+    //対局ログを返す
+    override fun getLog():MutableList<GameLog>{
+        val log = boardRepository.getLog()
+        Log.d("Main","サイズ："+ log.size)
+        return log
+
+    }
 }

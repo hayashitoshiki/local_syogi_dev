@@ -1,5 +1,5 @@
-package com.example.local_syogi.syogibase.presentation.view
-import android.app.AlertDialog
+package com.example.local_syogi.presentation.view.game
+
 import android.content.Context
 import android.graphics.*
 import android.media.AudioAttributes
@@ -8,20 +8,32 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.GameViewRateContact
+import com.example.local_syogi.presentation.presenter.GameLogicFreePresenter
+import com.example.local_syogi.syogibase.data.BoardRepositoryImp
 import com.example.local_syogi.syogibase.data.local.GameLog
 import com.example.local_syogi.syogibase.data.local.GameMode
+import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
+import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 
-
-class GameView(private val activity:GameActivity, context: Context, width:Int, height:Int): View(context), GameViewContact.View,
+class GameFreeView(private val activity: GameActivity, context: Context, width:Int, height:Int,val log:MutableList<GameLog>): View(context), GameViewRateContact.View,
     KoinComponent {
 
-    private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
-    private lateinit var canvas:Canvas
-    private val paint:Paint = Paint()
+   // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
+    private val presenter: GameLogicFreePresenter =
+       GameLogicFreePresenter(
+           this as GameViewRateContact.View,
+           SyogiLogicUseCaseImp(BoardRepositoryImp())
+       )
+
+    private lateinit var canvas: Canvas
+    private val paint: Paint = Paint()
+
+    private var count = 0
 
     //画像定義
     private val kingBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_king)
@@ -40,18 +52,18 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
     private val tokinBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_to)
     private val rect1 = Rect(0, 0, kingBmp.width, kingBmp.height)
 
-    private val bw:Float = if(width < height){
+    private var bw:Float = if(width < height){
         width.toFloat()
     }else{
         height.toFloat()
     }//将棋盤の幅
-    private val bh:Float =  if(width < height){
+    private var bh:Float =  if(width < height){
         width.toFloat()
     }else{
         height.toFloat()
     }//将棋盤の高さ
-    private val cw:Float = bw/9//１マスの幅
-    private val ch:Float = bh/9//１マスの高さ
+    private var cw:Float = bw/9//１マスの幅
+    private var ch:Float = bh/9//１マスの高さ
     private val median = 3 //盤の位置　中央値：３ 範囲：０～６
 
     private lateinit var soundPool: SoundPool
@@ -60,6 +72,10 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         paint.textSize = cw
+        bw = width.toFloat()//将棋盤の幅
+        bh = width.toFloat()//将棋盤の高さ
+        cw = bw/9//１マスの幅
+        ch = bh/9
         val textWidth = paint.measureText(GameMode.getModeText())
 
         this.canvas = canvas
@@ -91,13 +107,16 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
         when (event.action) {
             MotionEvent.ACTION_DOWN ->{}
             MotionEvent.ACTION_UP ->{
-                presenter.onTouchEvent(c,r)
-                invalidate()
+//                presenter.onTouchEvent(c,r)
+               // invalidate()
+                //TODO　後で絶対修正！！！
+                if(c in 4..8){
+                    socketMove()
+                }
             }
             MotionEvent.ACTION_MOVE -> {}
             MotionEvent.ACTION_CANCEL -> {}
         }
-
         return true
     }
 
@@ -120,7 +139,7 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
     }
 
     //駒の名前→画像へ変換
-    private fun changeImageByPiece(name:String):Bitmap{
+    private fun changeImageByPiece(name:String): Bitmap {
         return when(name){
             "歩" -> fuBmp
             "と" -> tokinBmp
@@ -174,51 +193,33 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
         canvas.restore()
     }
 
-    //ヒント描画メソッド
-    override fun drawHint(x:Int, y:Int){
-        paint.color = (Color.argb(200, 255, 255, 0))
-        canvas.drawCircle((cw*x + cw/2 ), (ch*(y+1) + ch/2), (bw/9 * 0.46).toFloat(), paint)
-        paint.color = Color.rgb(40, 40, 40)
-    }
-
-    //成り判定ダイアログ
-    override fun showDialog(){
-        val alertBuilder = AlertDialog.Builder(context).setCancelable(false)
-        alertBuilder.setMessage("成りますか？")
-        alertBuilder.setPositiveButton("はい") { _, _ ->
-            presenter.evolutionPiece(true)
-            invalidate()
+    //駒の動きを受信。受信側は判定を行わない　　viewの変更
+    fun socketMove() {
+        if(log.size > count) {
+            presenter.socketMove(
+                log[count].oldX,
+                log[count].oldY,
+                log[count].newX,
+                log[count].newY,
+                log[count].evolution)
+            count++
+        }else{
+            Log.d("Main","上限いっぱい")
         }
-        alertBuilder.setNegativeButton("いいえ") { _, _ ->
-            presenter.evolutionPiece(false)
-            invalidate()
-        }
-        alertBuilder.create().show()
+        invalidate()
     }
+    override fun moveEmit(log: GameLog){}
 
-    //終了ダイアログ表示
-    override fun gameEnd(turn:Int){
-        activity.gameEnd(turn)
-    }
-
-    //駒音再生
+    //ヒント描画
+    override fun drawHint(i:Int,j:Int){}
+    //成るか判断するダイアログ生成
+    override fun showDialog(){}
+    //対局終了モーダル生成
+    override fun gameEnd(turn:Int){}
+    //効果音を鳴らす
     override fun playbackEffect(){
-        // play(ロードしたID, 左音量, 右音量, 優先度, ループ, 再生速度)
-        soundPool.play(soundOne, 1.0f, 1.0f, 0, 0, 1.0f)
-    }
-
-
-    //対局ログを返す
-    fun getLog():MutableList<GameLog>{
-        val log = presenter.getLog()
-        Log.d("Main","(view)サイズ："+ log.size)
-       return log
-    }
-
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        Log.d("Main","views駆除")
 
     }
+
 
 }
