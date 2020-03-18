@@ -112,6 +112,8 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
                 //TODO　後で絶対修正！！！
                 if(c in 4..8){
                     socketMove()
+                }else if(c in 0..4){
+                    backRevioew()
                 }
             }
             MotionEvent.ACTION_MOVE -> {}
@@ -205,6 +207,16 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
             count++
         }else{
             Log.d("Main","上限いっぱい")
+        }
+        invalidate()
+    }
+    //一手戻す
+    fun backRevioew(){
+        if(log.size != 0 && count != 0) {
+            presenter.setBackMove()
+            count--
+        }else{
+            Log.d("Main","下限いっぱい")
         }
         invalidate()
     }

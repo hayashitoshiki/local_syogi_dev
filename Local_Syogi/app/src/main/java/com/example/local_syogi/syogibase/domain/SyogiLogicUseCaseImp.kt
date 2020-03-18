@@ -65,7 +65,7 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         boardRepository.setMove(newX, newY, turn,false)
         val (kingX: Int, kingY: Int) = boardRepository.findKing(turn)
         if (!checkJudg(kingX, kingY, turn)) boardRepository.setHint(newX, newY)
-        boardRepository.setBackMove()
+        boardRepository.setPreBackMove()
     }
 
     //持ち駒制限将棋
@@ -378,5 +378,10 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
         Log.d("Main","サイズ："+ log.size)
         return log
 
+    }
+
+    //一手戻す
+    override fun setBackMove(){
+        boardRepository.setBackMove()
     }
 }

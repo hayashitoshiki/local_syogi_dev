@@ -58,6 +58,16 @@ class GameLogicFreePresenter(private val view: GameViewRateContact.View, private
         }
         view.playbackEffect()
     }
+
+    fun setBackMove(){
+        syogiUseCase.setBackMove()
+        val turn = syogiUseCase.getTurn()
+        if(turn == BLACK){
+            syogiUseCase.setTurn(WHITE)
+        }else{
+            syogiUseCase.setTurn(BLACK)
+        }
+    }
     //ターン変更
     override fun setTurn(turn:Int){}
 

@@ -66,6 +66,22 @@ class BoardRepositoryImp:BoardRepository {
         Log.d("Main","サイズ："+ logList.size)
     }
 
+    //１手戻す(ヒント)
+    override fun setPreBackMove() {
+        val log: GameLog = logList.last()
+        when(log.oldY){
+            10 -> board.holdPieceBlack[changeIntToPiece(log.oldX)] = board.holdPieceBlack[changeIntToPiece(log.oldX)]!! + 1
+            -1 -> board.holdPieceWhite[changeIntToPiece(log.oldX)] = board.holdPieceWhite[changeIntToPiece(log.oldX)]!! + 1
+            else ->{
+                board.cells[log.oldX][log.oldY].piece = log.afterPiece
+                board.cells[log.oldX][log.oldY].turn = log.afterTurn
+            }
+        }
+        board.cells[log.newX][log.newY].piece = log.beforpiece
+        board.cells[log.newX][log.newY].turn = log.beforturn
+        logList.remove(log)
+    }
+
     //１手戻す
     override fun setBackMove() {
         val log: GameLog = logList.last()
@@ -75,6 +91,19 @@ class BoardRepositoryImp:BoardRepository {
             else ->{
                 board.cells[log.oldX][log.oldY].piece = log.afterPiece
                 board.cells[log.oldX][log.oldY].turn = log.afterTurn
+            }
+        }
+        if(log.beforpiece != Piece.None){
+            val piece =
+                if (log.beforpiece.findDegeneration()){
+                    log.beforpiece.degeneration()
+                }else{
+                    log.beforpiece
+                }
+            if(log.beforturn == BLACK){
+                board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
+            }else{
+                board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
             }
         }
         board.cells[log.newX][log.newY].piece = log.beforpiece
