@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import com.example.local_syogi.R
 import androidx.appcompat.app.AlertDialog
 import com.example.local_syogi.presentation.view.game.GameFreeView
+import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
 import com.example.local_syogi.syogibase.data.local.GameLog
 
 
@@ -22,6 +23,7 @@ class GameActivity : AppCompatActivity() {
 
     var frame:FrameLayout? = null
     private lateinit var view:GameView
+    private var first = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +33,12 @@ class GameActivity : AppCompatActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-
-        frame = this.findViewById(R.id.frame) as FrameLayout
-        view = GameView(this,this, frame!!.width,frame!!.height)
-        frame!!.addView(view, 0)
+        if(first) {
+            frame = this.findViewById(R.id.frame) as FrameLayout
+            view = GameView(this, this, frame!!.width, frame!!.height)
+            frame!!.addView(view, 0)
+            first = false
+        }
     }
 
     //投了ボタン
@@ -45,19 +49,15 @@ class GameActivity : AppCompatActivity() {
         surrender(1)
     }
     private fun surrender(turn:Int){
-        val builder1 = AlertDialog.Builder(this) // Dialogを用意（Windowになる）
+        AlertDialog.Builder(this).setCancelable(false)
+            .setMessage("投了しますか？")
+            .setPositiveButton("はい") { _, _ ->
+                gameEnd(turn)
+            }
+            .setNegativeButton("いいえ", null)
+            .create()
+            .show()
 
-        gameEnd(turn)
-
-//        runOnUiThread {
-//            AlertDialog.Builder(this)
-//                .setMessage("投了しますか？")
-//                .setPositiveButton("はい") { _, _ ->
-//                    gameEnd(turn)
-//                }
-//                .setNegativeButton("いいえ", null)
-//                .show()
-//        }
     }
 
     var log = mutableListOf<GameLog>()
@@ -65,15 +65,15 @@ class GameActivity : AppCompatActivity() {
     fun gameEnd(turn:Int){
         log = view.getLog()
         Log.d("Main","(activity)サイズ："+ log.size)
-        val button:Button = findViewById(R.id.surrender_white)
+        val button:Button = findViewById(R.id.backStartButton)
         val button2:Button = findViewById(R.id.surrender_black)
         val viewGroup = this.findViewById(R.id.frame2) as FrameLayout
         val endView:View = layoutInflater.inflate(R.layout.modal_game_end, viewGroup)
         val winLoseView: View = WinLoseModal(this, turn)
         val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
-        button.visibility = View.INVISIBLE
-        button2.visibility = View.INVISIBLE
+        button.visibility = View.GONE
+        button2.visibility = View.GONE
         frame!!.addView(winLoseView,1)
         //アラートダイアログ入れる時は2にする
         endView.startAnimation(animation)
@@ -81,10 +81,24 @@ class GameActivity : AppCompatActivity() {
 
     //終了ボダン
     fun end(v: View) {
-        val view: View = GameFreeView(this,this, frame!!.width,frame!!.height,log)
-        frame!!.removeAllViews()
-        frame!!.addView(view)
+
+        val button:Button = findViewById(R.id.backStartButton)
+        val button2:Button = findViewById(R.id.surrender_black)
+        button.visibility = View.GONE
+        button2.visibility = View.GONE
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.fade_in_slide_from_right,
+                0
+            )
+            .replace(R.id.frame, GamePlayBackFragment(log))
+            .commit()
         //finish()
+    }
+
+    //終了
+    fun end(){
+        finish()
     }
 
     //もう一度ボタン

@@ -44,4 +44,6 @@ interface SyogiLogicUseCase {
 
     //対局ログを返す
     fun getLog():MutableList<GameLog>
+    //一手戻す
+    fun setBackMove()
 }

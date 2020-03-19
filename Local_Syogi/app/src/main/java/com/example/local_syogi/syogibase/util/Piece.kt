@@ -74,7 +74,7 @@ enum class Piece(val nameJP:String) {
     fun evolution():Piece{
         when(this){
             FU    ->return TO
-            KEI   ->return N_KYO
+            KEI   ->return N_KEI
             KYO   ->return N_KYO
             GIN   ->return N_GIN
             HISYA ->return RYU
@@ -82,11 +82,33 @@ enum class Piece(val nameJP:String) {
             else  ->return None
         }
     }
+    //退化
+    fun degeneration():Piece{
+        return when(this){
+            TO,FU     -> FU
+            N_KEI,KEI -> KEI
+            N_KYO,KYO -> KYO
+            N_GIN,GIN -> GIN
+            RYU,HISYA -> HISYA
+            UMA,KAKU  -> KAKU
+            KIN       -> KIN
+            OU        -> OU
+            GYOKU     -> GYOKU
+            else      -> None
+        }
+    }
 
     //成れる駒の分類
     fun findEvolution():Boolean{
         when(this){
             FU,KEI,KYO,GIN,HISYA,KAKU  ->return true
+            else -> return false
+        }
+    }
+    //退化できる駒の分類
+    fun findDegeneration():Boolean{
+        when(this){
+            TO,N_KEI,N_KYO,N_GIN,RYU,UMA  ->return true
             else -> return false
         }
     }

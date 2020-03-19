@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.media.AudioAttributes
 import android.media.SoundPool
+import android.os.Handler
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -20,7 +21,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 
-class GameFreeView(private val activity: GameActivity, context: Context, width:Int, height:Int,val log:MutableList<GameLog>): View(context), GameViewRateContact.View,
+class GameFreeView(context: Context, width:Int, height:Int,val log:MutableList<GameLog>): View(context), GameViewRateContact.View,
     KoinComponent {
 
    // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
@@ -99,20 +100,37 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
         soundOne = soundPool.load(context, R.raw.sound_japanese_chess, 1)
     }
 
+    private val longPressHandler = Handler()
+    private val longPressBack = Runnable {
+        backMoveFirst()
+    }
+    private val longPressGo = Runnable {
+       goMoveLast()
+    }
+
     //指した時の動作
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val c = (event.x / cw).toInt()
         val r = (event.y / ch - median).toInt()
 
         when (event.action) {
-            MotionEvent.ACTION_DOWN ->{}
+            MotionEvent.ACTION_DOWN ->{
+                if(c in 4..8){
+                    longPressHandler.postDelayed( longPressGo, 800)
+                }else if(c in 0..4){
+                    longPressHandler.postDelayed( longPressBack, 800)
+                }
+            }
             MotionEvent.ACTION_UP ->{
-//                presenter.onTouchEvent(c,r)
-               // invalidate()
                 //TODO　後で絶対修正！！！
                 if(c in 4..8){
-                    socketMove()
+                    goMove()
+                    longPressHandler.removeCallbacks( longPressGo )
+                }else if(c in 0..4){
+                    backMove()
+                    longPressHandler.removeCallbacks( longPressBack )
                 }
+                invalidate()
             }
             MotionEvent.ACTION_MOVE -> {}
             MotionEvent.ACTION_CANCEL -> {}
@@ -194,7 +212,7 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
     }
 
     //駒の動きを受信。受信側は判定を行わない　　viewの変更
-    fun socketMove() {
+    fun goMove() {
         if(log.size > count) {
             presenter.socketMove(
                 log[count].oldX,
@@ -203,8 +221,26 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
                 log[count].newY,
                 log[count].evolution)
             count++
-        }else{
-            Log.d("Main","上限いっぱい")
+        }
+    }
+    //一手戻す
+    fun backMove(){
+        if(log.size != 0 && count != 0) {
+            presenter.setBackMove()
+            count--
+        }
+    }
+    //最初まで戻す
+    fun backMoveFirst(){
+        while(count != 0){
+            backMove()
+        }
+        invalidate()
+    }
+    //最後まで動かす
+    fun goMoveLast(){
+        while(log.size > count){
+            goMove()
         }
         invalidate()
     }

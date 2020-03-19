@@ -50,13 +50,23 @@ class GameLogicFreePresenter(private val view: GameViewRateContact.View, private
     override fun socketMove(oldX:Int, oldY:Int, newX:Int, newY:Int, evolution:Boolean){
         syogiUseCase.setPre(oldX,oldY)
         syogiUseCase.setMove(newX,newY, evolution)
+        changeTurn()
+        view.playbackEffect()
+    }
+
+    //一手戻す
+    fun setBackMove(){
+        syogiUseCase.setBackMove()
+        changeTurn()
+    }
+    //ターン変更
+    private fun changeTurn(){
         val turn = syogiUseCase.getTurn()
         if(turn == BLACK){
             syogiUseCase.setTurn(WHITE)
         }else{
             syogiUseCase.setTurn(BLACK)
         }
-        view.playbackEffect()
     }
     //ターン変更
     override fun setTurn(turn:Int){}

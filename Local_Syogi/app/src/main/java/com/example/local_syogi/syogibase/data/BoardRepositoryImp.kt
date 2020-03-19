@@ -41,7 +41,6 @@ class BoardRepositoryImp:BoardRepository {
 
     //対局ログを返す
     override fun getLog():MutableList<GameLog>{
-        Log.d("Main","サイズ："+ logList.size)
         return logList
     }
 
@@ -50,10 +49,10 @@ class BoardRepositoryImp:BoardRepository {
         val piece = changeIntToPiece(previousX)
         val gameLog = GameLog(previousX, previousY, previousPiece, turn, x, y, board.cells[x][y].piece, board.cells[x][y].turn,evolution)
         logList.add(gameLog)
+        board.cells[x][y].turn = turn
         board.cells[x][y].piece =
             if(evolution) previousPiece.evolution()
             else previousPiece
-        board.cells[x][y].turn = turn
         when(previousY){
             10   -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
             -1   -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
@@ -66,6 +65,22 @@ class BoardRepositoryImp:BoardRepository {
         Log.d("Main","サイズ："+ logList.size)
     }
 
+    //１手戻す(ヒント)
+    override fun setPreBackMove() {
+        val log: GameLog = logList.last()
+        when(log.oldY){
+            10 -> board.holdPieceBlack[changeIntToPiece(log.oldX)] = board.holdPieceBlack[changeIntToPiece(log.oldX)]!! + 1
+            -1 -> board.holdPieceWhite[changeIntToPiece(log.oldX)] = board.holdPieceWhite[changeIntToPiece(log.oldX)]!! + 1
+            else ->{
+                board.cells[log.oldX][log.oldY].piece = log.afterPiece
+                board.cells[log.oldX][log.oldY].turn = log.afterTurn
+            }
+        }
+        board.cells[log.newX][log.newY].piece = log.beforpiece
+        board.cells[log.newX][log.newY].turn = log.beforturn
+        logList.remove(log)
+    }
+
     //１手戻す
     override fun setBackMove() {
         val log: GameLog = logList.last()
@@ -75,6 +90,14 @@ class BoardRepositoryImp:BoardRepository {
             else ->{
                 board.cells[log.oldX][log.oldY].piece = log.afterPiece
                 board.cells[log.oldX][log.oldY].turn = log.afterTurn
+            }
+        }
+        if(log.beforpiece != Piece.None){
+            val piece = log.beforpiece.degeneration()
+            Log.d("Main","駒："+piece.nameJP)
+            when(log.beforturn){
+                BLACK -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
+                WHITE -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
             }
         }
         board.cells[log.newX][log.newY].piece = log.beforpiece

@@ -12,7 +12,9 @@ import com.example.local_syogi.syogibase.data.BoardRepository
 import com.example.local_syogi.syogibase.data.BoardRepositoryImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
+import com.example.local_syogi.presentation.contact.GamePlayBackContact
 import com.example.local_syogi.syogibase.presentation.presenter.GameLogicPresenter
+import com.example.local_syogi.presentation.presenter.GamePlayBackPresenter
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -44,6 +46,12 @@ class MyApplication : Application() {
         factory <SettingAccountContact.Presenter>{ (v: SettingAccountContact.View) -> SettingAccountPresenter(v,get()) }
         factory <SettingRootContact.Presenter>{ (v: SettingRootContact.View) -> SettingRootPresenter(v,get()) }
         factory <RateCardContact.Presenter>{ (v: RateCardContact.View) -> RateCardPresenter(v) }
+        factory <GamePlayBackContact.Presenter>{ (v: GamePlayBackContact.View) ->
+            GamePlayBackPresenter(
+                v
+            )
+        }
+
 
         factory <SyogiLogicUseCase>{ SyogiLogicUseCaseImp(get()) }
         factory <AuthenticationUseCase>{ AuthenticationUseCaseImp(get())}
