@@ -84,14 +84,14 @@ enum class Piece(val nameJP:String) {
     }
     //退化
     fun degeneration():Piece{
-        when(this){
-            TO    ->return FU
-            N_KEI ->return KEI
-            N_KYO ->return KYO
-            N_GIN ->return GIN
-            RYU   ->return HISYA
-            UMA   ->return KAKU
-            else  ->return None
+        return when(this){
+            TO,FU     -> FU
+            N_KEI,KEI -> KEI
+            N_KYO,KYO -> KYO
+            N_GIN,GIN -> GIN
+            RYU,HISYA -> HISYA
+            UMA,KAKU  -> KAKU
+            else      -> None
         }
     }
 

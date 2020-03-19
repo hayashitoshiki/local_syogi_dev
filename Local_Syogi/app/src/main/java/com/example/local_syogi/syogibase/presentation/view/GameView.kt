@@ -185,15 +185,15 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
     override fun showDialog(){
         val alertBuilder = AlertDialog.Builder(context).setCancelable(false)
         alertBuilder.setMessage("成りますか？")
-        alertBuilder.setPositiveButton("はい") { _, _ ->
+        .setPositiveButton("はい") { _, _ ->
             presenter.evolutionPiece(true)
             invalidate()
         }
-        alertBuilder.setNegativeButton("いいえ") { _, _ ->
+        .setNegativeButton("いいえ") { _, _ ->
             presenter.evolutionPiece(false)
             invalidate()
         }
-        alertBuilder.create().show()
+        .create().show()
     }
 
     //終了ダイアログ表示

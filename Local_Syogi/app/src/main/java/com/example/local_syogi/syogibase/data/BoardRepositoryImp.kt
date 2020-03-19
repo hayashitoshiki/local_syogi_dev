@@ -41,7 +41,6 @@ class BoardRepositoryImp:BoardRepository {
 
     //対局ログを返す
     override fun getLog():MutableList<GameLog>{
-        Log.d("Main","サイズ："+ logList.size)
         return logList
     }
 
@@ -50,10 +49,10 @@ class BoardRepositoryImp:BoardRepository {
         val piece = changeIntToPiece(previousX)
         val gameLog = GameLog(previousX, previousY, previousPiece, turn, x, y, board.cells[x][y].piece, board.cells[x][y].turn,evolution)
         logList.add(gameLog)
+        board.cells[x][y].turn = turn
         board.cells[x][y].piece =
             if(evolution) previousPiece.evolution()
             else previousPiece
-        board.cells[x][y].turn = turn
         when(previousY){
             10   -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
             -1   -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
@@ -94,16 +93,10 @@ class BoardRepositoryImp:BoardRepository {
             }
         }
         if(log.beforpiece != Piece.None){
-            val piece =
-                if (log.beforpiece.findDegeneration()){
-                    log.beforpiece.degeneration()
-                }else{
-                    log.beforpiece
-                }
-            if(log.beforturn == BLACK){
-                board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
-            }else{
-                board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
+            val piece = log.beforpiece.degeneration()
+            when(log.beforturn){
+                BLACK -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
+                WHITE -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
             }
         }
         board.cells[log.newX][log.newY].piece = log.beforpiece
