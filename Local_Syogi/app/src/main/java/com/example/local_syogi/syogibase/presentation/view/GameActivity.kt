@@ -81,18 +81,18 @@ class GameActivity : AppCompatActivity() {
 
     //終了ボダン
     fun end(v: View) {
-        //val playBack = GamePlayBackFragment(log)
-       // val view: View = GameFreeView(this,this, frame!!.width,frame!!.height,log)
+
         val button:Button = findViewById(R.id.backStartButton)
         val button2:Button = findViewById(R.id.surrender_black)
         button.visibility = View.GONE
         button2.visibility = View.GONE
-        frame!!.removeAllViews()
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.fade_in_slide_from_right,
+                0
+            )
             .replace(R.id.frame, GamePlayBackFragment(log))
-            .addToBackStack(null)
             .commit()
-        //frame!!.addView(view)
         //finish()
     }
 
