@@ -22,6 +22,7 @@ class GameActivity : AppCompatActivity() {
 
     var frame:FrameLayout? = null
     private lateinit var view:GameView
+    private var first = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +32,12 @@ class GameActivity : AppCompatActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-
-        frame = this.findViewById(R.id.frame) as FrameLayout
-        view = GameView(this,this, frame!!.width,frame!!.height)
-        frame!!.addView(view, 0)
+        if(first) {
+            frame = this.findViewById(R.id.frame) as FrameLayout
+            view = GameView(this, this, frame!!.width, frame!!.height)
+            frame!!.addView(view, 0)
+            first = false
+        }
     }
 
     //投了ボタン
@@ -45,19 +48,15 @@ class GameActivity : AppCompatActivity() {
         surrender(1)
     }
     private fun surrender(turn:Int){
-        val builder1 = AlertDialog.Builder(this) // Dialogを用意（Windowになる）
+        AlertDialog.Builder(this).setCancelable(false)
+            .setMessage("投了しますか？")
+            .setPositiveButton("はい") { _, _ ->
+                gameEnd(turn)
+            }
+            .setNegativeButton("いいえ", null)
+            .create()
+            .show()
 
-        gameEnd(turn)
-
-//        runOnUiThread {
-//            AlertDialog.Builder(this)
-//                .setMessage("投了しますか？")
-//                .setPositiveButton("はい") { _, _ ->
-//                    gameEnd(turn)
-//                }
-//                .setNegativeButton("いいえ", null)
-//                .show()
-//        }
     }
 
     var log = mutableListOf<GameLog>()
