@@ -77,6 +77,21 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
         val intent = Intent(this, GameRateActivity()::class.java)
         startActivity(intent)
     }
+    //感想戦ボタン
+    fun replay(v:View){
+//        val button:Button = findViewById(R.id.backStartButton)
+//        val button2:Button = findViewById(R.id.surrender_black)
+//        button.visibility = View.GONE
+//        button2.visibility = View.GONE
+//        supportFragmentManager.beginTransaction()
+//            .setCustomAnimations(
+//                R.anim.fade_in_slide_from_right,
+//                0
+//            )
+//            .replace(R.id.frame, GamePlayBackFragment(log))
+//            .commit()
+    }
+
 
 
 
