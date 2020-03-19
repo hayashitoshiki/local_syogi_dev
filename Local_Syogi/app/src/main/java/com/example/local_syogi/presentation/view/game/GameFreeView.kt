@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.media.AudioAttributes
 import android.media.SoundPool
+import android.os.Handler
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -99,21 +100,35 @@ class GameFreeView(context: Context, width:Int, height:Int,val log:MutableList<G
         soundOne = soundPool.load(context, R.raw.sound_japanese_chess, 1)
     }
 
+    private val longPressHandler = Handler()
+    private val longPressBack = Runnable {
+        backMoveFirst()
+    }
+    private val longPressGo = Runnable {
+       goMoveLast()
+    }
+
     //指した時の動作
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val c = (event.x / cw).toInt()
         val r = (event.y / ch - median).toInt()
 
         when (event.action) {
-            MotionEvent.ACTION_DOWN ->{}
+            MotionEvent.ACTION_DOWN ->{
+                if(c in 4..8){
+                    longPressHandler.postDelayed( longPressGo, 800)
+                }else if(c in 0..4){
+                    longPressHandler.postDelayed( longPressBack, 800)
+                }
+            }
             MotionEvent.ACTION_UP ->{
-//                presenter.onTouchEvent(c,r)
-               // invalidate()
                 //TODO　後で絶対修正！！！
                 if(c in 4..8){
                     goMove()
+                    longPressHandler.removeCallbacks( longPressGo )
                 }else if(c in 0..4){
                     backMove()
+                    longPressHandler.removeCallbacks( longPressBack )
                 }
                 invalidate()
             }
