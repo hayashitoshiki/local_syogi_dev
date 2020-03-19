@@ -91,6 +91,9 @@ enum class Piece(val nameJP:String) {
             N_GIN,GIN -> GIN
             RYU,HISYA -> HISYA
             UMA,KAKU  -> KAKU
+            KIN       -> KIN
+            OU        -> OU
+            GYOKU     -> GYOKU
             else      -> None
         }
     }

@@ -94,6 +94,7 @@ class BoardRepositoryImp:BoardRepository {
         }
         if(log.beforpiece != Piece.None){
             val piece = log.beforpiece.degeneration()
+            Log.d("Main","駒："+piece.nameJP)
             when(log.beforturn){
                 BLACK -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
                 WHITE -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1

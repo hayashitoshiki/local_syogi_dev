@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import com.example.local_syogi.R
 import androidx.appcompat.app.AlertDialog
 import com.example.local_syogi.presentation.view.game.GameFreeView
+import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
 import com.example.local_syogi.syogibase.data.local.GameLog
 
 
@@ -64,15 +65,15 @@ class GameActivity : AppCompatActivity() {
     fun gameEnd(turn:Int){
         log = view.getLog()
         Log.d("Main","(activity)サイズ："+ log.size)
-        val button:Button = findViewById(R.id.surrender_white)
+        val button:Button = findViewById(R.id.backStartButton)
         val button2:Button = findViewById(R.id.surrender_black)
         val viewGroup = this.findViewById(R.id.frame2) as FrameLayout
         val endView:View = layoutInflater.inflate(R.layout.modal_game_end, viewGroup)
         val winLoseView: View = WinLoseModal(this, turn)
         val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
-        button.visibility = View.INVISIBLE
-        button2.visibility = View.INVISIBLE
+        button.visibility = View.GONE
+        button2.visibility = View.GONE
         frame!!.addView(winLoseView,1)
         //アラートダイアログ入れる時は2にする
         endView.startAnimation(animation)
@@ -80,10 +81,24 @@ class GameActivity : AppCompatActivity() {
 
     //終了ボダン
     fun end(v: View) {
-        val view: View = GameFreeView(this,this, frame!!.width,frame!!.height,log)
+        //val playBack = GamePlayBackFragment(log)
+       // val view: View = GameFreeView(this,this, frame!!.width,frame!!.height,log)
+        val button:Button = findViewById(R.id.backStartButton)
+        val button2:Button = findViewById(R.id.surrender_black)
+        button.visibility = View.GONE
+        button2.visibility = View.GONE
         frame!!.removeAllViews()
-        frame!!.addView(view)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame, GamePlayBackFragment(log))
+            .addToBackStack(null)
+            .commit()
+        //frame!!.addView(view)
         //finish()
+    }
+
+    //終了
+    fun end(){
+        finish()
     }
 
     //もう一度ボタン

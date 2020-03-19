@@ -9,7 +9,7 @@
     android:id="@+id/constraint_layout">
 
     <Button
-        android:id="@+id/surrender_white"
+        android:id="@+id/backStartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="surrenderWhite"

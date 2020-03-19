@@ -20,7 +20,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 
-class GameFreeView(private val activity: GameActivity, context: Context, width:Int, height:Int,val log:MutableList<GameLog>): View(context), GameViewRateContact.View,
+class GameFreeView(context: Context, width:Int, height:Int,val log:MutableList<GameLog>): View(context), GameViewRateContact.View,
     KoinComponent {
 
    // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
@@ -111,10 +111,11 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
                // invalidate()
                 //TODO　後で絶対修正！！！
                 if(c in 4..8){
-                    socketMove()
+                    goMove()
                 }else if(c in 0..4){
-                    backRevioew()
+                    backMove()
                 }
+                invalidate()
             }
             MotionEvent.ACTION_MOVE -> {}
             MotionEvent.ACTION_CANCEL -> {}
@@ -196,7 +197,7 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
     }
 
     //駒の動きを受信。受信側は判定を行わない　　viewの変更
-    fun socketMove() {
+    fun goMove() {
         if(log.size > count) {
             presenter.socketMove(
                 log[count].oldX,
@@ -205,18 +206,26 @@ class GameFreeView(private val activity: GameActivity, context: Context, width:I
                 log[count].newY,
                 log[count].evolution)
             count++
-        }else{
-            Log.d("Main","上限いっぱい")
         }
-        invalidate()
     }
     //一手戻す
-    fun backRevioew(){
+    fun backMove(){
         if(log.size != 0 && count != 0) {
             presenter.setBackMove()
             count--
-        }else{
-            Log.d("Main","下限いっぱい")
+        }
+    }
+    //最初まで戻す
+    fun backMoveFirst(){
+        while(count != 0){
+            backMove()
+        }
+        invalidate()
+    }
+    //最後まで動かす
+    fun goMoveLast(){
+        while(log.size > count){
+            goMove()
         }
         invalidate()
     }
