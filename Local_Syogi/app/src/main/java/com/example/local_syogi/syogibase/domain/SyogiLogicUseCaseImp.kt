@@ -1,14 +1,15 @@
 package com.example.local_syogi.syogibase.domain
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.local.GameMode
-import com.example.local_syogi.syogibase.data.BoardRepository
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.repository.BoardRepository
+import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.repository.GameRecordRepository
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.PieceMove
 import com.example.local_syogi.syogibase.util.Piece.*
 
-class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLogicUseCase {
+class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository,private val recordRepository: GameRecordRepository):SyogiLogicUseCase {
 
     companion object {
         const val BLACK = 1
@@ -384,4 +385,23 @@ class SyogiLogicUseCaseImp(private val boardRepository:BoardRepository):SyogiLog
     override fun setBackMove(){
         boardRepository.setBackMove()
     }
+
+    //DBに保存
+    override fun saveTable(log:MutableList<GameLog>){
+        recordRepository.save(log)
+    }
+
+//    //DBから指定の対局のを取り出す
+//    override fun gteRecordByTitle(title:String){
+//        //val titleList = recordRepository.findTitleByAll()
+//        //val title:String? = titleList.first().title
+//        if(title != null){
+//            val logList = recordRepository.findRecordByTitle(title)
+//            for(log in logList){
+//                Log.d("Realm","棋譜：" + log.fromX + "," + log.fromY + "" + log.toPiece)
+//            }
+//        }else{
+//            Log.d("Realm","タイトルがありません")
+//        }
+//    }
 }

@@ -1,4 +1,4 @@
-package com.example.local_syogi.presentation.view.account
+package com.example.local_syogi.presentation.view.record
 
 import android.graphics.Color
 import android.graphics.Typeface
@@ -9,14 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.SettingAccountContact
-import kotlinx.android.synthetic.main.fragment_card_account.*
-import kotlinx.android.synthetic.main.fragment_usually_syogi.*
+import com.example.local_syogi.presentation.contact.GameRecordRootContact
+import com.example.local_syogi.presentation.view.account.NotLoginFragment
 
-class AccountCardFragment: Fragment(){
+class GameRecordCardFragment : Fragment() {
 
     private val buttonList = arrayListOf<Button>()
-    private lateinit var rootFragment:AccountRootFragment
+    private lateinit var rootFragment:GameRecordRootFragment
     private lateinit var accountButton: Button
     private var tab = -1
     private var colorPrevious:Int = Color.parseColor("#795548")
@@ -26,7 +25,7 @@ class AccountCardFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_card_account, container, false)
+        val view = inflater.inflate(R.layout.fragment_card_record_game, container, false)
         accountButton = view.findViewById(R.id.accountButton)
         val allButton: Button = view.findViewById(R.id.allButton)
         val usuallyButton: Button = view.findViewById(R.id.usualyButton)
@@ -36,7 +35,7 @@ class AccountCardFragment: Fragment(){
         val checkmateButton: Button = view.findViewById(R.id.checkmateButton)
         val pieceLimitButton: Button = view.findViewById(R.id.pieceLimitButton)
         val chaosButton: Button = view.findViewById(R.id.chaosButton)
-        rootFragment = parentFragment  as AccountRootFragment
+        rootFragment = parentFragment  as GameRecordRootFragment
 
         buttonList.add(allButton)
         buttonList.add(accountButton)
@@ -56,28 +55,28 @@ class AccountCardFragment: Fragment(){
             changeMode(accountButton, rootFragment.authFragment)
         }
         allButton.setOnClickListener{changeMode(allButton,
-            ResultListFragment.newInstance("総合成績")
+            GameRecordListFragment.newInstance("総合成績")
         ) }
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
-            ResultListFragment.newInstance(usuallyButton.text.toString())
+            GameRecordListFragment.newInstance(usuallyButton.text.toString())
         ) }
         annanButton.setOnClickListener { changeMode(annanButton,
-            ResultListFragment.newInstance(annnanButton.text.toString())
+            GameRecordListFragment.newInstance(annanButton.text.toString())
         ) }
         queenButton.setOnClickListener { changeMode(queenButton,
-            ResultListFragment.newInstance(queenButton.text.toString())
+            GameRecordListFragment.newInstance(queenButton.text.toString())
         ) }
         secondButton.setOnClickListener { changeMode(secondButton,
-            ResultListFragment.newInstance(secondButton.text.toString())
+            GameRecordListFragment.newInstance(secondButton.text.toString())
         ) }
         checkmateButton.setOnClickListener { changeMode(checkmateButton,
-            ResultListFragment.newInstance(checkmateButton.text.toString())
+            GameRecordListFragment.newInstance(checkmateButton.text.toString())
         ) }
         pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,
-            ResultListFragment.newInstance(pieceLimitButton.text.toString())
+            GameRecordListFragment.newInstance(pieceLimitButton.text.toString())
         ) }
         chaosButton.setOnClickListener { changeMode(chaosButton,
-            ResultListFragment.newInstance(chaosButton.text.toString())
+            GameRecordListFragment.newInstance(chaosButton.text.toString())
         ) }
         return view
     }
@@ -106,11 +105,11 @@ class AccountCardFragment: Fragment(){
     }
 
     companion object {
-        private var parentPresenter: SettingAccountContact.Presenter? = null
+        private var parentPresenter: GameRecordRootContact.Presenter? = null
 
         @JvmStatic
-        fun newInstance(parentPresenter: SettingAccountContact.Presenter): AccountCardFragment {
-            val fragment = AccountCardFragment()
+        fun newInstance(parentPresenter: GameRecordRootContact.Presenter): GameRecordCardFragment {
+            val fragment = GameRecordCardFragment()
             this.parentPresenter = parentPresenter
             return fragment
         }

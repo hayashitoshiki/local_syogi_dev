@@ -1,4 +1,4 @@
-package com.example.local_syogi.syogibase.data.local
+package com.example.local_syogi.syogibase.data.game
 
 //将棋盤定義クラス
 
@@ -14,7 +14,7 @@ class Board{
     }
 
     //９×９の将棋盤
-    val cells = Array(COLS, {Array(ROWS, {Cell()})})
+    val cells = Array(COLS, {Array(ROWS, { Cell() })})
 
     // 持ち駒　名前　数
     var holdPieceBlack = mutableMapOf<Piece, Int>(

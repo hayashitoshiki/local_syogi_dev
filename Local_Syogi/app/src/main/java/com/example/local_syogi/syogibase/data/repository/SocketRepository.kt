@@ -1,6 +1,6 @@
-package com.example.local_syogi.syogibase.data
+package com.example.local_syogi.syogibase.data.repository
 
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameLog
 
 interface SocketRepository {
     //動かしたことを送信　駒を動かしたら送信

@@ -2,7 +2,7 @@ package com.example.local_syogi.presentation.view.setting
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.local_syogi.syogibase.data.local.GameMode
+import com.example.local_syogi.syogibase.data.game.GameMode
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation

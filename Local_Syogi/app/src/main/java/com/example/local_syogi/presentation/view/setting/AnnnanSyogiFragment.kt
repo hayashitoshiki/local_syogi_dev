@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.AnnnanSyogiContact
-import com.example.local_syogi.syogibase.data.local.GameMode
+import com.example.local_syogi.syogibase.data.game.GameMode
 
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

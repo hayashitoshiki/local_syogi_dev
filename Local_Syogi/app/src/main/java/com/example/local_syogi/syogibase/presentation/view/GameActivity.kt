@@ -10,9 +10,8 @@ import android.widget.Button
 import android.widget.FrameLayout
 import com.example.local_syogi.R
 import androidx.appcompat.app.AlertDialog
-import com.example.local_syogi.presentation.view.game.GameFreeView
 import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameLog
 
 
 
@@ -81,7 +80,10 @@ class GameActivity : AppCompatActivity() {
 
     //終了ボダン
     fun end(v: View) {
-
+        finish()
+    }
+    //感想戦ボタン
+    fun replay(v:View){
         val button:Button = findViewById(R.id.backStartButton)
         val button2:Button = findViewById(R.id.surrender_black)
         button.visibility = View.GONE
@@ -93,7 +95,6 @@ class GameActivity : AppCompatActivity() {
             )
             .replace(R.id.frame, GamePlayBackFragment(log))
             .commit()
-        //finish()
     }
 
     //終了

@@ -8,8 +8,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
-import com.example.local_syogi.syogibase.data.local.GameLog
-import com.example.local_syogi.syogibase.data.local.GameMode
+import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -211,8 +211,7 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
     //対局ログを返す
     fun getLog():MutableList<GameLog>{
         val log = presenter.getLog()
-        Log.d("Main","(view)サイズ："+ log.size)
-       return log
+        return log
     }
 
     override fun onDetachedFromWindow() {

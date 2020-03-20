@@ -1,7 +1,7 @@
 package com.example.local_syogi.syogibase.domain
 
-import com.example.local_syogi.syogibase.data.BoardRepository
-import com.example.local_syogi.syogibase.data.local.Cell
+import com.example.local_syogi.syogibase.data.repository.BoardRepository
+import com.example.local_syogi.syogibase.data.game.Cell
 import com.example.local_syogi.syogibase.util.Piece
 import com.nhaarman.mockito_kotlin.*
 import org.junit.Before

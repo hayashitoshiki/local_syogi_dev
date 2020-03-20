@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="400px"
+        android:layout_height="match_parent"
+        android:background="@drawable/tab_whiteshadow"
+        android:orientation="vertical"
+        android:scaleType="centerInside"
+        android:transitionName="share"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="棋譜"
+            android:textColor="#000000"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/accountButton"
+            android:background="#00000000"
+            android:textAlignment="viewStart"
+            android:textColor="#616161"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:textSize="18sp"
+            android:text="アカウント"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/allButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18sp"
+            android:background="#00000000"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="通信対戦"
+            android:textAlignment="viewStart"
+            android:textColor="#616161"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/usualyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="#00000000"
+            android:text="本将棋"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/annnanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:background="#00000000"
+            android:text="安南将棋"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
+
+        <Button
+            android:id="@+id/seccondButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="#00000000"
+            android:text="2手差し将棋"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/pieceLimitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="#00000000"
+            android:text="持駒制限将棋"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
+
+        <Button
+            android:id="@+id/queenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="#00000000"
+            android:text="クイーン将棋"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
+
+        <Button
+            android:id="@+id/checkmateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="#00000000"
+            android:text="王手将棋"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
+
+        <Button
+            android:id="@+id/chaosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="#00000000"
+            android:text="カオス将棋"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

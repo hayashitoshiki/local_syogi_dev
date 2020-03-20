@@ -73,3 +73,6 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 }
 apply plugin: 'com.google.gms.google-services'
+//Realm
+apply plugin: 'kotlin-kapt'
+apply plugin: "realm-android"

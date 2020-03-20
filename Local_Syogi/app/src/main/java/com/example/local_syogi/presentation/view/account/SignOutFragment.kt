@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.contact.SettingAccountContact
 
 
@@ -21,19 +22,31 @@ class SignOutFragment : Fragment(){
         //ログインボタン
         val button = view.findViewById(R.id.logout) as Button
         button.setOnClickListener {
-            presenter!!.signOut()
+            if(presenter != null) {
+                presenter!!.signOut()
+            }else{
+                presenter2!!.signOut()
+            }
         }
         return view
     }
 
     companion object {
         private var presenter: SettingAccountContact.Presenter? = null
+        private var presenter2: GameRecordRootContact.Presenter? = null
 
         @JvmStatic
         fun newInstance(mPresemter: SettingAccountContact.Presenter): SignOutFragment {
             val fragment =
                 SignOutFragment()
             presenter = mPresemter
+            return fragment
+        }
+        @JvmStatic
+        fun newInstance2(mPresemter: GameRecordRootContact.Presenter): SignOutFragment {
+            val fragment =
+                SignOutFragment()
+            presenter2 = mPresemter
             return fragment
         }
     }

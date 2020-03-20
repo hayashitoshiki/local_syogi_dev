@@ -8,13 +8,17 @@ import com.example.local_syogi.domain.AuthenticationUseCaseImp
 import com.example.local_syogi.presentation.contact.*
 import com.example.local_syogi.presentation.presenter.*
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
-import com.example.local_syogi.syogibase.data.BoardRepository
-import com.example.local_syogi.syogibase.data.BoardRepositoryImp
+import com.example.local_syogi.syogibase.data.repository.BoardRepository
+import com.example.local_syogi.syogibase.data.repository.BoardRepositoryImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
 import com.example.local_syogi.presentation.contact.GamePlayBackContact
 import com.example.local_syogi.syogibase.presentation.presenter.GameLogicPresenter
 import com.example.local_syogi.presentation.presenter.GamePlayBackPresenter
+import com.example.local_syogi.syogibase.data.repository.GameRecordRepository
+import com.example.local_syogi.syogibase.data.repository.GameRecordRepositoryImp
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -24,7 +28,8 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        Realm.init(this)
+        val config = RealmConfiguration.Builder().build()
 
         startKoin {
             androidContext(applicationContext)
@@ -46,19 +51,16 @@ class MyApplication : Application() {
         factory <SettingAccountContact.Presenter>{ (v: SettingAccountContact.View) -> SettingAccountPresenter(v,get()) }
         factory <SettingRootContact.Presenter>{ (v: SettingRootContact.View) -> SettingRootPresenter(v,get()) }
         factory <RateCardContact.Presenter>{ (v: RateCardContact.View) -> RateCardPresenter(v) }
-        factory <GamePlayBackContact.Presenter>{ (v: GamePlayBackContact.View) ->
-            GamePlayBackPresenter(
-                v
-            )
-        }
+        factory <GameRecordRootContact.Presenter>{ (v: GameRecordRootContact.View) -> GameRecordRootPresenter(v,get()) }
+        factory <GamePlayBackContact.Presenter>{ (v: GamePlayBackContact.View) -> GamePlayBackPresenter(v) }
 
 
-        factory <SyogiLogicUseCase>{ SyogiLogicUseCaseImp(get()) }
+        factory <SyogiLogicUseCase>{ SyogiLogicUseCaseImp(get(),get()) }
         factory <AuthenticationUseCase>{ AuthenticationUseCaseImp(get())}
 
         factory <FirebaseRepository>{ FirebaseRepositoryImp() }
         factory <BoardRepository>{ BoardRepositoryImp() }
-
+        factory <GameRecordRepository>{GameRecordRepositoryImp() }
     }
 }
 

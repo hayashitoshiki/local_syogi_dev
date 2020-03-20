@@ -1,7 +1,7 @@
 package com.example.local_syogi.syogibase.domain
 
 
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.util.Piece
 
 interface SyogiLogicUseCase {
@@ -46,4 +46,6 @@ interface SyogiLogicUseCase {
     fun getLog():MutableList<GameLog>
     //一手戻す
     fun setBackMove()
+    //DBに保存
+    fun saveTable(log:MutableList<GameLog>)
 }

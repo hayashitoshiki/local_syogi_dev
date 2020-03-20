@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.GamePlayBackContact
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
 
 import org.koin.android.ext.android.inject
