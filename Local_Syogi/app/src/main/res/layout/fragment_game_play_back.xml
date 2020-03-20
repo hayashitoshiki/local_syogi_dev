@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#CDDC39"
     android:id="@+id/constraint_layout"
-    tools:context="com.example.local_syogi.syogibase.presentation.view.GameActivity">
+    >
 
     <Button
         android:id="@+id/backStartButton"

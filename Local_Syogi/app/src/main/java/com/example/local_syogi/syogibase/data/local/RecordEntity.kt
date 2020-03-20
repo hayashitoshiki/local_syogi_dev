@@ -14,7 +14,7 @@ open class RecordEntity: RealmObject() {
     @Required
     open var toY:Int? = 0
     @Required
-    open var toPiece:String? = "駒"
+    open var toPiece:String? = ""
     @Required
     open var toTurn:Int? = 0
     @Required
@@ -22,7 +22,7 @@ open class RecordEntity: RealmObject() {
     @Required
     open var fromY:Int? = 0
     @Required
-    open var fromPiece:String? = "駒"
+    open var fromPiece:String? = ""
     @Required
     open var fromTurn:Int? = 0
     @Required

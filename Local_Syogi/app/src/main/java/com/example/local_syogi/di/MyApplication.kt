@@ -52,6 +52,7 @@ class MyApplication : Application() {
         factory <SettingRootContact.Presenter>{ (v: SettingRootContact.View) -> SettingRootPresenter(v,get()) }
         factory <RateCardContact.Presenter>{ (v: RateCardContact.View) -> RateCardPresenter(v) }
         factory <GameRecordRootContact.Presenter>{ (v: GameRecordRootContact.View) -> GameRecordRootPresenter(v,get()) }
+        factory <GameRecordListContact.Presenter>{ (v: GameRecordListContact.View) -> GameRecordListPresenter(v,get()) }
         factory <GamePlayBackContact.Presenter>{ (v: GamePlayBackContact.View) -> GamePlayBackPresenter(v) }
 
 

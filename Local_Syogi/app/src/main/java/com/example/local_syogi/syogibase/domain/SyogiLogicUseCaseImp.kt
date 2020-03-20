@@ -391,6 +391,35 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository,private 
         recordRepository.save(log)
     }
 
+    //全ての棋譜リストを取得する
+    override fun getGameAll():MutableList<String>{
+        val titlesList = recordRepository.findTitleByAll()
+        val titleList = mutableListOf<String>()
+        titlesList.forEach {titleList.add(it.title!!) }
+        return titleList
+    }
+    //指定した対局の棋譜を返す
+    override fun getRecordByTitle(title:String):MutableList<GameLog>{
+        Log.d("Realm","タイトル：" + Piece.getByNameJP("歩"))
+        val recordList = recordRepository.findRecordByTitle(title)
+        val logList = mutableListOf<GameLog>()
+        recordList.forEach{
+           // Log.d("Realm","棋譜：" + it.fromX + "," + it.fromY + "" + it.toPiece)
+            val log = GameLog(
+                it.toX!!,
+                it.toY!!,
+                Piece.getByNameJP(it.toPiece!!),
+                it.toTurn!!,
+                it.fromX!!,
+                it.fromY!!,
+                Piece.getByNameJP(it.fromPiece!!),
+                it.fromTurn!!,
+                it.evolution!!)
+           logList.add(log)
+        }
+        return logList
+    }
+
 //    //DBから指定の対局のを取り出す
 //    override fun gteRecordByTitle(title:String){
 //        //val titleList = recordRepository.findTitleByAll()
