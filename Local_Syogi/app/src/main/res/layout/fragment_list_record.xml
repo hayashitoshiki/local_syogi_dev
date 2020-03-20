@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="本将棋"
+            android:textColor="#212121"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/BlackTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="オンライン"
+            android:textColor="#424242"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="75dp" />
+
+        <LinearLayout
+            android:id="@+id/blackMatchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BlackTitleTextView"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="39dp">
+
+            <TextView
+                android:id="@+id/blackMatchTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="対戦回数："
+                android:textColor="#616161" />
+
+            <TextView
+                android:id="@+id/blackMatchEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ー" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/blackRateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blackMatchLayout"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/blackRateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="レート　："
+                android:textColor="#616161" />
+
+            <TextView
+                android:id="@+id/blackRateEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ー" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/whiteTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="オフライン"
+            android:textColor="#424242"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blackRateLayout"
+            app:layout_constraintVertical_bias="0.45"
+            tools:layout_editor_absoluteX="-16dp" />
+
+        <LinearLayout
+            android:id="@+id/whiteMatchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/whiteTitleTextView"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="16dp">
+
+            <TextView
+                android:id="@+id/whiteMatchTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="対戦回数：" />
+
+            <TextView
+                android:id="@+id/whiteMatchEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ー" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/whiteRateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/whiteMatchLayout"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/whiteRateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="レート　：" />
+
+            <TextView
+                android:id="@+id/whiteRateEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ー" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

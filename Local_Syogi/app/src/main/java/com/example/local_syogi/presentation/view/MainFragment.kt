@@ -16,6 +16,7 @@ class MainFragment: Fragment() {
 
     private lateinit var gameButton: Button
     private lateinit var settingButton: Button
+    private lateinit var recordButton: Button
     private lateinit var title: TextView
 
     //初期設定
@@ -28,6 +29,7 @@ class MainFragment: Fragment() {
         val main = activity as MainActivity
         gameButton = view.findViewById(R.id.game_button)
         settingButton = view.findViewById(R.id.setting_button)
+        recordButton = view.findViewById(R.id.recordButton)
         title = view.findViewById(R.id.title)
 
         gameButton.setOnClickListener{
@@ -37,6 +39,10 @@ class MainFragment: Fragment() {
         settingButton.setOnClickListener{
             closeFragment()
             main.account()
+        }
+        recordButton.setOnClickListener{
+            closeFragment()
+            main.record()
         }
         return view
     }
@@ -52,6 +58,8 @@ class MainFragment: Fragment() {
         gameButton.visibility = View.VISIBLE
         settingButton.startAnimation(fadeDelay)
         settingButton.visibility = View.VISIBLE
+        recordButton.startAnimation(fadeDelay)
+        recordButton.visibility = View.VISIBLE
         title.startAnimation(fadeIn)
         title.visibility = View.VISIBLE
 
@@ -67,6 +75,8 @@ class MainFragment: Fragment() {
         settingButton.visibility = View.INVISIBLE
         gameButton.startAnimation(fade)
         gameButton.visibility = View.INVISIBLE
+        recordButton.startAnimation(fade)
+        recordButton.visibility = View.INVISIBLE
         title.startAnimation(fadeOut)
         title.visibility = View.INVISIBLE
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.contact.RateCardContact
 import com.example.local_syogi.presentation.contact.SettingAccountContact
 
@@ -33,17 +34,30 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
     override fun onStart() {
         super.onStart()
         stop = false
-        if(parentPresenter!!.isSession()){
-            setInformationView()
+        if(parentPresenter != null) {
+            if(parentPresenter!!.isSession()){
+                setInformationView()
+            }else{
+                setLoginView()
+            }
         }else{
-            setLoginView()
+            if(parentPresenter2!!.isSession()){
+                setInformationView()
+            }else{
+                setLoginView()
+            }
         }
     }
 
     //ログインViewを表示する
     fun setLoginView() {
         Log.d("Main","ログイン")
-        val signIn = SignInUpFragment.newInstance(parentPresenter!!)
+        val signIn =
+            if(parentPresenter != null) {
+                SignInUpFragment.newInstance(parentPresenter!!)
+            }else{
+                SignInUpFragment.newInstance2(parentPresenter2!!)
+            }
         if(isAdded && !stop) {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
@@ -58,7 +72,12 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
     //ログイン後(設定)画面を表示する
     fun setInformationView() {
         Log.d("Main","設定画面")
-        val signOut =SignOutFragment.newInstance(parentPresenter!!)
+        val signOut =
+            if(parentPresenter != null) {
+                SignOutFragment.newInstance(parentPresenter!!)
+            }else{
+                SignOutFragment.newInstance2(parentPresenter2!!)
+            }
         if(isAdded && !stop) {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
@@ -78,11 +97,18 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
 
     companion object {
         private var parentPresenter: SettingAccountContact.Presenter? = null
+        private var parentPresenter2: GameRecordRootContact.Presenter? = null
 
         @JvmStatic
         fun newInstance(parentPresenter: SettingAccountContact.Presenter): AuthenticationBaseFragment {
             val fragment = AuthenticationBaseFragment()
             this.parentPresenter = parentPresenter
+            return fragment
+        }
+        @JvmStatic
+        fun newInstance2(parentPresenter: GameRecordRootContact.Presenter): AuthenticationBaseFragment {
+            val fragment = AuthenticationBaseFragment()
+            this.parentPresenter2 = parentPresenter
             return fragment
         }
     }

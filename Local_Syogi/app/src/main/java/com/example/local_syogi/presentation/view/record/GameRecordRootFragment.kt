@@ -1,6 +1,7 @@
-package com.example.local_syogi.presentation.view.account
+package com.example.local_syogi.presentation.view.record
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,42 +9,49 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.SettingAccountContact
+import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.view.MainActivity
+import com.example.local_syogi.presentation.view.account.AuthenticationBaseFragment
+import com.example.local_syogi.presentation.view.account.NotLoginFragment
 import com.example.local_syogi.util.OnBackPressedListener
 
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
+class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPressedListener {
 
-
-class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressedListener {
-
-    private val presenter: SettingAccountContact.Presenter by inject { parametersOf(this) }
-    lateinit var authFragment:AuthenticationBaseFragment
-    private lateinit var accountTab:AccountCardFragment
+    private val presenter: GameRecordRootContact.Presenter by inject { parametersOf(this) }
+    lateinit var authFragment: AuthenticationBaseFragment
+    private lateinit var accountTab:GameRecordCardFragment
     private lateinit var tabFragment:FrameLayout
     private lateinit var mainFrame:FrameLayout
-    private lateinit var main :MainActivity
+    private lateinit var main : MainActivity
 
     private var tab = -1
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_setting_account, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_game_record_root, container, false)
         main = activity as MainActivity
-        authFragment = AuthenticationBaseFragment.newInstance(presenter)
-        accountTab = AccountCardFragment.newInstance(presenter)
+        authFragment = AuthenticationBaseFragment.newInstance2(presenter)
+        accountTab = GameRecordCardFragment.newInstance(presenter)
         tabFragment = view.findViewById(R.id.tab)
         mainFrame = view.findViewById(R.id.fragment)
 
-
+        if(isAdded) {
             childFragmentManager
                 .beginTransaction()
-                .replace(R.id.tab, accountTab)
+                .add(R.id.tab, accountTab)
                 .commit()
-
+        }
         return view
     }
 
@@ -142,9 +150,10 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View,OnBackPressed
     companion object {
 
         @JvmStatic
-        fun newInstance(): AccountRootFragment {
-            val fragment = AccountRootFragment()
+        fun newInstance(): GameRecordRootFragment {
+            val fragment = GameRecordRootFragment()
             return fragment
         }
     }
+
 }
