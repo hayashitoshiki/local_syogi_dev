@@ -10,12 +10,10 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import com.example.local_syogi.R
-import com.example.local_syogi.syogibase.data.SocketRepository
-import com.example.local_syogi.syogibase.data.SocketRepositoryImp
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.repository.SocketRepository
+import com.example.local_syogi.syogibase.data.repository.SocketRepositoryImp
+import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.presentation.view.WinLoseModal
-import android.view.KeyEvent.KEYCODE_BACK
-import android.view.KeyEvent
 
 
 class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
@@ -30,7 +28,8 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_rate)
-        socketRepository = SocketRepositoryImp(this)
+        socketRepository =
+            SocketRepositoryImp(this)
         socketRepository.start()
         //画面作成
         frame = this.findViewById(R.id.frame) as FrameLayout

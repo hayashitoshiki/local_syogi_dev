@@ -1,4 +1,4 @@
-package com.example.local_syogi.syogibase.data.local
+package com.example.local_syogi.syogibase.data.game
 
 import com.example.local_syogi.syogibase.util.Piece
 

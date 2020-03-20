@@ -10,9 +10,8 @@ import android.widget.Button
 import android.widget.FrameLayout
 import com.example.local_syogi.R
 import androidx.appcompat.app.AlertDialog
-import com.example.local_syogi.presentation.view.game.GameFreeView
 import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameLog
 
 
 

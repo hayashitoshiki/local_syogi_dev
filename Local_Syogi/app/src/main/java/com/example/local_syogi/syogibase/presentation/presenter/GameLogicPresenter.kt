@@ -2,7 +2,7 @@ package com.example.local_syogi.syogibase.presentation.presenter
 
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
 
@@ -74,7 +74,7 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
     //対局ログを返す
     override fun getLog():MutableList<GameLog>{
         val log = usecase.getLog()
-        Log.d("Main","(presenter)サイズ："+ log.size)
+        usecase.saveTable(log)
         return log
     }
 

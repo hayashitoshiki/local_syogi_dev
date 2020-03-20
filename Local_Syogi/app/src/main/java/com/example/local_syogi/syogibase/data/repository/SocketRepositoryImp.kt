@@ -1,7 +1,7 @@
-package com.example.local_syogi.syogibase.data
+package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.local.GameLog
+import com.example.local_syogi.syogibase.data.game.GameLog
 import com.google.gson.Gson
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -18,7 +18,8 @@ import java.net.URISyntaxException
  */
 
 
-class SocketRepositoryImp(val presenter:SocketRepository.presenter) :SocketRepository{
+class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
+    SocketRepository {
     private lateinit var socket: Socket
 
     fun start(){

@@ -1,16 +1,17 @@
-package com.example.local_syogi.syogibase.data
+package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.local.Board
-import com.example.local_syogi.syogibase.data.local.Cell
-import com.example.local_syogi.syogibase.data.local.GameLog
-import com.example.local_syogi.syogibase.data.local.GameMode
+import com.example.local_syogi.syogibase.data.game.Board
+import com.example.local_syogi.syogibase.data.game.Cell
+import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.PieceMove
 
 
-class BoardRepositoryImp:BoardRepository {
-    private val board: Board = Board()
+class BoardRepositoryImp: BoardRepository {
+    private val board: Board =
+        Board()
     private val logList = mutableListOf<GameLog>()
 
     private var previousX: Int = 0
@@ -47,7 +48,17 @@ class BoardRepositoryImp:BoardRepository {
     //駒を動かす
     override fun setMove(x: Int, y: Int, turn: Int,evolution:Boolean) {
         val piece = changeIntToPiece(previousX)
-        val gameLog = GameLog(previousX, previousY, previousPiece, turn, x, y, board.cells[x][y].piece, board.cells[x][y].turn,evolution)
+        val gameLog = GameLog(
+            previousX,
+            previousY,
+            previousPiece,
+            turn,
+            x,
+            y,
+            board.cells[x][y].piece,
+            board.cells[x][y].turn,
+            evolution
+        )
         logList.add(gameLog)
         board.cells[x][y].turn = turn
         board.cells[x][y].piece =

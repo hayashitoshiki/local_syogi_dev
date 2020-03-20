@@ -1,9 +1,7 @@
 package com.example.local_syogi.presentation.presenter
 
 import com.example.local_syogi.presentation.contact.GameViewRateContact
-import com.example.local_syogi.syogibase.data.local.GameLog
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
-import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
 
 
 class GameLogicFreePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase): GameViewRateContact.Presenter{

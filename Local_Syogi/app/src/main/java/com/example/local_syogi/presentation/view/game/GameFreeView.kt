@@ -5,21 +5,17 @@ import android.graphics.*
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Handler
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.GameViewRateContact
 import com.example.local_syogi.presentation.presenter.GameLogicFreePresenter
-import com.example.local_syogi.syogibase.data.BoardRepositoryImp
-import com.example.local_syogi.syogibase.data.local.GameLog
-import com.example.local_syogi.syogibase.data.local.GameMode
+import com.example.local_syogi.syogibase.data.repository.BoardRepositoryImp
+import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.repository.GameRecordRepositoryImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
-import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
-import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import org.koin.core.KoinComponent
-import org.koin.core.inject
-import org.koin.core.parameter.parametersOf
 
 class GameFreeView(context: Context, width:Int, height:Int,val log:MutableList<GameLog>): View(context), GameViewRateContact.View,
     KoinComponent {
@@ -28,7 +24,7 @@ class GameFreeView(context: Context, width:Int, height:Int,val log:MutableList<G
     private val presenter: GameLogicFreePresenter =
        GameLogicFreePresenter(
            this as GameViewRateContact.View,
-           SyogiLogicUseCaseImp(BoardRepositoryImp())
+           SyogiLogicUseCaseImp(BoardRepositoryImp(),GameRecordRepositoryImp())
        )
 
     private lateinit var canvas: Canvas
