@@ -161,7 +161,16 @@ enum class Piece(val nameJP:String) {
         }
     }
 
-
+    companion object {
+        fun getByNameJP(name: String): Piece {
+            for (piece in Piece.values()) {
+                if (piece.nameJP.equals(name)) {
+                    return piece
+                }
+            }
+            return None
+        }
+    }
 
 
 

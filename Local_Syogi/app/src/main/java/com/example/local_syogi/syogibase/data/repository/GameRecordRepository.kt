@@ -11,7 +11,7 @@ interface GameRecordRepository {
     //全てのモードのタイトルを取得
     fun findTitleByAll():Array<GameEntity>
     //特定のモードのタイトルを取得
-    fun findTitleByMode()
+    fun findTitleByMode(mode:Int):Array<GameEntity>
     //特定の対局データ取得
     fun findRecordByTitle(title:String):Array<RecordEntity>
 }

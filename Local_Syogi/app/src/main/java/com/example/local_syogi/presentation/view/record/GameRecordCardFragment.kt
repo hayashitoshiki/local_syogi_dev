@@ -11,6 +11,13 @@ import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.view.account.NotLoginFragment
+import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.game.GameMode.BACKMOVE
+import com.example.local_syogi.syogibase.data.game.GameMode.CHAOS
+import com.example.local_syogi.syogibase.data.game.GameMode.CHECKMATE
+import com.example.local_syogi.syogibase.data.game.GameMode.LIMIT
+import com.example.local_syogi.syogibase.data.game.GameMode.NORMAL
+import com.example.local_syogi.syogibase.data.game.GameMode.TWOTIME
 
 class GameRecordCardFragment : Fragment() {
 
@@ -55,28 +62,28 @@ class GameRecordCardFragment : Fragment() {
             changeMode(accountButton, rootFragment.authFragment)
         }
         allButton.setOnClickListener{changeMode(allButton,
-            GameRecordListFragment.newInstance("総合成績")
+            GameRecordListFragment.newInstance("総合成績",0)
         ) }
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
-            GameRecordListFragment.newInstance(usuallyButton.text.toString())
+            GameRecordListFragment.newInstance(usuallyButton.text.toString(),NORMAL)
         ) }
         annanButton.setOnClickListener { changeMode(annanButton,
-            GameRecordListFragment.newInstance(annanButton.text.toString())
+            GameRecordListFragment.newInstance(annanButton.text.toString(),BACKMOVE)
         ) }
         queenButton.setOnClickListener { changeMode(queenButton,
-            GameRecordListFragment.newInstance(queenButton.text.toString())
+            GameRecordListFragment.newInstance(queenButton.text.toString(), CHAOS)
         ) }
         secondButton.setOnClickListener { changeMode(secondButton,
-            GameRecordListFragment.newInstance(secondButton.text.toString())
+            GameRecordListFragment.newInstance(secondButton.text.toString(),TWOTIME)
         ) }
         checkmateButton.setOnClickListener { changeMode(checkmateButton,
-            GameRecordListFragment.newInstance(checkmateButton.text.toString())
+            GameRecordListFragment.newInstance(checkmateButton.text.toString(), CHECKMATE)
         ) }
         pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,
-            GameRecordListFragment.newInstance(pieceLimitButton.text.toString())
+            GameRecordListFragment.newInstance(pieceLimitButton.text.toString(),LIMIT)
         ) }
         chaosButton.setOnClickListener { changeMode(chaosButton,
-            GameRecordListFragment.newInstance(chaosButton.text.toString())
+            GameRecordListFragment.newInstance(chaosButton.text.toString(), CHAOS)
         ) }
         return view
     }

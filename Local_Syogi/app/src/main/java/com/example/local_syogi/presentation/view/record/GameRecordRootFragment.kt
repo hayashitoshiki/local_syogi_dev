@@ -14,6 +14,8 @@ import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.account.AuthenticationBaseFragment
 import com.example.local_syogi.presentation.view.account.NotLoginFragment
+import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
+import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.util.OnBackPressedListener
 
 import org.koin.android.ext.android.inject
@@ -92,6 +94,23 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
             .beginTransaction()
             .add(R.id.fragment, NotLoginFragment())
             .commit()
+    }
+    //棋譜を表示する
+    fun setRePlayView(log:MutableList<GameLog>){
+        childFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.fade_in_slide_from_right,
+                0,
+                0,
+                R.anim.fade_out_slide_to_right
+            )
+            .replace(R.id.rePlayFragment, GameRePlayFragment(log))
+            .addToBackStack(null)
+            .commit()
+    }
+    //棋譜表示画面を閉じる
+    fun endRePlay(){
+        childFragmentManager.popBackStack()
     }
 
     //ログイン画面を表示する
