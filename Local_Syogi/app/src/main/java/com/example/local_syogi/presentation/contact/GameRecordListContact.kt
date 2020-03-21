@@ -9,6 +9,8 @@ interface GameRecordListContact {
     interface Presenter{
         //棋譜を全権取得
         fun getGameAll():MutableList<String>
+        //指定したモードの対局一覧を取得
+        fun getGameByMode(mode:Int):MutableList<String>
         //指定した対局の棋譜を取得
         fun getRecordByTitle(title:String):MutableList<GameLog>
     }

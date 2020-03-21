@@ -2,6 +2,7 @@ package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.local.GameEntity
 import com.example.local_syogi.syogibase.data.local.RecordEntity
 import io.realm.Realm
@@ -26,11 +27,8 @@ class GameRecordRepositoryImp:GameRecordRepository {
     }
     //自動連番Id取得
     private fun getAutoIncrementIdByRecord(realm:Realm): Int {
-        // 初期化
         var nextUserId:Int = 1
-        // userIdの最大値を取得
         val maxUserId = realm.where(RecordEntity::class.java).max("id")
-        // 1度もデータが作成されていない場合はNULLが返ってくるため、NULLチェックをする
         if (maxUserId != null) {
             nextUserId = maxUserId.toInt() + 1
         }
@@ -46,7 +44,7 @@ class GameRecordRepositoryImp:GameRecordRepository {
 
         realm.executeTransaction {
             val game = realm.createObject(GameEntity::class.java,title)
-            game.mode  = 1
+            game.mode  = GameMode.getModeInt()
             realm.copyToRealm(game)
         }
         for (log in logList){
@@ -70,17 +68,21 @@ class GameRecordRepositoryImp:GameRecordRepository {
     //全てのモードのタイトルを取得
     override fun findTitleByAll():Array<GameEntity>{
         updateRealm()
-        Log.d(TAG,"全対局取得")
         val gameList = realm.where(GameEntity::class.java).findAll()
         val games:Array<GameEntity> = gameList.toTypedArray()
-        for(game in games){
-            Log.d(TAG,"対戦記録・・Title：" + game.title + "選択モード:" + game.mode)
-        }
+
         return games
     }
 
     //特定のモードのタイトルを取得
-    override fun findTitleByMode(){}
+    override fun findTitleByMode(mode:Int):Array<GameEntity>{
+        updateRealm()
+        val gameList = realm.where(GameEntity::class.java).equalTo("mode",mode).findAll()
+        val games:Array<GameEntity> = gameList.toTypedArray()
+
+        return games
+    }
+
     //特定の対局データ取得
     override fun findRecordByTitle(title:String):Array<RecordEntity>{
         val recordList = realm.where(RecordEntity::class.java).equalTo("title",title).findAll()

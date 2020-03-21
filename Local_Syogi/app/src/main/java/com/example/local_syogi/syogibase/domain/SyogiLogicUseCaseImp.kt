@@ -398,6 +398,13 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository,private 
         titlesList.forEach {titleList.add(it.title!!) }
         return titleList
     }
+    //特定の種類の棋譜リストを取得する
+    override fun getGameByMode(mode:Int):MutableList<String>{
+        val titlesList = recordRepository.findTitleByMode(mode)
+        val titleList = mutableListOf<String>()
+        titlesList.forEach {titleList.add(it.title!!) }
+        return titleList
+    }
     //指定した対局の棋譜を返す
     override fun getRecordByTitle(title:String):MutableList<GameLog>{
         Log.d("Realm","タイトル：" + Piece.getByNameJP("歩"))

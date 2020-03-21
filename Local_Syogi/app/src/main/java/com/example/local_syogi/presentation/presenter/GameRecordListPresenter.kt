@@ -10,6 +10,10 @@ class GameRecordListPresenter(private val view:GameRecordListContact.View, priva
         return usecase.getGameAll()
     }
 
+    override fun getGameByMode(mode:Int):MutableList<String>{
+        return usecase.getGameByMode(mode)
+    }
+
     override fun getRecordByTitle(title:String):MutableList<GameLog>{
         return usecase.getRecordByTitle(title)
     }
