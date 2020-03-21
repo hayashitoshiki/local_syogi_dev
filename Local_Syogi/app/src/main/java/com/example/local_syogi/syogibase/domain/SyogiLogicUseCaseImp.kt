@@ -5,6 +5,7 @@ import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepository
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepository
+import com.example.local_syogi.syogibase.domain.model.GameModel
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.PieceMove
 import com.example.local_syogi.syogibase.util.Piece.*
@@ -378,7 +379,6 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository,private 
         val log = boardRepository.getLog()
         Log.d("Main","サイズ："+ log.size)
         return log
-
     }
 
     //一手戻す
@@ -387,22 +387,26 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository,private 
     }
 
     //DBに保存
-    override fun saveTable(log:MutableList<GameLog>){
-        recordRepository.save(log)
+    override fun saveTable(log:MutableList<GameLog>,winner:Int){
+        recordRepository.save(log,winner)
     }
 
     //全ての棋譜リストを取得する
-    override fun getGameAll():MutableList<String>{
+    override fun getGameAll():MutableList<GameModel>{
         val titlesList = recordRepository.findTitleByAll()
-        val titleList = mutableListOf<String>()
-        titlesList.forEach {titleList.add(it.title!!) }
+        val titleList = mutableListOf<GameModel>()
+        titlesList.forEach {
+            titleList.add(GameModel(it.title!!,it.winner!!))
+        }
         return titleList
     }
     //特定の種類の棋譜リストを取得する
-    override fun getGameByMode(mode:Int):MutableList<String>{
+    override fun getGameByMode(mode:Int):MutableList<GameModel>{
         val titlesList = recordRepository.findTitleByMode(mode)
-        val titleList = mutableListOf<String>()
-        titlesList.forEach {titleList.add(it.title!!) }
+        val titleList = mutableListOf<GameModel>()
+        titlesList.forEach {
+            titleList.add(GameModel(it.title!!,it.winner!!))
+        }
         return titleList
     }
     //指定した対局の棋譜を返す

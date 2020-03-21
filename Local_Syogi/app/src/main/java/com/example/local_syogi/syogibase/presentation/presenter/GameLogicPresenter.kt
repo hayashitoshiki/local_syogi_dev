@@ -72,9 +72,9 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
 
 
     //対局ログを返す
-    override fun getLog():MutableList<GameLog>{
+    override fun getLog(winner:Int):MutableList<GameLog>{
         val log = usecase.getLog()
-        usecase.saveTable(log)
+        usecase.saveTable(log,winner)
         return log
     }
 

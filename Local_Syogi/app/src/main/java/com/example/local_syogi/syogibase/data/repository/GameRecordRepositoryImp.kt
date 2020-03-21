@@ -37,13 +37,13 @@ class GameRecordRepositoryImp:GameRecordRepository {
     }
 
     //新規対局データ格納
-    override fun save(logList:MutableList<GameLog>){
-        val title = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
-        Log.d(TAG,"現在の時間：" + title)
+    override fun save(logList:MutableList<GameLog>,winner:Int){
+        val title = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss"))
         updateRealm()
 
         realm.executeTransaction {
             val game = realm.createObject(GameEntity::class.java,title)
+            game.winner = winner
             game.mode  = GameMode.getModeInt()
             realm.copyToRealm(game)
         }

@@ -35,6 +35,6 @@ interface GameViewContact {
         fun evolutionPiece(bool:Boolean)
 
         //対局ログを返す
-        fun getLog():MutableList<GameLog>
+        fun getLog(winner:Int):MutableList<GameLog>
     }
 }

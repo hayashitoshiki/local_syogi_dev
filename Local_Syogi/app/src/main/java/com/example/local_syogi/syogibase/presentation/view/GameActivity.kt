@@ -13,11 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
 import com.example.local_syogi.syogibase.data.game.GameLog
 
-
-
-
-
-
 class GameActivity : AppCompatActivity() {
 
     var frame:FrameLayout? = null
@@ -61,14 +56,14 @@ class GameActivity : AppCompatActivity() {
 
     var log = mutableListOf<GameLog>()
     //ゲーム終了後画面
-    fun gameEnd(turn:Int){
-        log = view.getLog()
+    fun gameEnd(winner:Int){
+        log = view.getLog(winner)
         Log.d("Main","(activity)サイズ："+ log.size)
         val button:Button = findViewById(R.id.backStartButton)
         val button2:Button = findViewById(R.id.surrender_black)
         val viewGroup = this.findViewById(R.id.frame2) as FrameLayout
         val endView:View = layoutInflater.inflate(R.layout.modal_game_end, viewGroup)
-        val winLoseView: View = WinLoseModal(this, turn)
+        val winLoseView: View = WinLoseModal(this, winner)
         val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
         button.visibility = View.GONE

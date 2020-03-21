@@ -2,6 +2,7 @@ package com.example.local_syogi.syogibase.domain
 
 
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.domain.model.GameModel
 import com.example.local_syogi.syogibase.util.Piece
 
 interface SyogiLogicUseCase {
@@ -47,11 +48,11 @@ interface SyogiLogicUseCase {
     //一手戻す
     fun setBackMove()
     //DBに保存
-    fun saveTable(log:MutableList<GameLog>)
+    fun saveTable(log:MutableList<GameLog>, winner:Int)
     //全ての棋譜リストを取得する
-    fun getGameAll():MutableList<String>
+    fun getGameAll():MutableList<GameModel>
     //特定の種類の棋譜リストを取得する
-    fun getGameByMode(mode:Int):MutableList<String>
+    fun getGameByMode(mode:Int):MutableList<GameModel>
     //指定した対局の棋譜を返す
     fun getRecordByTitle(title:String):MutableList<GameLog>
 }

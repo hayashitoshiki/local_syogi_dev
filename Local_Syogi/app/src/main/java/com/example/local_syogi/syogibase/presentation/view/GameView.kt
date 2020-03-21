@@ -209,8 +209,8 @@ class GameView(private val activity:GameActivity, context: Context, width:Int, h
 
 
     //対局ログを返す
-    fun getLog():MutableList<GameLog>{
-        val log = presenter.getLog()
+    fun getLog(winner:Int):MutableList<GameLog>{
+        val log = presenter.getLog(winner)
         return log
     }
 
