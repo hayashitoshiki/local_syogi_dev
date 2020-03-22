@@ -32,7 +32,7 @@ class SettingRootPresenter(private val view: SettingRootContact.View, private va
             if (x2 - x < -10) {
                 if (y in 800..1200) {
                     // Main
-                   view.backHome()
+                    view.backHome()
                 } else {
                     changeMode()
                     view.flipCardRight(mode)

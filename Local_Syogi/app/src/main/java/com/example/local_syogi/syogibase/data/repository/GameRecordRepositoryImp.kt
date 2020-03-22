@@ -91,7 +91,7 @@ class GameRecordRepositoryImp : GameRecordRepository {
             records
         } else {
             Log.d(TAG, "一致する棋譜がありません")
-           arrayOf(RecordEntity())
+            arrayOf(RecordEntity())
         }
     }
 }

@@ -23,9 +23,9 @@ class SelectNormalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = if (mode == 1) {
-             inflater.inflate(R.layout.fragment_select_normal, container, false)
+            inflater.inflate(R.layout.fragment_select_normal, container, false)
         } else {
-             inflater.inflate(R.layout.fragment_select_rate, container, false)
+            inflater.inflate(R.layout.fragment_select_rate, container, false)
         }
         val usuallyButton: Button = view.findViewById(R.id.usualyButton)
         val annanButton: Button = view.findViewById(R.id.annnanButton)

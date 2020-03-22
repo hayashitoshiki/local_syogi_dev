@@ -426,7 +426,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         val recordList = recordRepository.findRecordByTitle(title)
         val logList = mutableListOf<GameLog>()
         recordList.forEach {
-           // Log.d("Realm","棋譜：" + it.fromX + "," + it.fromY + "" + it.toPiece)
+            // Log.d("Realm","棋譜：" + it.fromX + "," + it.fromY + "" + it.toPiece)
             val log = GameLog(
                 it.toX!!,
                 it.toY!!,
@@ -437,7 +437,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
                 Piece.getByNameJP(it.fromPiece!!),
                 it.fromTurn!!,
                 it.evolution!!)
-           logList.add(log)
+            logList.add(log)
         }
         return logList
     }
