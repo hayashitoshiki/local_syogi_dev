@@ -11,19 +11,18 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 
-
-class MainFragment: Fragment() {
+class MainFragment : Fragment() {
 
     private lateinit var gameButton: Button
     private lateinit var settingButton: Button
     private lateinit var recordButton: Button
     private lateinit var title: TextView
 
-    //初期設定
+    // 初期設定
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val main = activity as MainActivity
@@ -32,22 +31,22 @@ class MainFragment: Fragment() {
         recordButton = view.findViewById(R.id.recordButton)
         title = view.findViewById(R.id.title)
 
-        gameButton.setOnClickListener{
+        gameButton.setOnClickListener {
             closeFragment()
             main.gameSet()
         }
-        settingButton.setOnClickListener{
+        settingButton.setOnClickListener {
             closeFragment()
             main.account()
         }
-        recordButton.setOnClickListener{
+        recordButton.setOnClickListener {
             closeFragment()
             main.record()
         }
         return view
     }
 
-    //Fragment表示アニメーション
+    // Fragment表示アニメーション
     override fun onStart() {
         super.onStart()
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide) as Animation
@@ -62,12 +61,10 @@ class MainFragment: Fragment() {
         recordButton.visibility = View.VISIBLE
         title.startAnimation(fadeIn)
         title.visibility = View.VISIBLE
-
     }
 
-
-    //Fragmentを閉じる
-    private fun closeFragment(){
+    // Fragmentを閉じる
+    private fun closeFragment() {
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide) as Animation
         val fadeOut: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
 
@@ -79,7 +76,6 @@ class MainFragment: Fragment() {
         recordButton.visibility = View.INVISIBLE
         title.startAnimation(fadeOut)
         title.visibility = View.INVISIBLE
-
     }
 
     companion object {
@@ -90,5 +86,4 @@ class MainFragment: Fragment() {
             return fragment
         }
     }
-
 }

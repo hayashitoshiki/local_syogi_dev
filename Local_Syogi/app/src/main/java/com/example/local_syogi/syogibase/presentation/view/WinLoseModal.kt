@@ -7,9 +7,9 @@ import android.graphics.Paint
 import android.view.MotionEvent
 import android.view.View
 
-//勝った時の勝敗表示View
+// 勝った時の勝敗表示View
 class WinLoseModal(context: Context, private val turn: Int) : View(context) {
-    private var mas: Float = 0.toFloat()//ひとまず分の大きさメモ
+    private var mas: Float = 0.toFloat() // ひとまず分の大きさメモ
 
     init {
         isFocusable = true
@@ -21,7 +21,7 @@ class WinLoseModal(context: Context, private val turn: Int) : View(context) {
         val paint = Paint()
         paint.textSize = mas * 3
 
-        //後手が勝った場合
+        // 後手が勝った場合
         if (turn == 2) {
             canvas.save()
 
@@ -37,7 +37,7 @@ class WinLoseModal(context: Context, private val turn: Int) : View(context) {
             paint.color = Color.rgb(0, 0, 255)
             canvas.drawText("Lose", width / 2 - text_Width / 2, mas * 15, paint)
         } else {
-            //先手が勝った場合
+            // 先手が勝った場合
             canvas.save()
 
             var text_Width = paint.measureText("Lose")
@@ -54,7 +54,7 @@ class WinLoseModal(context: Context, private val turn: Int) : View(context) {
         }
     }
 
-    //指した時の動作
+    // 指した時の動作
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return true
     }

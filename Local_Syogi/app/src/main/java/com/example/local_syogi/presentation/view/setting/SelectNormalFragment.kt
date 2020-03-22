@@ -18,22 +18,22 @@ class SelectNormalFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
-        val view = if(mode == 1){
+        val view = if (mode == 1) {
              inflater.inflate(R.layout.fragment_select_normal, container, false)
-        }else{
+        } else {
              inflater.inflate(R.layout.fragment_select_rate, container, false)
         }
         val usuallyButton: Button = view.findViewById(R.id.usualyButton)
-        val annanButton:Button = view.findViewById(R.id.annnanButton)
-        val queenButton:Button = view.findViewById(R.id.queenButton)
-        val secondButton:Button = view.findViewById(R.id.seccondButton)
-        val checkmateButton:Button = view.findViewById(R.id.checkmateButton)
-        val pieceLimitButton:Button = view.findViewById(R.id.pieceLimitButton)
-        val chaosButton:Button = view.findViewById(R.id.chaosButton)
+        val annanButton: Button = view.findViewById(R.id.annnanButton)
+        val queenButton: Button = view.findViewById(R.id.queenButton)
+        val secondButton: Button = view.findViewById(R.id.seccondButton)
+        val checkmateButton: Button = view.findViewById(R.id.checkmateButton)
+        val pieceLimitButton: Button = view.findViewById(R.id.pieceLimitButton)
+        val chaosButton: Button = view.findViewById(R.id.chaosButton)
 
         buttonList.add(usuallyButton)
         buttonList.add(annanButton)
@@ -42,11 +42,11 @@ class SelectNormalFragment : Fragment() {
         buttonList.add(checkmateButton)
         buttonList.add(pieceLimitButton)
         buttonList.add(chaosButton)
-        if(tab != -1){
+        if (tab != -1) {
             buttonList[tab].setTextColor(Color.parseColor("#795548"))
         }
 
-        //ボタン押下
+        // ボタン押下
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
             UsuallySyogiFragment()
         ) }
@@ -71,15 +71,15 @@ class SelectNormalFragment : Fragment() {
         return view
     }
 
-    //タブ選択
-    private fun changeMode(button:Button, fragment: Fragment) {
+    // タブ選択
+    private fun changeMode(button: Button, fragment: Fragment) {
         for (btn in buttonList) {
             btn.setTextColor(Color.WHITE)
         }
         button.setTextColor(Color.parseColor("#795548"))
         val tab = buttonList.indexOf(button)
         val act = parentFragment as SettingRootFragment
-        act.changeMode(fragment,tab)
+        act.changeMode(fragment, tab)
     }
 
     companion object {
@@ -88,7 +88,7 @@ class SelectNormalFragment : Fragment() {
         private var tab = -1
 
         @JvmStatic
-        fun newInstance(mode:Int,tab :Int): SelectNormalFragment {
+        fun newInstance(mode: Int, tab: Int): SelectNormalFragment {
             val fragment =
                 SelectNormalFragment()
             Companion.mode = mode

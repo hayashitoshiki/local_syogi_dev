@@ -1,32 +1,30 @@
 package com.example.local_syogi.presentation.view.setting
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.example.local_syogi.syogibase.data.game.GameMode
-import android.view.View
-import android.view.animation.AnimationUtils
-import android.view.animation.Animation
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.SettingRootContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.game.GameRateActivity
+import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import com.example.local_syogi.util.OnBackPressedListener
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-
-class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedListener {
+class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedListener {
 
     private val presenter: SettingRootContact.Presenter by inject { parametersOf(this) }
-
 
     private lateinit var view2: ConstraintLayout
     private lateinit var tabFrame: FrameLayout
@@ -36,9 +34,9 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
     private var first = true
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.activity_game_setting, container, false)
         modeFrame = view.findViewById(R.id.mode_frame)
@@ -78,7 +76,7 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
        選択しているボタンは指定職にする
        また、fragmentを入れ替える */
     fun changeMode(fragment: Fragment, tab: Int) {
-        if(first){
+        if (first) {
             firstChoice()
         }
         childFragmentManager.beginTransaction()
@@ -91,27 +89,27 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
         this.tab = tab
     }
 
-    //タッチイベント
+    // タッチイベント
     fun onTouchEvent(x: Int, y: Int, x2: Int, y2: Int) {
         presenter.onTouchEvent(x, y, x2, y2)
     }
 
-    //ホーム画面へ戻る
+    // ホーム画面へ戻る
     override fun backHome() {
         closeActivity()
         val main = activity as MainActivity
         main.backFragment()
     }
 
-    //「モード選択」(タイトル)Viewを非表示にする
-    override fun firstChoice(){
+    // 「モード選択」(タイトル)Viewを非表示にする
+    override fun firstChoice() {
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
         title.startAnimation(fade)
         title.visibility = View.INVISIBLE
         first = false
     }
 
-    //タブカード回転
+    // タブカード回転
     override fun flipCardRight(mode: Int) {
         childFragmentManager.beginTransaction()
             .setCustomAnimations(
@@ -128,7 +126,7 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
             .commit()
     }
 
-    //タブカード回転
+    // タブカード回転
     override fun flipCardLeft(mode: Int) {
         childFragmentManager.beginTransaction()
             .setCustomAnimations(
@@ -145,25 +143,25 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
             .commit()
     }
 
-    //対局開始判定ロジックへ
+    // 対局開始判定ロジックへ
     fun fadeOut() {
         presenter.startGame()
     }
 
-    //通常対戦画面へ遷移
+    // 通常対戦画面へ遷移
     override fun startNomarGame() {
         val intent = Intent(context, GameActivity::class.java)
         startActivity(intent)
     }
 
-    //通信対戦画面へ遷移
+    // 通信対戦画面へ遷移
     override fun startRateGame() {
         val intent = Intent(context, GameRateActivity::class.java)
         startActivity(intent)
     }
 
-    //activity終了
-    private fun closeActivity(){
+    // activity終了
+    private fun closeActivity() {
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide_delay) as Animation
         val fadeSpeed: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_speed) as Animation
         val fadeOut: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
@@ -172,25 +170,25 @@ class SettingRootFragment  : Fragment(), SettingRootContact.View,OnBackPressedLi
         tabFrame.visibility = View.INVISIBLE
         modeFrame.startAnimation(fadeSpeed)
         modeFrame.visibility = View.INVISIBLE
-        if(title.visibility == View.VISIBLE) {
+        if (title.visibility == View.VISIBLE) {
             title.startAnimation(fadeOut)
             title.visibility = View.INVISIBLE
         }
     }
 
-    override fun onResume(){
+    override fun onResume() {
         super.onResume()
         GameMode.reset()
         view2.visibility = View.VISIBLE
         first = true
     }
 
-    //BackKey
+    // BackKey
     override fun onBackPressed() {
         closeActivity()
     }
 
-    //エラー表示
+    // エラー表示
     override fun showAuthToast() {
         Toast.makeText(context, "ログインしてください", Toast.LENGTH_LONG).show()
     }

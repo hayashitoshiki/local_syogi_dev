@@ -1,17 +1,14 @@
 package com.example.local_syogi.syogibase.domain
 
-import com.example.local_syogi.syogibase.data.repository.BoardRepository
 import com.example.local_syogi.syogibase.data.game.Cell
+import com.example.local_syogi.syogibase.data.repository.BoardRepository
 import com.example.local_syogi.syogibase.util.Piece
 import com.nhaarman.mockito_kotlin.*
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.mockito.ArgumentMatchers.anyInt
 import org.powermock.api.mockito.PowerMockito
-
-
 
 class SyogiLogicUsecaseTest {
 
@@ -19,23 +16,22 @@ class SyogiLogicUsecaseTest {
     fun setUp() {
     }
 
-
     /**
      * 盤上の自分の駒をタップしたときにヒントを表示する
      * 条件：中央の王(周りなし)をタップ
      * 期待結果：8回setHint()が呼ばれる
      */
     @Test
-    fun setTouchHintCenter(){
-        val repository = mock<BoardRepository>{
-            on{ getMove(4,4) } doReturn Piece.OU.getMove()
-            on{ findKing(anyInt()) } doReturn Pair(0,0)
-            on{ getPiece(anyInt(), anyInt())} doReturn Piece.None
-            on{ getTurn(anyInt(),anyInt())  } doReturn 2
+    fun setTouchHintCenter() {
+        val repository = mock<BoardRepository> {
+            on { getMove(4, 4) } doReturn Piece.OU.getMove()
+            on { findKing(anyInt()) } doReturn Pair(0, 0)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
+            on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setTouchHint(4,4)
+        // 実行
+        useCase.setTouchHint(4, 4)
         verify(repository, times(8)).setBackMove()
     }
 
@@ -45,16 +41,16 @@ class SyogiLogicUsecaseTest {
      * 期待結果：3回setHint()が呼ばれる
      */
     @Test
-    fun setTouchHintTop(){
-        val repository = mock<BoardRepository>{
-            on{ getMove(0,0) } doReturn Piece.OU.getMove()
-            on{ findKing(anyInt()) } doReturn Pair(0,0)
-            on{ getPiece(anyInt(), anyInt())} doReturn Piece.None
-            on{ getTurn(anyInt(),anyInt())  } doReturn 2
+    fun setTouchHintTop() {
+        val repository = mock<BoardRepository> {
+            on { getMove(0, 0) } doReturn Piece.OU.getMove()
+            on { findKing(anyInt()) } doReturn Pair(0, 0)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
+            on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setTouchHint(0,0)
+        // 実行
+        useCase.setTouchHint(0, 0)
         verify(repository, times(3)).setBackMove()
     }
 
@@ -64,16 +60,16 @@ class SyogiLogicUsecaseTest {
      * 期待結果：3回setHint()が呼ばれる
      */
     @Test
-    fun setTouchHintBottom(){
-        val repository = mock<BoardRepository>{
-            on{ getMove(8,8) } doReturn Piece.OU.getMove()
-            on{ findKing(anyInt()) } doReturn Pair(0,0)
-            on{ getPiece(anyInt(), anyInt())} doReturn Piece.None
-            on{ getTurn(anyInt(),anyInt())  } doReturn 2
+    fun setTouchHintBottom() {
+        val repository = mock<BoardRepository> {
+            on { getMove(8, 8) } doReturn Piece.OU.getMove()
+            on { findKing(anyInt()) } doReturn Pair(0, 0)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
+            on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setTouchHint(8,8)
+        // 実行
+        useCase.setTouchHint(8, 8)
         verify(repository, times(3)).setBackMove()
     }
 
@@ -83,16 +79,16 @@ class SyogiLogicUsecaseTest {
      * 期待結果：8回setHint()が呼ばれる
      */
     @Test
-    fun setTouchHintCenter2(){
-        val repository = mock<BoardRepository>{
-            on{ getMove(4,4) } doReturn Piece.OU.getMove()
-            on{ findKing(anyInt()) } doReturn Pair(0,0)
-            on{ getPiece(anyInt(), anyInt())} doReturn Piece.None
-            on{ getTurn(anyInt(),anyInt())  } doReturn 1
+    fun setTouchHintCenter2() {
+        val repository = mock<BoardRepository> {
+            on { getMove(4, 4) } doReturn Piece.OU.getMove()
+            on { findKing(anyInt()) } doReturn Pair(0, 0)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
+            on { getTurn(anyInt(), anyInt()) } doReturn 1
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setTouchHint(4,4)
+        // 実行
+        useCase.setTouchHint(4, 4)
         verify(repository, times(0)).setBackMove()
     }
 
@@ -103,17 +99,17 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun setHintTrue() {
-        //テストクラス作成
-        val repository = mock<BoardRepository>{
-            on{findKing(1)} doReturn Pair(5,5)
-            on{getPiece(anyInt(), anyInt())} doReturn Piece.None
-            on{getTurn(anyInt(),anyInt())} doReturn 1
+        // テストクラス作成
+        val repository = mock<BoardRepository> {
+            on { findKing(1) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
+            on { getTurn(anyInt(), anyInt()) } doReturn 1
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        val method = PowerMockito.method(useCase.javaClass, "setHint", Int::class.java,Int::class.java,Int::class.java,Int::class.java,Int::class.java)
-        //実行
-        method.invoke(useCase, 3,3,2,3,1)
-        verify(repository, times(1)).setHint(2,3)
+        val method = PowerMockito.method(useCase.javaClass, "setHint", Int::class.java, Int::class.java, Int::class.java, Int::class.java, Int::class.java)
+        // 実行
+        method.invoke(useCase, 3, 3, 2, 3, 1)
+        verify(repository, times(1)).setHint(2, 3)
     }
 
     /**
@@ -123,20 +119,20 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun setHintFalse() {
-        //テストクラス作成
-        val repository = mock<BoardRepository>{
-            on{findKing(1)} doReturn Pair(5,5)
-            on{getPiece(anyInt(), anyInt())} doReturn Piece.RYU
-            on{getTurn(anyInt(),anyInt())} doReturn 2
+        // テストクラス作成
+        val repository = mock<BoardRepository> {
+            on { findKing(1) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.RYU
+            on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        val method = PowerMockito.method(useCase.javaClass, "setHint", Int::class.java,Int::class.java,Int::class.java,Int::class.java,Int::class.java)
-        //実行
-        method.invoke(useCase, 3,3,2,3,1)
-        verify(repository, times(0)).setHint(2,3)
+        val method = PowerMockito.method(useCase.javaClass, "setHint", Int::class.java, Int::class.java, Int::class.java, Int::class.java, Int::class.java)
+        // 実行
+        method.invoke(useCase, 3, 3, 2, 3, 1)
+        verify(repository, times(0)).setHint(2, 3)
     }
 
-    //持ち駒の打てる場所判定
+    // 持ち駒の打てる場所判定
     /**
      * 持ち駒の打てる場所判定関数
      * 条件；歩をタップした場合
@@ -144,14 +140,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceFU() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.FU
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.FU
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(72)).setBackMove()
     }
 
@@ -162,14 +158,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceKYO() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.KYO
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.KYO
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(72)).setBackMove()
     }
 
@@ -180,14 +176,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceKEI() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.KEI
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.KEI
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(63)).setBackMove()
     }
 
@@ -198,14 +194,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceGIN() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.GIN
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.GIN
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setBackMove()
     }
 
@@ -216,14 +212,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceKIN() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.KIN
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.KIN
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setBackMove()
     }
 
@@ -234,14 +230,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceHISYA() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.HISYA
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.HISYA
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setBackMove()
     }
 
@@ -252,14 +248,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceKAKU() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.KAKU
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.KAKU
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setBackMove()
     }
 
@@ -270,20 +266,18 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getHintHoldPieceNone() {
-        val repository = mock<BoardRepository>{
-            on{findHoldPieceBy(anyInt(),anyInt())} doReturn Piece.None
-            on{ findKing(anyInt()) } doReturn Pair(5,5)
-            on{ getPiece(anyInt(),anyInt()) } doReturn Piece.None
+        val repository = mock<BoardRepository> {
+            on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.None
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setHintHoldPiece(5,10)
+        // 実行
+        useCase.setHintHoldPiece(5, 10)
         verify(repository, times(0)).setBackMove()
     }
 
-
-
-    //動かす
+    // 動かす
     /**
      * 駒を動かす関数
      * 正常系：下記のメソッドを呼ぶ
@@ -293,12 +287,12 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun setMove() {
-        //テストクラス作成
-        val repository = mock<BoardRepository>{}
+        // テストクラス作成
+        val repository = mock<BoardRepository> {}
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        useCase.setMove(3,3,false)
-        verify(repository, times(1)).setMove(eq(3),eq(3),anyInt(),eq(false))
+        // 実行
+        useCase.setMove(3, 3, false)
+        verify(repository, times(1)).setMove(eq(3), eq(3), anyInt(), eq(false))
         verify(repository, times(1)).setHoldPiece()
         verify(repository, times(1)).resetHint()
     }
@@ -310,15 +304,15 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun evolutionCheckTrue() {
-        //テストクラス作成
-        val repository = mock<BoardRepository>{
-            on{findEvolutionBy(3, 3)} doReturn true
-            on{findLogY()} doReturn 2
+        // テストクラス作成
+        val repository = mock<BoardRepository> {
+            on { findEvolutionBy(3, 3) } doReturn true
+            on { findLogY() } doReturn 2
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.evolutionCheck(3,3)
-        assertEquals(result,true)
+        // 実行
+        val result = useCase.evolutionCheck(3, 3)
+        assertEquals(result, true)
     }
 
     /**
@@ -328,14 +322,14 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun evolutionCheck() {
-        //テストクラス作成
-        val repository = mock<BoardRepository>{
-            on{findEvolutionBy(3, 3)} doReturn false
+        // テストクラス作成
+        val repository = mock<BoardRepository> {
+            on { findEvolutionBy(3, 3) } doReturn false
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.evolutionCheck(3,3)
-        assertEquals(result,false)
+        // 実行
+        val result = useCase.evolutionCheck(3, 3)
+        assertEquals(result, false)
     }
 
     /**
@@ -345,13 +339,13 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun compulsionEvolutionCheckTrue() {
-        val repository = mock<BoardRepository>{
-            on{checkForcedevolution()} doReturn true
+        val repository = mock<BoardRepository> {
+            on { checkForcedevolution() } doReturn true
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         val result = useCase.compulsionEvolutionCheck()
-        assertEquals(result,true)
+        assertEquals(result, true)
         verify(repository, times(1)).setEvolution()
     }
 
@@ -362,13 +356,13 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun compulsionEvolutionCheckFalse() {
-        val repository = mock<BoardRepository>{
-            on{checkForcedevolution()} doReturn false
+        val repository = mock<BoardRepository> {
+            on { checkForcedevolution() } doReturn false
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         val result = useCase.compulsionEvolutionCheck()
-        assertEquals(result,false)
+        assertEquals(result, false)
         verify(repository, times(0)).setEvolution()
     }
 
@@ -378,9 +372,9 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun evolutionPiece() {
-        val repository = mock<BoardRepository>{}
+        val repository = mock<BoardRepository> {}
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         useCase.evolutionPiece(true)
         verify(repository, times(1)).setEvolution()
     }
@@ -392,16 +386,16 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun checkGameEndTrue1() {
-        val repository = mock<BoardRepository>{
-            on{findKing(anyInt())} doReturn Pair(5,5)
-            on{getPiece(anyInt(), anyInt())} doReturn Piece.FU
-            on{getTurn(anyInt(),anyInt())} doReturn 1
-            on{getCountByHint()} doReturn 0//詰み判定
+        val repository = mock<BoardRepository> {
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.FU
+            on { getTurn(anyInt(), anyInt()) } doReturn 1
+            on { getCountByHint() } doReturn 0 // 詰み判定
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         val result = useCase.checkGameEnd()
-        assertEquals(result,true)
+        assertEquals(result, true)
     }
 
     /**
@@ -411,16 +405,16 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun checkGameEndFalse1() {
-        val repository = mock<BoardRepository>{
-            on{findKing(anyInt())} doReturn Pair(5,5)
-            on{getPiece(anyInt(), anyInt())} doReturn Piece.FU
-            on{getTurn(anyInt(),anyInt())} doReturn 1
-            on{getCountByHint()} doReturn 3//詰み判定
+        val repository = mock<BoardRepository> {
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.FU
+            on { getTurn(anyInt(), anyInt()) } doReturn 1
+            on { getCountByHint() } doReturn 3 // 詰み判定
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         val result = useCase.checkGameEnd()
-        assertEquals(result,false)
+        assertEquals(result, false)
     }
 
     /**
@@ -430,15 +424,15 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun checkGameEndFalse2() {
-        val repository = mock<BoardRepository>{
-            on{findKing(anyInt())} doReturn Pair(5,5)
-            on{getPiece(anyInt(), anyInt())} doReturn Piece.None
-            on{getTurn(anyInt(),anyInt())} doReturn 1
+        val repository = mock<BoardRepository> {
+            on { findKing(anyInt()) } doReturn Pair(5, 5)
+            on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
+            on { getTurn(anyInt(), anyInt()) } doReturn 1
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         val result = useCase.checkGameEnd()
-        assertEquals(result,false)
+        assertEquals(result, false)
     }
 
     /**
@@ -447,10 +441,10 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun cancel() {
-        //テストクラス作成
-        val repository = mock<BoardRepository>{}
+        // テストクラス作成
+        val repository = mock<BoardRepository> {}
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         useCase.cancel()
         verify(repository, times(1)).resetHint()
     }
@@ -462,18 +456,18 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getCellInformation() {
-        //テストクラス作成
+        // テストクラス作成
         val cell = Cell()
         cell.piece = Piece.FU
         cell.turn = 1
         cell.hint = false
-        val repository = mock<BoardRepository>{
-            on{ getCellInformation(5,5) } doReturn cell
+        val repository = mock<BoardRepository> {
+            on { getCellInformation(5, 5) } doReturn cell
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.getCellInformation(5,5)
-        assertEquals(result, Triple(Piece.FU.nameJP, 1,false))
+        // 実行
+        val result = useCase.getCellInformation(5, 5)
+        assertEquals(result, Triple(Piece.FU.nameJP, 1, false))
     }
 
     /**
@@ -483,17 +477,17 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getCellTrunBLACKNoHint() {
-        //テストクラス作成
+        // テストクラス作成
         val cell = Cell()
         cell.piece = Piece.FU
         cell.turn = 1
         cell.hint = false
-        val repository = mock<BoardRepository>{
-            on{ getCellInformation(5,5) } doReturn cell
+        val repository = mock<BoardRepository> {
+            on { getCellInformation(5, 5) } doReturn cell
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.getCellTrun(5,5)
+        // 実行
+        val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 1)
     }
 
@@ -504,17 +498,17 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getCellTrunBLACKAndHint() {
-        //テストクラス作成
+        // テストクラス作成
         val cell = Cell()
         cell.piece = Piece.FU
         cell.turn = 1
         cell.hint = true
-        val repository = mock<BoardRepository>{
-            on{ getCellInformation(5,5) } doReturn cell
+        val repository = mock<BoardRepository> {
+            on { getCellInformation(5, 5) } doReturn cell
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.getCellTrun(5,5)
+        // 実行
+        val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 3)
     }
 
@@ -525,17 +519,17 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getCellTrunWHITENoHint() {
-        //テストクラス作成
+        // テストクラス作成
         val cell = Cell()
         cell.piece = Piece.FU
         cell.turn = 2
         cell.hint = false
-        val repository = mock<BoardRepository>{
-            on{ getCellInformation(5,5) } doReturn cell
+        val repository = mock<BoardRepository> {
+            on { getCellInformation(5, 5) } doReturn cell
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.getCellTrun(5,5)
+        // 実行
+        val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 2)
     }
 
@@ -546,17 +540,17 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getCellTrunWHITEAndHint() {
-        //テストクラス作成
+        // テストクラス作成
         val cell = Cell()
         cell.piece = Piece.FU
         cell.turn = 2
         cell.hint = true
-        val repository = mock<BoardRepository>{
-            on{ getCellInformation(5,5) } doReturn cell
+        val repository = mock<BoardRepository> {
+            on { getCellInformation(5, 5) } doReturn cell
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.getCellTrun(5,5)
+        // 実行
+        val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 3)
     }
     /**
@@ -566,17 +560,17 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getCellTurnNoneNoHint() {
-        //テストクラス作成
+        // テストクラス作成
         val cell = Cell()
         cell.piece = Piece.None
         cell.turn = 0
         cell.hint = false
-        val repository = mock<BoardRepository>{
-            on{ getCellInformation(5,5) } doReturn cell
+        val repository = mock<BoardRepository> {
+            on { getCellInformation(5, 5) } doReturn cell
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.getCellTrun(5,5)
+        // 実行
+        val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 4)
     }
 
@@ -587,32 +581,32 @@ class SyogiLogicUsecaseTest {
      */
     @Test
     fun getCellTurnNoneAndHint() {
-        //テストクラス作成
+        // テストクラス作成
         val cell = Cell()
         cell.piece = Piece.None
         cell.turn = 0
         cell.hint = true
-        val repository = mock<BoardRepository>{
-            on{ getCellInformation(5,5) } doReturn cell
+        val repository = mock<BoardRepository> {
+            on { getCellInformation(5, 5) } doReturn cell
         }
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
-        val result = useCase.getCellTrun(5,5)
+        // 実行
+        val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 3)
     }
 
-    //手持ちの駒取得
+    // 手持ちの駒取得
     @Test
     fun getPieceHand() {
     }
 
-    //手番取得
+    // 手番取得
     @Test
     fun getTurn() {
-        val repository = mock<BoardRepository>{}
+        val repository = mock<BoardRepository> {}
         val useCase = SyogiLogicUseCaseImp(repository)
-        //実行
+        // 実行
         val result = useCase.getTurn()
-        assertEquals(result,1)
+        assertEquals(result, 1)
     }
 }

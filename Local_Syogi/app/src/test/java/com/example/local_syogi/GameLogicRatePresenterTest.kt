@@ -25,5 +25,4 @@ class GameLogicRatePresenterTest {
 //        //verify(repository, times(1)).setPre(2,6)
 //
 //    }
-
 }

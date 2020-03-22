@@ -4,27 +4,27 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
 
-open class RecordEntity: RealmObject() {
+open class RecordEntity : RealmObject() {
     @PrimaryKey
-    open var id:Int? = 0
+    open var id: Int? = 0
     @Required
     open var title: String? = "yyyy/MM/dd-HH:mm:ss"
     @Required
-    open var toX:Int? = 0
+    open var toX: Int? = 0
     @Required
-    open var toY:Int? = 0
+    open var toY: Int? = 0
     @Required
-    open var toPiece:String? = ""
+    open var toPiece: String? = ""
     @Required
-    open var toTurn:Int? = 0
+    open var toTurn: Int? = 0
     @Required
-    open var fromX:Int? = 0
+    open var fromX: Int? = 0
     @Required
-    open var fromY:Int? = 0
+    open var fromY: Int? = 0
     @Required
-    open var fromPiece:String? = ""
+    open var fromPiece: String? = ""
     @Required
-    open var fromTurn:Int? = 0
+    open var fromTurn: Int? = 0
     @Required
-    open var evolution:Boolean? = false
+    open var evolution: Boolean? = false
 }

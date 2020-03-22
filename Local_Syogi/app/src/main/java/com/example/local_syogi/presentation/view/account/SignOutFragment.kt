@@ -11,20 +11,19 @@ import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.contact.SettingAccountContact
 
-
-class SignOutFragment : Fragment(){
+class SignOutFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_sign_out, container, false)
 
-        Log.d("SignOut","onCreateView")
-        //ログインボタン
+        Log.d("SignOut", "onCreateView")
+        // ログインボタン
         val button = view.findViewById(R.id.logout) as Button
         button.setOnClickListener {
-            if(presenter != null) {
+            if (presenter != null) {
                 presenter!!.signOut()
-            }else{
+            } else {
                 presenter2!!.signOut()
             }
         }
