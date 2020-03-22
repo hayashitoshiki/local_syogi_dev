@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.view.account.NotLoginFragment
-import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.game.GameMode.BACKMOVE
 import com.example.local_syogi.syogibase.data.game.GameMode.CHAOS
 import com.example.local_syogi.syogibase.data.game.GameMode.CHECKMATE
@@ -22,10 +21,10 @@ import com.example.local_syogi.syogibase.data.game.GameMode.TWOTIME
 class GameRecordCardFragment : Fragment() {
 
     private val buttonList = arrayListOf<Button>()
-    private lateinit var rootFragment:GameRecordRootFragment
+    private lateinit var rootFragment: GameRecordRootFragment
     private lateinit var accountButton: Button
     private var tab = -1
-    private var colorPrevious:Int = Color.parseColor("#795548")
+    private var colorPrevious: Int = Color.parseColor("#795548")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +41,7 @@ class GameRecordCardFragment : Fragment() {
         val checkmateButton: Button = view.findViewById(R.id.checkmateButton)
         val pieceLimitButton: Button = view.findViewById(R.id.pieceLimitButton)
         val chaosButton: Button = view.findViewById(R.id.chaosButton)
-        rootFragment = parentFragment  as GameRecordRootFragment
+        rootFragment = parentFragment as GameRecordRootFragment
 
         buttonList.add(allButton)
         buttonList.add(accountButton)
@@ -53,34 +52,34 @@ class GameRecordCardFragment : Fragment() {
         buttonList.add(checkmateButton)
         buttonList.add(pieceLimitButton)
         buttonList.add(chaosButton)
-        if(tab != -1){
+        if (tab != -1) {
             buttonList[tab].setTextColor(Color.parseColor("#795548"))
         }
 
-        //ボタン押下
-        accountButton.setOnClickListener{
+        // ボタン押下
+        accountButton.setOnClickListener {
             changeMode(accountButton, rootFragment.authFragment)
         }
-        allButton.setOnClickListener{changeMode(allButton,
-            GameRecordListFragment.newInstance("総合成績",0)
+        allButton.setOnClickListener { changeMode(allButton,
+            GameRecordListFragment.newInstance("総合成績", 0)
         ) }
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
-            GameRecordListFragment.newInstance(usuallyButton.text.toString(),NORMAL)
+            GameRecordListFragment.newInstance(usuallyButton.text.toString(), NORMAL)
         ) }
         annanButton.setOnClickListener { changeMode(annanButton,
-            GameRecordListFragment.newInstance(annanButton.text.toString(),BACKMOVE)
+            GameRecordListFragment.newInstance(annanButton.text.toString(), BACKMOVE)
         ) }
         queenButton.setOnClickListener { changeMode(queenButton,
             GameRecordListFragment.newInstance(queenButton.text.toString(), CHAOS)
         ) }
         secondButton.setOnClickListener { changeMode(secondButton,
-            GameRecordListFragment.newInstance(secondButton.text.toString(),TWOTIME)
+            GameRecordListFragment.newInstance(secondButton.text.toString(), TWOTIME)
         ) }
         checkmateButton.setOnClickListener { changeMode(checkmateButton,
             GameRecordListFragment.newInstance(checkmateButton.text.toString(), CHECKMATE)
         ) }
         pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,
-            GameRecordListFragment.newInstance(pieceLimitButton.text.toString(),LIMIT)
+            GameRecordListFragment.newInstance(pieceLimitButton.text.toString(), LIMIT)
         ) }
         chaosButton.setOnClickListener { changeMode(chaosButton,
             GameRecordListFragment.newInstance(chaosButton.text.toString(), CHAOS)
@@ -88,12 +87,12 @@ class GameRecordCardFragment : Fragment() {
         return view
     }
 
-    //タブ選択
-    private fun changeMode(button:Button, fragment: Fragment) {
+    // タブ選択
+    private fun changeMode(button: Button, fragment: Fragment) {
 //        for (btn in buttonList) {
 //           // btn.setTextColor(Color.BLACK)
 //        }
-        if(tab != -1) {
+        if (tab != -1) {
             buttonList[tab].setTextColor(colorPrevious)
             buttonList[tab].setTypeface(null, Typeface.ITALIC)
         }
@@ -102,13 +101,11 @@ class GameRecordCardFragment : Fragment() {
         button.setTextColor(Color.parseColor("#795548"))
         button.typeface = Typeface.DEFAULT_BOLD
 
-
-        if(button == accountButton || parentPresenter!!.isSession()){
-            rootFragment.changeMode(fragment,tab)
-        }else{
-            rootFragment.changeMode(NotLoginFragment(),tab)
+        if (button == accountButton || parentPresenter!!.isSession()) {
+            rootFragment.changeMode(fragment, tab)
+        } else {
+            rootFragment.changeMode(NotLoginFragment(), tab)
         }
-
     }
 
     companion object {

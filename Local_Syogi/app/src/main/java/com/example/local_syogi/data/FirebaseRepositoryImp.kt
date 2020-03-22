@@ -3,8 +3,7 @@ package com.example.local_syogi.data
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 
-
-class FirebaseRepositoryImp: FirebaseRepository {
+class FirebaseRepositoryImp : FirebaseRepository {
 
     companion object {
         private const val TAG = "FireBaseRepositoryImp"
@@ -12,22 +11,20 @@ class FirebaseRepositoryImp: FirebaseRepository {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-
-    //ユーザーのEmailを取得
+    // ユーザーのEmailを取得
     override fun getEmail(): String {
         return auth.currentUser!!.email!!
     }
 
-    //ログイン状態を返す(Boolean型)
-    override fun isAuth():Boolean{
-        if (auth.currentUser != null){
+    // ログイン状態を返す(Boolean型)
+    override fun isAuth(): Boolean {
+        if (auth.currentUser != null) {
             return true
         }
         return false
-
     }
 
-    //自動ログイン認証(Callback型)
+    // 自動ログイン認証(Callback型)
     override fun firstCheck(onSuccess: () -> Unit, onError: () -> Unit) {
         if (auth.currentUser != null) {
             onSuccess()
@@ -36,7 +33,7 @@ class FirebaseRepositoryImp: FirebaseRepository {
         }
     }
 
-    //ログイン機能
+    // ログイン機能
     override fun signIn(
         email: String,
         password: String,
@@ -53,10 +50,9 @@ class FirebaseRepositoryImp: FirebaseRepository {
                     onError()
                 }
             }
-
     }
 
-    //ログアウト
+    // ログアウト
     override fun signOut(onSuccess: () -> Unit, onError: () -> Unit) {
         auth.signOut()
         if (auth.currentUser == null) {
@@ -68,7 +64,7 @@ class FirebaseRepositoryImp: FirebaseRepository {
         }
     }
 
-    //アカウント作成
+    // アカウント作成
     override fun signUp(
         email: String,
         password: String,
@@ -87,7 +83,7 @@ class FirebaseRepositoryImp: FirebaseRepository {
             }
     }
 
-    //ユーザー削除
+    // ユーザー削除
     override fun delete(onSuccess: () -> Unit, onError: () -> Unit) {
         auth.currentUser!!.delete()
             .addOnCompleteListener { task ->
@@ -101,4 +97,3 @@ class FirebaseRepositoryImp: FirebaseRepository {
             }
     }
 }
-

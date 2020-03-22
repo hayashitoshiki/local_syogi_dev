@@ -1,57 +1,58 @@
 package com.example.local_syogi.syogibase.domain
 
-
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.domain.model.GameModel
 import com.example.local_syogi.syogibase.util.Piece
 
 interface SyogiLogicUseCase {
 
-    //TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
+    // TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
     fun twohandRule()
-    //ヒントセットする
-    fun setTouchHint(x:Int,y:Int)
-    //持ち駒を使う場合
+    // ヒントセットする
+    fun setTouchHint(x: Int, y: Int)
+    // 持ち駒を使う場合
     fun setHintHoldPiece(x: Int, y: Int)
-    //駒を動かす
-    fun setMove(x: Int, y: Int, evolution:Boolean)
-    //成り判定
-    fun evolutionCheck(x:Int, y:Int):Boolean
-    //成り判定 強制か否か
-    fun compulsionEvolutionCheck():Boolean
-    //成り
+    // 駒を動かす
+    fun setMove(x: Int, y: Int, evolution: Boolean)
+    // 成り判定
+    fun evolutionCheck(x: Int, y: Int): Boolean
+    // 成り判定 強制か否か
+    fun compulsionEvolutionCheck(): Boolean
+    // 成り
     fun evolutionPiece(bool: Boolean)
-    //駒を動かした後～王手判定
-    fun checkGameEnd():Boolean
-    //キャンセル
+    // 駒を動かした後～王手判定
+    fun checkGameEnd(): Boolean
+    // キャンセル
     fun cancel()
-    //(駒の名前,手番,ヒントの表示)を返す
-    fun getCellInformation(x:Int,y:Int):Triple<String,Int,Boolean>
-    //(駒の名前,手番,ヒントの表示)を返す
-    fun getCellTrun(x:Int,y:Int):Int
-    //持ち駒を加工して返す
-    fun getPieceHand(turn:Int):MutableList<Pair<Piece,Int>>
-    //ターンを返す
-    fun getTurn():Int
-    //手番を設定する
-    fun setTurn(turn:Int)
-    //ヒントを設定する
-    fun setHint(x:Int, y:Int, newX:Int, newY:Int, turn:Int)
-    //最後のログを取得する
+    // (駒の名前,手番,ヒントの表示)を返す
+    fun getCellInformation(x: Int, y: Int): Triple<String, Int, Boolean>
+    // (駒の名前,手番,ヒントの表示)を返す
+    fun getCellTrun(x: Int, y: Int): Int
+    // 持ち駒を加工して返す
+    fun getPieceHand(turn: Int): MutableList<Pair<Piece, Int>>
+    // ターンを返す
+    fun getTurn(): Int
+    // 手番を設定する
+    fun setTurn(turn: Int)
+    // ヒントを設定する
+    fun setHint(x: Int, y: Int, newX: Int, newY: Int, turn: Int)
+    // 最後のログを取得する
     fun getLogLast(): GameLog
-    //動かす駒の元の位置をセットする
-    fun setPre(x:Int, y:Int)
+    // 動かす駒の元の位置をセットする
+    fun setPre(x: Int, y: Int)
+    // 千日手判定
+    fun isRepetitionMove(): Boolean
 
-
-    //対局ログを返す
-    fun getLog():MutableList<GameLog>
-    //一手戻す
+    // 対局ログを返す
+    fun getLog(): MutableList<GameLog>
+    // 一手戻す
     fun setBackMove()
-    //DBに保存
-    fun saveTable(log:MutableList<GameLog>)
-    //全ての棋譜リストを取得する
-    fun getGameAll():MutableList<String>
-    //特定の種類の棋譜リストを取得する
-    fun getGameByMode(mode:Int):MutableList<String>
-    //指定した対局の棋譜を返す
-    fun getRecordByTitle(title:String):MutableList<GameLog>
+    // DBに保存
+    fun saveTable(log: MutableList<GameLog>, winner: Int)
+    // 全ての棋譜リストを取得する
+    fun getGameAll(): MutableList<GameModel>
+    // 特定の種類の棋譜リストを取得する
+    fun getGameByMode(mode: Int): MutableList<GameModel>
+    // 指定した対局の棋譜を返す
+    fun getRecordByTitle(title: String): MutableList<GameLog>
 }

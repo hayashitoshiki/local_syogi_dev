@@ -3,56 +3,55 @@ package com.example.local_syogi.presentation.presenter
 import com.example.local_syogi.domain.AuthenticationUseCase
 import com.example.local_syogi.presentation.contact.SettingAccountContact
 
-class SettingAccountPresenter(private val view: SettingAccountContact.View, private val firebase:AuthenticationUseCase) :
+class SettingAccountPresenter(private val view: SettingAccountContact.View, private val firebase: AuthenticationUseCase) :
     SettingAccountContact.Presenter {
 
-    //ログイン状態を返す
-    override fun isSession():Boolean{
+    // ログイン状態を返す
+    override fun isSession(): Boolean {
         return firebase.isAuth()
     }
 
-    //自動ログイン認証
-    override fun onStart(){
+    // 自動ログイン認証
+    override fun onStart() {
         firebase.firstCheck({
-            //view.setInformationView()
-        },{
+            // view.setInformationView()
+        }, {
             view.setLoginViewFirst()
         })
     }
 
-    //ログイン認証
-    override fun signIn(email:String, password:String){
-        if(email != "" && password != ""){
-            firebase.signIn(email,password,{
+    // ログイン認証
+    override fun signIn(email: String, password: String) {
+        if (email != "" && password != "") {
+            firebase.signIn(email, password, {
                 view.setInformationView()
-            },{
+            }, {
                 view.showErrorToast()
             })
-        } else{
+        } else {
             view.showErrorEmailPassword()
         }
     }
 
-    //ログアウト
+    // ログアウト
     override fun signOut() {
         firebase.signOut({
             view.signOut()
-        },{
+        }, {
             view.showErrorToast()
         })
     }
 
-    //新規作成処理
-    override fun signUp(email:String, password:String){
-        if(email != "" && password != "") {
+    // 新規作成処理
+    override fun signUp(email: String, password: String) {
+        if (email != "" && password != "") {
             firebase.signUp(email, password, {
                 view.setInformationView()
             }, {
                 view.showErrorToast()
             })
-        }else {
+        } else {
             view.showErrorEmailPassword()
         }
     }
-
 }

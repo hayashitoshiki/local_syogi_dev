@@ -13,13 +13,13 @@ import com.example.local_syogi.presentation.contact.SettingAccountContact
 import kotlinx.android.synthetic.main.fragment_card_account.*
 import kotlinx.android.synthetic.main.fragment_usually_syogi.*
 
-class AccountCardFragment: Fragment(){
+class AccountCardFragment : Fragment() {
 
     private val buttonList = arrayListOf<Button>()
-    private lateinit var rootFragment:AccountRootFragment
+    private lateinit var rootFragment: AccountRootFragment
     private lateinit var accountButton: Button
     private var tab = -1
-    private var colorPrevious:Int = Color.parseColor("#795548")
+    private var colorPrevious: Int = Color.parseColor("#795548")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,7 @@ class AccountCardFragment: Fragment(){
         val checkmateButton: Button = view.findViewById(R.id.checkmateButton)
         val pieceLimitButton: Button = view.findViewById(R.id.pieceLimitButton)
         val chaosButton: Button = view.findViewById(R.id.chaosButton)
-        rootFragment = parentFragment  as AccountRootFragment
+        rootFragment = parentFragment as AccountRootFragment
 
         buttonList.add(allButton)
         buttonList.add(accountButton)
@@ -47,15 +47,15 @@ class AccountCardFragment: Fragment(){
         buttonList.add(checkmateButton)
         buttonList.add(pieceLimitButton)
         buttonList.add(chaosButton)
-        if(tab != -1){
+        if (tab != -1) {
             buttonList[tab].setTextColor(Color.parseColor("#795548"))
         }
 
-        //ボタン押下
-        accountButton.setOnClickListener{
+        // ボタン押下
+        accountButton.setOnClickListener {
             changeMode(accountButton, rootFragment.authFragment)
         }
-        allButton.setOnClickListener{changeMode(allButton,
+        allButton.setOnClickListener { changeMode(allButton,
             ResultListFragment.newInstance("総合成績")
         ) }
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
@@ -82,12 +82,12 @@ class AccountCardFragment: Fragment(){
         return view
     }
 
-    //タブ選択
-    private fun changeMode(button:Button, fragment: Fragment) {
+    // タブ選択
+    private fun changeMode(button: Button, fragment: Fragment) {
 //        for (btn in buttonList) {
 //           // btn.setTextColor(Color.BLACK)
 //        }
-        if(tab != -1) {
+        if (tab != -1) {
             buttonList[tab].setTextColor(colorPrevious)
             buttonList[tab].setTypeface(null, Typeface.ITALIC)
         }
@@ -96,13 +96,11 @@ class AccountCardFragment: Fragment(){
         button.setTextColor(Color.parseColor("#795548"))
         button.typeface = Typeface.DEFAULT_BOLD
 
-
-        if(button == accountButton || parentPresenter!!.isSession()){
-            rootFragment.changeMode(fragment,tab)
-        }else{
-            rootFragment.changeMode(NotLoginFragment(),tab)
+        if (button == accountButton || parentPresenter!!.isSession()) {
+            rootFragment.changeMode(fragment, tab)
+        } else {
+            rootFragment.changeMode(NotLoginFragment(), tab)
         }
-
     }
 
     companion object {

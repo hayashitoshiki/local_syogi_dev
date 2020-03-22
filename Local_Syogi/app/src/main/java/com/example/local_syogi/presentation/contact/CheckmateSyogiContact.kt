@@ -1,11 +1,7 @@
 package com.example.local_syogi.presentation.contact
 
 interface CheckmateSyogiContact {
-    interface View {
+    interface View
 
-    }
-
-    interface Presenter {
-
-    }
+    interface Presenter
 }

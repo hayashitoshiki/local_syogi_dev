@@ -2,19 +2,16 @@ package com.example.local_syogi.presentation.view.account
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.GameRecordRootContact
 import com.example.local_syogi.presentation.contact.RateCardContact
 import com.example.local_syogi.presentation.contact.SettingAccountContact
-
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-
-
 
 class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
 
@@ -34,31 +31,31 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
     override fun onStart() {
         super.onStart()
         stop = false
-        if(parentPresenter != null) {
-            if(parentPresenter!!.isSession()){
+        if (parentPresenter != null) {
+            if (parentPresenter!!.isSession()) {
                 setInformationView()
-            }else{
+            } else {
                 setLoginView()
             }
-        }else{
-            if(parentPresenter2!!.isSession()){
+        } else {
+            if (parentPresenter2!!.isSession()) {
                 setInformationView()
-            }else{
+            } else {
                 setLoginView()
             }
         }
     }
 
-    //ログインViewを表示する
+    // ログインViewを表示する
     fun setLoginView() {
-        Log.d("Main","ログイン")
+        Log.d("Main", "ログイン")
         val signIn =
-            if(parentPresenter != null) {
+            if (parentPresenter != null) {
                 SignInUpFragment.newInstance(parentPresenter!!)
-            }else{
+            } else {
                 SignInUpFragment.newInstance2(parentPresenter2!!)
             }
-        if(isAdded && !stop) {
+        if (isAdded && !stop) {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
                     R.anim.fade_in,
@@ -69,16 +66,16 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
         }
     }
 
-    //ログイン後(設定)画面を表示する
+    // ログイン後(設定)画面を表示する
     fun setInformationView() {
-        Log.d("Main","設定画面")
+        Log.d("Main", "設定画面")
         val signOut =
-            if(parentPresenter != null) {
+            if (parentPresenter != null) {
                 SignOutFragment.newInstance(parentPresenter!!)
-            }else{
+            } else {
                 SignOutFragment.newInstance2(parentPresenter2!!)
             }
-        if(isAdded && !stop) {
+        if (isAdded && !stop) {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
                     R.anim.fade_in,
@@ -93,7 +90,6 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
         super.onStop()
         stop = true
     }
-
 
     companion object {
         private var parentPresenter: SettingAccountContact.Presenter? = null
@@ -112,5 +108,4 @@ class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
             return fragment
         }
     }
-
 }

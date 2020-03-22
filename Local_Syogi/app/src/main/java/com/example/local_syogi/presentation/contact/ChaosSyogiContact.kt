@@ -1,11 +1,7 @@
 package com.example.local_syogi.presentation.contact
 
 interface ChaosSyogiContact {
-    interface View {
+    interface View
 
-    }
-
-    interface Presenter {
-
-    }
+    interface Presenter
 }

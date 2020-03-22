@@ -1,20 +1,18 @@
 package com.example.local_syogi.presentation.view.setting
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.local_syogi.presentation.contact.ChaosSyogiContact
-
+import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.ChaosSyogiContact
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 /*
  *  DI用クラスに以下の１行を追加してください
  */
-
 
 class ChaosSyogiFragment : Fragment(), ChaosSyogiContact.View {
 
@@ -33,6 +31,4 @@ class ChaosSyogiFragment : Fragment(), ChaosSyogiContact.View {
 
         return view
     }
-
-
 }

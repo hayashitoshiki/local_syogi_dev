@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 
-class NotLoginFragment: Fragment() {
+class NotLoginFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -8,8 +8,7 @@ import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.PieceMove
 
-
-class BoardRepositoryImp: BoardRepository {
+class BoardRepositoryImp : BoardRepository {
     private val board: Board =
         Board()
     private val logList = mutableListOf<GameLog>()
@@ -23,30 +22,29 @@ class BoardRepositoryImp: BoardRepository {
         const val WHITE = 2
     }
 
-
-    //動かす前の駒の状態をセット
+    // 動かす前の駒の状態をセット
     override fun setPre(x: Int, y: Int) {
         previousX = x
         previousY = y
         Log.d("Main", "駒：" + ",x:" + previousX + ",y:" + previousY)
-        Log.d("Main","駒セット。サイズ："+ logList.size)
+        Log.d("Main", "駒セット。サイズ：" + logList.size)
         if (y == 10 || y == -1) previousPiece = changeIntToPiece(x)
         else previousPiece = board.cells[previousX][previousY].piece
-        //Log.d("Main","駒："+ board.cells[x][y].piece + ",x:" + previousX +",y:" + previousY)
+        // Log.d("Main","駒："+ board.cells[x][y].piece + ",x:" + previousX +",y:" + previousY)
     }
 
-    //最新手を返す
+    // 最新手を返す
     override fun getLogList(): GameLog {
         return logList.last()
     }
 
-    //対局ログを返す
-    override fun getLog():MutableList<GameLog>{
+    // 対局ログを返す
+    override fun getLog(): MutableList<GameLog> {
         return logList
     }
 
-    //駒を動かす
-    override fun setMove(x: Int, y: Int, turn: Int,evolution:Boolean) {
+    // 駒を動かす
+    override fun setMove(x: Int, y: Int, turn: Int, evolution: Boolean) {
         val piece = changeIntToPiece(previousX)
         val gameLog = GameLog(
             previousX,
@@ -62,27 +60,27 @@ class BoardRepositoryImp: BoardRepository {
         logList.add(gameLog)
         board.cells[x][y].turn = turn
         board.cells[x][y].piece =
-            if(evolution) previousPiece.evolution()
+            if (evolution) previousPiece.evolution()
             else previousPiece
-        when(previousY){
-            10   -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
-            -1   -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
+        when (previousY) {
+            10 -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
+            -1 -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
             else -> {
                 board.cells[previousX][previousY].piece = Piece.None
                 board.cells[previousX][previousY].turn = 0
             }
         }
         Log.d("Main", "駒：" + board.cells[x][y].piece)
-        Log.d("Main","サイズ："+ logList.size)
+        Log.d("Main", "サイズ：" + logList.size)
     }
 
-    //１手戻す(ヒント)
+    // １手戻す(ヒント)
     override fun setPreBackMove() {
         val log: GameLog = logList.last()
-        when(log.oldY){
+        when (log.oldY) {
             10 -> board.holdPieceBlack[changeIntToPiece(log.oldX)] = board.holdPieceBlack[changeIntToPiece(log.oldX)]!! + 1
             -1 -> board.holdPieceWhite[changeIntToPiece(log.oldX)] = board.holdPieceWhite[changeIntToPiece(log.oldX)]!! + 1
-            else ->{
+            else -> {
                 board.cells[log.oldX][log.oldY].piece = log.afterPiece
                 board.cells[log.oldX][log.oldY].turn = log.afterTurn
             }
@@ -92,21 +90,21 @@ class BoardRepositoryImp: BoardRepository {
         logList.remove(log)
     }
 
-    //１手戻す
+    // １手戻す
     override fun setBackMove() {
         val log: GameLog = logList.last()
-        when(log.oldY){
+        when (log.oldY) {
             10 -> board.holdPieceBlack[changeIntToPiece(log.oldX)] = board.holdPieceBlack[changeIntToPiece(log.oldX)]!! + 1
             -1 -> board.holdPieceWhite[changeIntToPiece(log.oldX)] = board.holdPieceWhite[changeIntToPiece(log.oldX)]!! + 1
-            else ->{
+            else -> {
                 board.cells[log.oldX][log.oldY].piece = log.afterPiece
                 board.cells[log.oldX][log.oldY].turn = log.afterTurn
             }
         }
-        if(log.beforpiece != Piece.None){
+        if (log.beforpiece != Piece.None) {
             val piece = log.beforpiece.degeneration()
-            Log.d("Main","駒："+piece.nameJP)
-            when(log.beforturn){
+            Log.d("Main", "駒：" + piece.nameJP)
+            when (log.beforturn) {
                 BLACK -> board.holdPieceWhite[piece] = board.holdPieceWhite[piece]!! - 1
                 WHITE -> board.holdPieceBlack[piece] = board.holdPieceBlack[piece]!! - 1
             }
@@ -116,24 +114,24 @@ class BoardRepositoryImp: BoardRepository {
         logList.remove(log)
     }
 
-    //成る
+    // 成る
     override fun setEvolution() {
         val log: GameLog = logList.last()
         logList.last().evolution = true
         board.cells[log.newX][log.newY].piece = log.afterPiece.evolution()
     }
 
-    //成れる駒か判別
+    // 成れる駒か判別
     override fun findEvolutionBy(x: Int, y: Int): Boolean {
         return board.cells[x][y].piece.findEvolution()
     }
 
-    //打った駒の打つ前のY軸取得
+    // 打った駒の打つ前のY軸取得
     override fun findLogY(): Int {
         return logList.last().oldY
     }
 
-    //ヒントが表示されているマスの数を返す
+    // ヒントが表示されているマスの数を返す
     override fun getCountByHint(): Int {
         var count = 0
         board.cells.forEach { count += it.filter { it.hint }.count() }
@@ -141,7 +139,7 @@ class BoardRepositoryImp: BoardRepository {
         return count
     }
 
-    //持ち駒リスト取得
+    // 持ち駒リスト取得
     override fun getAllHoldPiece(turn: Int): Map<Piece, Int> {
         return if (turn == BLACK) {
             board.holdPieceBlack
@@ -150,7 +148,7 @@ class BoardRepositoryImp: BoardRepository {
         }
     }
 
-    //持ち駒の数を取得
+    // 持ち駒の数を取得
     override fun getCountHoldPiece(turn: Int): Int {
         var count = 0
         for ((_, v) in getAllHoldPiece(turn)) {
@@ -159,7 +157,7 @@ class BoardRepositoryImp: BoardRepository {
         return count
     }
 
-    //持ち駒マスから取得
+    // 持ち駒マスから取得
     override fun findHoldPieceBy(i: Int, turn: Int): Piece {
         if (turn == 1 && board.holdPieceBlack[changeIntToPiece(i)] == 0 ||
             turn == 2 && board.holdPieceWhite[changeIntToPiece(i)] == 0
@@ -168,7 +166,7 @@ class BoardRepositoryImp: BoardRepository {
         return changeIntToPiece(i)
     }
 
-    //持ち駒台の座標から駒を取得(本当はよくない)
+    // 持ち駒台の座標から駒を取得(本当はよくない)
     private fun changeIntToPiece(i: Int): Piece {
         return when (i) {
             2 -> Piece.FU
@@ -182,12 +180,12 @@ class BoardRepositoryImp: BoardRepository {
         }
     }
 
-    //取った駒を表示
+    // 取った駒を表示
     override fun getTakePice(): Piece {
         return logList.last().beforpiece
     }
 
-    //持ち駒追加
+    // 持ち駒追加
     override fun setHoldPiece() {
         val log: GameLog = logList.last()
         if (log.beforpiece != Piece.None) {
@@ -231,7 +229,7 @@ class BoardRepositoryImp: BoardRepository {
         }
     }
 
-    //強制的にならないといけない駒かチェック
+    // 強制的にならないといけない駒かチェック
     override fun checkForcedevolution(): Boolean {
         val log: GameLog = logList.last()
         val piece = board.cells[log.newX][log.newY].piece
@@ -242,32 +240,36 @@ class BoardRepositoryImp: BoardRepository {
         return false
     }
 
-    //駒の動きを取得
+    // 駒の動きを取得
     override fun getMove(x: Int, y: Int): Array<Array<PieceMove>> {
         return getPiece(x, y).getMove()
     }
+    // 局面を取得
+    override fun getBoard(): Array<Array<Cell>> {
+        return board.cells
+    }
 
-    //ヒントセット
+    // ヒントセット
     override fun setHint(x: Int, y: Int) {
         board.cells[x][y].hint = true
     }
 
-    //ヒントリセット
+    // ヒントリセット
     override fun resetHint() {
         board.cells.forEach { it.forEach { it.hint = false } }
     }
 
-    //そのマスの駒の所有者を返す
+    // そのマスの駒の所有者を返す
     override fun getTurn(x: Int, y: Int): Int {
         return board.cells[x][y].turn
     }
 
-    //そのマスのヒントを返す
+    // そのマスのヒントを返す
     override fun getHint(x: Int, y: Int): Boolean {
         return board.cells[x][y].hint
     }
 
-    //そのマスの駒を返す
+    // そのマスの駒を返す
     override fun getPiece(x: Int, y: Int): Piece {
         // TODO 安南だったら一段下の駒を取得
         return if (GameMode.getAnnanMode()) {
@@ -289,15 +291,15 @@ class BoardRepositoryImp: BoardRepository {
         } else {
             board.cells[x][y].piece
         }
-        //return board.cells[x][y].piece
+        // return board.cells[x][y].piece
     }
 
-    //そのマスの駒の名前を返す
+    // そのマスの駒の名前を返す
     override fun getJPName(x: Int, y: Int): String {
         return board.cells[x][y].piece.nameJP
     }
 
-    //指定した手番の王様の座標を返す
+    // 指定した手番の王様の座標を返す
     override fun findKing(turn: Int): Pair<Int, Int> {
         for (i in 0..8) for (j in 0..8) if (board.cells[i][j].piece == Piece.OU && board.cells[i][j].turn == turn) return Pair(
             i,
@@ -306,9 +308,8 @@ class BoardRepositoryImp: BoardRepository {
         return Pair(0, 0)
     }
 
-    //指定したマスの情報を返す
+    // 指定したマスの情報を返す
     override fun getCellInformation(x: Int, y: Int): Cell {
         return board.cells[x][y]
     }
-
 }

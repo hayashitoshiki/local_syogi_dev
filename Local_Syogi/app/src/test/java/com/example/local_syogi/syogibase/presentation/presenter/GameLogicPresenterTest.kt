@@ -8,7 +8,6 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 
-
 /**
  * 下記のテストを行う
  * タッチイベント
@@ -30,7 +29,7 @@ class GameLogicPresenterTest {
     companion object {
         const val BLACK = 1
         const val WHITE = 2
-        const val HINT  = 3
+        const val HINT = 3
         const val OTHER = 4
     }
 
@@ -40,15 +39,15 @@ class GameLogicPresenterTest {
      * 正常系：usecase.cancel()が呼ばれる
      */
     @Test
-    fun onTouchPieceStand(){
-        //テストクラス作成
-        val view = mock<GameViewContact.View>{}
-        val usecase =  mock<SyogiLogicUseCase>{}
-        val presenter = GameLogicPresenter(view,usecase)
+    fun onTouchPieceStand() {
+        // テストクラス作成
+        val view = mock<GameViewContact.View> {}
+        val usecase = mock<SyogiLogicUseCase> {}
+        val presenter = GameLogicPresenter(view, usecase)
 
-        //実行
-        presenter.onTouchEvent(0,0)
-        presenter.onTouchEvent(2,10)
+        // 実行
+        presenter.onTouchEvent(0, 0)
+        presenter.onTouchEvent(2, 10)
         verify(usecase, times(2)).setHintHoldPiece(anyInt(), anyInt())
     }
 
@@ -57,18 +56,18 @@ class GameLogicPresenterTest {
      * 正常系：自分の駒の動けるマスを返す
      */
     @Test
-    fun onTouchMyPieceInBoard(){
-        //テストクラス作成
-        val (x,y) = Pair(5,5)
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{
-            on{getCellTrun(x, y-1)} doReturn BLACK
-            on{getTurn()} doReturn BLACK
+    fun onTouchMyPieceInBoard() {
+        // テストクラス作成
+        val (x, y) = Pair(5, 5)
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {
+            on { getCellTrun(x, y - 1) } doReturn BLACK
+            on { getTurn() } doReturn BLACK
         }
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
-        presenter.onTouchEvent(x,y)
-        verify(useCase, times(1)).setTouchHint(5,4)
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
+        presenter.onTouchEvent(x, y)
+        verify(useCase, times(1)).setTouchHint(5, 4)
     }
 
     /**
@@ -76,17 +75,17 @@ class GameLogicPresenterTest {
      * 正常系：ヒントを消して何もしない
      */
     @Test
-    fun onTouchOpponentPieceInBoard(){
-        //テストクラス作成
-        val (x,y) = Pair(5,5)
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{
-            on{getCellTrun(x, y-1)} doReturn WHITE
-            on{getTurn()} doReturn BLACK
+    fun onTouchOpponentPieceInBoard() {
+        // テストクラス作成
+        val (x, y) = Pair(5, 5)
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {
+            on { getCellTrun(x, y - 1) } doReturn WHITE
+            on { getTurn() } doReturn BLACK
         }
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
-        presenter.onTouchEvent(x,y)
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
+        presenter.onTouchEvent(x, y)
         verify(useCase, times(1)).cancel()
     }
 
@@ -95,18 +94,18 @@ class GameLogicPresenterTest {
      * 正常系：駒を動かす
      */
     @Test
-    fun onTouchHintInBoard(){
-        //テストクラス作成
-        val (x,y) = Pair(5,5)
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{
-            on{getCellTrun(x, y-1)} doReturn HINT
-            on{getTurn()} doReturn BLACK
+    fun onTouchHintInBoard() {
+        // テストクラス作成
+        val (x, y) = Pair(5, 5)
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {
+            on { getCellTrun(x, y - 1) } doReturn HINT
+            on { getTurn() } doReturn BLACK
         }
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
-        presenter.onTouchEvent(x,y)
-        verify(useCase, times(1)).setMove(x,y-1,false)
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
+        presenter.onTouchEvent(x, y)
+        verify(useCase, times(1)).setMove(x, y - 1, false)
         verify(view, times(1)).playbackEffect()
     }
 
@@ -115,20 +114,20 @@ class GameLogicPresenterTest {
      * 正常系：成りダイアログが呼ばれる
      */
     @Test
-    fun onTouchHintEvolutionPiece(){
-        //テストクラス作成
-        val (x,y) = Pair(5,5)
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{
-            on{getCellTrun(x, y-1)} doReturn HINT
-            on{getTurn()} doReturn BLACK
-            on{evolutionCheck(x, y-1)} doReturn true
-            on{compulsionEvolutionCheck()} doReturn false
+    fun onTouchHintEvolutionPiece() {
+        // テストクラス作成
+        val (x, y) = Pair(5, 5)
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {
+            on { getCellTrun(x, y - 1) } doReturn HINT
+            on { getTurn() } doReturn BLACK
+            on { evolutionCheck(x, y - 1) } doReturn true
+            on { compulsionEvolutionCheck() } doReturn false
         }
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
-        presenter.onTouchEvent(x,y)
-        verify(useCase, times(1)).setMove(x,y-1,false)
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
+        presenter.onTouchEvent(x, y)
+        verify(useCase, times(1)).setMove(x, y - 1, false)
         verify(view, times(1)).playbackEffect()
         verify(view, times(1)).showDialog()
     }
@@ -138,19 +137,19 @@ class GameLogicPresenterTest {
      * 正常系：終了ダイアログ表示メソッドが呼ばれる
      */
     @Test
-    fun onTouchHintGameEnd(){
-        //テストクラス作成
-        val (x,y) = Pair(5,5)
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{
-            on{getCellTrun(x, y-1)} doReturn HINT
-            on{getTurn()} doReturn BLACK
-            on{checkGameEnd()} doReturn true
+    fun onTouchHintGameEnd() {
+        // テストクラス作成
+        val (x, y) = Pair(5, 5)
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {
+            on { getCellTrun(x, y - 1) } doReturn HINT
+            on { getTurn() } doReturn BLACK
+            on { checkGameEnd() } doReturn true
         }
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
-        presenter.onTouchEvent(x,y)
-        verify(useCase, times(1)).setMove(x,y-1,false)
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
+        presenter.onTouchEvent(x, y)
+        verify(useCase, times(1)).setMove(x, y - 1, false)
         verify(view, times(1)).playbackEffect()
         verify(view, times(1)).gameEnd(BLACK)
     }
@@ -160,17 +159,17 @@ class GameLogicPresenterTest {
      * 正常系：ヒントを消して何もしない
      */
     @Test
-    fun onTouchOtherInBoard(){
-        //テストクラス作成
-        val (x,y) = Pair(5,5)
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{
-            on{getCellTrun(x, y-1)} doReturn OTHER
-            on{getTurn()} doReturn BLACK
+    fun onTouchOtherInBoard() {
+        // テストクラス作成
+        val (x, y) = Pair(5, 5)
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {
+            on { getCellTrun(x, y - 1) } doReturn OTHER
+            on { getTurn() } doReturn BLACK
         }
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
-        presenter.onTouchEvent(x,y)
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
+        presenter.onTouchEvent(x, y)
         verify(useCase, times(1)).cancel()
     }
 
@@ -179,17 +178,17 @@ class GameLogicPresenterTest {
      * 正常系：ヒントを消して何もしない
      */
     @Test
-    fun onTouchOther(){
-        //テストクラス作成
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{}
-        val presenter = GameLogicPresenter(view,useCase)
+    fun onTouchOther() {
+        // テストクラス作成
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {}
+        val presenter = GameLogicPresenter(view, useCase)
 
-        //実行
-        presenter.onTouchEvent(5,-1)
-        presenter.onTouchEvent(5,11)
-        presenter.onTouchEvent(-1,5)
-        presenter.onTouchEvent(9 ,5)
+        // 実行
+        presenter.onTouchEvent(5, -1)
+        presenter.onTouchEvent(5, 11)
+        presenter.onTouchEvent(-1, 5)
+        presenter.onTouchEvent(9, 5)
         verify(useCase, times(4)).cancel()
     }
 
@@ -199,29 +198,29 @@ class GameLogicPresenterTest {
      */
     @Test
     fun drawView() {
-        //テストクラス作成
-        val pieceHand = mutableListOf<Pair<Piece,Int>>(Pair(Piece.FU,1),Pair(Piece.KYO,0))
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{
-            on{getCellInformation(eq(0),anyInt())} doReturn Triple("歩",BLACK,false)
-            on{getCellInformation(eq(1),anyInt())} doReturn Triple("歩",BLACK,true)
-            on{getCellInformation(eq(2),anyInt())} doReturn Triple("歩",WHITE,false)
-            on{getCellInformation(eq(3),anyInt())} doReturn Triple("歩",WHITE,true)
-            on{getCellInformation(eq(4),anyInt())} doReturn Triple("歩",OTHER,true)
-            on{getCellInformation(eq(5),anyInt())} doReturn Triple("歩",OTHER,false)
-            on{getCellInformation(eq(6),anyInt())} doReturn Triple("歩",OTHER,false)
-            on{getCellInformation(eq(7),anyInt())} doReturn Triple("歩",OTHER,false)
-            on{getCellInformation(eq(8),anyInt())} doReturn Triple("歩",OTHER,false)
-            on{getPieceHand(BLACK)} doReturn pieceHand
-            on{getPieceHand(WHITE)} doReturn pieceHand
+        // テストクラス作成
+        val pieceHand = mutableListOf<Pair<Piece, Int>>(Pair(Piece.FU, 1), Pair(Piece.KYO, 0))
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {
+            on { getCellInformation(eq(0), anyInt()) } doReturn Triple("歩", BLACK, false)
+            on { getCellInformation(eq(1), anyInt()) } doReturn Triple("歩", BLACK, true)
+            on { getCellInformation(eq(2), anyInt()) } doReturn Triple("歩", WHITE, false)
+            on { getCellInformation(eq(3), anyInt()) } doReturn Triple("歩", WHITE, true)
+            on { getCellInformation(eq(4), anyInt()) } doReturn Triple("歩", OTHER, true)
+            on { getCellInformation(eq(5), anyInt()) } doReturn Triple("歩", OTHER, false)
+            on { getCellInformation(eq(6), anyInt()) } doReturn Triple("歩", OTHER, false)
+            on { getCellInformation(eq(7), anyInt()) } doReturn Triple("歩", OTHER, false)
+            on { getCellInformation(eq(8), anyInt()) } doReturn Triple("歩", OTHER, false)
+            on { getPieceHand(BLACK) } doReturn pieceHand
+            on { getPieceHand(WHITE) } doReturn pieceHand
         }
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
         presenter.drawView()
         verify(view, times(1)).drawBoard()
-        verify(view, times(18)).drawBlackPiece(anyString(),anyInt(),anyInt())
-        verify(view, times(18)).drawWhitePiece(anyString(),anyInt(),anyInt())
-        verify(view, times(27)).drawHint(anyInt(),anyInt())
+        verify(view, times(18)).drawBlackPiece(anyString(), anyInt(), anyInt())
+        verify(view, times(18)).drawWhitePiece(anyString(), anyInt(), anyInt())
+        verify(view, times(27)).drawHint(anyInt(), anyInt())
         verify(view, times(1)).drawHoldPieceBlack(anyString(), anyInt(), anyInt())
         verify(view, times(1)).drawHoldPieceWhite(anyString(), anyInt(), anyInt())
     }
@@ -232,11 +231,11 @@ class GameLogicPresenterTest {
      */
     @Test
     fun evolutionPiece() {
-        //テストクラス作成
-        val view = mock<GameViewContact.View>{}
-        val useCase =  mock<SyogiLogicUseCase>{}
-        val presenter = GameLogicPresenter(view,useCase)
-        //実行
+        // テストクラス作成
+        val view = mock<GameViewContact.View> {}
+        val useCase = mock<SyogiLogicUseCase> {}
+        val presenter = GameLogicPresenter(view, useCase)
+        // 実行
         presenter.evolutionPiece(true)
         verify(useCase, times(1)).evolutionPiece(true)
     }

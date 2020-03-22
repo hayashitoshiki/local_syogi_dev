@@ -12,14 +12,12 @@ import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.GamePlayBackContact
 import com.example.local_syogi.presentation.view.game.GameFreeView
 import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class GameRePlayFragment(private val log:MutableList<GameLog>) : Fragment(), GamePlayBackContact.View {
+class GameRePlayFragment(private val log: MutableList<GameLog>) : Fragment(), GamePlayBackContact.View {
 
     private val presenter: GamePlayBackContact.Presenter by inject { parametersOf(this) }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +26,7 @@ class GameRePlayFragment(private val log:MutableList<GameLog>) : Fragment(), Gam
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_play_back, container, false)
         val frame = view.findViewById(R.id.frame) as FrameLayout
-        val gameView = GameFreeView(context!!, frame.width,frame.height,log)
+        val gameView = GameFreeView(context!!, frame.width, frame.height, log)
         val backButton = view.findViewById<Button>(R.id.backButton)
         val goButton = view.findViewById<Button>(R.id.goButton)
         val backStartButton = view.findViewById<Button>(R.id.backStartButton)
@@ -36,30 +34,29 @@ class GameRePlayFragment(private val log:MutableList<GameLog>) : Fragment(), Gam
         val endButton = view.findViewById<Button>(R.id.endButton)
 
         frame.addView(gameView)
-        backButton.setOnClickListener{
+        backButton.setOnClickListener {
             gameView.backMove()
             gameView.invalidate()
         }
-        goButton.setOnClickListener{
+        goButton.setOnClickListener {
             gameView.goMove()
             gameView.invalidate()
         }
-        backStartButton.setOnClickListener{
+        backStartButton.setOnClickListener {
             gameView.backMoveFirst()
         }
-        goEndButton.setOnClickListener{
+        goEndButton.setOnClickListener {
             gameView.goMoveLast()
         }
-        endButton.setOnClickListener{
+        endButton.setOnClickListener {
             AlertDialog.Builder(context).setCancelable(false)
                 .setMessage("感想戦を終了しますか？")
                 .setPositiveButton("はい") { _, _ ->
                     val mFragment = parentFragment as GameRecordRootFragment
                     mFragment.endRePlay()
                 }
-                .setNegativeButton("いいえ",null)
+                .setNegativeButton("いいえ", null)
                 .create().show()
-
         }
         return view
     }
