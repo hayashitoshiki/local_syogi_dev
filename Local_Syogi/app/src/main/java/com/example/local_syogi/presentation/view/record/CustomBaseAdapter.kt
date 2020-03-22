@@ -43,13 +43,20 @@ internal class CustomBaseAdapter(context: Context?, private val resourcedId: Int
         holder.WhiteResultTextView = view?.findViewById(R.id.WhiteResultTextView)
         holder.titleTextView?.text = items[position].title
         view!!.tag = holder
-        if (items[position].winner == 1) {
-            holder.BlackResultTextView?.text = "〇"
-            holder.WhiteResultTextView?.text = "●"
-        } else {
+        when (items[position].winner) {
+            1 -> {
+                holder.BlackResultTextView?.text = "〇"
+                holder.WhiteResultTextView?.text = "●"
+            }
+            2 ->{
             holder.BlackResultTextView?.text = "●"
             holder.WhiteResultTextView?.text = "〇"
-        }
+            }
+            else -> {
+                holder.BlackResultTextView?.text = "△"
+                holder.WhiteResultTextView?.text = "△"
+            }
+    }
         return view
     }
 
