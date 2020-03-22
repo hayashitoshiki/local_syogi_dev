@@ -442,7 +442,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         return logList
     }
 
-    //千日手判定
+    // 千日手判定
     override fun isRepetitionMove(): Boolean {
         positionList.forEach { (_, v) ->
             if (v >= 4)return true

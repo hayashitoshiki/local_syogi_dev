@@ -48,7 +48,7 @@ internal class CustomBaseAdapter(context: Context?, private val resourcedId: Int
                 holder.BlackResultTextView?.text = "〇"
                 holder.WhiteResultTextView?.text = "●"
             }
-            2 ->{
+            2 -> {
             holder.BlackResultTextView?.text = "●"
             holder.WhiteResultTextView?.text = "〇"
             }

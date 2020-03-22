@@ -40,7 +40,7 @@ interface SyogiLogicUseCase {
     fun getLogLast(): GameLog
     // 動かす駒の元の位置をセットする
     fun setPre(x: Int, y: Int)
-    //千日手判定
+    // 千日手判定
     fun isRepetitionMove(): Boolean
 
     // 対局ログを返す

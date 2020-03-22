@@ -244,7 +244,7 @@ class BoardRepositoryImp : BoardRepository {
     override fun getMove(x: Int, y: Int): Array<Array<PieceMove>> {
         return getPiece(x, y).getMove()
     }
-    //局面を取得
+    // 局面を取得
     override fun getBoard(): Array<Array<Cell>> {
         return board.cells
     }
