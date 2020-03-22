@@ -43,6 +43,8 @@ interface BoardRepository {
     fun setHint(x: Int, y: Int)
     // ヒントリセット
     fun resetHint()
+    //局面を取得
+    fun getBoard(): Array<Array<Cell>>
     // そのマスの駒の所有者を返す
     fun getTurn(x: Int, y: Int): Int
     // そのマスのヒントを返す

@@ -18,9 +18,9 @@ class SelectNormalFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = if (mode == 1) {
              inflater.inflate(R.layout.fragment_select_normal, container, false)

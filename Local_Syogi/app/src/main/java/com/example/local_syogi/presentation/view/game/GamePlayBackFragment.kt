@@ -20,9 +20,9 @@ class GamePlayBackFragment(private val log: MutableList<GameLog>) : Fragment(), 
     private val presenter: GamePlayBackContact.Presenter by inject { parametersOf(this) }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_play_back, container, false)
         val frame = view.findViewById(R.id.frame) as FrameLayout

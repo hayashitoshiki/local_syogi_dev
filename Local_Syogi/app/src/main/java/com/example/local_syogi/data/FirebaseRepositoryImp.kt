@@ -35,10 +35,10 @@ class FirebaseRepositoryImp : FirebaseRepository {
 
     // ログイン機能
     override fun signIn(
-        email: String,
-        password: String,
-        onSuccess: () -> Unit,
-        onError: () -> Unit
+      email: String,
+      password: String,
+      onSuccess: () -> Unit,
+      onError: () -> Unit
     ) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -66,10 +66,10 @@ class FirebaseRepositoryImp : FirebaseRepository {
 
     // アカウント作成
     override fun signUp(
-        email: String,
-        password: String,
-        onSuccess: () -> Unit,
-        onError: () -> Unit
+      email: String,
+      password: String,
+      onSuccess: () -> Unit,
+      onError: () -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->

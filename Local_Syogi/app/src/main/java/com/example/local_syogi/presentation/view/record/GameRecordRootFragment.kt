@@ -35,9 +35,9 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_record_root, container, false)
         main = activity as MainActivity

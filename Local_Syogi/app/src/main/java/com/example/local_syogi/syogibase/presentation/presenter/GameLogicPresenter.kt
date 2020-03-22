@@ -25,6 +25,9 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
                         view.showDialog()
                     }
                     view.playbackEffect()
+                    //千日手判定
+                   if (usecase.isRepetitionMove()) view.gameEnd(3)
+                    //王手判定
                     if (usecase.checkGameEnd()) {
                         view.gameEnd(usecase.getTurn())
                     }

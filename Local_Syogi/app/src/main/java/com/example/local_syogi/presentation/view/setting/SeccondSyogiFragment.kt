@@ -25,9 +25,9 @@ class SeccondSyogiFragment : Fragment(), SeccondSyogiContact.View {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_seccond_syogi, container, false)
         val button = view.findViewById(R.id.startButton) as Button

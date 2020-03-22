@@ -34,9 +34,9 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
     private var first = true
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.activity_game_setting, container, false)
         modeFrame = view.findViewById(R.id.mode_frame)

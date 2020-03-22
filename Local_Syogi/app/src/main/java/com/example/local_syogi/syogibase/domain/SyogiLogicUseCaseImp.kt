@@ -20,6 +20,8 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     private var turn: Int = 1
     private var secondTime = false
 
+    private var positionList = mutableMapOf<String, Int>()
+
     // 駒を動かした後～王手判定
     override fun checkGameEnd(): Boolean {
         val turnOpponent = if (turn == BLACK) WHITE else BLACK
@@ -90,6 +92,18 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         boardRepository.setMove(x, y, turn, evolution)
         boardRepository.setHoldPiece()
         boardRepository.resetHint()
+        val board = boardRepository.getBoard()
+        var position: String = ""
+        board.forEach {
+            it.forEach {
+                position += it.hint.toString() + it.piece.toString() + it.turn.toString()
+            }
+        }
+        if (positionList.containsKey(position)) {
+            positionList[position] = positionList[position]!!.toInt() + 1
+        } else {
+            positionList[position] = 1
+        }
     }
 
     // 成り判定
@@ -426,6 +440,14 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
            logList.add(log)
         }
         return logList
+    }
+
+    //千日手判定
+    override fun isRepetitionMove(): Boolean {
+        positionList.forEach { (_, v) ->
+            if (v >= 4)return true
+        }
+        return false
     }
 
 //    //DBから指定の対局のを取り出す

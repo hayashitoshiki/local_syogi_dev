@@ -27,9 +27,9 @@ class GameRecordCardFragment : Fragment() {
     private var colorPrevious: Int = Color.parseColor("#795548")
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_card_record_game, container, false)
         accountButton = view.findViewById(R.id.accountButton)
