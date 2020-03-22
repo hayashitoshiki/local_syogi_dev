@@ -1,0 +1,25 @@
+configurations {
+    ktlint
+}
+
+// ktlintの設定
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt",
+            "--android",
+            "--color",
+            "--reporter=plain",
+            "--reporter=checkstyle,output=${buildDir}/reports/ktlint-results.xml"   // レポート出力
+    ignoreExitValue true    // CIで異常終了させない
+}
+check.dependsOn ktlint
+
+// ktlintのフォーマット設定（自動修正）
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
+}
