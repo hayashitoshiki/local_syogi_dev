@@ -318,22 +318,42 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
                         }
                     }
                 }
-            FU ->
+            FU -> {
+                val xList = mutableListOf<Int>()
+                val yList = mutableListOf<Int>()
                 for (i in 0..8) {
                     for (j in 0..8) {
                         if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
                         if (j == 8) {
                             for (k in 1..8) {
                                 val K = if (y == 10) k else k - 1
-                                if (boardRepository.getTurn(i, K) == 0) {
-                                    setHint(newX, newY, i, K, turn)
+                                if (boardRepository.getTurn(i, K) == 0 && !isCheckMateByPossessionFu(newX, newY, i, K, turn)) {
+                                    xList.add(i)
+                                    yList.add(K)
+                                   // setHint(newX, newY, i, K, turn)
                                 }
                             }
                         }
                     }
                 }
+                xList.forEachIndexed {i,x ->
+                    setHint(newX, newY, x, yList[i], turn)
+                }
+            }
             else -> Log.e("GameLogicPresenter", "不正な持ち駒を取得しようとしています")
         }
+    }
+
+    // 打ち歩詰め判定
+    private fun isCheckMateByPossessionFu(x:Int, y:Int, newX:Int, newY:Int,turn:Int):Boolean{
+        boardRepository.setPre(x, y)
+        boardRepository.setMove(newX, newY, turn, false)
+        if (checkmate()) {
+            boardRepository.setPreBackMove()
+            return true
+        }
+        boardRepository.setPreBackMove()
+        return false
     }
 
     // (駒の名前,手番,ヒントの表示)を返す
