@@ -450,6 +450,20 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         return false
     }
 
+    // トライルール判定
+    override fun isTryKing(): Boolean {
+        val cell =
+            if (turn == BLACK) {
+                boardRepository.getCellInformation(4,0)
+            } else {
+                boardRepository.getCellInformation(4,8)
+            }
+        if ((cell.piece == GYOKU || cell.piece == OU) && cell.turn == turn) {
+            return true
+        }
+        return false
+    }
+
 //    //DBから指定の対局のを取り出す
 //    override fun gteRecordByTitle(title:String){
 //        //val titleList = recordRepository.findTitleByAll()
