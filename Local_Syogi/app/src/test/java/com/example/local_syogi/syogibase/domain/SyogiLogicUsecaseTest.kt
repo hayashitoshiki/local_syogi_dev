@@ -158,12 +158,14 @@ class SyogiLogicUsecaseTest {
             on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.FU
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
+            on { getTurn(any(), any())} doReturn 0
+            on { getCountByHint()} doReturn 2
         }
         val gameRecordRepository = mock<GameRecordRepository>{}
         val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
-        verify(repository, times(72)).setPreBackMove()
+        verify(repository, times(72)).setHint(any(),any())
     }
 
     /**
