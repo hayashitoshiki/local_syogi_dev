@@ -20,12 +20,12 @@ import org.koin.core.KoinComponent
 class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>) : View(context), GameViewRateContact.View,
     KoinComponent {
 
-   // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
+    // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
     private val presenter: GameLogicFreePresenter =
-       GameLogicFreePresenter(
-           this as GameViewRateContact.View,
-           SyogiLogicUseCaseImp(BoardRepositoryImp(), GameRecordRepositoryImp())
-       )
+        GameLogicFreePresenter(
+            this as GameViewRateContact.View,
+            SyogiLogicUseCaseImp(BoardRepositoryImp(), GameRecordRepositoryImp())
+        )
 
     private lateinit var canvas: Canvas
     private val paint: Paint = Paint()
@@ -101,7 +101,7 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
         backMoveFirst()
     }
     private val longPressGo = Runnable {
-       goMoveLast()
+        goMoveLast()
     }
 
     // 指した時の動作

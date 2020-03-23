@@ -318,22 +318,42 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
                         }
                     }
                 }
-            FU ->
+            FU -> {
+                val xList = mutableListOf<Int>()
+                val yList = mutableListOf<Int>()
                 for (i in 0..8) {
                     for (j in 0..8) {
                         if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
                         if (j == 8) {
                             for (k in 1..8) {
                                 val K = if (y == 10) k else k - 1
-                                if (boardRepository.getTurn(i, K) == 0) {
-                                    setHint(newX, newY, i, K, turn)
+                                if (boardRepository.getTurn(i, K) == 0 && !isCheckMateByPossessionFu(newX, newY, i, K, turn)) {
+                                    xList.add(i)
+                                    yList.add(K)
+                                   // setHint(newX, newY, i, K, turn)
                                 }
                             }
                         }
                     }
                 }
+                xList.forEachIndexed {i,x ->
+                    setHint(newX, newY, x, yList[i], turn)
+                }
+            }
             else -> Log.e("GameLogicPresenter", "不正な持ち駒を取得しようとしています")
         }
+    }
+
+    // 打ち歩詰め判定
+    private fun isCheckMateByPossessionFu(x:Int, y:Int, newX:Int, newY:Int,turn:Int):Boolean{
+        boardRepository.setPre(x, y)
+        boardRepository.setMove(newX, newY, turn, false)
+        if (checkmate()) {
+            boardRepository.setPreBackMove()
+            return true
+        }
+        boardRepository.setPreBackMove()
+        return false
     }
 
     // (駒の名前,手番,ヒントの表示)を返す
@@ -426,7 +446,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         val recordList = recordRepository.findRecordByTitle(title)
         val logList = mutableListOf<GameLog>()
         recordList.forEach {
-           // Log.d("Realm","棋譜：" + it.fromX + "," + it.fromY + "" + it.toPiece)
+            // Log.d("Realm","棋譜：" + it.fromX + "," + it.fromY + "" + it.toPiece)
             val log = GameLog(
                 it.toX!!,
                 it.toY!!,
@@ -437,7 +457,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
                 Piece.getByNameJP(it.fromPiece!!),
                 it.fromTurn!!,
                 it.evolution!!)
-           logList.add(log)
+            logList.add(log)
         }
         return logList
     }
@@ -446,6 +466,20 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     override fun isRepetitionMove(): Boolean {
         positionList.forEach { (_, v) ->
             if (v >= 4)return true
+        }
+        return false
+    }
+
+    // トライルール判定
+    override fun isTryKing(): Boolean {
+        val cell =
+            if (turn == BLACK) {
+                boardRepository.getCellInformation(4,0)
+            } else {
+                boardRepository.getCellInformation(4,8)
+            }
+        if ((cell.piece == GYOKU || cell.piece == OU) && cell.turn == turn) {
+            return true
         }
         return false
     }

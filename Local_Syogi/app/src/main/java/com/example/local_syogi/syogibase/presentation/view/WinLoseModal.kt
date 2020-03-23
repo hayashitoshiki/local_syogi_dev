@@ -62,5 +62,5 @@ class WinLoseModal(context: Context, private val turn: Int) : View(context) {
     // 指した時の動作
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return true
-   }
+    }
 }

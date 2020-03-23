@@ -19,7 +19,7 @@ import org.koin.core.parameter.parametersOf
 class GameRateView(private val activity: GameRateActivity, context: Context) : View(context), GameViewRateContact.View,
     KoinComponent {
 
-     val presenter: GameViewRateContact.Presenter by inject { parametersOf(this) }
+    val presenter: GameViewRateContact.Presenter by inject { parametersOf(this) }
     private lateinit var canvas: Canvas
     private val paint: Paint = Paint()
 
