@@ -697,4 +697,97 @@ class SyogiLogicUsecaseTest {
         val result = useCase.isRepetitionMove()
         assertEquals(result, false)
     }
+
+    /**
+     * トライルール判定を行う関数
+     * 条件：先手の王様がトライした
+     * 結果：trueを返す
+     */
+    @Test
+    fun isTryKingBlackTrue(){
+        // テストクラス作成
+        val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
+        cells[4][0].piece = Piece.OU
+        cells[4][0].turn = 1
+        val repository = mock<BoardRepository> {
+            on{ getBoard()} doReturn cells
+            on{ getCellInformation(4,0)} doReturn cells[4][0]
+        }
+        val gameRecordRepository = mock<GameRecordRepository>{}
+        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        // 実行
+        useCase.setMove(3, 3, false)
+        val result = useCase.isTryKing()
+        assertEquals(result, true)
+    }
+
+    /**
+     * トライルール判定を行う関数
+     * 条件：先手の王様がトライしていない
+     * 結果：falseを返す
+     */
+    @Test
+    fun isTryKingBlackFalse(){
+        // テストクラス作成
+        val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
+        cells[4][5].piece = Piece.OU
+        cells[4][5].turn = 1
+        val repository = mock<BoardRepository> {
+            on{ getBoard()} doReturn cells
+            on{ getCellInformation(4,0)} doReturn cells[4][0]
+        }
+        val gameRecordRepository = mock<GameRecordRepository>{}
+        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        // 実行
+        useCase.setMove(3, 3, false)
+        val result = useCase.isTryKing()
+        assertEquals(result, false)
+    }
+    /**
+     * トライルール判定を行う関数
+     * 条件：後手の王様がトライした
+     * 結果：trueを返す
+     */
+    @Test
+    fun isTryKingWhiteTrue(){
+        // テストクラス作成
+        val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
+        cells[4][8].piece = Piece.OU
+        cells[4][8].turn = 2
+        val repository = mock<BoardRepository> {
+            on{ getBoard()} doReturn cells
+            on{ getCellInformation(4,8)} doReturn cells[4][8]
+        }
+        val gameRecordRepository = mock<GameRecordRepository>{}
+        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        // 実行
+        useCase.setMove(3, 3, false)
+        useCase.setTurn(2)
+        val result = useCase.isTryKing()
+        assertEquals(result, true)
+    }
+
+    /**
+     * トライルール判定を行う関数
+     * 条件：後手の王様がトライしていない
+     * 結果：falseを返す
+     */
+    @Test
+    fun isTryKingWhiteFalse(){
+        // テストクラス作成
+        val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
+        cells[4][5].piece = Piece.OU
+        cells[4][5].turn = 2
+        val repository = mock<BoardRepository> {
+            on{ getBoard()} doReturn cells
+            on{ getCellInformation(4,8)} doReturn cells[4][8]
+        }
+        val gameRecordRepository = mock<GameRecordRepository>{}
+        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        // 実行
+        useCase.setMove(3, 3, false)
+        useCase.setTurn(2)
+        val result = useCase.isTryKing()
+        assertEquals(result, false)
+    }
 }
