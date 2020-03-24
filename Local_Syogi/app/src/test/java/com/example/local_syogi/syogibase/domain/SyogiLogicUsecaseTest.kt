@@ -31,8 +31,8 @@ class SyogiLogicUsecaseTest {
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
             on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setTouchHint(4, 4)
         verify(repository, times(8)).setPreBackMove()
@@ -51,8 +51,8 @@ class SyogiLogicUsecaseTest {
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
             on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(boarRepository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(boarRepository, gameRecordRepository)
         // 実行
         useCase.setTouchHint(0, 0)
         verify(boarRepository, times(3)).setPreBackMove()
@@ -71,10 +71,9 @@ class SyogiLogicUsecaseTest {
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
             on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
-        val gameRecordRepository = mock<GameRecordRepository>{
-
+        val gameRecordRepository = mock<GameRecordRepository> {
         }
-        val useCase = SyogiLogicUseCaseImp(boarRepository,gameRecordRepository)
+        val useCase = SyogiLogicUseCaseImp(boarRepository, gameRecordRepository)
         // 実行
         useCase.setTouchHint(8, 8)
         verify(boarRepository, times(3)).setPreBackMove()
@@ -93,10 +92,9 @@ class SyogiLogicUsecaseTest {
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
             on { getTurn(anyInt(), anyInt()) } doReturn 1
         }
-        val gameRecordRepository = mock<GameRecordRepository>{
-
+        val gameRecordRepository = mock<GameRecordRepository> {
         }
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setTouchHint(4, 4)
         verify(repository, times(0)).setBackMove()
@@ -115,8 +113,8 @@ class SyogiLogicUsecaseTest {
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
             on { getTurn(anyInt(), anyInt()) } doReturn 1
          }
-         val gameRecordRepository = mock<GameRecordRepository>{}
-         val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+         val gameRecordRepository = mock<GameRecordRepository> {}
+         val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
          val method = PowerMockito.method(useCase.javaClass, "setHint", Int::class.java, Int::class.java, Int::class.java, Int::class.java, Int::class.java)
          // 実行
          method.invoke(useCase, 3, 3, 2, 3, 1)
@@ -136,10 +134,9 @@ class SyogiLogicUsecaseTest {
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.RYU
             on { getTurn(anyInt(), anyInt()) } doReturn 2
         }
-        val gameRecordRepository = mock<GameRecordRepository>{
-
+        val gameRecordRepository = mock<GameRecordRepository> {
         }
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         val method = PowerMockito.method(useCase.javaClass, "setHint", Int::class.java, Int::class.java, Int::class.java, Int::class.java, Int::class.java)
         // 実行
         method.invoke(useCase, 3, 3, 2, 3, 1)
@@ -158,14 +155,14 @@ class SyogiLogicUsecaseTest {
             on { findHoldPieceBy(anyInt(), anyInt()) } doReturn Piece.FU
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
-            on { getTurn(any(), any())} doReturn 0
-            on { getCountByHint()} doReturn 2
+            on { getTurn(any(), any()) } doReturn 0
+            on { getCountByHint() } doReturn 2
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
-        verify(repository, times(72)).setHint(any(),any())
+        verify(repository, times(72)).setHint(any(), any())
     }
 
     /**
@@ -180,8 +177,8 @@ class SyogiLogicUsecaseTest {
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
         verify(repository, times(72)).setPreBackMove()
@@ -199,8 +196,8 @@ class SyogiLogicUsecaseTest {
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
         verify(repository, times(63)).setPreBackMove()
@@ -218,8 +215,8 @@ class SyogiLogicUsecaseTest {
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setPreBackMove()
@@ -237,8 +234,8 @@ class SyogiLogicUsecaseTest {
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setPreBackMove()
@@ -256,8 +253,8 @@ class SyogiLogicUsecaseTest {
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setPreBackMove()
@@ -275,8 +272,8 @@ class SyogiLogicUsecaseTest {
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
         verify(repository, times(81)).setPreBackMove()
@@ -294,8 +291,8 @@ class SyogiLogicUsecaseTest {
             on { findKing(anyInt()) } doReturn Pair(5, 5)
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setHintHoldPiece(5, 10)
         verify(repository, times(0)).setBackMove()
@@ -314,10 +311,10 @@ class SyogiLogicUsecaseTest {
         // テストクラス作成
         val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
         val repository = mock<BoardRepository> {
-            on{ getBoard()} doReturn cells
+            on { getBoard() } doReturn cells
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setMove(3, 3, false)
         verify(repository, times(1)).setMove(eq(3), eq(3), anyInt(), eq(false))
@@ -337,8 +334,8 @@ class SyogiLogicUsecaseTest {
             on { findEvolutionBy(3, 3) } doReturn true
             on { findLogY() } doReturn 2
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.evolutionCheck(3, 3)
         assertEquals(result, true)
@@ -355,8 +352,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { findEvolutionBy(3, 3) } doReturn false
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.evolutionCheck(3, 3)
         assertEquals(result, false)
@@ -372,8 +369,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { checkForcedevolution() } doReturn true
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.compulsionEvolutionCheck()
         assertEquals(result, true)
@@ -390,8 +387,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { checkForcedevolution() } doReturn false
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.compulsionEvolutionCheck()
         assertEquals(result, false)
@@ -405,8 +402,8 @@ class SyogiLogicUsecaseTest {
     @Test
     fun evolutionPiece() {
         val repository = mock<BoardRepository> {}
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.evolutionPiece(true)
         verify(repository, times(1)).setEvolution()
@@ -425,8 +422,8 @@ class SyogiLogicUsecaseTest {
             on { getTurn(anyInt(), anyInt()) } doReturn 1
             on { getCountByHint() } doReturn 0 // 詰み判定
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.checkGameEnd()
         assertEquals(result, true)
@@ -445,8 +442,8 @@ class SyogiLogicUsecaseTest {
             on { getTurn(anyInt(), anyInt()) } doReturn 1
             on { getCountByHint() } doReturn 3 // 詰み判定
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.checkGameEnd()
         assertEquals(result, false)
@@ -464,8 +461,8 @@ class SyogiLogicUsecaseTest {
             on { getPiece(anyInt(), anyInt()) } doReturn Piece.None
             on { getTurn(anyInt(), anyInt()) } doReturn 1
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.checkGameEnd()
         assertEquals(result, false)
@@ -479,8 +476,8 @@ class SyogiLogicUsecaseTest {
     fun cancel() {
         // テストクラス作成
         val repository = mock<BoardRepository> {}
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.cancel()
         verify(repository, times(1)).resetHint()
@@ -501,8 +498,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { getCellInformation(5, 5) } doReturn cell
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getCellInformation(5, 5)
         assertEquals(result, Triple(Piece.FU.nameJP, 1, false))
@@ -523,8 +520,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { getCellInformation(5, 5) } doReturn cell
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 1)
@@ -545,8 +542,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { getCellInformation(5, 5) } doReturn cell
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 3)
@@ -567,8 +564,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { getCellInformation(5, 5) } doReturn cell
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 2)
@@ -589,8 +586,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { getCellInformation(5, 5) } doReturn cell
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 3)
@@ -610,8 +607,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { getCellInformation(5, 5) } doReturn cell
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 4)
@@ -632,8 +629,8 @@ class SyogiLogicUsecaseTest {
         val repository = mock<BoardRepository> {
             on { getCellInformation(5, 5) } doReturn cell
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getCellTrun(5, 5)
         assertEquals(result, 3)
@@ -648,8 +645,8 @@ class SyogiLogicUsecaseTest {
     @Test
     fun getTurn() {
         val repository = mock<BoardRepository> {}
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         val result = useCase.getTurn()
         assertEquals(result, 1)
@@ -661,14 +658,14 @@ class SyogiLogicUsecaseTest {
      * 結果：trueを返す
      */
     @Test
-    fun isRepetitionMoveTrue(){
+    fun isRepetitionMoveTrue() {
         // テストクラス作成
         val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
         val repository = mock<BoardRepository> {
-            on{ getBoard()} doReturn cells
+            on { getBoard() } doReturn cells
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setMove(3, 3, false)
         useCase.setMove(3, 3, false)
@@ -684,14 +681,14 @@ class SyogiLogicUsecaseTest {
      * 結果：falseを返す
      */
     @Test
-    fun isRepetitionMoveFalse(){
+    fun isRepetitionMoveFalse() {
         // テストクラス作成
         val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
         val repository = mock<BoardRepository> {
-            on{ getBoard()} doReturn cells
+            on { getBoard() } doReturn cells
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setMove(3, 3, false)
         useCase.setMove(3, 3, false)
@@ -706,17 +703,17 @@ class SyogiLogicUsecaseTest {
      * 結果：trueを返す
      */
     @Test
-    fun isTryKingBlackTrue(){
+    fun isTryKingBlackTrue() {
         // テストクラス作成
         val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
         cells[4][0].piece = Piece.OU
         cells[4][0].turn = 1
         val repository = mock<BoardRepository> {
-            on{ getBoard()} doReturn cells
-            on{ getCellInformation(4,0)} doReturn cells[4][0]
+            on { getBoard() } doReturn cells
+            on { getCellInformation(4, 0) } doReturn cells[4][0]
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setMove(3, 3, false)
         val result = useCase.isTryKing()
@@ -729,17 +726,17 @@ class SyogiLogicUsecaseTest {
      * 結果：falseを返す
      */
     @Test
-    fun isTryKingBlackFalse(){
+    fun isTryKingBlackFalse() {
         // テストクラス作成
         val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
         cells[4][5].piece = Piece.OU
         cells[4][5].turn = 1
         val repository = mock<BoardRepository> {
-            on{ getBoard()} doReturn cells
-            on{ getCellInformation(4,0)} doReturn cells[4][0]
+            on { getBoard() } doReturn cells
+            on { getCellInformation(4, 0) } doReturn cells[4][0]
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setMove(3, 3, false)
         val result = useCase.isTryKing()
@@ -751,17 +748,17 @@ class SyogiLogicUsecaseTest {
      * 結果：trueを返す
      */
     @Test
-    fun isTryKingWhiteTrue(){
+    fun isTryKingWhiteTrue() {
         // テストクラス作成
         val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
         cells[4][8].piece = Piece.OU
         cells[4][8].turn = 2
         val repository = mock<BoardRepository> {
-            on{ getBoard()} doReturn cells
-            on{ getCellInformation(4,8)} doReturn cells[4][8]
+            on { getBoard() } doReturn cells
+            on { getCellInformation(4, 8) } doReturn cells[4][8]
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setMove(3, 3, false)
         useCase.setTurn(2)
@@ -775,17 +772,17 @@ class SyogiLogicUsecaseTest {
      * 結果：falseを返す
      */
     @Test
-    fun isTryKingWhiteFalse(){
+    fun isTryKingWhiteFalse() {
         // テストクラス作成
         val cells = Array(Board.COLS, { Array(Board.ROWS, { Cell() }) })
         cells[4][5].piece = Piece.OU
         cells[4][5].turn = 2
         val repository = mock<BoardRepository> {
-            on{ getBoard()} doReturn cells
-            on{ getCellInformation(4,8)} doReturn cells[4][8]
+            on { getBoard() } doReturn cells
+            on { getCellInformation(4, 8) } doReturn cells[4][8]
         }
-        val gameRecordRepository = mock<GameRecordRepository>{}
-        val useCase = SyogiLogicUseCaseImp(repository,gameRecordRepository)
+        val gameRecordRepository = mock<GameRecordRepository> {}
+        val useCase = SyogiLogicUseCaseImp(repository, gameRecordRepository)
         // 実行
         useCase.setMove(3, 3, false)
         useCase.setTurn(2)
