@@ -31,7 +31,6 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
     private lateinit var modeFrame: FrameLayout
     private lateinit var title: TextView
     private var tab = -1
-    private var first = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,8 +64,10 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.VISIBLE
-        title.startAnimation(fadeIn)
-        title.visibility = View.VISIBLE
+        if(title.visibility != View.GONE) {
+            title.startAnimation(fadeIn)
+            title.visibility = View.VISIBLE
+        }
         modeFrame.startAnimation(fadeDelay)
         modeFrame.visibility = View.VISIBLE
     }
@@ -76,7 +77,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
        選択しているボタンは指定職にする
        また、fragmentを入れ替える */
     fun changeMode(fragment: Fragment, tab: Int) {
-        if (first) {
+        if (title.visibility != View.GONE) {
             firstChoice()
         }
         childFragmentManager.beginTransaction()
@@ -104,9 +105,10 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
     // 「モード選択」(タイトル)Viewを非表示にする
     override fun firstChoice() {
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
-        title.startAnimation(fade)
-        title.visibility = View.INVISIBLE
-        first = false
+        if(title.visibility != View.GONE) {
+            title.startAnimation(fade)
+            title.visibility = View.GONE
+        }
     }
 
     // タブカード回転
@@ -180,7 +182,6 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         super.onResume()
         GameMode.reset()
         view2.visibility = View.VISIBLE
-        first = true
     }
 
     // BackKey

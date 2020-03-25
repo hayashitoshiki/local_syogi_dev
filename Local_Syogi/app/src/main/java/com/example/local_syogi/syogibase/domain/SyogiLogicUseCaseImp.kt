@@ -336,7 +336,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
                         }
                     }
                 }
-                xList.forEachIndexed {i,x ->
+                xList.forEachIndexed { i, x ->
                     setHint(newX, newY, x, yList[i], turn)
                 }
             }
@@ -345,7 +345,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     }
 
     // 打ち歩詰め判定
-    private fun isCheckMateByPossessionFu(x:Int, y:Int, newX:Int, newY:Int,turn:Int):Boolean{
+    private fun isCheckMateByPossessionFu(x: Int, y: Int, newX: Int, newY: Int, turn: Int): Boolean {
         boardRepository.setPre(x, y)
         boardRepository.setMove(newX, newY, turn, false)
         if (checkmate()) {
@@ -474,9 +474,9 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     override fun isTryKing(): Boolean {
         val cell =
             if (turn == BLACK) {
-                boardRepository.getCellInformation(4,0)
+                boardRepository.getCellInformation(4, 0)
             } else {
-                boardRepository.getCellInformation(4,8)
+                boardRepository.getCellInformation(4, 8)
             }
         if ((cell.piece == GYOKU || cell.piece == OU) && cell.turn == turn) {
             return true
