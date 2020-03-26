@@ -5,6 +5,8 @@ import com.example.local_syogi.syogibase.data.game.Board
 import com.example.local_syogi.syogibase.data.game.Cell
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.PieceMove
 
@@ -17,10 +19,7 @@ class BoardRepositoryImp : BoardRepository {
     private var previousY: Int = 0
     private var previousPiece: Piece = Piece.None
 
-    companion object {
-        const val BLACK = 1
-        const val WHITE = 2
-    }
+
 
     // 動かす前の駒の状態をセット
     override fun setPre(x: Int, y: Int) {
@@ -159,8 +158,8 @@ class BoardRepositoryImp : BoardRepository {
 
     // 持ち駒マスから取得
     override fun findHoldPieceBy(i: Int, turn: Int): Piece {
-        if (turn == 1 && board.holdPieceBlack[changeIntToPiece(i)] == 0 ||
-            turn == 2 && board.holdPieceWhite[changeIntToPiece(i)] == 0
+        if (turn == BLACK && board.holdPieceBlack[changeIntToPiece(i)] == 0 ||
+            turn == WHITE && board.holdPieceWhite[changeIntToPiece(i)] == 0
         ) return Piece.None
 
         return changeIntToPiece(i)
@@ -189,7 +188,7 @@ class BoardRepositoryImp : BoardRepository {
     override fun setHoldPiece() {
         val log: GameLog = logList.last()
         if (log.beforpiece != Piece.None) {
-            if (log.beforturn == 2) {
+            if (log.beforturn == WHITE) {
                 when (log.beforpiece) {
                     Piece.FU, Piece.TO -> board.holdPieceBlack[Piece.FU] =
                         board.holdPieceBlack[Piece.FU]!! + 1
@@ -273,17 +272,9 @@ class BoardRepositoryImp : BoardRepository {
     override fun getPiece(x: Int, y: Int): Piece {
         // TODO 安南だったら一段下の駒を取得
         return if (GameMode.getAnnanMode()) {
-            if (board.cells[x][y].turn == BLACK && y + 1 <= 8 && getTurn(
-                    x,
-                    y + 1
-                ) == board.cells[x][y].turn
-            ) {
+            if (board.cells[x][y].turn == BLACK && y + 1 <= 8 && getTurn(x, y + 1) == board.cells[x][y].turn) {
                 board.cells[x][y + 1].piece
-            } else if (board.cells[x][y].turn == WHITE && y - 1 >= 0 && getTurn(
-                    x,
-                    y - 1
-                ) == board.cells[x][y].turn
-            ) {
+            } else if (board.cells[x][y].turn == WHITE && y - 1 >= 0 && getTurn(x, y - 1) == board.cells[x][y].turn) {
                 board.cells[x][y - 1].piece
             } else {
                 board.cells[x][y].piece

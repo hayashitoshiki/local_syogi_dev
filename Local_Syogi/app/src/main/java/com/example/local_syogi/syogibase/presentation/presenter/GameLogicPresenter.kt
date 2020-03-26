@@ -3,14 +3,13 @@ package com.example.local_syogi.syogibase.presentation.presenter
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.HINT
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
 class GameLogicPresenter(private val view: GameViewContact.View, private val usecase: SyogiLogicUseCase) : GameViewContact.Presenter {
 
-    companion object {
-        const val BLACK = 1
-        const val WHITE = 2
-        const val HINT = 3
-    }
+
 
     // タッチ判定
     override fun onTouchEvent(x: Int, y: Int) {

@@ -6,18 +6,17 @@ import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepository
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepository
 import com.example.local_syogi.syogibase.domain.model.GameModel
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.Piece.*
 import com.example.local_syogi.syogibase.util.PieceMove
 
 class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private val recordRepository: GameRecordRepository) : SyogiLogicUseCase {
 
-    companion object {
-        const val BLACK = 1
-        const val WHITE = 2
-    }
 
-    private var turn: Int = 1
+
+    private var turn: Int = BLACK
     private var secondTime = false
 
     private var positionList = mutableMapOf<String, Int>()
