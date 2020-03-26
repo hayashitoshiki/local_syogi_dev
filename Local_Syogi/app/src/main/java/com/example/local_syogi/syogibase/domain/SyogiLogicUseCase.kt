@@ -6,8 +6,9 @@ import com.example.local_syogi.syogibase.util.Piece
 
 interface SyogiLogicUseCase {
 
-    // TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
-    fun twohandRule()
+    /**
+     * ベースのロジック：Base
+     */
     // ヒントセットする
     fun setTouchHint(x: Int, y: Int)
     // 持ち駒を使う場合
@@ -40,11 +41,20 @@ interface SyogiLogicUseCase {
     fun getLogLast(): GameLog
     // 動かす駒の元の位置をセットする
     fun setPre(x: Int, y: Int)
+
+    /**
+     * 将棋ルール：Rule
+     */
+    // TODO 2手差し将棋ならここで王手判断、駒を取ったか判断
+    fun twohandRule()
     // 千日手判定
     fun isRepetitionMove(): Boolean
     // トライルール判定
     fun isTryKing(): Boolean
 
+    /**
+     *　保存系：Save
+     */
     // 対局ログを返す
     fun getLog(): MutableList<GameLog>
     // 一手戻す
