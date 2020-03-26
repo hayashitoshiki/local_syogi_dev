@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
 class GameActivity : AppCompatActivity() {
 
@@ -36,16 +38,16 @@ class GameActivity : AppCompatActivity() {
 
     // 投了ボタン
     fun surrenderBlack(v: View) {
-        surrender(2)
+        surrender(WHITE)
     }
     fun surrenderWhite(v: View) {
-        surrender(1)
+        surrender(BLACK)
     }
-    private fun surrender(turn: Int) {
+    private fun surrender(winner: Int) {
         AlertDialog.Builder(this).setCancelable(false)
             .setMessage("投了しますか？")
             .setPositiveButton("はい") { _, _ ->
-                gameEnd(turn)
+                gameEnd(winner)
             }
             .setNegativeButton("いいえ", null)
             .create()
