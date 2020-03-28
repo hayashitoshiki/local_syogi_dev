@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.SettingRootContact
 import com.example.local_syogi.presentation.view.MainActivity
@@ -26,6 +27,8 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
 
     private val presenter: SettingRootContact.Presenter by inject { parametersOf(this) }
 
+    private lateinit var adapter: CustomFragmentPagerAdapter
+    private lateinit var pager: CustomViewPager
     private lateinit var view2: ConstraintLayout
     private lateinit var tabFrame: FrameLayout
     private lateinit var modeFrame: FrameLayout
@@ -53,6 +56,19 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
             .commit()
 
         view2 = view.findViewById(R.id.test)
+
+        adapter = CustomFragmentPagerAdapter(childFragmentManager)
+        pager = view.findViewById(R.id.pager)
+        pager.adapter = adapter
+        pager.setPagingEnabled(false)
+        pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                when(position){
+                    0 ->  pager.setPagingEnabled(false)
+                    else -> pager.setPagingEnabled(true)
+                }
+            }
+        })
         return view
     }
 
@@ -61,6 +77,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
         val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new_delay) as Animation
         val fadeIn: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_delay) as Animation
+        val fadeInRight: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_from_right_delay) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.VISIBLE
@@ -70,6 +87,8 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         }
         modeFrame.startAnimation(fadeDelay)
         modeFrame.visibility = View.VISIBLE
+        pager.startAnimation(fadeInRight)
+        pager.visibility = View.VISIBLE
     }
 
     /* タブのボタンを押下
@@ -167,11 +186,14 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide_delay) as Animation
         val fadeSpeed: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_speed) as Animation
         val fadeOut: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
+        val fadeOutRight: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide_to_right_delay) as Animation
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.INVISIBLE
         modeFrame.startAnimation(fadeSpeed)
         modeFrame.visibility = View.INVISIBLE
+        pager.startAnimation(fadeOutRight)
+        pager.visibility = View.INVISIBLE
         if (title.visibility == View.VISIBLE) {
             title.startAnimation(fadeOut)
             title.visibility = View.INVISIBLE
