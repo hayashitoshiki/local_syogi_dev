@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.view.setting.SelectNormalFragment">
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="400px"
+        android:layout_width="128dp"
         android:layout_height="match_parent"
         android:background="@drawable/tab_red_shadow"
         android:orientation="vertical"
