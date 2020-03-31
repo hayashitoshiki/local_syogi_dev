@@ -5,6 +5,11 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.viewpager.widget.ViewPager
 
+/**
+ * ViewPager拡張クラス
+ * 　・スクロール調整(有無、位置)
+ */
+
 class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(context, attrs) {
 
     private var isEnable = true
@@ -14,14 +19,13 @@ class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(contex
     override fun onTouchEvent(event: MotionEvent): Boolean{
         when (isEnable) {
             true -> return super.onTouchEvent(event)
-            // else -> false
             else -> {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         super.onTouchEvent(event)
                         x = event.x.toInt()
                         y = event.y.toInt()
-                        if (200 <= x){
+                        if (670 <= x && y in 160..250){
                             return true
                         }
                         return false

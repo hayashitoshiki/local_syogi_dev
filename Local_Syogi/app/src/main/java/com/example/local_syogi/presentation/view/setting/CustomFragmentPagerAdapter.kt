@@ -6,6 +6,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import android.os.Parcelable
 
+/**
+ * PagerAdapterの拡張クラス
+ *   0→空画面セット
+ *   1→詳細設定画面セット
+ */
 
 
 class CustomFragmentPagerAdapter (manager: FragmentManager): FragmentStatePagerAdapter(manager) {
@@ -17,7 +22,6 @@ class CustomFragmentPagerAdapter (manager: FragmentManager): FragmentStatePagerA
 
     //ページセット
     override fun getItem(position: Int): Fragment {
-        Log.d("Main", "position：" + position)
         return when(position){
             0 -> SettingDetailsHomeFragment.newInstance()
             else -> SettingDetailsFragment.newInstance()
