@@ -2,6 +2,8 @@ package com.example.local_syogi.syogibase.data.game
 
 // 将棋盤定義クラス
 
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.Piece.*
 
@@ -119,6 +121,68 @@ class Board {
             cells[7][3].turn = 2
             cells[7][5].piece = FU
             cells[7][5].turn = 1
+        }
+    }
+
+    // 駒落ちセット
+    fun setHandi(turn: Int, handi: Int) {
+        when (turn) {
+            BLACK -> {
+                if (handi > 8) {
+                    cells[2][8].piece = None
+                    cells[2][8].turn = 0
+                    cells[6][8].piece = None
+                    cells[6][8].turn = 0
+                }
+                if (handi >= 7) {
+                    cells[1][8].piece = None
+                    cells[1][8].turn = 0
+                    cells[7][8].piece = None
+                    cells[7][8].turn = 0
+                }
+                if (handi >= 6) {
+                    cells[0][8].piece = None
+                    cells[0][8].turn = 0
+                    cells[8][8].piece = None
+                    cells[8][8].turn = 0
+                }
+                if (handi >= 4) {
+                    cells[7][7].piece = None
+                    cells[7][7].turn = 0
+                }
+                if (handi == 3 || handi >= 5) {
+                    cells[1][7].piece = None
+                    cells[1][7].turn = 0
+                }
+            }
+            WHITE -> {
+                if (handi > 8) {
+                    cells[2][0].piece = None
+                    cells[2][0].turn = 0
+                    cells[6][0].piece = None
+                    cells[6][0].turn = 0
+                }
+                if (handi >= 7) {
+                    cells[1][0].piece = None
+                    cells[1][0].turn = 0
+                    cells[7][0].piece = None
+                    cells[7][0].turn = 0
+                }
+                if (handi >= 6) {
+                    cells[0][0].piece = None
+                    cells[0][0].turn = 0
+                    cells[8][0].piece = None
+                    cells[8][0].turn = 0
+                }
+                if (handi >= 4) {
+                    cells[1][1].piece = None
+                    cells[1][1].turn = 0
+                }
+                if (handi == 3 || handi >= 5) {
+                    cells[7][1].piece = None
+                    cells[7][1].turn = 0
+                }
+            }
         }
     }
 }

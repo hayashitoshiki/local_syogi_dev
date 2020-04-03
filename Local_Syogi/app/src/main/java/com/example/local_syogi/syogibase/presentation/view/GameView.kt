@@ -55,6 +55,11 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
 
     private lateinit var soundPool: SoundPool
     private var soundOne = 0
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        presenter.startGame()
+    }
     // onCreat
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

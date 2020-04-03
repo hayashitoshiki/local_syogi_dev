@@ -1,10 +1,9 @@
 package com.example.local_syogi.presentation.view.setting
 
-import android.util.Log
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import android.os.Parcelable
 
 /**
  * PagerAdapterの拡張クラス
@@ -12,17 +11,15 @@ import android.os.Parcelable
  *   1→詳細設定画面セット
  */
 
-
-class CustomFragmentPagerAdapter (manager: FragmentManager): FragmentStatePagerAdapter(manager) {
-
+class CustomFragmentPagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
 
     override fun getCount(): Int {
         return 2
     }
 
-    //ページセット
+    // ページセット
     override fun getItem(position: Int): Fragment {
-        return when(position){
+        return when (position) {
             0 -> SettingDetailsHomeFragment.newInstance()
             else -> SettingDetailsFragment.newInstance()
         }

@@ -26,6 +26,8 @@ interface GameViewContact {
     }
 
     interface Presenter {
+        // 初期設定
+        fun startGame()
         // タッチイベントロジック
         fun onTouchEvent(x: Int, y: Int)
         // 描画ロジック

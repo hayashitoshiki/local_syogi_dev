@@ -19,8 +19,10 @@ class BoardRepositoryImp : BoardRepository {
     private var previousY: Int = 0
     private var previousPiece: Piece = Piece.None
 
-
-
+    // 駒落ち設定
+    override fun setHandi(turn: Int, handi: Int) {
+        board.setHandi(turn, handi)
+    }
     // 動かす前の駒の状態をセット
     override fun setPre(x: Int, y: Int) {
         previousX = x
