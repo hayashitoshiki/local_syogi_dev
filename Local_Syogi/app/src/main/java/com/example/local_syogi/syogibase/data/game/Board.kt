@@ -2,7 +2,6 @@ package com.example.local_syogi.syogibase.data.game
 
 // 将棋盤定義クラス
 
-import android.util.Log
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 import com.example.local_syogi.syogibase.util.Piece
