@@ -9,6 +9,8 @@ interface SyogiLogicUseCase {
     /**
      * ベースのロジック：Base
      */
+    // 駒落ち設定
+    fun setHandi(turn: Int, handi: Int)
     // ヒントセットする
     fun setTouchHint(x: Int, y: Int)
     // 持ち駒を使う場合

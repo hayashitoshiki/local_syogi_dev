@@ -14,12 +14,15 @@ import com.example.local_syogi.syogibase.util.PieceMove
 
 class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private val recordRepository: GameRecordRepository) : SyogiLogicUseCase {
 
-
-
     private var turn: Int = BLACK
     private var secondTime = false
 
     private var positionList = mutableMapOf<String, Int>()
+
+    // 駒落ち設定
+    override fun setHandi(turn: Int, handi: Int) {
+        boardRepository.setHandi(turn, handi)
+    }
 
     // 駒を動かした後～王手判定
     override fun checkGameEnd(): Boolean {

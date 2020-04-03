@@ -63,8 +63,8 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         pager.setPagingEnabled(false)
         pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
-                when(position){
-                    0 ->  pager.setPagingEnabled(false)
+                when (position) {
+                    0 -> pager.setPagingEnabled(false)
                     else -> pager.setPagingEnabled(true)
                 }
             }
@@ -81,7 +81,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
 
         tabFrame.startAnimation(fade)
         tabFrame.visibility = View.VISIBLE
-        if(title.visibility != View.GONE) {
+        if (title.visibility != View.GONE) {
             title.startAnimation(fadeIn)
             title.visibility = View.VISIBLE
         }
@@ -124,7 +124,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
     // 「モード選択」(タイトル)Viewを非表示にする
     override fun firstChoice() {
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
-        if(title.visibility != View.GONE) {
+        if (title.visibility != View.GONE) {
             title.startAnimation(fade)
             title.visibility = View.GONE
         }

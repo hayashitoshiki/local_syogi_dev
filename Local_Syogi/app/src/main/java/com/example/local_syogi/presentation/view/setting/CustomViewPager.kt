@@ -16,7 +16,7 @@ class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(contex
     var x: Int = 0
     var y: Int = 0
 
-    override fun onTouchEvent(event: MotionEvent): Boolean{
+    override fun onTouchEvent(event: MotionEvent): Boolean {
         when (isEnable) {
             true -> return super.onTouchEvent(event)
             else -> {
@@ -25,7 +25,7 @@ class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(contex
                         super.onTouchEvent(event)
                         x = event.x.toInt()
                         y = event.y.toInt()
-                        if (670 <= x && y in 160..250){
+                        if (670 <= x && y in 160..250) {
                             return true
                         }
                         return false
@@ -47,5 +47,4 @@ class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(contex
     fun setPagingEnabled(isEnable: Boolean) {
         this.isEnable = isEnable
     }
-
 }

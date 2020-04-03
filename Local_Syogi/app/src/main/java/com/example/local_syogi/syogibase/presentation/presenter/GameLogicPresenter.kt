@@ -9,8 +9,12 @@ import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
 class GameLogicPresenter(private val view: GameViewContact.View, private val usecase: SyogiLogicUseCase) : GameViewContact.Presenter {
 
-
-
+    // 初期設定
+    override fun startGame() {
+        // ハンデ設定
+        usecase.setHandi(BLACK, 10)
+        usecase.setHandi(WHITE, 10)
+    }
     // タッチ判定
     override fun onTouchEvent(x: Int, y: Int) {
         // 持ち駒
