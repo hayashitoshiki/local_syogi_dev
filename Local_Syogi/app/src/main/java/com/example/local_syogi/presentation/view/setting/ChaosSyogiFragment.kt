@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.ChaosSyogiContact
+import com.example.local_syogi.presentation.contact.setting.ChaosSyogiContact
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 

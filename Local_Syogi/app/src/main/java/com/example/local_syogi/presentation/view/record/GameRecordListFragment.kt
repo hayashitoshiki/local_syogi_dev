@@ -8,7 +8,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GameRecordListContact
+import com.example.local_syogi.presentation.contact.record.GameRecordListContact
 import com.example.local_syogi.syogibase.domain.model.GameModel
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -43,9 +43,10 @@ class GameRecordListFragment : Fragment(), GameRecordListContact.View {
         // 項目をタップしたら感想戦画面を開く
         offLineListView.setOnItemClickListener { parent, view, position, id ->
             val gameTitle = gameList[position].title
+            val gameDetail = presenter.getRecordSettingByTitle(gameTitle)
             val log = presenter.getRecordByTitle(gameTitle)
             val mFragment = parentFragment as GameRecordRootFragment
-            mFragment.setRePlayView(log)
+            mFragment.setRePlayView(log, gameDetail)
         }
         return view
     }

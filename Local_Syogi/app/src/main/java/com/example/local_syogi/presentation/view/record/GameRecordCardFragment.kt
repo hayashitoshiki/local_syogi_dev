@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GameRecordRootContact
+import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
 import com.example.local_syogi.presentation.view.account.NotLoginFragment
 import com.example.local_syogi.syogibase.data.game.GameMode.BACKMOVE
 import com.example.local_syogi.syogibase.data.game.GameMode.CHAOS

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.view.game.GamePlayBackFragment
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
@@ -79,6 +80,11 @@ class GameActivity : AppCompatActivity() {
     }
     // 感想戦ボタン
     fun replay(v: View) {
+        val shared = GameSettingSharedPreferences(this)
+        val gameDetail = GameDetailSetitngModel(
+            shared.getHandyBlack(),
+            shared.getHandyWhite()
+        )
         val button: Button = findViewById(R.id.backStartButton)
         val button2: Button = findViewById(R.id.surrender_black)
         button.visibility = View.GONE
@@ -88,7 +94,7 @@ class GameActivity : AppCompatActivity() {
                 R.anim.fade_in_slide_from_right,
                 0
             )
-            .replace(R.id.frame, GamePlayBackFragment(log))
+            .replace(R.id.frame, GamePlayBackFragment(log, gameDetail))
             .commit()
     }
 

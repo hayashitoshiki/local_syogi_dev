@@ -9,13 +9,14 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GamePlayBackContact
+import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class GamePlayBackFragment(private val log: MutableList<GameLog>) : Fragment(), GamePlayBackContact.View {
+class GamePlayBackFragment(private val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : Fragment(), GamePlayBackContact.View {
 
     private val presenter: GamePlayBackContact.Presenter by inject { parametersOf(this) }
 
@@ -26,7 +27,7 @@ class GamePlayBackFragment(private val log: MutableList<GameLog>) : Fragment(), 
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_play_back, container, false)
         val frame = view.findViewById(R.id.frame) as FrameLayout
-        val gameView = GameFreeView(context!!, frame.width, frame.height, log)
+        val gameView = GameFreeView(context!!, frame.width, frame.height, log, gameDetail)
         val backButton = view.findViewById<Button>(R.id.backButton)
         val goButton = view.findViewById<Button>(R.id.goButton)
         val backStartButton = view.findViewById<Button>(R.id.backStartButton)

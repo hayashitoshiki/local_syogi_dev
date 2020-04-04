@@ -3,6 +3,7 @@ package com.example.local_syogi.syogibase.data.repository
 import android.util.Log
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.game.GameSetting
 import com.example.local_syogi.syogibase.data.local.GameEntity
 import com.example.local_syogi.syogibase.data.local.RecordEntity
 import io.realm.Realm
@@ -45,6 +46,8 @@ class GameRecordRepositoryImp : GameRecordRepository {
             val game = realm.createObject(GameEntity::class.java, title)
             game.winner = winner
             game.mode = GameMode.getModeInt()
+            game.handyBlack = GameSetting.handiBlack
+            game.handyWhite = GameSetting.handiWhite
             realm.copyToRealm(game)
         }
         for (log in logList) {
@@ -81,6 +84,12 @@ class GameRecordRepositoryImp : GameRecordRepository {
         val games: Array<GameEntity> = gameList.toTypedArray()
 
         return games
+    }
+    // 特定のタイトルの詳細を取得
+    override fun findDetaileByTitle(title: String): GameEntity {
+        updateRealm()
+        val game = realm.where(GameEntity::class.java).equalTo("title", title).findAll().first()
+        return game!!
     }
 
     // 特定の対局データ取得

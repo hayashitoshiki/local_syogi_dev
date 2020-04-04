@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.PieceLimitSyogiContact
+import com.example.local_syogi.presentation.contact.setting.PieceLimitSyogiContact
 import com.example.local_syogi.syogibase.data.game.GameMode
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

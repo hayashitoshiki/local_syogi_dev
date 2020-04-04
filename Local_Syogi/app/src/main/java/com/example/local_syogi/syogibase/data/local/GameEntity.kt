@@ -11,4 +11,8 @@ open class GameEntity : RealmObject() {
     open var winner: Int? = 0 // 0:引き分け,1:先手勝利、２：後手勝利
     @Required
     open var mode: Int? = 0
+    @Required
+    open var handyBlack: Int? = 0 // 先手の駒落ち
+    @Required
+    open var handyWhite: Int? = 0 // 後手の駒落ち
 }

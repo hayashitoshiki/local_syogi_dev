@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.SettingAccountContact
+import com.example.local_syogi.presentation.contact.account.SettingAccountContact
 import kotlinx.android.synthetic.main.fragment_card_account.*
-import kotlinx.android.synthetic.main.fragment_usually_syogi.*
 
 class AccountCardFragment : Fragment() {
 

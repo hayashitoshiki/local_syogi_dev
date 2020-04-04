@@ -8,23 +8,27 @@ import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GameViewRateContact
-import com.example.local_syogi.presentation.presenter.GameLogicFreePresenter
+import com.example.local_syogi.presentation.contact.game.GameViewRateContact
+import com.example.local_syogi.presentation.presenter.game.GameLogicFreePresenter
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepositoryImp
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepositoryImp
-import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
+import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCaseImp
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import org.koin.core.KoinComponent
 
-class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>) : View(context), GameViewRateContact.View,
+class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : View(context), GameViewRateContact.View,
     KoinComponent {
 
     // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
     private val presenter: GameLogicFreePresenter =
         GameLogicFreePresenter(
             this as GameViewRateContact.View,
-            SyogiLogicUseCaseImp(BoardRepositoryImp(), GameRecordRepositoryImp())
+            SyogiLogicUseCaseImp(
+                BoardRepositoryImp(),
+                GameRecordRepositoryImp()
+            )
         )
 
     private lateinit var canvas: Canvas
@@ -65,6 +69,12 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
 
     private lateinit var soundPool: SoundPool
     private var soundOne = 0
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        presenter.setReplayView(gameDetail)
+    }
+
     // onCreat
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

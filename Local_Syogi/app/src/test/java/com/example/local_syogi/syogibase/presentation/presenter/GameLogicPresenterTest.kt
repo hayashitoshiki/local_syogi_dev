@@ -1,6 +1,6 @@
 package com.example.local_syogi.syogibase.presentation.presenter
 
-import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
+import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
 import com.example.local_syogi.syogibase.util.Piece
 import com.nhaarman.mockito_kotlin.*

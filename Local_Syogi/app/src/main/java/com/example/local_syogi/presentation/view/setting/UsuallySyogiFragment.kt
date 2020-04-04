@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.UsuallySyogiContact
+import com.example.local_syogi.presentation.contact.setting.UsuallySyogiContact
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
