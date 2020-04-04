@@ -9,7 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GameViewRateContact
+import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
 import org.koin.core.KoinComponent

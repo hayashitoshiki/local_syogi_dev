@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GamePlayBackContact
+import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
 import com.example.local_syogi.presentation.view.game.GameFreeView
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel

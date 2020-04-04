@@ -8,7 +8,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GameRecordListContact
+import com.example.local_syogi.presentation.contact.record.GameRecordListContact
 import com.example.local_syogi.syogibase.domain.model.GameModel
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

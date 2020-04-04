@@ -8,8 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.GameRecordRootContact
-import com.example.local_syogi.presentation.contact.SettingAccountContact
+import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
+import com.example.local_syogi.presentation.contact.account.SettingAccountContact
 
 class SignInUpFragment : Fragment() {
 

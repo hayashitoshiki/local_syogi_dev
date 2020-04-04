@@ -10,7 +10,7 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.SettingAccountContact
+import com.example.local_syogi.presentation.contact.account.SettingAccountContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.util.OnBackPressedListener
 import org.koin.android.ext.android.inject

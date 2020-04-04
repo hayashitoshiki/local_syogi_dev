@@ -14,7 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.SettingRootContact
+import com.example.local_syogi.presentation.contact.setting.SettingRootContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.game.GameRateActivity
 import com.example.local_syogi.syogibase.data.game.GameMode
