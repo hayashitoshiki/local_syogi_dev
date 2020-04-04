@@ -1,6 +1,7 @@
 package com.example.local_syogi.syogibase.domain
 
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.model.GameModel
 import com.example.local_syogi.syogibase.util.Piece
 
@@ -69,4 +70,6 @@ interface SyogiLogicUseCase {
     fun getGameByMode(mode: Int): MutableList<GameModel>
     // 指定した対局の棋譜を返す
     fun getRecordByTitle(title: String): MutableList<GameLog>
+    // 指定した対局の設定取得
+    fun getRecordSettingByTitle(title: String): GameDetailSetitngModel
 }

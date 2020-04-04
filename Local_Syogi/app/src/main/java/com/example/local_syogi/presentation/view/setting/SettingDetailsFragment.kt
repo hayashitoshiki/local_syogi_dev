@@ -16,7 +16,6 @@ import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPref
 
 class SettingDetailsFragment : Fragment() {
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view2 = inflater.inflate(R.layout.fragment_setting_details_fragment, container, false)
         val blackButton1 = view2.findViewById<RadioButton>(R.id.blackRadioButton1)

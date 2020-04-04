@@ -43,9 +43,10 @@ class GameRecordListFragment : Fragment(), GameRecordListContact.View {
         // 項目をタップしたら感想戦画面を開く
         offLineListView.setOnItemClickListener { parent, view, position, id ->
             val gameTitle = gameList[position].title
+            val gameDetail = presenter.getRecordSettingByTitle(gameTitle)
             val log = presenter.getRecordByTitle(gameTitle)
             val mFragment = parentFragment as GameRecordRootFragment
-            mFragment.setRePlayView(log)
+            mFragment.setRePlayView(log, gameDetail)
         }
         return view
     }

@@ -2,6 +2,7 @@ package com.example.local_syogi.presentation.presenter
 
 import com.example.local_syogi.presentation.contact.GameViewRateContact
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCase
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 
 class GameLogicFreePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewRateContact.Presenter {
 
@@ -11,6 +12,11 @@ class GameLogicFreePresenter(private val view: GameViewRateContact.View, private
         const val HINT = 3
     }
 
+    // 初期画面セット
+    override fun setReplayView(gameDetail: GameDetailSetitngModel) {
+        syogiUseCase.setHandi(BLACK, gameDetail.handyBlack)
+        syogiUseCase.setHandi(WHITE, gameDetail.handyWite)
+    }
     // タッチ判定
     override fun onTouchEvent(x: Int, y: Int) {}
 

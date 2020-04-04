@@ -15,9 +15,10 @@ import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepositoryImp
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepositoryImp
 import com.example.local_syogi.syogibase.domain.SyogiLogicUseCaseImp
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import org.koin.core.KoinComponent
 
-class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>) : View(context), GameViewRateContact.View,
+class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : View(context), GameViewRateContact.View,
     KoinComponent {
 
     // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
@@ -65,6 +66,12 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
 
     private lateinit var soundPool: SoundPool
     private var soundOne = 0
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        presenter.setReplayView(gameDetail)
+    }
+
     // onCreat
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

@@ -5,6 +5,7 @@ import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepository
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepository
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.model.GameModel
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
@@ -462,6 +463,15 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
             logList.add(log)
         }
         return logList
+    }
+    // 指定した対局の設定取得
+    override fun getRecordSettingByTitle(title: String): GameDetailSetitngModel {
+        val recordList = recordRepository.findDetaileByTitle(title)
+        val gameDetail = GameDetailSetitngModel(
+            recordList.handyBlack!!,
+            recordList.handyWhite!!
+        )
+        return gameDetail
     }
 
     // 千日手判定

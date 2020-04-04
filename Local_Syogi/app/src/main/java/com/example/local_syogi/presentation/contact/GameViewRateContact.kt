@@ -1,6 +1,7 @@
 package com.example.local_syogi.presentation.contact
 
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 
 interface GameViewRateContact {
 
@@ -27,6 +28,8 @@ interface GameViewRateContact {
     }
 
     interface Presenter {
+        // 初期画面セット
+        fun setReplayView(gameDetail: GameDetailSetitngModel)
         // タッチイベントロジック
         fun onTouchEvent(x: Int, y: Int)
         // 描画ロジック

@@ -14,4 +14,6 @@ interface GameRecordRepository {
     fun findTitleByMode(mode: Int): Array<GameEntity>
     // 特定の対局データ取得
     fun findRecordByTitle(title: String): Array<RecordEntity>
+    // 特定のタイトルの詳細を取得
+    fun findDetaileByTitle(title: String): GameEntity
 }
