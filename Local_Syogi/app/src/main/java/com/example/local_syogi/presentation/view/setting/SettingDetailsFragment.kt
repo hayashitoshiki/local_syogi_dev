@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.syogibase.data.game.GameSetting
+import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
+
+/**
+ * ゲーム選択画面　＞　詳細設定Fragment
+ */
 
 class SettingDetailsFragment : Fragment() {
 
-    private lateinit var listView: ListView
-    private val buttonList1 = arrayListOf<RadioButton>()
-    private val buttonList2 = arrayListOf<RadioButton>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view2 = inflater.inflate(R.layout.fragment_setting_details_fragment, container, false)
@@ -34,6 +35,9 @@ class SettingDetailsFragment : Fragment() {
         val whiteButton6 = view2.findViewById<RadioButton>(R.id.whiteRadioButton6)
         val whiteButton7 = view2.findViewById<RadioButton>(R.id.whiteRadioButton7)
         val whiteButton8 = view2.findViewById<RadioButton>(R.id.whiteRadioButton8)
+        val sharedPreferences = GameSettingSharedPreferences(context!!)
+        val buttonList1 = arrayListOf<RadioButton>()
+        val buttonList2 = arrayListOf<RadioButton>()
 
         buttonList1.add(blackButton1)
         buttonList1.add(blackButton2)
@@ -52,121 +56,56 @@ class SettingDetailsFragment : Fragment() {
         buttonList2.add(whiteButton7)
         buttonList2.add(whiteButton8)
 
+        // 詳細設定画面の初期設定
+        when (sharedPreferences.getHandyBlack()) {
+            1 -> blackButton1.isChecked = true
+            2 -> blackButton2.isChecked = true
+            3 -> blackButton3.isChecked = true
+            4 -> blackButton4.isChecked = true
+            5 -> blackButton5.isChecked = true
+            6 -> blackButton6.isChecked = true
+            7 -> blackButton7.isChecked = true
+            8 -> blackButton8.isChecked = true
+        }
+        when (sharedPreferences.getHandyWhite()) {
+            1 -> whiteButton1.isChecked = true
+            2 -> whiteButton2.isChecked = true
+            3 -> whiteButton3.isChecked = true
+            4 -> whiteButton4.isChecked = true
+            5 -> whiteButton5.isChecked = true
+            6 -> whiteButton6.isChecked = true
+            7 -> whiteButton7.isChecked = true
+            8 -> whiteButton8.isChecked = true
+        }
+
         // ラジオボタン変更時のイベント
-        blackButton1.setOnCheckedChangeListener { _, _ ->
-            if (blackButton1.isChecked) {
-                checkRadioButton(blackButton1)
-                GameSetting.handiBlack = 1
+        buttonList1.forEach { button ->
+            button.setOnCheckedChangeListener { _, _ ->
+                if (button.isChecked) {
+                    buttonList1.filterNot { it == button }.forEach { btn ->
+                        btn.isChecked = false
+                    }
+                    val id: String = context!!.resources.getResourceEntryName(button.id).toString()
+                    val mode = id.substring(id.length - 1).toInt()
+                    GameSetting.handiBlack = mode
+                    sharedPreferences.setHandyBlack(mode)
+                }
             }
         }
-        blackButton2.setOnCheckedChangeListener { _, _ ->
-            if (blackButton2.isChecked) {
-                checkRadioButton(blackButton2)
-                GameSetting.handiBlack = 2
-            }
-        }
-        blackButton3.setOnCheckedChangeListener { _, _ ->
-            if (blackButton3.isChecked) {
-                checkRadioButton(blackButton3)
-                GameSetting.handiBlack = 3
-            }
-        }
-        blackButton4.setOnCheckedChangeListener { _, _ ->
-            if (blackButton4.isChecked) {
-                checkRadioButton(blackButton4)
-                GameSetting.handiBlack = 4
-            }
-        }
-        blackButton5.setOnCheckedChangeListener { _, _ ->
-            if (blackButton5.isChecked) {
-                checkRadioButton(blackButton5)
-                GameSetting.handiBlack = 5
-            }
-        }
-        blackButton6.setOnCheckedChangeListener { _, _ ->
-            if (blackButton6.isChecked) {
-                checkRadioButton(blackButton6)
-                GameSetting.handiBlack = 6
-            }
-        }
-        blackButton7.setOnCheckedChangeListener { _, _ ->
-            if (blackButton7.isChecked) {
-                checkRadioButton(blackButton7)
-                GameSetting.handiBlack = 7
-            }
-        }
-        blackButton8.setOnCheckedChangeListener { _, _ ->
-            if (blackButton8.isChecked) {
-                checkRadioButton(blackButton8)
-                GameSetting.handiBlack = 8
-            }
-        }
-        whiteButton1.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton1.isChecked) {
-                checkRadioButton2(whiteButton1)
-                GameSetting.handiWhite = 1
-            }
-        }
-        whiteButton2.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton2.isChecked) {
-                checkRadioButton2(whiteButton2)
-                GameSetting.handiWhite = 2
-            }
-        }
-        whiteButton3.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton3.isChecked) {
-                checkRadioButton2(whiteButton3)
-                GameSetting.handiWhite = 3
-            }
-        }
-        whiteButton4.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton4.isChecked) {
-                checkRadioButton2(whiteButton4)
-                GameSetting.handiWhite = 4
-            }
-        }
-        whiteButton5.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton5.isChecked) {
-                checkRadioButton2(whiteButton5)
-                GameSetting.handiWhite = 5
-            }
-        }
-        whiteButton6.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton6.isChecked) {
-                checkRadioButton2(whiteButton6)
-                GameSetting.handiWhite = 6
-            }
-        }
-        whiteButton7.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton7.isChecked) {
-                checkRadioButton2(whiteButton7)
-                GameSetting.handiWhite = 7
-            }
-        }
-        whiteButton8.setOnCheckedChangeListener { _, _ ->
-            if (whiteButton8.isChecked) {
-                checkRadioButton2(whiteButton8)
-                GameSetting.handiWhite = 8
+        buttonList2.forEach { button ->
+            button.setOnCheckedChangeListener { _, _ ->
+                if (button.isChecked) {
+                    buttonList2.filterNot { it == button }.forEach { btn ->
+                        btn.isChecked = false
+                    }
+                    val id: String = context!!.resources.getResourceEntryName(button.id).toString()
+                    val mode = id.substring(id.length - 1).toInt()
+                    GameSetting.handiWhite = mode
+                    sharedPreferences.setHandyWhite(mode)
+                }
             }
         }
         return view2
-    }
-
-    // ラジオボタンの疑似的グループ化
-    private fun checkRadioButton(radioButton: RadioButton) {
-        buttonList1.forEach {
-            if (it != radioButton) {
-                it.isChecked = false
-            }
-        }
-    }
-    // ラジオボタンの疑似的グループ化
-    private fun checkRadioButton2(radioButton: RadioButton) {
-        buttonList2.forEach {
-            if (it != radioButton) {
-                it.isChecked = false
-            }
-        }
     }
 
     companion object {
