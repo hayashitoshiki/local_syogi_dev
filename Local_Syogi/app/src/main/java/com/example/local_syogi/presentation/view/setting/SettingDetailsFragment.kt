@@ -57,24 +57,72 @@ class SettingDetailsFragment : Fragment() {
 
         // 詳細設定画面の初期設定
         when (sharedPreferences.getHandyBlack()) {
-            1 -> blackButton1.isChecked = true
-            2 -> blackButton2.isChecked = true
-            3 -> blackButton3.isChecked = true
-            4 -> blackButton4.isChecked = true
-            5 -> blackButton5.isChecked = true
-            6 -> blackButton6.isChecked = true
-            7 -> blackButton7.isChecked = true
-            8 -> blackButton8.isChecked = true
+            1 -> {
+                blackButton1.isChecked = true
+                GameSetting.handiBlack = 1
+            }
+            2 -> {
+                blackButton2.isChecked = true
+                GameSetting.handiBlack = 2
+            }
+            3 -> {
+                blackButton3.isChecked = true
+                GameSetting.handiBlack = 3
+            }
+            4 -> {
+                blackButton4.isChecked = true
+                GameSetting.handiBlack = 4
+            }
+            5 -> {
+                blackButton5.isChecked = true
+                GameSetting.handiBlack = 5
+            }
+            6 -> {
+                blackButton6.isChecked = true
+                GameSetting.handiBlack = 6
+            }
+            7 -> {
+                blackButton7.isChecked = true
+                GameSetting.handiBlack = 7
+            }
+            8 -> {
+                blackButton8.isChecked = true
+                GameSetting.handiBlack = 8
+            }
         }
         when (sharedPreferences.getHandyWhite()) {
-            1 -> whiteButton1.isChecked = true
-            2 -> whiteButton2.isChecked = true
-            3 -> whiteButton3.isChecked = true
-            4 -> whiteButton4.isChecked = true
-            5 -> whiteButton5.isChecked = true
-            6 -> whiteButton6.isChecked = true
-            7 -> whiteButton7.isChecked = true
-            8 -> whiteButton8.isChecked = true
+            1 -> {
+                whiteButton1.isChecked = true
+                GameSetting.handiWhite = 1
+            }
+            2 -> {
+                whiteButton2.isChecked = true
+                GameSetting.handiWhite = 2
+            }
+            3 -> {
+                whiteButton3.isChecked = true
+                GameSetting.handiWhite = 3
+            }
+            4 -> {
+                whiteButton4.isChecked = true
+                GameSetting.handiWhite = 4
+            }
+            5 -> {
+                whiteButton5.isChecked = true
+                GameSetting.handiWhite = 5
+            }
+            6 -> {
+                whiteButton6.isChecked = true
+                GameSetting.handiWhite = 6
+            }
+            7 -> {
+                whiteButton7.isChecked = true
+                GameSetting.handiWhite = 7
+            }
+            8 -> {
+                whiteButton8.isChecked = true
+                GameSetting.handiWhite = 8
+            }
         }
 
         // ラジオボタン変更時のイベント

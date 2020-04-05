@@ -34,6 +34,16 @@ import org.koin.dsl.module
 
 class MyApplication : Application() {
 
+    companion object {
+         private lateinit var sInstance: MyApplication
+
+        @JvmStatic
+        @Synchronized
+        fun getInstance(): MyApplication {
+            return sInstance
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
@@ -43,6 +53,7 @@ class MyApplication : Application() {
             androidContext(applicationContext)
             modules(module)
         }
+        sInstance = this
     }
 
     // Koinモジュール

@@ -1,9 +1,10 @@
 package com.example.local_syogi.syogibase.presentation.presenter
 
+import com.example.local_syogi.di.MyApplication
 import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameSetting
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
+import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.HINT
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
@@ -13,8 +14,9 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
     // 初期設定
     override fun startGame() {
         // ハンデ設定
-        usecase.setHandi(BLACK, GameSetting.handiBlack)
-        usecase.setHandi(WHITE, GameSetting.handiWhite)
+        val sharedPreferences = GameSettingSharedPreferences(MyApplication.getInstance().applicationContext)
+        usecase.setHandi(BLACK, sharedPreferences.getHandyBlack())
+        usecase.setHandi(WHITE, sharedPreferences.getHandyWhite())
     }
     // タッチ判定
     override fun onTouchEvent(x: Int, y: Int) {
