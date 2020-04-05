@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.RadioButton
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.syogibase.data.game.GameSetting
@@ -34,6 +36,10 @@ class SettingDetailsFragment : Fragment() {
         val whiteButton6 = view2.findViewById<RadioButton>(R.id.whiteRadioButton6)
         val whiteButton7 = view2.findViewById<RadioButton>(R.id.whiteRadioButton7)
         val whiteButton8 = view2.findViewById<RadioButton>(R.id.whiteRadioButton8)
+        val blackSpinner1 = view2.findViewById<Spinner>(R.id.blackSpinner1)
+        val blackSpinner2 = view2.findViewById<Spinner>(R.id.blackSpinner2)
+        val whiteSpinner1 = view2.findViewById<Spinner>(R.id.whiteSpinner1)
+        val whiteSpinner2 = view2.findViewById<Spinner>(R.id.whiteSpinner2)
         val sharedPreferences = GameSettingSharedPreferences(context!!)
         val buttonList1 = arrayListOf<RadioButton>()
         val buttonList2 = arrayListOf<RadioButton>()
@@ -56,6 +62,12 @@ class SettingDetailsFragment : Fragment() {
         buttonList2.add(whiteButton8)
 
         // 詳細設定画面の初期設定
+        // 持ち時間
+        blackSpinner1.setSelection(sharedPreferences.getMinuteBlack())
+        blackSpinner2.setSelection(sharedPreferences.getSecondBlack())
+        whiteSpinner1.setSelection(sharedPreferences.getMinuteWhite())
+        whiteSpinner2.setSelection(sharedPreferences.getSecondWhite())
+        // 駒落ち
         when (sharedPreferences.getHandyBlack()) {
             1 -> {
                 blackButton1.isChecked = true
@@ -122,6 +134,44 @@ class SettingDetailsFragment : Fragment() {
             8 -> {
                 whiteButton8.isChecked = true
                 GameSetting.handiWhite = 8
+            }
+        }
+
+        // 持ち時間変更時イベント
+        blackSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val spinnerParent = parent as Spinner
+                val item = spinnerParent.selectedItem as String
+                val minute = item.toInt()
+                sharedPreferences.setMinuteBlack(minute)
+            }
+        }
+        blackSpinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val spinnerParent = parent as Spinner
+                val item = spinnerParent.selectedItem as String
+                val second = item.toInt()
+                sharedPreferences.setSecondBlack(second)
+            }
+        }
+        whiteSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val spinnerParent = parent as Spinner
+                val item = spinnerParent.selectedItem as String
+                val minute = item.toInt()
+                sharedPreferences.setMinuteWhite(minute)
+            }
+        }
+        whiteSpinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val spinnerParent = parent as Spinner
+                val item = spinnerParent.selectedItem as String
+                val second = item.toInt()
+                sharedPreferences.setSecondWhite(second)
             }
         }
 

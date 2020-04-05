@@ -22,6 +22,7 @@ task ktlint(type: JavaExec, group: "verification") {
 check.dependsOn ktlint
 
 // ktlintのフォーマット設定（自動修正）
+// gradlew ktlintFormat
 task ktlintFormat(type: JavaExec, group: "formatting") {
     description = "Fix Kotlin code style deviations."
     classpath = configurations.ktlint

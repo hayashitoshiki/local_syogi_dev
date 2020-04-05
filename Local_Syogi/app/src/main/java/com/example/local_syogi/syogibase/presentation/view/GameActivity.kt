@@ -36,9 +36,13 @@ class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        // 3分= 3x60x1000 = 180000 msec
-        countNumberWhite = 180000
-        countNumberBlack = 180000
+        val sharedPreferences = GameSettingSharedPreferences(this)
+        val minuteBlack = sharedPreferences.getMinuteBlack().toLong() * 60 * 1000
+        val secondBlack = sharedPreferences.getSecondBlack().toLong() * 1000
+        val minuteWhite = sharedPreferences.getMinuteWhite().toLong() * 60 * 1000
+        val secondWhite = sharedPreferences.getSecondWhite().toLong() * 1000
+        countNumberWhite = secondWhite + minuteWhite
+        countNumberBlack = secondBlack + minuteBlack
         timerWhite = findViewById(R.id.timerWhite)
         timerBlack = findViewById(R.id.timerBlack)
         timerWhite.text = dataFormat.format(countNumberWhite)
