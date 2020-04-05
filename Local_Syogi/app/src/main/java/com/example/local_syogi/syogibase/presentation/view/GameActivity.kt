@@ -2,11 +2,13 @@ package com.example.local_syogi.syogibase.presentation.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
@@ -15,16 +17,32 @@ import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
+import java.text.SimpleDateFormat
+import java.util.*
 
 class GameActivity : AppCompatActivity() {
 
     var frame: FrameLayout? = null
     private lateinit var view: GameView
     private var first = true
+    private val dataFormat = SimpleDateFormat("mm:ss", Locale.US)
+    private var countDownTimerWhite: CountDownWhite? = null
+    private var countDownTimerBlack: CountDownBlack? = null
+    private var countNumberWhite: Long = 0
+    private var countNumberBlack: Long = 0
+    private lateinit var timerWhite: TextView
+    private lateinit var timerBlack: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        // 3分= 3x60x1000 = 180000 msec
+        countNumberWhite = 180000
+        countNumberBlack = 180000
+        timerWhite = findViewById(R.id.timerWhite)
+        timerBlack = findViewById(R.id.timerBlack)
+        timerWhite.text = dataFormat.format(countNumberWhite)
+        timerBlack.text = dataFormat.format(countNumberBlack)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -35,6 +53,21 @@ class GameActivity : AppCompatActivity() {
             frame!!.addView(view, 0)
             first = false
         }
+    }
+    // 手番(タイマー)チェンジ
+    fun changeTimerBlack() {
+        if (countDownTimerWhite != null) {
+            countDownTimerWhite!!.cancel()
+        }
+        countDownTimerBlack = CountDownBlack(countNumberBlack, 10) // countMillisを残り時間にセット
+        countDownTimerBlack!!.start() // タイマーをスタート
+    }
+    fun changeTimerWhite() {
+        if (countDownTimerBlack != null) {
+            countDownTimerBlack!!.cancel()
+        }
+        countDownTimerWhite = CountDownWhite(countNumberWhite, 10) // countMillisを残り時間にセット
+        countDownTimerWhite!!.start() // タイマーをスタート
     }
 
     // 投了ボタン
@@ -112,4 +145,32 @@ class GameActivity : AppCompatActivity() {
 
     // 戻るボタンの無効化
     override fun onBackPressed() {}
+
+    // タイマー機能
+    internal inner class CountDownWhite(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        // 時間切れ
+        override fun onFinish() {
+            timerWhite.text = dataFormat.format(0)
+            gameEnd(BLACK)
+        }
+        // インターバルで呼ばれる
+        override fun onTick(millisUntilFinished: Long) {
+            timerWhite.text = dataFormat.format(millisUntilFinished)
+            countNumberWhite = millisUntilFinished
+        }
+    }
+    internal inner class CountDownBlack(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        // 時間切れ
+        override fun onFinish() {
+            timerBlack.text = dataFormat.format(0)
+            gameEnd(WHITE)
+        }
+        // インターバルで呼ばれる
+        override fun onTick(millisUntilFinished: Long) {
+            timerBlack.text = dataFormat.format(millisUntilFinished)
+            countNumberBlack = millisUntilFinished
+        }
+    }
 }

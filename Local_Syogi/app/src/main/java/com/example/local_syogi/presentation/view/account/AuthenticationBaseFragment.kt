@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.account.SettingAccountContact
 import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
 import com.example.local_syogi.presentation.contact.setting.RateCardContact
-import com.example.local_syogi.presentation.contact.account.SettingAccountContact
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 

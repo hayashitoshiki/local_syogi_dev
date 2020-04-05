@@ -12,8 +12,8 @@ import com.example.local_syogi.presentation.contact.record.GameRecordListContact
 import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
 import com.example.local_syogi.presentation.contact.setting.*
 import com.example.local_syogi.presentation.presenter.account.SettingAccountPresenter
-import com.example.local_syogi.presentation.presenter.game.GamePlayBackPresenter
 import com.example.local_syogi.presentation.presenter.game.GameLogicRatePresenter
+import com.example.local_syogi.presentation.presenter.game.GamePlayBackPresenter
 import com.example.local_syogi.presentation.presenter.record.GameRecordListPresenter
 import com.example.local_syogi.presentation.presenter.record.GameRecordRootPresenter
 import com.example.local_syogi.presentation.presenter.setting.*

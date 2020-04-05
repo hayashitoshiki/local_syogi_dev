@@ -2,9 +2,9 @@ package com.example.local_syogi.presentation.presenter.record
 
 import com.example.local_syogi.presentation.contact.record.GameRecordListContact
 import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.model.GameModel
+import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 
 class GameRecordListPresenter(private val view: GameRecordListContact.View, private val usecase: SyogiLogicUseCase) : GameRecordListContact.Presenter {
 

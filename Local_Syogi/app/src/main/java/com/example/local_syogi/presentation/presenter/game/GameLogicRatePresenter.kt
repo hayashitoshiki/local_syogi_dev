@@ -1,8 +1,8 @@
 package com.example.local_syogi.presentation.presenter.game
 
 import com.example.local_syogi.presentation.contact.game.GameViewRateContact
-import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
+import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 
 class GameLogicRatePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewRateContact.Presenter {
 

@@ -11,6 +11,8 @@ import com.example.local_syogi.R
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
@@ -215,6 +217,13 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
     fun getLog(winner: Int): MutableList<GameLog> {
         val log = presenter.getLog(winner)
         return log
+    }
+
+    override fun changeTurn(turn: Int) {
+        when (turn) {
+            BLACK -> activity.changeTimerWhite()
+            WHITE -> activity.changeTimerBlack()
+        }
     }
 
     override fun onDetachedFromWindow() {

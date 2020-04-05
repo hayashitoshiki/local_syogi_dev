@@ -29,6 +29,7 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
                         view.showDialog()
                     }
                     view.playbackEffect()
+                    view.changeTurn(usecase.getTurn())
                     // 千日手判定
                     if (usecase.isRepetitionMove()) view.gameEnd(3)
                     // トライルール判定
