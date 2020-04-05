@@ -23,6 +23,8 @@ interface GameViewContact {
         fun gameEnd(turn: Int)
         // 効果音を鳴らす
         fun playbackEffect()
+        // 手番チェンジ(チェスクロ変更など)
+        fun changeTurn(turn: Int)
     }
 
     interface Presenter {

@@ -14,8 +14,8 @@ import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepositoryImp
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepositoryImp
-import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCaseImp
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
+import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCaseImp
 import org.koin.core.KoinComponent
 
 class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : View(context), GameViewRateContact.View,

@@ -128,7 +128,7 @@ class Board {
     fun setHandi(turn: Int, handi: Int) {
         when (turn) {
             BLACK -> {
-                if (handi > 8) {
+                if (handi >= 8) {
                     cells[2][8].piece = None
                     cells[2][8].turn = 0
                     cells[6][8].piece = None
@@ -156,7 +156,7 @@ class Board {
                 }
             }
             WHITE -> {
-                if (handi > 8) {
+                if (handi >= 8) {
                     cells[2][0].piece = None
                     cells[2][0].turn = 0
                     cells[6][0].piece = None
