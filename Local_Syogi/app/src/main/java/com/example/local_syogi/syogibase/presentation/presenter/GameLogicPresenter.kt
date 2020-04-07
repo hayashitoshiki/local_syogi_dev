@@ -11,10 +11,11 @@ import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
 class GameLogicPresenter(private val view: GameViewContact.View, private val usecase: SyogiLogicUseCase) : GameViewContact.Presenter {
 
+    private val sharedPreferences = GameSettingSharedPreferences(MyApplication.getInstance().applicationContext)
+
     // 初期設定
     override fun startGame() {
         // ハンデ設定
-        val sharedPreferences = GameSettingSharedPreferences(MyApplication.getInstance().applicationContext)
         usecase.setHandi(BLACK, sharedPreferences.getHandyBlack())
         usecase.setHandi(WHITE, sharedPreferences.getHandyWhite())
     }
@@ -35,7 +36,7 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
                     // 千日手判定
                     if (usecase.isRepetitionMove()) view.gameEnd(3)
                     // トライルール判定
-                    if (usecase.isTryKing()) view.gameEnd(usecase.getTurn())
+                    if (sharedPreferences.getTryRule() && usecase.isTryKing()) view.gameEnd(usecase.getTurn())
                     // 王手判定
                     if (usecase.checkGameEnd()) view.gameEnd(usecase.getTurn())
                     usecase.twohandRule()

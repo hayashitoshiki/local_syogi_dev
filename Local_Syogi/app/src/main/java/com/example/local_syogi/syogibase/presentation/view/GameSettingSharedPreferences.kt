@@ -14,6 +14,7 @@ import android.preference.PreferenceManager
  *   ・secondBlack：先手番の持ち時間(秒)
  *   ・minuteWhite：後手番の持ち時間(分)
  *   ・secondBlack：先手番の持ち時間(秒)
+ *   ・tryRule    :トライルールの有無(true or false)
  *
  * 駒落ち設定詳細 (Int)
  *   1：なし
@@ -67,6 +68,12 @@ class GameSettingSharedPreferences(
         editor.putInt("secondWhite", second)
         editor.apply()
     }
+    // トライルール呼び出し
+    fun setTryRule(status:Boolean){
+        val editor = prefs.edit()
+        editor.putBoolean("tryRule", status)
+        editor.apply()
+    }
 
     // 駒落ち呼び出し
     fun getHandyBlack(): Int {
@@ -89,4 +96,9 @@ class GameSettingSharedPreferences(
     fun getSecondWhite(): Int {
         return prefs.getInt("secondWhite", 0)
     }
+    // トライルール呼び出し
+    fun getTryRule():Boolean{
+        return prefs.getBoolean("tryRule", true)
+    }
+
 }

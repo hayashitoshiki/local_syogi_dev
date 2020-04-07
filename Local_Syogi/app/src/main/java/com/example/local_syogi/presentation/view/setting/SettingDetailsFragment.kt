@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.RadioButton
 import android.widget.Spinner
+import android.widget.Switch
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.syogibase.data.game.GameSetting
@@ -43,6 +44,7 @@ class SettingDetailsFragment : Fragment() {
         val sharedPreferences = GameSettingSharedPreferences(context!!)
         val buttonList1 = arrayListOf<RadioButton>()
         val buttonList2 = arrayListOf<RadioButton>()
+        val trySwitch = view2.findViewById<Switch>(R.id.trySwitch)
 
         buttonList1.add(blackButton1)
         buttonList1.add(blackButton2)
@@ -62,6 +64,8 @@ class SettingDetailsFragment : Fragment() {
         buttonList2.add(whiteButton8)
 
         // 詳細設定画面の初期設定
+        // トライルルール
+        trySwitch.isChecked = sharedPreferences.getTryRule()
         // 持ち時間
         blackSpinner1.setSelection(sharedPreferences.getMinuteBlack())
         blackSpinner2.setSelection(sharedPreferences.getSecondBlack())
@@ -137,6 +141,10 @@ class SettingDetailsFragment : Fragment() {
             }
         }
 
+        // トライルール変更時イベント
+        trySwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            sharedPreferences.setTryRule(isChecked)
+        }
         // 持ち時間変更時イベント
         blackSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
