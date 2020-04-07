@@ -446,8 +446,23 @@
                 android:layout_height="wrap_content"
                 android:text="秒" />
         </LinearLayout>
-    </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共通ルール"
+            android:textSize="30sp"
+            tools:layout_editor_absoluteX="37dp"
+            tools:layout_editor_absoluteY="561dp" />
+
+        <Switch
+            android:id="@+id/trySwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="トライルール"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
