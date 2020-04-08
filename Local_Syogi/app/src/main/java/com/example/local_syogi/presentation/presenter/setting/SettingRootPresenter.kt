@@ -12,6 +12,11 @@ class SettingRootPresenter(private val view: SettingRootContact.View, private va
         const val RATE = 2
     }
 
+    // Modeリセット(これを入れないとなぜか初期化されない)
+    override fun initMode(){
+        mode = FREE
+    }
+
     // ログイン状態判定
     override fun isAuth(): Boolean {
         return firebase.isAuth()

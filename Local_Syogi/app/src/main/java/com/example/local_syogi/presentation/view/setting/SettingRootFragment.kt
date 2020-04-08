@@ -44,6 +44,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         modeFrame = view.findViewById(R.id.mode_frame)
         title = view.findViewById(R.id.title)
         tabFrame = view.findViewById(R.id.tab)
+        presenter.initMode()
 
         childFragmentManager.beginTransaction()
             .add(

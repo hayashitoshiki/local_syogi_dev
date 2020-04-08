@@ -29,15 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
             android:text="進化！？退化！？\n駒の強さは後ろの駒次第！！！"
             android:textAlignment="center"
-            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintBottom_toTopOf="@+id/button_layout"
             ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintHorizontal_bias="0.0"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/startButton"
-            ads:layout_constraintVertical_bias="0.0" />
+            ads:layout_constraintTop_toTopOf="parent"
+            ads:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -54,24 +53,42 @@
             ads:layout_constraintTop_toBottomOf="@+id/textView1"
             ads:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/startButton"
+        <LinearLayout
+            android:id="@+id/button_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/button_image"
-            android:clickable="true"
-            android:foreground="@drawable/ripple"
-            android:text="対局開始"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:orientation="horizontal"
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintHorizontal_bias="0.9"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/imageView"
-            ads:layout_constraintVertical_bias="0.13" />
+            ads:layout_constraintTop_toTopOf="parent"
+            ads:layout_constraintVertical_bias="1.0">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:foreground="@drawable/ripple"
+                android:background="@drawable/button_image"
+                android:text="詳しく"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/startButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:foreground="@drawable/ripple"
+                android:background="@drawable/button_image"
+                android:text="対局開始"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                ads:layout_constraintVertical_bias="1.0" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
