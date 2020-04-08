@@ -25,5 +25,7 @@ interface SettingRootContact {
         fun onTouchEvent(x: Int, y: Int, x2: Int, y2: Int)
         // 対局開始
         fun startGame()
+        // Modeリセット(これを入れないとなぜか初期化されない)
+        fun initMode()
     }
 }
