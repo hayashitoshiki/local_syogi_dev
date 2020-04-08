@@ -46,29 +46,48 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:text="1度に保持できる駒は2枚まで！？"
-            ads:layout_constraintBottom_toTopOf="@+id/startButton"
+            ads:layout_constraintBottom_toTopOf="@+id/button_layout"
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toBottomOf="@+id/textView1"
             ads:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/startButton"
+        <LinearLayout
+            android:id="@+id/button_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:layout_marginBottom="16dp"
-            android:text="対局開始"
-            android:clickable="true"
-            android:foreground="@drawable/ripple"
-            android:background="@drawable/button_image"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:orientation="horizontal"
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/textView1"
-            ads:layout_constraintVertical_bias="1.0" />
+            ads:layout_constraintTop_toTopOf="parent"
+            ads:layout_constraintVertical_bias="1.0">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:foreground="@drawable/ripple"
+                android:background="@drawable/button_image"
+                android:text="詳しく"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/startButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:foreground="@drawable/ripple"
+                android:background="@drawable/button_image"
+                android:text="対局開始"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                ads:layout_constraintVertical_bias="1.0" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
