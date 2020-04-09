@@ -1,6 +1,7 @@
 package com.example.local_syogi.presentation.view.record
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,11 @@ class GameRecordListFragment : Fragment(), GameRecordListContact.View {
             val gameTitle = gameList[position].title
             val gameDetail = presenter.getRecordSettingByTitle(gameTitle)
             val log = presenter.getRecordByTitle(gameTitle)
+            var count = 1
+            log.forEach {
+                Log.d("GameLog", "" + count + "手目：" + it.oldX + "." + it.oldY + "," + it.afterPiece + "→" + it.newX + "," + it.newY + "," + it.beforpiece)
+                count++
+            }
             val mFragment = parentFragment as GameRecordRootFragment
             mFragment.setRePlayView(log, gameDetail)
         }

@@ -24,13 +24,14 @@ class GameLogicFreePresenter(private val view: GameViewRateContact.View, private
     override fun drawView() {
         view.drawBoard()
         // 盤上の駒セット
-        for (i in 0..8) for (j in 0..8) {
-            val(pieceName, turn, hint) = syogiUseCase.getCellInformation(i, j)
+        for (i in 0..8) for (y in 0..8) {
+            val x = 8 - i
+            val(pieceName, turn, hint) = syogiUseCase.getCellInformation(i, y)
             when (turn) {
-                BLACK -> view.drawBlackPiece(pieceName, i, j)
-                WHITE -> view.drawWhitePiece(pieceName, i, j)
+                BLACK -> view.drawBlackPiece(pieceName, x, y)
+                WHITE -> view.drawWhitePiece(pieceName, x, y)
             }
-            if (hint)view.drawHint(i, j)
+            if (hint)view.drawHint(x, y)
         }
         // 順番に見て駒と枚数を返す 駒と枚数  表示するリストを作ってその添え字と返ってきた枚数。0以外なら
         syogiUseCase.getPieceHand(BLACK).forEachIndexed { index, piece ->

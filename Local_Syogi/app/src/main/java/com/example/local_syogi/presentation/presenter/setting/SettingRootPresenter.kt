@@ -13,7 +13,7 @@ class SettingRootPresenter(private val view: SettingRootContact.View, private va
     }
 
     // Modeリセット(これを入れないとなぜか初期化されない)
-    override fun initMode(){
+    override fun initMode() {
         mode = FREE
     }
 

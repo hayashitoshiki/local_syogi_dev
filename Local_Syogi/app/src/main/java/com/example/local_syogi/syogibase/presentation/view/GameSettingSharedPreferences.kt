@@ -69,7 +69,7 @@ class GameSettingSharedPreferences(
         editor.apply()
     }
     // トライルール呼び出し
-    fun setTryRule(status:Boolean){
+    fun setTryRule(status: Boolean) {
         val editor = prefs.edit()
         editor.putBoolean("tryRule", status)
         editor.apply()
@@ -97,8 +97,7 @@ class GameSettingSharedPreferences(
         return prefs.getInt("secondWhite", 0)
     }
     // トライルール呼び出し
-    fun getTryRule():Boolean{
+    fun getTryRule(): Boolean {
         return prefs.getBoolean("tryRule", true)
     }
-
 }

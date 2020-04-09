@@ -1,6 +1,12 @@
 package com.example.local_syogi.syogibase.data.game
 
-// 将棋盤定義クラス
+/**
+ * 将棋盤定義クラス
+ *   [x-1,y-1]に駒を保存
+ *   例) 7七角　→　[6][6].piece = KAKU
+ *
+ *   マスの詳細・・・Cellクラス
+ */
 
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
@@ -45,54 +51,54 @@ class Board {
         for (i in 0..8) {
             // 歩
             cells[i][2].piece = FU
-            cells[i][2].turn = 2
+            cells[i][2].turn = WHITE
             cells[i][6].piece = FU
-            cells[i][6].turn = 1
+            cells[i][6].turn = BLACK
             if (i == 4) {
                 // 王
                 cells[i][0].piece = OU
-                cells[i][0].turn = 2
+                cells[i][0].turn = WHITE
                 cells[i][8].piece = OU
-                cells[i][8].turn = 1
+                cells[i][8].turn = BLACK
             }
             if (i == 3 || i == 5) {
                 // 金
                 cells[i][0].piece = KIN
-                cells[i][0].turn = 2
+                cells[i][0].turn = WHITE
                 cells[i][8].piece = KIN
-                cells[i][8].turn = 1
+                cells[i][8].turn = BLACK
             } else if (i == 2 || i == 6) {
                 // 銀
                 cells[i][0].piece = GIN
-                cells[i][0].turn = 2
+                cells[i][0].turn = WHITE
                 cells[i][8].piece = GIN
-                cells[i][8].turn = 1
+                cells[i][8].turn = BLACK
             } else if (i == 1) {
                 // 佳
                 cells[i][0].piece = KEI
-                cells[i][0].turn = 2
+                cells[i][0].turn = WHITE
                 cells[i][8].piece = KEI
-                cells[i][8].turn = 1
-                cells[i][7].piece = KAKU
-                cells[i][7].turn = 1
-                cells[i][1].piece = HISYA
-                cells[i][1].turn = 2
+                cells[i][8].turn = BLACK
+                cells[i][7].piece = HISYA
+                cells[i][7].turn = BLACK
+                cells[i][1].piece = KAKU
+                cells[i][1].turn = WHITE
             } else if (i == 7) {
                 // 佳
                 cells[i][0].piece = KEI
-                cells[i][0].turn = 2
+                cells[i][0].turn = WHITE
                 cells[i][8].piece = KEI
-                cells[i][8].turn = 1
-                cells[i][7].piece = HISYA
-                cells[i][7].turn = 1
-                cells[i][1].piece = KAKU
-                cells[i][1].turn = 2
+                cells[i][8].turn = BLACK
+                cells[i][7].piece = KAKU
+                cells[i][7].turn = BLACK
+                cells[i][1].piece = HISYA
+                cells[i][1].turn = WHITE
             } else if (i == 0 || i == 8) {
                 // 香
                 cells[i][0].piece = KYO
-                cells[i][0].turn = 2
+                cells[i][0].turn = WHITE
                 cells[i][8].piece = KYO
-                cells[i][8].turn = 1
+                cells[i][8].turn = BLACK
             }
         }
         // 安南
@@ -110,17 +116,17 @@ class Board {
             cells[7][6].piece = None
             cells[7][6].turn = 0
             cells[1][3].piece = FU
-            cells[1][3].turn = 2
+            cells[1][3].turn = WHITE
             cells[1][5].piece = FU
-            cells[1][5].turn = 1
+            cells[1][5].turn = BLACK
             cells[1][3].piece = FU
-            cells[7][3].turn = 2
+            cells[7][3].turn = WHITE
             cells[7][5].piece = FU
-            cells[7][5].turn = 1
+            cells[7][5].turn = BLACK
             cells[7][3].piece = FU
-            cells[7][3].turn = 2
+            cells[7][3].turn = WHITE
             cells[7][5].piece = FU
-            cells[7][5].turn = 1
+            cells[7][5].turn = BLACK
         }
     }
 
