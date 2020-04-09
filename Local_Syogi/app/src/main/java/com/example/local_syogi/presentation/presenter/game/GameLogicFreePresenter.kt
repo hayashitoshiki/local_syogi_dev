@@ -1,10 +1,11 @@
 package com.example.local_syogi.presentation.presenter.game
 
+import com.example.local_syogi.presentation.contact.game.GameViewFreeContact
 import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 
-class GameLogicFreePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewRateContact.Presenter {
+class GameLogicFreePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewFreeContact.Presenter {
 
     companion object {
         const val BLACK = 1
@@ -24,13 +25,14 @@ class GameLogicFreePresenter(private val view: GameViewRateContact.View, private
     override fun drawView() {
         view.drawBoard()
         // 盤上の駒セット
-        for (i in 0..8) for (j in 0..8) {
-            val(pieceName, turn, hint) = syogiUseCase.getCellInformation(i, j)
+        for (i in 0..8) for (y in 0..8) {
+            val x = 8 - i
+            val(pieceName, turn, hint) = syogiUseCase.getCellInformation(i, y)
             when (turn) {
-                BLACK -> view.drawBlackPiece(pieceName, i, j)
-                WHITE -> view.drawWhitePiece(pieceName, i, j)
+                BLACK -> view.drawBlackPiece(pieceName, x, y)
+                WHITE -> view.drawWhitePiece(pieceName, x, y)
             }
-            if (hint)view.drawHint(i, j)
+            if (hint)view.drawHint(x, y)
         }
         // 順番に見て駒と枚数を返す 駒と枚数  表示するリストを作ってその添え字と返ってきた枚数。0以外なら
         syogiUseCase.getPieceHand(BLACK).forEachIndexed { index, piece ->
@@ -45,19 +47,16 @@ class GameLogicFreePresenter(private val view: GameViewRateContact.View, private
         }
     }
 
-    // 成り判定
-    override fun evolutionPiece(bool: Boolean) {}
-
-    // 駒の動きを受信。受信側は判定を行わない　　viewの変更
-    override fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean) {
+    // 一手進む
+    override fun setGoMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean) {
         syogiUseCase.setPre(oldX, oldY)
         syogiUseCase.setMove(newX, newY, evolution)
         changeTurn()
         view.playbackEffect()
     }
 
-    // 一手戻す
-    fun setBackMove() {
+    // 一手戻る
+    override fun setBackMove() {
         syogiUseCase.setBackMove()
         changeTurn()
     }
@@ -70,6 +69,4 @@ class GameLogicFreePresenter(private val view: GameViewRateContact.View, private
             syogiUseCase.setTurn(BLACK)
         }
     }
-    // ターン変更
-    override fun setTurn(turn: Int) {}
 }

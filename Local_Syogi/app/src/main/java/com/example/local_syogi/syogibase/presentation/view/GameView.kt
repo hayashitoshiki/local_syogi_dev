@@ -91,13 +91,13 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
 
     // 指した時の動作
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val c = (event.x / cw).toInt()
-        val r = (event.y / ch - median).toInt()
+        val x = (event.x / cw).toInt()
+        val y = (event.y / ch - median).toInt()
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {}
             MotionEvent.ACTION_UP -> {
-                presenter.onTouchEvent(c, r)
+                presenter.onTouchEvent(x, y)
                 invalidate()
             }
             MotionEvent.ACTION_MOVE -> {}

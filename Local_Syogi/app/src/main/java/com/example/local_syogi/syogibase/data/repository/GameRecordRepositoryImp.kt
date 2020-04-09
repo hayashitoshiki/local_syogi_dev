@@ -54,12 +54,12 @@ class GameRecordRepositoryImp : GameRecordRepository {
             realm.executeTransaction {
                 val record = realm.createObject(RecordEntity::class.java, getAutoIncrementIdByRecord(realm))
                 record.title = title
-                record.toX = log.oldX
-                record.toY = log.oldY
+                record.toX = log.oldX + 1
+                record.toY = log.oldY + 1
                 record.toPiece = log.afterPiece.nameJP
                 record.toTurn = log.afterTurn
-                record.fromX = log.newX
-                record.fromY = log.newY
+                record.fromX = log.newX + 1
+                record.fromY = log.newY + 1
                 record.fromPiece = log.beforpiece.nameJP
                 record.fromTurn = log.beforturn
                 record.evolution = log.evolution
