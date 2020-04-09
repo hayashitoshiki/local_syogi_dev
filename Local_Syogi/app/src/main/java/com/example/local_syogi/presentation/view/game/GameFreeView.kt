@@ -2,12 +2,11 @@ package com.example.local_syogi.presentation.view.game
 
 import android.content.Context
 import android.graphics.*
-import android.media.AudioAttributes
-import android.media.SoundPool
 import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
+import com.example.local_syogi.presentation.contact.game.GameViewFreeContact
 import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.presentation.presenter.game.GameLogicFreePresenter
 import com.example.local_syogi.syogibase.data.game.GameLog
@@ -18,7 +17,7 @@ import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCaseImp
 import org.koin.core.KoinComponent
 
-class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : View(context), GameViewRateContact.View,
+class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : View(context), GameViewFreeContact.View,
     KoinComponent {
 
     // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
@@ -67,9 +66,6 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
     private var ch: Float = bh / 9 // １マスの高さ
     private val median = 3 // 盤の位置　中央値：３ 範囲：０～６
 
-    private lateinit var soundPool: SoundPool
-    private var soundOne = 0
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         presenter.setReplayView(gameDetail)
@@ -93,17 +89,6 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
         canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * 15, paint)
         canvas.translate(0f, cw * median)
         presenter.drawView()
-
-        // 音声設定
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-            .build()
-        soundPool = SoundPool.Builder()
-            .setAudioAttributes(audioAttributes)
-            .setMaxStreams(1)
-            .build()
-        soundOne = soundPool.load(context, R.raw.sound_japanese_chess, 1)
     }
 
     private val longPressHandler = Handler()
@@ -217,10 +202,10 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
         canvas.restore()
     }
 
-    // 駒の動きを受信。受信側は判定を行わない　　viewの変更
+    // 一手進める
     fun goMove() {
         if (log.size > count) {
-            presenter.socketMove(
+            presenter.setGoMove(
                 log[count].oldX,
                 log[count].oldY,
                 log[count].newX,
@@ -249,16 +234,5 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
             goMove()
         }
         invalidate()
-    }
-    override fun moveEmit(log: GameLog) {}
-
-    // ヒント描画
-    override fun drawHint(i: Int, j: Int) {}
-    // 成るか判断するダイアログ生成
-    override fun showDialog() {}
-    // 対局終了モーダル生成
-    override fun gameEnd(turn: Int) {}
-    // 効果音を鳴らす
-    override fun playbackEffect() {
     }
 }
