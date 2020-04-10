@@ -450,8 +450,8 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         val logList = mutableListOf<GameLog>()
         recordList.forEach {
             val log = GameLog(
-                it.toX!! -1,
-                it.toY!! -1,
+                it.toX!! - 1,
+                it.toY!! - 1,
                 Piece.getByNameJP(it.toPiece!!),
                 it.toTurn!!,
                 it.fromX!! - 1,

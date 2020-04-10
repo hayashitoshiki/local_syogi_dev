@@ -8,7 +8,7 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 
-class SettingDetailsHomeFragment : Fragment() {
+class SettingDetailsIconFragment : Fragment() {
 
     private lateinit var listView: ListView
 
@@ -20,8 +20,8 @@ class SettingDetailsHomeFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(): SettingDetailsHomeFragment {
-            val fragment = SettingDetailsHomeFragment()
+        fun newInstance(): SettingDetailsIconFragment {
+            val fragment = SettingDetailsIconFragment()
             return fragment
         }
     }

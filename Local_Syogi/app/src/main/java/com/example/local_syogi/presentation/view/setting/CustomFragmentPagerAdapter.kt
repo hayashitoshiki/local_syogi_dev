@@ -20,7 +20,7 @@ class CustomFragmentPagerAdapter(manager: FragmentManager) : FragmentStatePagerA
     // ページセット
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> SettingDetailsHomeFragment.newInstance()
+            0 -> SettingDetailsIconFragment.newInstance()
             else -> SettingDetailsFragment.newInstance()
         }
     }

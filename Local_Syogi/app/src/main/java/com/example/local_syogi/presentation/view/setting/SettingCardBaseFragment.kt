@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 
-class SelectNormalFragment : Fragment() {
+class SettingCardBaseFragment : Fragment() {
 
     private val buttonList = arrayListOf<Button>()
 
@@ -48,25 +48,25 @@ class SelectNormalFragment : Fragment() {
 
         // ボタン押下
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
-            UsuallySyogiFragment()
+            SettingSyogiBaseFragment.newInstance(1)
         ) }
         annanButton.setOnClickListener { changeMode(annanButton,
-            AnnnanSyogiFragment()
+            SettingSyogiBaseFragment.newInstance(3)
         ) }
         queenButton.setOnClickListener { changeMode(queenButton,
-            QueenSyogiFragment()
+            SettingSyogiBaseFragment.newInstance(6)
         ) }
         secondButton.setOnClickListener { changeMode(secondButton,
-            SeccondSyogiFragment()
+            SettingSyogiBaseFragment.newInstance(4)
         ) }
         checkmateButton.setOnClickListener { changeMode(checkmateButton,
-            CheckmateSyogiFragment()
+            SettingSyogiBaseFragment.newInstance(2)
         ) }
         pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,
-            PieceLimitSyogiFragment()
+            SettingSyogiBaseFragment.newInstance(5)
         ) }
         chaosButton.setOnClickListener { changeMode(chaosButton,
-            ChaosSyogiFragment()
+            SettingSyogiBaseFragment.newInstance(7)
         ) }
         return view
     }
@@ -88,9 +88,9 @@ class SelectNormalFragment : Fragment() {
         private var tab = -1
 
         @JvmStatic
-        fun newInstance(mode: Int, tab: Int): SelectNormalFragment {
+        fun newInstance(mode: Int, tab: Int): SettingCardBaseFragment {
             val fragment =
-                SelectNormalFragment()
+                SettingCardBaseFragment()
             Companion.mode = mode
             Companion.tab = tab
             return fragment
