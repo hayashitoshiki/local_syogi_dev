@@ -49,7 +49,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         childFragmentManager.beginTransaction()
             .add(
                 R.id.tab,
-                SelectNormalFragment.newInstance(
+                SettingCardBaseFragment.newInstance(
                     FREE,
                     tab
                 )
@@ -140,7 +140,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
             )
             .replace(
                 R.id.tab,
-                SelectNormalFragment.newInstance(
+                SettingCardBaseFragment.newInstance(
                     mode,
                     tab
                 )
@@ -157,7 +157,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
             )
             .replace(
                 R.id.tab,
-                SelectNormalFragment.newInstance(
+                SettingCardBaseFragment.newInstance(
                     mode,
                     tab
                 )

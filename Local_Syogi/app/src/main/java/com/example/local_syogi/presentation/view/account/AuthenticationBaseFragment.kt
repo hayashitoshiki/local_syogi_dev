@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.account.SettingAccountContact
 import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
-import com.example.local_syogi.presentation.contact.setting.RateCardContact
+import com.example.local_syogi.presentation.contact.setting.SettingCardBaseContact
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class AuthenticationBaseFragment : Fragment(), RateCardContact.View {
+class AuthenticationBaseFragment : Fragment(), SettingCardBaseContact.View {
 
-    private val presenter: RateCardContact.Presenter by inject { parametersOf(this) }
+    private val presenter: SettingCardBaseContact.Presenter by inject { parametersOf(this) }
 
     private var stop = false
 

@@ -58,89 +58,17 @@ class MyApplication : Application() {
 
     // Koinモジュール
     private val module: Module = module {
-        factory <UsuallySyogiContact.Presenter> { (v: UsuallySyogiContact.View) ->
-            UsuallySyogiPresenter(
-                v
-            )
-        }
-        factory <AnnnanSyogiContact.Presenter> { (v: AnnnanSyogiContact.View) ->
-            AnnnanSyogiPresenter(
-                v
-            )
-        }
-        factory <SeccondSyogiContact.Presenter> { (v: SeccondSyogiContact.View) ->
-            SeccondSyogiPresenter(
-                v
-            )
-        }
-        factory <QueenSyogiContact.Presenter> { (v: QueenSyogiContact.View) ->
-            QueenSyogiPresenter(
-                v
-            )
-        }
-        factory <ChaosSyogiContact.Presenter> { (v: ChaosSyogiContact.View) ->
-            ChaosSyogiPresenter(
-                v
-            )
-        }
-        factory <CheckmateSyogiContact.Presenter> { (v: CheckmateSyogiContact.View) ->
-            CheckmateSyogiPresenter(
-                v
-            )
-        }
-        factory <PieceLimitSyogiContact.Presenter> { (v: PieceLimitSyogiContact.View) ->
-            PieceLimitSyogiPresenter(
-                v
-            )
-        }
+        factory <SettingSyogiBaseContact.Presenter> { (v: SettingSyogiBaseContact.View) -> SettingSyogiBasePresenter(v) }
         factory <GameViewContact.Presenter> { (v: GameViewContact.View) -> GameLogicPresenter(v, get()) }
-        factory <GameViewRateContact.Presenter> { (v: GameViewRateContact.View) ->
-            GameLogicRatePresenter(
-                v,
-                get()
-            )
-        }
-        factory <SettingAccountContact.Presenter> { (v: SettingAccountContact.View) ->
-            SettingAccountPresenter(
-                v,
-                get()
-            )
-        }
-        factory <SettingRootContact.Presenter> { (v: SettingRootContact.View) ->
-            SettingRootPresenter(
-                v,
-                get()
-            )
-        }
-        factory <RateCardContact.Presenter> { (v: RateCardContact.View) ->
-            RateCardPresenter(
-                v
-            )
-        }
-        factory <GameRecordRootContact.Presenter> { (v: GameRecordRootContact.View) ->
-            GameRecordRootPresenter(
-                v,
-                get()
-            )
-        }
-        factory <GameRecordListContact.Presenter> { (v: GameRecordListContact.View) ->
-            GameRecordListPresenter(
-                v,
-                get()
-            )
-        }
-        factory <GamePlayBackContact.Presenter> { (v: GamePlayBackContact.View) ->
-            GamePlayBackPresenter(
-                v
-            )
-        }
+        factory <GameViewRateContact.Presenter> { (v: GameViewRateContact.View) -> GameLogicRatePresenter(v, get()) }
+        factory <SettingAccountContact.Presenter> { (v: SettingAccountContact.View) -> SettingAccountPresenter(v, get()) }
+        factory <SettingRootContact.Presenter> { (v: SettingRootContact.View) -> SettingRootPresenter(v, get()) }
+        factory <SettingCardBaseContact.Presenter> { (v: SettingCardBaseContact.View) -> SettingCardBasePresenter(v) }
+        factory <GameRecordRootContact.Presenter> { (v: GameRecordRootContact.View) -> GameRecordRootPresenter(v, get()) }
+        factory <GameRecordListContact.Presenter> { (v: GameRecordListContact.View) -> GameRecordListPresenter(v, get()) }
+        factory <GamePlayBackContact.Presenter> { (v: GamePlayBackContact.View) -> GamePlayBackPresenter(v) }
 
-        factory <SyogiLogicUseCase> {
-            SyogiLogicUseCaseImp(
-                get(),
-                get()
-            )
-        }
+        factory <SyogiLogicUseCase> { SyogiLogicUseCaseImp(get(), get()) }
         factory <AuthenticationUseCase> { AuthenticationUseCaseImp(get()) }
 
         factory <FirebaseRepository> { FirebaseRepositoryImp() }
