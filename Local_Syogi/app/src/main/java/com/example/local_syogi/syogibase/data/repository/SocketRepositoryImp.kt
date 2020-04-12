@@ -38,8 +38,8 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
         // Socket処理定義
         socket.on(Socket.EVENT_CONNECT, connection)
         socket.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
-        socket.on("startGame", onGameStart)
-        socket.on("move", onMove)
+        socket.on("onGameStart", onGameStart)
+        socket.on("onMove", onMove)
         socket.on("onGameEnd", onGameEnd)
     }
 
@@ -103,12 +103,12 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
     // 動かした手を送信する
     override fun moveEmit(gameLog: GameLog) {
         val json = Gson().toJson(gameLog)
-        socket.emit("moveServer", json)
+        socket.emit("move", json)
     }
 
     // 勝敗を送信する
     override fun gameEndEmit(turn: Int) {
-        socket.emit("game-end", turn)
+        socket.emit("gameEnd", turn)
     }
 
     // Activity破棄
@@ -116,8 +116,8 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
         socket.disconnect()
         socket.off(Socket.EVENT_CONNECT, connection)
         socket.off(Socket.EVENT_CONNECT_ERROR, onConnectError)
-        socket.off("startGame", onGameStart)
-        socket.off("move", onMove)
+        socket.off("onGameStart", onGameStart)
+        socket.off("onMove", onMove)
         socket.off("onGameEnd", onGameEnd)
     }
 }
