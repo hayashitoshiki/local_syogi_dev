@@ -85,13 +85,13 @@ class GameSettingSharedPreferences(
 
     // 持ち時間呼び出し
     fun getMinuteBlack(): Int {
-        return prefs.getInt("minuteBlack", 0)
+        return prefs.getInt("minuteBlack", 10)
     }
     fun getSecondBlack(): Int {
         return prefs.getInt("secondBlack", 0)
     }
     fun getMinuteWhite(): Int {
-        return prefs.getInt("minuteWhite", 0)
+        return prefs.getInt("minuteWhite", 10)
     }
     fun getSecondWhite(): Int {
         return prefs.getInt("secondWhite", 0)
