@@ -2,6 +2,8 @@ package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
 import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.remote.Player
 import com.google.gson.Gson
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -20,10 +22,12 @@ import kotlinx.coroutines.withContext
 class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
     SocketRepository {
     private lateinit var socket: Socket
+    private lateinit var player: Player
 
     fun start() {
         val socketUrl = "https://socket-sample-th.herokuapp.com/"
         val uri = URI(socketUrl)
+        player = Player("testA", GameMode.getModeInt())
 
         // 接続
         try {
@@ -48,7 +52,8 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
         GlobalScope.launch {
             withContext(Dispatchers.IO) {
                 Log.d("MainActivity", "接続成功")
-                socket.emit("joinRoom", "room1")
+                val json = Gson().toJson(player)
+                socket.emit("joinRoom", json)
             }
         }
     }
