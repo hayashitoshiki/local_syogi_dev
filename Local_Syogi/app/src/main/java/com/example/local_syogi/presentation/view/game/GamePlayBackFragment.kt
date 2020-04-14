@@ -53,8 +53,15 @@ class GamePlayBackFragment(private val log: MutableList<GameLog>, private val ga
             AlertDialog.Builder(context).setCancelable(false)
                 .setMessage("感想戦を終了しますか？")
                 .setPositiveButton("はい") { _, _ ->
-                    val mActivity = activity as GameActivity
-                    mActivity.end()
+                    val mActivity = activity as? GameActivity
+                    if (mActivity != null) {
+                        mActivity.end()
+                    } else {
+                        val mActivity2 = activity as? GameRateActivity
+                        if (mActivity2 != null) {
+                            mActivity2.end()
+                        }
+                    }
                 }
                 .setNegativeButton("いいえ", null)
                 .create().show()
