@@ -24,6 +24,7 @@ interface GameViewRateContact {
         fun gameEnd(turn: Int)
         // 効果音を鳴らす
         fun playbackEffect()
+        // 指した手を送信する
         fun moveEmit(log: GameLog)
     }
 
@@ -36,8 +37,10 @@ interface GameViewRateContact {
         fun drawView()
         // 成り
         fun evolutionPiece(bool: Boolean)
+        // 対局ログを返す
+        fun getLog(winner: Int): MutableList<GameLog>
 
-        // 駒の動きを受信。受信側は判定を行わない　　viewの変更
+        // 受信したての繁栄
         fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean)
         // ターン変更
         fun setTurn(turn: Int)

@@ -13,6 +13,8 @@ import com.example.local_syogi.R
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.repository.SocketRepository
 import com.example.local_syogi.syogibase.data.repository.SocketRepositoryImp
+import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
+import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import com.example.local_syogi.syogibase.presentation.view.WinLoseModal
 
 class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
@@ -21,7 +23,9 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     lateinit var view: GameRateView
     private lateinit var socketRepository: SocketRepositoryImp
     private lateinit var button2: Button
+    var log = mutableListOf<GameLog>()
     private var isBackButton = true
+    private var first = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +55,11 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     }
 
     // ゲーム終了後画面
-    fun gameEnd(turn: Int) {
+    fun gameEnd(winner: Int) {
+        log = view.getLog(winner)
         val viewGroup = this.findViewById(R.id.frame2) as FrameLayout
         val endView: View = layoutInflater.inflate(R.layout.modal_game_end, viewGroup)
-        val winLoseView: View = WinLoseModal(this, turn)
+        val winLoseView: View = WinLoseModal(this, winner)
         val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
         button2.visibility = View.INVISIBLE
@@ -66,6 +71,10 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     fun end(v: View) {
         finish()
     }
+    // 終了
+    fun end() {
+        finish()
+    }
 
     // もう一度ボタン
     fun restart(v: View) {
@@ -75,17 +84,20 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     }
     // 感想戦ボタン
     fun replay(v: View) {
-//        val button:Button = findViewById(R.id.backStartButton)
-//        val button2:Button = findViewById(R.id.surrender_black)
-//        button.visibility = View.GONE
-//        button2.visibility = View.GONE
-//        supportFragmentManager.beginTransaction()
-//            .setCustomAnimations(
-//                R.anim.fade_in_slide_from_right,
-//                0
-//            )
-//            .replace(R.id.frame, GamePlayBackFragment(log))
-//            .commit()
+        val shared = GameSettingSharedPreferences(this)
+        val gameDetail = GameDetailSetitngModel(
+            shared.getHandyBlack(),
+            shared.getHandyWhite()
+        )
+        val button: Button = findViewById(R.id.surrender_black)
+        button.visibility = View.GONE
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.fade_in_slide_from_right,
+                0
+            )
+            .replace(R.id.frame, GamePlayBackFragment(log, gameDetail))
+            .commit()
     }
 
     // 戻るボタンの無効化
@@ -100,20 +112,26 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         socketRepository.onDestroy()
         Log.d("MainActivity", "socketオフ")
     }
-
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (first) {
+            frame = this.findViewById(R.id.frame) as FrameLayout
+            view = GameRateView(this, this, frame!!.width, frame!!.height)
+            first = false
+        }
+    }
     // 対局開始を受信　自動的 activityの変更
     override fun socketStartGame(turn: Int) {
         isBackButton = false
-        view = GameRateView(this, this)
         frame!!.addView(view, 0)
         button2.visibility = View.VISIBLE
         view.setTurn(turn)
     }
-    // 駒の動きを受信。受信側は判定を行わない　　viewの変更
+    // socketで受信した手の受け取り
     override fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean) {
         view.socketMove(oldX, oldY, newX, newY, evolution)
     }
-    // 勝敗結果を受信
+    // socketで受信した勝敗結果の受け取り
     override fun socketGameEnd(turn: Int) {
         gameEnd(turn)
     }
@@ -121,6 +139,7 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     fun gameEndEmit(turn: Int) {
         socketRepository.gameEndEmit(turn)
     }
+    // 指した手を送信
     fun moveEmit(log: GameLog) {
         socketRepository.moveEmit(log)
     }

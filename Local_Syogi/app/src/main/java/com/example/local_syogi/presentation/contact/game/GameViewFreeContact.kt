@@ -14,6 +14,8 @@ interface GameViewFreeContact {
         fun drawHoldPieceBlack(nameJP: String, stock: Int, count: Int)
         // 後手の持ち駒描画
         fun drawHoldPieceWhite(nameJP: String, stock: Int, count: Int)
+        // 効果音を鳴らす
+        fun playbackEffect()
     }
 
     interface Presenter {

@@ -13,4 +13,4 @@ package com.example.local_syogi.syogibase.data.remote
  *   const val LIMIT = 4
  *   const val TWOTIME = 5
  */
-class Player(private val name:String, private val mode:Int)
+class Player(private val name: String, private val mode: Int)

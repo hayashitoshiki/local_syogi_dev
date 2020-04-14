@@ -148,7 +148,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     // 中断ボタン
-    fun pauseButton(v: View){
+    fun pauseButton(v: View) {
         AlertDialog.Builder(this).setCancelable(false)
             .setMessage("中止しますか？")
             .setPositiveButton("はい") { _, _ ->

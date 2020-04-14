@@ -2,12 +2,13 @@ package com.example.local_syogi.presentation.view.game
 
 import android.content.Context
 import android.graphics.*
+import android.media.AudioAttributes
+import android.media.SoundPool
 import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.game.GameViewFreeContact
-import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.presentation.presenter.game.GameLogicFreePresenter
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
@@ -23,7 +24,7 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
     // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
     private val presenter: GameLogicFreePresenter =
         GameLogicFreePresenter(
-            this as GameViewRateContact.View,
+            this as GameViewFreeContact.View,
             SyogiLogicUseCaseImp(
                 BoardRepositoryImp(),
                 GameRecordRepositoryImp()
@@ -34,6 +35,9 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
     private val paint: Paint = Paint()
 
     private var count = 0
+
+    private lateinit var soundPool: SoundPool
+    private var soundOne = 0
 
     // 画像定義
     private val kingBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_king)
@@ -89,6 +93,17 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
         canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * 15, paint)
         canvas.translate(0f, cw * median)
         presenter.drawView()
+
+        // 音声設定
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+            .build()
+        soundPool = SoundPool.Builder()
+            .setAudioAttributes(audioAttributes)
+            .setMaxStreams(1)
+            .build()
+        soundOne = soundPool.load(context, R.raw.sound_japanese_chess, 1)
     }
 
     private val longPressHandler = Handler()
@@ -234,5 +249,11 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
             goMove()
         }
         invalidate()
+    }
+
+    // 駒音再生
+    override fun playbackEffect() {
+        // play(ロードしたID, 左音量, 右音量, 優先度, ループ, 再生速度)
+        soundPool.play(soundOne, 1.0f, 1.0f, 0, 0, 1.0f)
     }
 }
