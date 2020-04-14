@@ -147,6 +147,18 @@ class GameActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // 中断ボタン
+    fun pauseButton(v: View){
+        AlertDialog.Builder(this).setCancelable(false)
+            .setMessage("中止しますか？")
+            .setPositiveButton("はい") { _, _ ->
+                finish()
+            }
+            .setNegativeButton("いいえ", null)
+            .create()
+            .show()
+    }
+
     // 戻るボタンの無効化
     override fun onBackPressed() {}
 
