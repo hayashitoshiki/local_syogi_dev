@@ -216,8 +216,9 @@ class GameRateView(private val activity: GameRateActivity, context: Context, wid
     }
 
     // 手番変更
-    fun setTurn(turn: Int) {
+    fun setStartTurn(turn: Int) {
         presenter.setTurn(turn)
+        presenter.setStartTurn(turn)
     }
 
     // 指した手を送信

@@ -10,7 +10,9 @@ open class GameEntity : RealmObject() {
     @Required
     open var winner: Int? = 0 // 0:引き分け,1:先手勝利、２：後手勝利
     @Required
-    open var mode: Int? = 0
+    open var type: Int? = 0 // 対戦方法(オフライン or オンライン)
+    @Required
+    open var mode: Int? = 0 // ゲームモード
     @Required
     open var handyBlack: Int? = 0 // 先手の駒落ち
     @Required

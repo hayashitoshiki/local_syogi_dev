@@ -7,7 +7,7 @@ import com.example.local_syogi.syogibase.data.local.RecordEntity
 interface GameRecordRepository {
 
     // 新規対局データ格納
-    fun save(logList: MutableList<GameLog>, winner: Int)
+    fun save(logList: MutableList<GameLog>, winner: Int, type: Int)
     // 全てのモードのタイトルを取得
     fun findTitleByAll(): Array<GameEntity>
     // 特定のモードのタイトルを取得

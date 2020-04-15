@@ -44,5 +44,7 @@ interface GameViewRateContact {
         fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean)
         // ターン変更
         fun setTurn(turn: Int)
+        // 対局開始時の手番を記憶
+        fun setStartTurn(turn: Int)
     }
 }

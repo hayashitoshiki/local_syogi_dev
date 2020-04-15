@@ -12,6 +12,7 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
         const val WHITE = 2
         const val HINT = 3
     }
+    private var startTurn: Int = 1
 
     override fun setReplayView(gameDetail: GameDetailSetitngModel) {}
 
@@ -95,10 +96,18 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
         syogiUseCase.setTurn(turn)
     }
 
+    // 対局開始時の手番を記憶
+    override fun setStartTurn(turn: Int) {
+        startTurn = turn
+    }
+
     // 対局ログを返す
     override fun getLog(winner: Int): MutableList<GameLog> {
-        val log = syogiUseCase.getLog()
-        syogiUseCase.saveTable(log, winner)
+        var log = syogiUseCase.getLog()
+        if (startTurn == WHITE) {
+            log = syogiUseCase.changeLogTurn(log)
+        }
+        syogiUseCase.saveTable(log, winner, 2)
         return log
     }
 }

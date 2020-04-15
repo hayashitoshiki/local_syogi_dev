@@ -1,7 +1,6 @@
 package com.example.local_syogi.presentation.view.record
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,32 +24,48 @@ class GameRecordListFragment : Fragment(), GameRecordListContact.View {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_list_record, container, false)
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
-        val offLineListView: ListView = view.findViewById(R.id.offlinListView)
-        val offLineTextView: TextView = view.findViewById(R.id.offLineMatchEdit)
-        val gameList: MutableList<GameModel> =
+        val onlineListView: ListView = view.findViewById(R.id.onlinListView)
+        val onlineTextView: TextView = view.findViewById(R.id.onlineMatchEdit)
+        val offlineListView: ListView = view.findViewById(R.id.offlinListView)
+        val offlineTextView: TextView = view.findViewById(R.id.offlineMatchEdit)
+        val gameList1: List<GameModel> =
             if (mode == 0) {
-                presenter.getGameAll()
+                presenter.getOnlineGameAll()
             } else {
-                presenter.getGameByMode(mode)
+                presenter.getOnlineGameByMode(mode)
             }
-        val arrayAdapter = CustomBaseAdapter(context!!, android.R.layout.simple_list_item_1, gameList)
+        val gameList2: List<GameModel> =
+            if (mode == 0) {
+                presenter.getOfflineGameAll()
+            } else {
+                presenter.getOfflineGameByMode(mode)
+            }
+        val arrayAdapter1 = CustomBaseAdapter(context!!, android.R.layout.simple_list_item_1, gameList1)
+        val arrayAdapter2 = CustomBaseAdapter(context!!, android.R.layout.simple_list_item_1, gameList2)
 
-        offLineListView.adapter = arrayAdapter
+        onlineListView.adapter = arrayAdapter1
         titleTextView.text = title
-        if (gameList.size != 0) {
-            offLineTextView.text = gameList.size.toString()
+        if (gameList1.isNotEmpty()) {
+            onlineTextView.text = gameList1.size.toString()
+        }
+        offlineListView.adapter = arrayAdapter2
+        titleTextView.text = title
+        if (gameList2.isNotEmpty()) {
+            offlineTextView.text = gameList2.size.toString()
         }
 
         // 項目をタップしたら感想戦画面を開く
-        offLineListView.setOnItemClickListener { parent, view, position, id ->
-            val gameTitle = gameList[position].title
+        onlineListView.setOnItemClickListener { parent, view, position, id ->
+            val gameTitle = gameList1[position].title
             val gameDetail = presenter.getRecordSettingByTitle(gameTitle)
             val log = presenter.getRecordByTitle(gameTitle)
-            var count = 1
-            log.forEach {
-                Log.d("GameLog", "" + count + "手目：" + it.oldX + "." + it.oldY + "," + it.afterPiece + "→" + it.newX + "," + it.newY + "," + it.beforpiece)
-                count++
-            }
+            val mFragment = parentFragment as GameRecordRootFragment
+            mFragment.setRePlayView(log, gameDetail)
+        }
+        offlineListView.setOnItemClickListener { parent, view, position, id ->
+            val gameTitle = gameList2[position].title
+            val gameDetail = presenter.getRecordSettingByTitle(gameTitle)
+            val log = presenter.getRecordByTitle(gameTitle)
             val mFragment = parentFragment as GameRecordRootFragment
             mFragment.setRePlayView(log, gameDetail)
         }

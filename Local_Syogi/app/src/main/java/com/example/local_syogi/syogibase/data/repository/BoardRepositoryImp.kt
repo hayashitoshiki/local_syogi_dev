@@ -27,11 +27,8 @@ class BoardRepositoryImp : BoardRepository {
     override fun setPre(x: Int, y: Int) {
         previousX = x
         previousY = y
-        Log.d("Main", "駒：" + ",x:" + previousX + ",y:" + previousY)
-        Log.d("Main", "駒セット。サイズ：" + logList.size)
         if (y == 10 || y == -1) previousPiece = changeIntToPiece(x)
         else previousPiece = board.cells[previousX][previousY].piece
-        // Log.d("Main","駒："+ board.cells[x][y].piece + ",x:" + previousX +",y:" + previousY)
     }
 
     // 最新手を返す
@@ -71,8 +68,6 @@ class BoardRepositoryImp : BoardRepository {
                 board.cells[previousX][previousY].turn = 0
             }
         }
-        Log.d("Main", "駒：" + board.cells[x][y].piece)
-        Log.d("Main", "サイズ：" + logList.size)
     }
 
     // １手戻す(ヒント)

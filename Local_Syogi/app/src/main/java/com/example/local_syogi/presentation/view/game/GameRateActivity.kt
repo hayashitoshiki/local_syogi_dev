@@ -125,7 +125,7 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         isBackButton = false
         frame!!.addView(view, 0)
         button2.visibility = View.VISIBLE
-        view.setTurn(turn)
+        view.setStartTurn(turn)
     }
     // socketで受信した手の受け取り
     override fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean) {

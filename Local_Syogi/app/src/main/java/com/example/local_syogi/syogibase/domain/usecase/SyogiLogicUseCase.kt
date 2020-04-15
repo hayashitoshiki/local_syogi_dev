@@ -63,7 +63,7 @@ interface SyogiLogicUseCase {
     // 一手戻す
     fun setBackMove()
     // DBに保存
-    fun saveTable(log: MutableList<GameLog>, winner: Int)
+    fun saveTable(log: MutableList<GameLog>, winner: Int, type: Int)
     // 全ての棋譜リストを取得する
     fun getGameAll(): MutableList<GameModel>
     // 特定の種類の棋譜リストを取得する
@@ -72,4 +72,6 @@ interface SyogiLogicUseCase {
     fun getRecordByTitle(title: String): MutableList<GameLog>
     // 指定した対局の設定取得
     fun getRecordSettingByTitle(title: String): GameDetailSetitngModel
+    // 通信対戦でもし後手を引いたらlogファイルの手番変更
+    fun changeLogTurn(logList: MutableList<GameLog>): MutableList<GameLog>
 }

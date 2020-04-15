@@ -412,7 +412,6 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     // 対局ログを返す
     override fun getLog(): MutableList<GameLog> {
         val log = boardRepository.getLog()
-        Log.d("Main", "サイズ：" + log.size)
         return log
     }
 
@@ -422,8 +421,8 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     }
 
     // DBに保存
-    override fun saveTable(log: MutableList<GameLog>, winner: Int) {
-        recordRepository.save(log, winner)
+    override fun saveTable(log: MutableList<GameLog>, winner: Int, type: Int) {
+        recordRepository.save(log, winner, type)
     }
 
     // 全ての棋譜リストを取得する
@@ -431,7 +430,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         val titlesList = recordRepository.findTitleByAll()
         val titleList = mutableListOf<GameModel>()
         titlesList.forEach {
-            titleList.add(GameModel(it.title!!, it.winner!!))
+            titleList.add(GameModel(it.title!!, it.winner!!, it.type!!))
         }
         return titleList
     }
@@ -440,7 +439,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         val titlesList = recordRepository.findTitleByMode(mode)
         val titleList = mutableListOf<GameModel>()
         titlesList.forEach {
-            titleList.add(GameModel(it.title!!, it.winner!!))
+            titleList.add(GameModel(it.title!!, it.winner!!, it.type!!))
         }
         return titleList
     }
@@ -473,6 +472,53 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         return gameDetail
     }
 
+    // 棋譜の手番変更
+    override fun changeLogTurn(logList: MutableList<GameLog>): MutableList<GameLog> {
+        val newLogList = mutableListOf<GameLog>()
+        logList.forEach {
+            val oldY = changeY(it.oldY)
+            val oldX = changeX(it.oldX, oldY)
+            val newY = changeY(it.newY)
+            val newX = changeX(it.newX, newY)
+            val log = GameLog(
+                oldX,
+                oldY,
+                it.afterPiece,
+                changeTurn(it.afterTurn),
+                newX,
+                newY,
+                it.beforpiece,
+                changeTurn(it.beforturn),
+                it.evolution)
+            newLogList.add(log)
+        }
+        return newLogList
+    }
+
+    // 持ち駒の場合と盤上の場合を加味してX軸の反転
+    private fun changeX(x: Int, y: Int): Int {
+        return when (y) {
+            -1, 10 -> x
+            else -> 8 - x
+        }
+    }
+    private fun changeY(y: Int): Int {
+        return when (y) {
+            -1 -> 10
+            10 -> -1
+            else -> 8 - y
+        }
+    }
+
+    // 手番変更
+    private fun changeTurn(turn: Int): Int {
+        return when (turn) {
+            BLACK -> WHITE
+            WHITE -> BLACK
+            else -> 0
+        }
+    }
+
     // 千日手判定
     override fun isRepetitionMove(): Boolean {
         positionList.forEach { (_, v) ->
@@ -494,18 +540,4 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         }
         return false
     }
-
-//    //DBから指定の対局のを取り出す
-//    override fun gteRecordByTitle(title:String){
-//        //val titleList = recordRepository.findTitleByAll()
-//        //val title:String? = titleList.first().title
-//        if(title != null){
-//            val logList = recordRepository.findRecordByTitle(title)
-//            for(log in logList){
-//                Log.d("Realm","棋譜：" + log.fromX + "," + log.fromY + "" + log.toPiece)
-//            }
-//        }else{
-//            Log.d("Realm","タイトルがありません")
-//        }
-//    }
 }
