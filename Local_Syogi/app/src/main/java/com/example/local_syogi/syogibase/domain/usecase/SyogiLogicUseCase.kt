@@ -72,4 +72,6 @@ interface SyogiLogicUseCase {
     fun getRecordByTitle(title: String): MutableList<GameLog>
     // 指定した対局の設定取得
     fun getRecordSettingByTitle(title: String): GameDetailSetitngModel
+    // 通信対戦でもし後手を引いたらlogファイルの手番変更
+    fun changeLogTurn(logList: MutableList<GameLog>): MutableList<GameLog>
 }
