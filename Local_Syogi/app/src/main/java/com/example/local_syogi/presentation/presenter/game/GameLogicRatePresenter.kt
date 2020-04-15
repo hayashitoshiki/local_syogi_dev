@@ -98,7 +98,7 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
     // 対局ログを返す
     override fun getLog(winner: Int): MutableList<GameLog> {
         val log = syogiUseCase.getLog()
-        syogiUseCase.saveTable(log, winner)
+        syogiUseCase.saveTable(log, winner, 2)
         return log
     }
 }

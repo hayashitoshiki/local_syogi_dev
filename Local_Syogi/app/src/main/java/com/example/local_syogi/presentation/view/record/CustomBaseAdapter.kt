@@ -13,7 +13,7 @@ import com.example.local_syogi.syogibase.domain.model.GameModel
  *CustomListViewの生成用クラス
  */
 
-internal class CustomBaseAdapter(context: Context?, private val resourcedId: Int, private val items: MutableList<GameModel>) : BaseAdapter() {
+internal class CustomBaseAdapter(context: Context?, private val resourcedId: Int, private val items: List<GameModel>) : BaseAdapter() {
     private val inflater: LayoutInflater
     private lateinit var holder: ViewHolder
 
