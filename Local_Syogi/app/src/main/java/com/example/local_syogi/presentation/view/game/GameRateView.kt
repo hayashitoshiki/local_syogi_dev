@@ -51,7 +51,7 @@ class GameRateView(private val activity: GameRateActivity, context: Context, wid
     } // 将棋盤の高さ
     private var cw: Float = bw / 9 // １マスの幅
     private var ch: Float = bh / 9 // １マスの高さ
-    private val median = 3 // 盤の位置　中央値：３ 範囲：０～６
+    private val median = 1 // 盤の位置　中央値：３ 範囲：０～６
 
     private lateinit var soundPool: SoundPool
     private var soundOne = 0
