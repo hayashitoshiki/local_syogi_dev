@@ -1,0 +1,16 @@
+package com.example.local_syogi.syogibase.data.remote
+
+import com.example.local_syogi.syogibase.util.Piece
+
+class DtoMove(
+    val toX: Int,
+    val toY: Int,
+    val toPiece: Piece,
+    val toTurn: Int,
+    val fromX: Int,
+    val fromY: Int,
+    val fromPiece: Piece,
+    val fromTurn: Int,
+    val evolution: Boolean,
+    val countNumber: Long
+)

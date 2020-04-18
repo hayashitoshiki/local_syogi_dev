@@ -5,16 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.setting.SettingSyogiBaseContact
 import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 class SettingSyogiBaseFragment : Fragment(), SettingSyogiBaseContact.View {
 
     private val presenter: SettingSyogiBaseContact.Presenter by inject { parametersOf(this) }
+
+    private lateinit var radioButton3: RadioButton
+    private lateinit var radioButton5: RadioButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,16 @@ class SettingSyogiBaseFragment : Fragment(), SettingSyogiBaseContact.View {
             else -> inflater.inflate(R.layout.fragment_usually_syogi, container, false)
         }
         val button = view.findViewById(R.id.startButton) as Button
+        val sharedPreferences = GameSettingSharedPreferences(context!!)
+        radioButton3 = view.findViewById(R.id.radioButton3)
+        radioButton5 = view.findViewById(R.id.radioButton5)
+        when (sharedPreferences.getRateTimeLimit()) {
+            3 * 60 * 1000 -> radioButton3.isChecked = true
+            5 * 60 * 1000 -> radioButton5.isChecked = true
+        }
+        if (card == 1) {
+            setOfflineMode()
+        }
 
         // UI処理
         button.setOnClickListener {
@@ -48,7 +63,29 @@ class SettingSyogiBaseFragment : Fragment(), SettingSyogiBaseContact.View {
             val mActivity: SettingRootFragment = parentFragment as SettingRootFragment
             mActivity.fadeOut()
         }
-        return view
+        radioButton3.setOnCheckedChangeListener { _, _ ->
+            if (radioButton3.isChecked) {
+                radioButton5.isChecked = false
+                sharedPreferences.setRateTimeLimit(3 * 60 * 1000)
+            }
+        }
+        radioButton5.setOnCheckedChangeListener { _, _ ->
+            if (radioButton5.isChecked) {
+                radioButton3.isChecked = false
+                sharedPreferences.setRateTimeLimit(5 * 60 * 1000)
+            }
+        }
+            return view
+    }
+
+    fun setOnlineMode() {
+        radioButton3.visibility = View.VISIBLE
+        radioButton5.visibility = View.VISIBLE
+    }
+
+    fun setOfflineMode() {
+        radioButton3.visibility = View.INVISIBLE
+        radioButton5.visibility = View.INVISIBLE
     }
 
     companion object {
@@ -62,11 +99,19 @@ class SettingSyogiBaseFragment : Fragment(), SettingSyogiBaseContact.View {
          * ５：持ち駒制限将棋
          * ６：クイーン将棋
          */
+        var card = 1
+
+        /**
+         * cardの引数
+         * １：オフライン対戦
+         * ２：オンライン対戦
+         */
 
         @JvmStatic
-        fun newInstance(mode: Int): SettingSyogiBaseFragment {
+        fun newInstance(mode: Int, card: Int): SettingSyogiBaseFragment {
             val fragment = SettingSyogiBaseFragment()
             this.mode = mode
+            this.card = card
             return fragment
         }
     }

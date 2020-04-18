@@ -32,6 +32,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
     private lateinit var view2: ConstraintLayout
     private lateinit var tabFrame: FrameLayout
     private lateinit var modeFrame: FrameLayout
+    private var syogiBaseFragment: SettingSyogiBaseFragment? = null
     private lateinit var title: TextView
     private var tab = -1
 
@@ -100,6 +101,7 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
         if (title.visibility != View.GONE) {
             firstChoice()
         }
+        syogiBaseFragment = fragment as SettingSyogiBaseFragment
         childFragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.fade_in_slide,
@@ -146,6 +148,12 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
                 )
             )
             .commit()
+        if (syogiBaseFragment != null) {
+            when (mode) {
+                1 -> syogiBaseFragment!!.setOfflineMode()
+                2 -> syogiBaseFragment!!.setOnlineMode()
+            }
+        }
     }
 
     // タブカード回転
@@ -163,6 +171,12 @@ class SettingRootFragment : Fragment(), SettingRootContact.View, OnBackPressedLi
                 )
             )
             .commit()
+        if (syogiBaseFragment != null) {
+            when (mode) {
+                1 -> syogiBaseFragment!!.setOfflineMode()
+                2 -> syogiBaseFragment!!.setOnlineMode()
+            }
+        }
     }
 
     // 対局開始判定ロジックへ
