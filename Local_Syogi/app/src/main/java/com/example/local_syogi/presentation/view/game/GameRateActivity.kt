@@ -2,11 +2,13 @@ package com.example.local_syogi.presentation.view.game
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
@@ -16,6 +18,9 @@ import com.example.local_syogi.syogibase.data.repository.SocketRepositoryImp
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import com.example.local_syogi.syogibase.presentation.view.WinLoseModal
+import com.example.local_syogi.syogibase.util.IntUtil
+import java.text.SimpleDateFormat
+import java.util.*
 
 class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
 
@@ -27,6 +32,14 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     private var isBackButton = true
     private var first = true
 
+    private val dataFormat = SimpleDateFormat("mm:ss", Locale.US)
+    private var countDownTimerWhite: CountDownWhite? = null
+    private var countDownTimerBlack: CountDownBlack? = null
+    private var countNumberWhite: Long = 0
+    private var countNumberBlack: Long = 0
+    private lateinit var timerWhite: TextView
+    private lateinit var timerBlack: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_rate)
@@ -37,6 +50,17 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         frame = this.findViewById(R.id.frame) as FrameLayout
         button2 = findViewById(R.id.surrender_black)
         button2.visibility = View.INVISIBLE
+
+        val sharedPreferences = GameSettingSharedPreferences(this)
+        val rateTimeLimit = sharedPreferences.getRateTimeLimit().toLong()
+        countNumberWhite = rateTimeLimit
+        countNumberBlack = rateTimeLimit
+        timerWhite = findViewById(R.id.timerWhite)
+        timerBlack = findViewById(R.id.timerBlack)
+        timerWhite.visibility = View.INVISIBLE
+        timerBlack.visibility = View.INVISIBLE
+        timerWhite.text = dataFormat.format(countNumberWhite)
+        timerBlack.text = dataFormat.format(countNumberBlack)
     }
 
     // 投了ボタン
@@ -63,6 +87,8 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
         button2.visibility = View.INVISIBLE
+        timerWhite.visibility = View.INVISIBLE
+        timerBlack.visibility = View.INVISIBLE
         frame!!.addView(winLoseView, 1)
         endView.startAnimation(animation)
     }
@@ -89,8 +115,9 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
             shared.getHandyBlack(),
             shared.getHandyWhite()
         )
-        val button: Button = findViewById(R.id.surrender_black)
-        button.visibility = View.GONE
+        button2.visibility = View.GONE
+        timerWhite.visibility = View.GONE
+        timerBlack.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.fade_in_slide_from_right,
@@ -125,22 +152,75 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         isBackButton = false
         frame!!.addView(view, 0)
         button2.visibility = View.VISIBLE
+        timerWhite.visibility = View.VISIBLE
+        timerBlack.visibility = View.VISIBLE
         view.setStartTurn(turn)
     }
+
     // socketで受信した手の受け取り
-    override fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean) {
+    override fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean, countNumberWhite: Long) {
         view.socketMove(oldX, oldY, newX, newY, evolution)
+        this.countNumberWhite = countNumberWhite
+        changeTimerBlack()
     }
+
     // socketで受信した勝敗結果の受け取り
     override fun socketGameEnd(turn: Int) {
         gameEnd(turn)
     }
+
     // 投了通知→勝敗結果通知
     fun gameEndEmit(turn: Int) {
         socketRepository.gameEndEmit(turn)
     }
+
     // 指した手を送信
     fun moveEmit(log: GameLog) {
-        socketRepository.moveEmit(log)
+        changeTimerWhite()
+        socketRepository.moveEmit(log, countNumberBlack)
+    }
+
+    // 手番(タイマー)チェンジ
+    fun changeTimerBlack() {
+        if (countDownTimerWhite != null) {
+            countDownTimerWhite!!.cancel()
+        }
+        countDownTimerBlack = CountDownBlack(countNumberBlack, 10) // countMillisを残り時間にセット
+        countDownTimerBlack!!.start() // タイマーをスタート
+    }
+    fun changeTimerWhite() {
+        if (countDownTimerBlack != null) {
+            countDownTimerBlack!!.cancel()
+        }
+        countDownTimerWhite = CountDownWhite(countNumberWhite, 10) // countMillisを残り時間にセット
+        countDownTimerWhite!!.start() // タイマーをスタート
+    }
+
+    // タイマー機能
+    internal inner class CountDownWhite(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        // 時間切れ
+        override fun onFinish() {
+            timerWhite.text = dataFormat.format(0)
+        }
+        // インターバルで呼ばれる
+        override fun onTick(millisUntilFinished: Long) {
+            timerWhite.text = dataFormat.format(millisUntilFinished)
+            countNumberWhite = millisUntilFinished
+        }
+    }
+    internal inner class CountDownBlack(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        // 時間切れ
+        override fun onFinish() {
+            timerBlack.text = dataFormat.format(0)
+            gameEnd(IntUtil.WHITE)
+            gameEndEmit(IntUtil.BLACK)
+        }
+        // インターバルで呼ばれる
+        override fun onTick(millisUntilFinished: Long) {
+            timerBlack.text = dataFormat.format(millisUntilFinished)
+            countNumberBlack = millisUntilFinished
+        }
     }
 }

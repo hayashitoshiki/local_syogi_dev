@@ -48,25 +48,25 @@ class SettingCardBaseFragment : Fragment() {
 
         // ボタン押下
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
-            SettingSyogiBaseFragment.newInstance(1)
+            SettingSyogiBaseFragment.newInstance(1, mode)
         ) }
         annanButton.setOnClickListener { changeMode(annanButton,
-            SettingSyogiBaseFragment.newInstance(3)
+            SettingSyogiBaseFragment.newInstance(3, mode)
         ) }
         queenButton.setOnClickListener { changeMode(queenButton,
-            SettingSyogiBaseFragment.newInstance(6)
+            SettingSyogiBaseFragment.newInstance(6, mode)
         ) }
         secondButton.setOnClickListener { changeMode(secondButton,
-            SettingSyogiBaseFragment.newInstance(4)
+            SettingSyogiBaseFragment.newInstance(4, mode)
         ) }
         checkmateButton.setOnClickListener { changeMode(checkmateButton,
-            SettingSyogiBaseFragment.newInstance(2)
+            SettingSyogiBaseFragment.newInstance(2, mode)
         ) }
         pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,
-            SettingSyogiBaseFragment.newInstance(5)
+            SettingSyogiBaseFragment.newInstance(5, mode)
         ) }
         chaosButton.setOnClickListener { changeMode(chaosButton,
-            SettingSyogiBaseFragment.newInstance(7)
+            SettingSyogiBaseFragment.newInstance(7, mode)
         ) }
         return view
     }

@@ -27,5 +27,7 @@ interface SettingRootContact {
         fun startGame()
         // Modeリセット(これを入れないとなぜか初期化されない)
         fun initMode()
+        // mode(FREE or RATE)を返す
+        fun getMode(): Int
     }
 }

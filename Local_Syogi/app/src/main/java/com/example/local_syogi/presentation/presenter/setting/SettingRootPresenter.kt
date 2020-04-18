@@ -17,6 +17,10 @@ class SettingRootPresenter(private val view: SettingRootContact.View, private va
         mode = FREE
     }
 
+    override fun getMode(): Int {
+        return mode
+    }
+
     // ログイン状態判定
     override fun isAuth(): Boolean {
         return firebase.isAuth()

@@ -1,9 +1,12 @@
 package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
+import com.example.local_syogi.di.MyApplication
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
-import com.example.local_syogi.syogibase.data.remote.Player
+import com.example.local_syogi.syogibase.data.remote.DtoMove
+import com.example.local_syogi.syogibase.data.remote.DtoPlayer
+import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import com.google.gson.Gson
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -22,12 +25,13 @@ import kotlinx.coroutines.withContext
 class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
     SocketRepository {
     private lateinit var socket: Socket
-    private lateinit var player: Player
+    private lateinit var player: DtoPlayer
 
     fun start() {
         val socketUrl = "https://socket-sample-th.herokuapp.com/"
         val uri = URI(socketUrl)
-        player = Player("testA", GameMode.getModeInt())
+        val sharedPreferences = GameSettingSharedPreferences(MyApplication.getInstance().applicationContext)
+        player = DtoPlayer("testA", GameMode.getModeInt() + sharedPreferences.getRateTimeLimit())
 
         // 接続
         try {
@@ -87,27 +91,38 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
 
     // 相手が指した手を受信する
     private val onMove = Emitter.Listener { json ->
-        val data2 = json[0].toString()
-        val company = Gson().fromJson(data2, GameLog::class.java)
-        GlobalScope.launch {
-            withContext(Dispatchers.IO) {
+        val data = json[0].toString()
+        val dtoMove = Gson().fromJson(data, DtoMove::class.java)
+        GlobalScope.launch(Dispatchers.Main) {
                 val (oldY, oldX) =
-                    when (company.oldY) {
-                        -1 -> Pair(10, company.oldX)
-                        10 -> Pair(-1, company.oldX)
-                        else -> Pair(8 - company.oldY, 8 - company.oldX)
+                    when (dtoMove.toY) {
+                        -1 -> Pair(10, dtoMove.toX)
+                        10 -> Pair(-1, dtoMove.toX)
+                        else -> Pair(8 - dtoMove.toY, 8 - dtoMove.toX)
                     }
-                val newX = 8 - company.newX
-                val newY = 8 - company.newY
-                val evolution = company.evolution
-                presenter.socketMove(oldX, oldY, newX, newY, evolution)
-            }
+                val newX = 8 - dtoMove.fromX
+                val newY = 8 - dtoMove.fromY
+                val evolution = dtoMove.evolution
+                val countNumberBlack = dtoMove.countNumber
+                presenter.socketMove(oldX, oldY, newX, newY, evolution, countNumberBlack)
         }
     }
 
     // 動かした手を送信する
-    override fun moveEmit(gameLog: GameLog) {
-        val json = Gson().toJson(gameLog)
+    override fun moveEmit(gameLog: GameLog, countNumberBlack: Long) {
+        val jsonData = DtoMove(
+            gameLog.oldX,
+            gameLog.oldY,
+            gameLog.afterPiece,
+            gameLog.afterTurn,
+            gameLog.newX,
+            gameLog.newY,
+            gameLog.beforpiece,
+            gameLog.beforturn,
+            gameLog.evolution,
+            countNumberBlack
+        )
+        val json = Gson().toJson(jsonData)
         socket.emit("move", json)
     }
 
