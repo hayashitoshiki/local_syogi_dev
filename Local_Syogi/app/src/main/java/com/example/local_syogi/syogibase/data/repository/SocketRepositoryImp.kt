@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.local_syogi.di.MyApplication
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.remote.DtoEndInfo
 import com.example.local_syogi.syogibase.data.remote.DtoMove
 import com.example.local_syogi.syogibase.data.remote.DtoPlayer
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
@@ -76,16 +77,16 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
         GlobalScope.launch(Dispatchers.Main) {
             val data2 = data[0].toString()
             val turn = data2.toInt()
-            presenter.socketStartGame(turn)
+            presenter.socketStartGame(turn, "socket敵")
         }
     }
 
     // 対局終了
-    private val onGameEnd = Emitter.Listener { data ->
+    private val onGameEnd = Emitter.Listener { json ->
         GlobalScope.launch(Dispatchers.Main) {
-            val data2 = data[0].toString()
-            val winnerTurn = data2.toInt()
-            presenter.socketGameEnd(winnerTurn)
+            val data = json[0].toString()
+            val dtoMove = Gson().fromJson(data, DtoEndInfo::class.java)
+            presenter.socketGameEnd(dtoMove.turn, dtoMove.winType)
         }
     }
 
@@ -127,8 +128,10 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
     }
 
     // 勝敗を送信する
-    override fun gameEndEmit(turn: Int) {
-        socket.emit("gameEnd", turn)
+    override fun gameEndEmit(turn: Int, winType: Int) {
+        val jsonData = DtoEndInfo(turn, winType)
+        val json = Gson().toJson(jsonData)
+        socket.emit("gameEnd", json)
     }
 
     // Activity破棄

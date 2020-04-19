@@ -21,7 +21,7 @@ interface GameViewRateContact {
         // 成るか判断するダイアログ生成
         fun showDialog()
         // 詰んだことをActivityに知らせる
-        fun gameEnd(turn: Int)
+        fun gameEnd(turn: Int, winType: Int)
         // 効果音を鳴らす
         fun playbackEffect()
         // 指した手を送信する
@@ -37,8 +37,10 @@ interface GameViewRateContact {
         fun drawView()
         // 成り
         fun evolutionPiece(bool: Boolean)
+        // 対局者を設定する
+        fun setUser(whiteUser: String)
         // 対局ログを返す
-        fun getLog(winner: Int): MutableList<GameLog>
+        fun endLogic(winner: Int, winType: Int): MutableList<GameLog>
 
         // 受信したての繁栄
         fun socketMove(oldX: Int, oldY: Int, newX: Int, newY: Int, evolution: Boolean)

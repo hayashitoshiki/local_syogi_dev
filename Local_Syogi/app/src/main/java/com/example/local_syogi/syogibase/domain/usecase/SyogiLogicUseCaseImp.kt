@@ -421,8 +421,8 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     }
 
     // DBに保存
-    override fun saveTable(log: MutableList<GameLog>, winner: Int, type: Int) {
-        recordRepository.save(log, winner, type)
+    override fun saveTable(log: MutableList<GameLog>, winner: Int, type: Int, blackName: String, whiteName: String, winType: Int) {
+        recordRepository.save(log, winner, type, blackName, whiteName, winType)
     }
 
     // 全ての棋譜リストを取得する
@@ -430,7 +430,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         val titlesList = recordRepository.findTitleByAll()
         val titleList = mutableListOf<GameModel>()
         titlesList.forEach {
-            titleList.add(GameModel(it.title!!, it.winner!!, it.type!!))
+            titleList.add(GameModel(it.title!!, it.winner!!, it.winType!!, it.type!!, it.turnCount!!, it.blackName!!, it.whiteName!!))
         }
         return titleList
     }
@@ -439,7 +439,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         val titlesList = recordRepository.findTitleByMode(mode)
         val titleList = mutableListOf<GameModel>()
         titlesList.forEach {
-            titleList.add(GameModel(it.title!!, it.winner!!, it.type!!))
+            titleList.add(GameModel(it.title!!, it.winner!!, it.winType!!, it.type!!, it.turnCount!!, it.blackName!!, it.whiteName!!))
         }
         return titleList
     }

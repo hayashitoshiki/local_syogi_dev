@@ -71,16 +71,16 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         AlertDialog.Builder(this)
             .setMessage("投了しますか？")
             .setPositiveButton("はい") { _, _ ->
-                gameEnd(turn)
-                gameEndEmit(turn)
+                gameEnd(turn, 2)
+                gameEndEmit(turn, 2)
             }
             .setNegativeButton("いいえ", null)
             .show()
     }
 
     // ゲーム終了後画面
-    fun gameEnd(winner: Int) {
-        log = view.getLog(winner)
+    fun gameEnd(winner: Int, winType: Int) {
+        log = view.getLog(winner, winType)
         val viewGroup = this.findViewById(R.id.frame2) as FrameLayout
         val endView: View = layoutInflater.inflate(R.layout.modal_game_end, viewGroup)
         val winLoseView: View = WinLoseModal(this, winner)
@@ -148,13 +148,13 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         }
     }
     // 対局開始を受信　自動的 activityの変更
-    override fun socketStartGame(turn: Int) {
+    override fun socketStartGame(turn: Int, whiteName: String) {
         isBackButton = false
         frame!!.addView(view, 0)
         button2.visibility = View.VISIBLE
         timerWhite.visibility = View.VISIBLE
         timerBlack.visibility = View.VISIBLE
-        view.setStartTurn(turn)
+        view.setStartTurn(turn, whiteName)
     }
 
     // socketで受信した手の受け取り
@@ -165,13 +165,13 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     }
 
     // socketで受信した勝敗結果の受け取り
-    override fun socketGameEnd(turn: Int) {
-        gameEnd(turn)
+    override fun socketGameEnd(turn: Int, winType: Int) {
+        gameEnd(turn, winType)
     }
 
     // 投了通知→勝敗結果通知
-    fun gameEndEmit(turn: Int) {
-        socketRepository.gameEndEmit(turn)
+    fun gameEndEmit(turn: Int, winType: Int) {
+        socketRepository.gameEndEmit(turn, winType)
     }
 
     // 指した手を送信
@@ -214,8 +214,8 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         // 時間切れ
         override fun onFinish() {
             timerBlack.text = dataFormat.format(0)
-            gameEnd(IntUtil.WHITE)
-            gameEndEmit(IntUtil.BLACK)
+            gameEnd(IntUtil.WHITE, 4)
+            gameEndEmit(IntUtil.BLACK, 4)
         }
         // インターバルで呼ばれる
         override fun onTick(millisUntilFinished: Long) {

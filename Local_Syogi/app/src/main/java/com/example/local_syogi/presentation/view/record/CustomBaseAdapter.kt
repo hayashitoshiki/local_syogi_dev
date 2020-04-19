@@ -18,9 +18,13 @@ internal class CustomBaseAdapter(context: Context?, private val resourcedId: Int
     private lateinit var holder: ViewHolder
 
     internal class ViewHolder {
-        var BlackResultTextView: TextView? = null
+        var blackResultTextView: TextView? = null
+        var whiteResultTextView: TextView? = null
+        var blackAccountTextView: TextView? = null
+        var whiteAccountTextView: TextView? = null
+        var turnCountTextView: TextView? = null
+        var winTypeTextView: TextView? = null
         var titleTextView: TextView? = null
-        var WhiteResultTextView: TextView? = null
     }
 
     init {
@@ -38,26 +42,48 @@ internal class CustomBaseAdapter(context: Context?, private val resourcedId: Int
             holder = view.tag as ViewHolder
         }
 
-        holder.BlackResultTextView = view?.findViewById(R.id.BlackResultTextView)
+        holder.blackAccountTextView = view?.findViewById(R.id.blackAccountTextView)
+        holder.whiteAccountTextView = view?.findViewById(R.id.whiteAccountTextView)
+        holder.blackResultTextView = view?.findViewById(R.id.BlackResultTextView)
+        holder.whiteResultTextView = view?.findViewById(R.id.WhiteResultTextView)
+        holder.turnCountTextView = view?.findViewById(R.id.turnCountTextView)
+        holder.winTypeTextView = view?.findViewById(R.id.winTypeTextView)
         holder.titleTextView = view?.findViewById(R.id.titleTextView)
-        holder.WhiteResultTextView = view?.findViewById(R.id.WhiteResultTextView)
+
+        holder.blackAccountTextView?.text = items[position].blackName
+        holder.whiteAccountTextView?.text = items[position].whiteName
+        holder.turnCountTextView?.text = items[position].turnCount.toString() + "手"
+        holder.winTypeTextView?.text = changeTurnCountToString(items[position].winType)
         holder.titleTextView?.text = items[position].title
         view!!.tag = holder
         when (items[position].winner) {
             1 -> {
-                holder.BlackResultTextView?.text = "〇"
-                holder.WhiteResultTextView?.text = "●"
+                holder.blackResultTextView?.text = "〇"
+                holder.whiteResultTextView?.text = "●"
             }
             2 -> {
-            holder.BlackResultTextView?.text = "●"
-            holder.WhiteResultTextView?.text = "〇"
+            holder.blackResultTextView?.text = "●"
+            holder.whiteResultTextView?.text = "〇"
             }
             else -> {
-                holder.BlackResultTextView?.text = "△"
-                holder.WhiteResultTextView?.text = "△"
+                holder.blackResultTextView?.text = "△"
+                holder.whiteResultTextView?.text = "△"
             }
     }
         return view
+    }
+
+    private fun changeTurnCountToString(turnCount: Int): String {
+        return when (turnCount) {
+            0 -> "引き分け"
+            1 -> "詰み"
+            2 -> "投了"
+            3 -> "接続切れ"
+            4 -> "時間切れ"
+            5 -> "トライ"
+            6 -> "特殊"
+            else -> "不正データ"
+        }
     }
 
     // ListViewの数

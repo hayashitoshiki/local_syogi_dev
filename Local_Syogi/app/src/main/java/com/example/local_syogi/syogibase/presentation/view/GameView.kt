@@ -203,8 +203,8 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
     }
 
     // 終了ダイアログ表示
-    override fun gameEnd(turn: Int) {
-        activity.gameEnd(turn)
+    override fun gameEnd(turn: Int, winType: Int) {
+        activity.gameEnd(turn, winType)
     }
 
     // 駒音再生
@@ -214,8 +214,8 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
     }
 
     // 対局ログを返す
-    fun getLog(winner: Int): MutableList<GameLog> {
-        val log = presenter.getLog(winner)
+    fun getLog(winner: Int, winType: Int): MutableList<GameLog> {
+        val log = presenter.getLog(winner, winType)
         return log
     }
 

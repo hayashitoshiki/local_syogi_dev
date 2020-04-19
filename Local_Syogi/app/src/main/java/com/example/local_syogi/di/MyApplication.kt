@@ -60,7 +60,7 @@ class MyApplication : Application() {
     private val module: Module = module {
         factory <SettingSyogiBaseContact.Presenter> { (v: SettingSyogiBaseContact.View) -> SettingSyogiBasePresenter(v) }
         factory <GameViewContact.Presenter> { (v: GameViewContact.View) -> GameLogicPresenter(v, get()) }
-        factory <GameViewRateContact.Presenter> { (v: GameViewRateContact.View) -> GameLogicRatePresenter(v, get()) }
+        factory <GameViewRateContact.Presenter> { (v: GameViewRateContact.View) -> GameLogicRatePresenter(v, get(), get()) }
         factory <SettingAccountContact.Presenter> { (v: SettingAccountContact.View) -> SettingAccountPresenter(v, get()) }
         factory <SettingRootContact.Presenter> { (v: SettingRootContact.View) -> SettingRootPresenter(v, get()) }
         factory <SettingCardBaseContact.Presenter> { (v: SettingCardBaseContact.View) -> SettingCardBasePresenter(v) }

@@ -20,7 +20,7 @@ interface GameViewContact {
         // 成るか判断するダイアログ生成
         fun showDialog()
         // 対局終了モーダル生成
-        fun gameEnd(turn: Int)
+        fun gameEnd(turn: Int, winType: Int)
         // 効果音を鳴らす
         fun playbackEffect()
         // 手番チェンジ(チェスクロ変更など)
@@ -38,6 +38,6 @@ interface GameViewContact {
         fun evolutionPiece(bool: Boolean)
 
         // 対局ログを返す
-        fun getLog(winner: Int): MutableList<GameLog>
+        fun getLog(winner: Int, winType: Int): MutableList<GameLog>
     }
 }
