@@ -197,10 +197,10 @@ class GameRateView(private val activity: GameRateActivity, context: Context, wid
     }
 
     // 終了ダイアログ表示
-    override fun gameEnd(turn: Int) {
-        activity.gameEnd(turn)
+    override fun gameEnd(turn: Int, winType: Int) {
+        activity.gameEnd(turn, winType)
         val winTurn = if (turn == 1) 2 else 1
-        activity.gameEndEmit(winTurn)
+        activity.gameEndEmit(winTurn, winType)
     }
 
     // 駒音再生
@@ -216,9 +216,10 @@ class GameRateView(private val activity: GameRateActivity, context: Context, wid
     }
 
     // 手番変更
-    fun setStartTurn(turn: Int) {
+    fun setStartTurn(turn: Int, whiteName: String) {
         presenter.setTurn(turn)
         presenter.setStartTurn(turn)
+        presenter.setUser(whiteName)
     }
 
     // 指した手を送信
@@ -227,8 +228,8 @@ class GameRateView(private val activity: GameRateActivity, context: Context, wid
     }
 
     // 対局ログを返す
-    fun getLog(winner: Int): MutableList<GameLog> {
-        val log = presenter.getLog(winner)
+    fun getLog(winner: Int, winType: Int): MutableList<GameLog> {
+        val log = presenter.endLogic(winner, winType)
         return log
     }
 }

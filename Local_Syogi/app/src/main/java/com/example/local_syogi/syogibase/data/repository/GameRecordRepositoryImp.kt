@@ -38,17 +38,21 @@ class GameRecordRepositoryImp : GameRecordRepository {
     }
 
     // 新規対局データ格納
-    override fun save(logList: MutableList<GameLog>, winner: Int, type: Int) {
+    override fun save(logList: MutableList<GameLog>, winner: Int, type: Int, blackName: String, whiteName: String, winType: Int) {
         val title = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss"))
         updateRealm()
 
         realm.executeTransaction {
             val game = realm.createObject(GameEntity::class.java, title)
             game.winner = winner
+            game.winType = winType
+            game.blackName = blackName
+            game.whiteName = whiteName
             game.mode = GameMode.getModeInt()
             game.type = type
             game.handyBlack = GameSetting.handiBlack
             game.handyWhite = GameSetting.handiWhite
+            game.turnCount = logList.size
             realm.copyToRealm(game)
         }
         for (log in logList) {

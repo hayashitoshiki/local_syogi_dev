@@ -85,7 +85,7 @@ class GameActivity : AppCompatActivity() {
         AlertDialog.Builder(this).setCancelable(false)
             .setMessage("投了しますか？")
             .setPositiveButton("はい") { _, _ ->
-                gameEnd(winner)
+                gameEnd(winner, 2)
             }
             .setNegativeButton("いいえ", null)
             .create()
@@ -94,8 +94,8 @@ class GameActivity : AppCompatActivity() {
 
     var log = mutableListOf<GameLog>()
     // ゲーム終了後画面
-    fun gameEnd(winner: Int) {
-        log = view.getLog(winner)
+    fun gameEnd(winner: Int, winType: Int) {
+        log = view.getLog(winner, winType)
         Log.d("Main", "(activity)サイズ：" + log.size)
         val button: Button = findViewById(R.id.backStartButton)
         val button2: Button = findViewById(R.id.surrender_black)
@@ -168,7 +168,7 @@ class GameActivity : AppCompatActivity() {
         // 時間切れ
         override fun onFinish() {
             timerWhite.text = dataFormat.format(0)
-            gameEnd(BLACK)
+            gameEnd(BLACK, 4)
         }
         // インターバルで呼ばれる
         override fun onTick(millisUntilFinished: Long) {
@@ -181,7 +181,7 @@ class GameActivity : AppCompatActivity() {
         // 時間切れ
         override fun onFinish() {
             timerBlack.text = dataFormat.format(0)
-            gameEnd(WHITE)
+            gameEnd(WHITE, 4)
         }
         // インターバルで呼ばれる
         override fun onTick(millisUntilFinished: Long) {

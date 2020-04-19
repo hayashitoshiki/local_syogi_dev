@@ -1,11 +1,12 @@
 package com.example.local_syogi.presentation.presenter.game
 
+import com.example.local_syogi.domain.AuthenticationUseCase
 import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.syogibase.data.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 
-class GameLogicRatePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewRateContact.Presenter {
+class GameLogicRatePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase, private val firebase: AuthenticationUseCase) : GameViewRateContact.Presenter {
 
     companion object {
         const val BLACK = 1
@@ -13,6 +14,8 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
         const val HINT = 3
     }
     private var startTurn: Int = 1
+    private var blackName: String = ""
+    private var whiteName: String = ""
 
     override fun setReplayView(gameDetail: GameDetailSetitngModel) {}
 
@@ -38,7 +41,7 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
                     view.playbackEffect()
                     view.moveEmit(syogiUseCase.getLogLast())
                     if (syogiUseCase.checkGameEnd()) {
-                        view.gameEnd(syogiUseCase.getTurn())
+                        view.gameEnd(syogiUseCase.getTurn(), 1)
                     }
                     syogiUseCase.twohandRule()
                 }
@@ -101,13 +104,19 @@ class GameLogicRatePresenter(private val view: GameViewRateContact.View, private
         startTurn = turn
     }
 
+    // 対局者を設定する
+    override fun setUser(whiteUser: String) {
+        blackName = firebase.getEmail()
+        whiteName = whiteUser
+    }
+
     // 対局ログを返す
-    override fun getLog(winner: Int): MutableList<GameLog> {
+    override fun endLogic(winner: Int, winType: Int): MutableList<GameLog> {
         var log = syogiUseCase.getLog()
         if (startTurn == WHITE) {
             log = syogiUseCase.changeLogTurn(log)
         }
-        syogiUseCase.saveTable(log, winner, 2)
+        syogiUseCase.saveTable(log, winner, 2, blackName, whiteName, winType)
         return log
     }
 }

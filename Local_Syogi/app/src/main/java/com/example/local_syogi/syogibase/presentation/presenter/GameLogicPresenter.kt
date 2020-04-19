@@ -37,11 +37,11 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
                     view.playbackEffect()
                     view.changeTurn(usecase.getTurn())
                     // 千日手判定
-                    if (usecase.isRepetitionMove()) view.gameEnd(3)
+                    if (usecase.isRepetitionMove()) view.gameEnd(3, 0)
                     // トライルール判定
-                    if (sharedPreferences.getTryRule() && usecase.isTryKing()) view.gameEnd(usecase.getTurn())
+                    if (sharedPreferences.getTryRule() && usecase.isTryKing()) view.gameEnd(usecase.getTurn(), 1)
                     // 王手判定
-                    if (usecase.checkGameEnd()) view.gameEnd(usecase.getTurn())
+                    if (usecase.checkGameEnd()) view.gameEnd(usecase.getTurn(), 1)
                     usecase.twohandRule()
                 }
                 usecase.getTurn() -> usecase.setTouchHint(x2, y2)
@@ -84,9 +84,9 @@ class GameLogicPresenter(private val view: GameViewContact.View, private val use
     }
 
     // 対局ログを返す
-    override fun getLog(winner: Int): MutableList<GameLog> {
+    override fun getLog(winner: Int, winType: Int): MutableList<GameLog> {
         val log = usecase.getLog()
-        usecase.saveTable(log, winner, 1)
+        usecase.saveTable(log, winner, 1, "先手", "後手", winType)
         return log
     }
 }
