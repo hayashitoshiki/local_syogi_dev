@@ -85,6 +85,22 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/userName_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="UserName:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/userName_edit_text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp" />
+            <TextView
                 android:id="@+id/email_text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,6 +129,24 @@
 
             <EditText
                 android:id="@+id/password_edit_text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email_edit_text"
+                android:layout_toRightOf="@+id/password_text"
+                android:inputType="textPassword"
+                android:text="" />
+            <TextView
+                android:id="@+id/password_text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Password:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/password_edit_text3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/email_edit_text"

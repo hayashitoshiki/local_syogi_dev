@@ -42,7 +42,7 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_record_root, container, false)
         main = activity as MainActivity
-        authFragment = AuthenticationBaseFragment.newInstance2(presenter)
+        authFragment = AuthenticationBaseFragment.newInstance()
         accountTab = GameRecordCardFragment.newInstance(presenter)
         tabFragment = view.findViewById(R.id.tab)
         mainFrame = view.findViewById(R.id.fragment)
@@ -166,8 +166,7 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
 
         @JvmStatic
         fun newInstance(): GameRecordRootFragment {
-            val fragment = GameRecordRootFragment()
-            return fragment
+            return GameRecordRootFragment()
         }
     }
 }
