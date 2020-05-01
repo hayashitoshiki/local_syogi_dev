@@ -2,6 +2,7 @@ package com.example.local_syogi.data
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class FirebaseRepositoryImp : FirebaseRepository {
 
@@ -14,6 +15,16 @@ class FirebaseRepositoryImp : FirebaseRepository {
     // ユーザーのEmailを取得
     override fun getEmail(): String {
         return auth.currentUser!!.email!!
+    }
+
+    // ユーザーのUIDを返す
+    override fun getUid(): String {
+        return auth.currentUser!!.uid
+    }
+
+    // ユーザ名を返す
+    override fun getName(): String {
+        return auth.currentUser!!.displayName!!
     }
 
     // ログイン状態を返す(Boolean型)
@@ -78,6 +89,29 @@ class FirebaseRepositoryImp : FirebaseRepository {
                     onSuccess()
                 } else {
                     Log.w(TAG, "アカウント作成失敗", task.exception)
+                    onError()
+                }
+            }
+    }
+
+    // ユーザー情報の更新
+    override fun update(
+        userName: String,
+        onSuccess: () -> Unit,
+        onError: () -> Unit
+    ) {
+
+        val profileUpdates = UserProfileChangeRequest.Builder()
+            .setDisplayName(userName) // ユーザー名
+            .build()
+
+        auth.currentUser?.updateProfile(profileUpdates)
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "更新成功")
+                    onSuccess()
+                } else {
+                    Log.d(TAG, "更新失敗", task.exception)
                     onError()
                 }
             }

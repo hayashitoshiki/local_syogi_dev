@@ -33,85 +33,6 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="0.0" />
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linearLayout2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/logout"-->
-<!--        app:layout_constraintVertical_bias="0.0">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView10"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="総合レート"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView11"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="対戦数"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView12"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="月間レート"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView13"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="月間対戦数"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView14"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="各対戦数"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView15"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="本将棋"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView16"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="王手将棋"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView18"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="安南将棋"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView17"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="2手差し将棋"-->
-<!--            android:textSize="18sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView19"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="持ち駒制限将棋"-->
-<!--            android:textSize="18sp" />-->
-<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -130,18 +51,38 @@
 
             <TextView
                 android:id="@+id/textView21"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="account"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/accountTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="テストA" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/udidTextView1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/idTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="UDID10桁" />
         </LinearLayout>
 
         <LinearLayout
@@ -151,15 +92,14 @@
 
             <TextView
                 android:id="@+id/textView24"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="E-mail"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView25"
-                android:layout_width="match_parent"
+                android:id="@+id/emailTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="test@test.jp" />
@@ -172,9 +112,8 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="password"
                 android:textSize="18sp" />
 

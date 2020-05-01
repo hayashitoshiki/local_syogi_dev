@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.account.SettingAccountContact
@@ -30,7 +29,7 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View, OnBackPresse
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_setting_account, container, false)
         main = activity as MainActivity
-        authFragment = AuthenticationBaseFragment.newInstance(presenter)
+        authFragment = AuthenticationBaseFragment.newInstance()
         accountTab = AccountCardFragment.newInstance(presenter)
         tabFragment = view.findViewById(R.id.tab)
         mainFrame = view.findViewById(R.id.fragment)
@@ -89,20 +88,6 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View, OnBackPresse
         authFragment.setInformationView()
     }
 
-    // エラー表示
-    override fun showErrorEmailPassword() {
-        Toast.makeText(context, "EmailとPasswordを入力してください", Toast.LENGTH_LONG).show()
-    }
-    // エラー表示
-    override fun showErrorToast() {
-        Toast.makeText(context, "通信環境の良いところでお試しください", Toast.LENGTH_LONG).show()
-    }
-    // ログアウトトースト表示
-    override fun signOut() {
-        Toast.makeText(context, "ログアウト", Toast.LENGTH_LONG).show()
-        setLoginView()
-    }
-
     // activity終了
     private fun closeActivity() {
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide) as Animation
@@ -112,8 +97,6 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View, OnBackPresse
         tabFragment.visibility = View.INVISIBLE
         mainFrame.startAnimation(fadeOut)
         mainFrame.visibility = View.INVISIBLE
-        // val act = activity as MainActivity
-        // main.backFragment()
     }
 
     fun changeMode(fragment: Fragment, tab: Int) {
@@ -136,8 +119,7 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View, OnBackPresse
 
         @JvmStatic
         fun newInstance(): AccountRootFragment {
-            val fragment = AccountRootFragment()
-            return fragment
+            return AccountRootFragment()
         }
     }
 }

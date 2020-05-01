@@ -26,6 +26,6 @@ interface GameRecordRootContact {
         // ログアウト
         fun signOut()
         // 新規作成処理
-        fun signUp(email: String, password: String)
+        fun signUp(email: String, password: String, userName: String)
     }
 }

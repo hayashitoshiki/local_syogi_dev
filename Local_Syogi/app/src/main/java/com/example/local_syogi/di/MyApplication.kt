@@ -5,13 +5,19 @@ import com.example.local_syogi.data.FirebaseRepository
 import com.example.local_syogi.data.FirebaseRepositoryImp
 import com.example.local_syogi.domain.AuthenticationUseCase
 import com.example.local_syogi.domain.AuthenticationUseCaseImp
+import com.example.local_syogi.presentation.contact.account.AuthenticationBaseContact
 import com.example.local_syogi.presentation.contact.account.SettingAccountContact
+import com.example.local_syogi.presentation.contact.account.SignInUpContact
+import com.example.local_syogi.presentation.contact.account.SignOutContact
 import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
 import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.presentation.contact.record.GameRecordListContact
 import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
 import com.example.local_syogi.presentation.contact.setting.*
+import com.example.local_syogi.presentation.presenter.account.AuthenticationBasePresenter
 import com.example.local_syogi.presentation.presenter.account.SettingAccountPresenter
+import com.example.local_syogi.presentation.presenter.account.SignInUpPresenter
+import com.example.local_syogi.presentation.presenter.account.SignOutPresenter
 import com.example.local_syogi.presentation.presenter.game.GameLogicRatePresenter
 import com.example.local_syogi.presentation.presenter.game.GamePlayBackPresenter
 import com.example.local_syogi.presentation.presenter.record.GameRecordListPresenter
@@ -67,6 +73,9 @@ class MyApplication : Application() {
         factory <GameRecordRootContact.Presenter> { (v: GameRecordRootContact.View) -> GameRecordRootPresenter(v, get()) }
         factory <GameRecordListContact.Presenter> { (v: GameRecordListContact.View) -> GameRecordListPresenter(v, get()) }
         factory <GamePlayBackContact.Presenter> { (v: GamePlayBackContact.View) -> GamePlayBackPresenter(v) }
+        factory <SignInUpContact.Presenter> { (v: SignInUpContact.View) -> SignInUpPresenter(v, get()) }
+        factory <SignOutContact.Presenter> { (v: SignOutContact.View) -> SignOutPresenter(v, get()) }
+        factory <AuthenticationBaseContact.Presenter> { (v: AuthenticationBaseContact.View) -> AuthenticationBasePresenter(get()) }
 
         factory <SyogiLogicUseCase> { SyogiLogicUseCaseImp(get(), get()) }
         factory <AuthenticationUseCase> { AuthenticationUseCaseImp(get()) }

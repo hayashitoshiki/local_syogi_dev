@@ -38,10 +38,14 @@ class AuthenticationUseCaseImp(private val firebaseRepository: FirebaseRepositor
     }
 
     // アカウント作成
-    override fun signUp(email: String, password: String, onSuccess: () -> Unit, onError: () -> Unit) {
+    override fun signUp(email: String, password: String, userName: String, onSuccess: () -> Unit, onError: () -> Unit) {
         firebaseRepository.signUp(email, password,
             {
-                onSuccess()
+                firebaseRepository.update(userName, {
+                    onSuccess()
+                }, {
+                    onError()
+                })
             }, {
                 onError()
             })
@@ -60,5 +64,15 @@ class AuthenticationUseCaseImp(private val firebaseRepository: FirebaseRepositor
     // ユーザーのEmailを取得
     override fun getEmail(): String {
         return firebaseRepository.getEmail()
+    }
+
+    // ユーザーのUidを取得
+    override fun getUid(): String {
+        return firebaseRepository.getUid().substring(0, 10)
+    }
+
+    // ユーザー名を取得
+    override fun getUserName(): String {
+        return firebaseRepository.getName()
     }
 }

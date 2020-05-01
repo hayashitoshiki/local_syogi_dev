@@ -43,9 +43,9 @@ class GameRecordRootPresenter(private val view: GameRecordRootContact.View, priv
     }
 
     // 新規作成処理
-    override fun signUp(email: String, password: String) {
+    override fun signUp(email: String, password: String, userName: String) {
         if (email != "" && password != "") {
-            firebase.signUp(email, password, {
+            firebase.signUp(email, password, userName, {
                 view.setInformationView()
             }, {
                 view.showErrorToast()

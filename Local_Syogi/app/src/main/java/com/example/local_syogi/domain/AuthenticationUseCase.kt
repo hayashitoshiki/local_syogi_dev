@@ -11,9 +11,13 @@ interface AuthenticationUseCase {
     // ログアウト
     fun signOut(onSuccess: () -> Unit, onError: () -> Unit)
     // アカウント作成
-    fun signUp(email: String, password: String, onSuccess: () -> Unit, onError: () -> Unit)
+    fun signUp(email: String, password: String, userName: String, onSuccess: () -> Unit, onError: () -> Unit)
     // アカウント削除
     fun delete(onSuccess: () -> Unit, onError: () -> Unit)
     // ユーザーのEmailを取得
     fun getEmail(): String
+    // ユーザーのUidを取得
+    fun getUid(): String
+    // ユーザー名を取得
+    fun getUserName(): String
 }
