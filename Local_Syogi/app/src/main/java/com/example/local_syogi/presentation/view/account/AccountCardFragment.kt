@@ -35,6 +35,7 @@ class AccountCardFragment : Fragment() {
         val checkmateButton: Button = view.findViewById(R.id.checkmateButton)
         val pieceLimitButton: Button = view.findViewById(R.id.pieceLimitButton)
         val chaosButton: Button = view.findViewById(R.id.chaosButton)
+        val followButton: Button = view.findViewById(R.id.accountFollowButton)
         rootFragment = parentFragment as AccountRootFragment
 
         buttonList.add(allButton)
@@ -46,6 +47,7 @@ class AccountCardFragment : Fragment() {
         buttonList.add(checkmateButton)
         buttonList.add(pieceLimitButton)
         buttonList.add(chaosButton)
+        buttonList.add(followButton)
         if (tab != -1) {
             buttonList[tab].setTextColor(Color.parseColor("#795548"))
         }
@@ -53,6 +55,11 @@ class AccountCardFragment : Fragment() {
         // ボタン押下
         accountButton.setOnClickListener {
             changeMode(accountButton, rootFragment.authFragment)
+        }
+        followButton.setOnClickListener {
+            changeMode(followButton,
+                AccountFollowFragment()
+            )
         }
         allButton.setOnClickListener { changeMode(allButton,
             ResultListFragment.newInstance("総合成績")
