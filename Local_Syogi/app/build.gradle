@@ -17,7 +17,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 // Enabling multidex support.
-            multiDexEnabled true
+        multiDexEnabled true
 
     }
     buildTypes {

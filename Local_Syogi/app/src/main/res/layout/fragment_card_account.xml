@@ -43,6 +43,21 @@
             android:textStyle="italic" />
 
         <Button
+            android:id="@+id/accountFollowButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="#00000000"
+            android:text="友達一覧"
+            android:textAlignment="viewStart"
+            android:textColor="#757575"
+            android:textSize="16dp"
+            android:textStyle="italic" />
+
+        <Button
             android:id="@+id/allButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

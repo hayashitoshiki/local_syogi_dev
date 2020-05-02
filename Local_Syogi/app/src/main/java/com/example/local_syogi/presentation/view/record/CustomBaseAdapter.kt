@@ -36,7 +36,7 @@ internal class CustomBaseAdapter(context: Context?, private val resourcedId: Int
         var view = convertView
 
         if (view == null) {
-            view = inflater.inflate(R.layout.game_list_item, null)
+            view = inflater.inflate(R.layout.list_item_game, null)
             holder = ViewHolder()
         } else {
             holder = view.tag as ViewHolder
