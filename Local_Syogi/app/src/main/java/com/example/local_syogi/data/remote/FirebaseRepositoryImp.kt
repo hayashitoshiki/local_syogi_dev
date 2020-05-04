@@ -1,10 +1,11 @@
-package com.example.local_syogi.data
+package com.example.local_syogi.data.remote
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 
-class FirebaseRepositoryImp : FirebaseRepository {
+class FirebaseRepositoryImp :
+    FirebaseRepository {
 
     companion object {
         private const val TAG = "FireBaseRepositoryImp"

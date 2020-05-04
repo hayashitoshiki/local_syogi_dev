@@ -1,9 +1,12 @@
 package com.example.local_syogi.presentation.presenter.account
 
+import android.util.Log
+import com.example.local_syogi.domain.AccountUseCase
+import com.example.local_syogi.domain.AccountUseCaseImp
 import com.example.local_syogi.domain.AuthenticationUseCase
 import com.example.local_syogi.presentation.contact.account.SignInUpContact
 
-class SignInUpPresenter(val view: SignInUpContact.View, private val auth: AuthenticationUseCase) : SignInUpContact.Presenter {
+class SignInUpPresenter(val view: SignInUpContact.View, private val auth: AuthenticationUseCase, private val account: AccountUseCase) : SignInUpContact.Presenter {
 
     // ログイン認証
     override fun signIn(email: String, password: String) {
@@ -36,7 +39,12 @@ class SignInUpPresenter(val view: SignInUpContact.View, private val auth: Authen
             else -> {
                 // 新規作成
                 auth.signUp(email, password, userName, {
-                    view.setInformationView()
+                    account.createAccount(auth.getUid(), userName, {
+                        Log.d(AccountUseCaseImp.TAG, "createAccount：")
+                        view.setInformationView()
+                    },{
+                        view.showErrorToast()
+                    })
                 }, {
                     view.showErrorToast()
                 })

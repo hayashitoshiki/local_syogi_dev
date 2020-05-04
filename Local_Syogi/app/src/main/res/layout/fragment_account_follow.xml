@@ -102,14 +102,14 @@
         ads:layout_constraintVertical_bias="0.0">
 
         <EditText
-            android:id="@+id/email_edit_text"
+            android:id="@+id/searchEditText"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/sign_up_button"
+            android:id="@+id/pushButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/password_edit_text"
@@ -125,7 +125,7 @@
     <ListView
         android:id="@+id/searchList"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="0dp"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintTop_toBottomOf="@+id/linearLayout5"
         ads:layout_constraintVertical_bias="0.0" />

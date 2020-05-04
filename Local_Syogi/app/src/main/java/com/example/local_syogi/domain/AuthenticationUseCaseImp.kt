@@ -1,6 +1,6 @@
 package com.example.local_syogi.domain
 
-import com.example.local_syogi.data.FirebaseRepository
+import com.example.local_syogi.data.remote.FirebaseRepository
 
 class AuthenticationUseCaseImp(private val firebaseRepository: FirebaseRepository) : AuthenticationUseCase {
 

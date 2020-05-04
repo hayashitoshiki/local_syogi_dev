@@ -1,8 +1,12 @@
 package com.example.local_syogi.di
 
 import android.app.Application
-import com.example.local_syogi.data.FirebaseRepository
-import com.example.local_syogi.data.FirebaseRepositoryImp
+import com.example.local_syogi.data.remote.AccountRepository
+import com.example.local_syogi.data.remote.AccountRepositoryImp
+import com.example.local_syogi.data.remote.FirebaseRepository
+import com.example.local_syogi.data.remote.FirebaseRepositoryImp
+import com.example.local_syogi.domain.AccountUseCase
+import com.example.local_syogi.domain.AccountUseCaseImp
 import com.example.local_syogi.domain.AuthenticationUseCase
 import com.example.local_syogi.domain.AuthenticationUseCaseImp
 import com.example.local_syogi.presentation.contact.account.AccountFollowContact
@@ -75,19 +79,17 @@ class MyApplication : Application() {
         factory <GameRecordRootContact.Presenter> { (v: GameRecordRootContact.View) -> GameRecordRootPresenter(v, get()) }
         factory <GameRecordListContact.Presenter> { (v: GameRecordListContact.View) -> GameRecordListPresenter(v, get()) }
         factory <GamePlayBackContact.Presenter> { (v: GamePlayBackContact.View) -> GamePlayBackPresenter(v) }
-        factory <SignInUpContact.Presenter> { (v: SignInUpContact.View) -> SignInUpPresenter(v, get()) }
+        factory <SignInUpContact.Presenter> { (v: SignInUpContact.View) -> SignInUpPresenter(v, get(), get()) }
         factory <SignOutContact.Presenter> { (v: SignOutContact.View) -> SignOutPresenter(v, get()) }
         factory <AuthenticationBaseContact.Presenter> { (v: AuthenticationBaseContact.View) -> AuthenticationBasePresenter(get()) }
-        factory <AccountFollowContact.Presenter> { (v: AccountFollowContact.View) ->
-            AccountFollowPresenter(
-                v
-            )
-        }
+        factory <AccountFollowContact.Presenter> { (v: AccountFollowContact.View) -> AccountFollowPresenter(v, get()) }
 
         factory <SyogiLogicUseCase> { SyogiLogicUseCaseImp(get(), get()) }
         factory <AuthenticationUseCase> { AuthenticationUseCaseImp(get()) }
+        factory <AccountUseCase> { AccountUseCaseImp(get()) }
 
         factory <FirebaseRepository> { FirebaseRepositoryImp() }
+        factory <AccountRepository> { AccountRepositoryImp() }
         factory <BoardRepository> { BoardRepositoryImp() }
         factory <GameRecordRepository> { GameRecordRepositoryImp() }
     }
