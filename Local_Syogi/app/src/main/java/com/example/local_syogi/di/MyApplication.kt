@@ -79,7 +79,7 @@ class MyApplication : Application() {
         factory <GameRecordRootContact.Presenter> { (v: GameRecordRootContact.View) -> GameRecordRootPresenter(v, get()) }
         factory <GameRecordListContact.Presenter> { (v: GameRecordListContact.View) -> GameRecordListPresenter(v, get()) }
         factory <GamePlayBackContact.Presenter> { (v: GamePlayBackContact.View) -> GamePlayBackPresenter(v) }
-        factory <SignInUpContact.Presenter> { (v: SignInUpContact.View) -> SignInUpPresenter(v, get()) }
+        factory <SignInUpContact.Presenter> { (v: SignInUpContact.View) -> SignInUpPresenter(v, get(), get()) }
         factory <SignOutContact.Presenter> { (v: SignOutContact.View) -> SignOutPresenter(v, get()) }
         factory <AuthenticationBaseContact.Presenter> { (v: AuthenticationBaseContact.View) -> AuthenticationBasePresenter(get()) }
         factory <AccountFollowContact.Presenter> { (v: AccountFollowContact.View) -> AccountFollowPresenter(v, get()) }

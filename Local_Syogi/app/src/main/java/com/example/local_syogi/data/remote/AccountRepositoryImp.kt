@@ -6,6 +6,7 @@ import com.example.local_syogi.data.entity.FollowEntity
 import com.example.local_syogi.data.remote.dto.AccountDto
 import com.example.local_syogi.data.remote.dto.FollowDto
 import com.example.local_syogi.data.remote.dto.StatusDto
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,7 @@ class AccountRepositoryImp : AccountRepository {
     // ユーザー登録
     override fun createAccount(userId: String, userName: String, callBack: (state: StatusDto) -> Unit, onError: () -> Unit) {
         val account = AccountEntity(userId, userName)
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().createAccount(account)
                 callBack(state)

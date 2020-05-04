@@ -18,7 +18,6 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
             FollowModel("テスト5", 1),
             FollowModel("テスト6", 1),
             FollowModel("テスト7", 1))
-        accountUseCase.createAccount("AAA", "AAAAA", { test() }, { test() })
         accountUseCase.findFollowByUserId("BBB", { test() }, { test() })
         accountUseCase.findAccountByUserId("BBB", { test() }, { test() })
         accountUseCase.createFollow("AAA", "DDD", { test() }, { test() })

@@ -2,6 +2,7 @@ package com.example.local_syogi.domain
 
 import android.util.Log
 import com.example.local_syogi.data.remote.AccountRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -13,16 +14,14 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
 
     // ユーザー登録
     override fun createAccount(userId: String, userName: String, onSuccess: () -> Unit, onError: () -> Unit) {
-        Log.d(TAG, "接続")
-        GlobalScope.launch {
-            try {
-                repository.createAccount(userId, userName, {
-                }, {
-                    Log.d(TAG, "取得失敗")
-                })
-            } catch (e: Exception) {
-                Log.d(TAG, "createAccount：Exception：" + e)
-            }
+        try {
+            repository.createAccount(userId, userName, {
+                onSuccess()
+            }, {
+                Log.d(TAG, "取得失敗")
+            })
+        } catch (e: Exception) {
+            Log.d(TAG, "createAccount：Exception：" + e)
         }
     }
     // ユーザー検索
