@@ -1,9 +1,10 @@
 package com.example.local_syogi.presentation.presenter.account
 
+import com.example.local_syogi.domain.AccountUseCase
 import com.example.local_syogi.domain.model.FollowModel
 import com.example.local_syogi.presentation.contact.account.AccountFollowContact
 
-class AccountFollowPresenter(private val view: AccountFollowContact.View) :
+class AccountFollowPresenter(private val view: AccountFollowContact.View, private val accountUseCase: AccountUseCase) :
     AccountFollowContact.Presenter {
 
     // 友達リストを取得
@@ -17,7 +18,15 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View) :
             FollowModel("テスト5", 1),
             FollowModel("テスト6", 1),
             FollowModel("テスト7", 1))
+        accountUseCase.createAccount("AAA", "AAAAA", { test() }, { test() })
+        accountUseCase.findFollowByUserId("BBB", { test() }, { test() })
+        accountUseCase.findAccountByUserId("BBB", { test() }, { test() })
+        accountUseCase.createFollow("AAA", "DDD", { test() }, { test() })
+        accountUseCase.updateFollow("AAA", "DDD", { test() }, { test() })
+        accountUseCase.deleteFollow("AAA", "DDD", { test() }, { test() })
         return followList
+    }
+    fun test() {
     }
 
     // 承認待ちリスト取得

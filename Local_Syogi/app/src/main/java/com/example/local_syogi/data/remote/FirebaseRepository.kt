@@ -1,4 +1,4 @@
-package com.example.local_syogi.data
+package com.example.local_syogi.data.remote
 
 interface FirebaseRepository {
 

@@ -1,6 +1,6 @@
 package com.example.local_syogi.presentation.presenter.setting
 
-import com.example.local_syogi.data.FirebaseRepository
+import com.example.local_syogi.data.remote.FirebaseRepository
 import com.example.local_syogi.presentation.contact.setting.SettingRootContact
 
 class SettingRootPresenter(private val view: SettingRootContact.View, private val firebase: FirebaseRepository) : SettingRootContact.Presenter {
