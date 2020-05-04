@@ -1,10 +1,13 @@
 package com.example.local_syogi.domain
 
+import com.example.local_syogi.data.entity.AccountEntity
+import com.example.local_syogi.domain.model.FollowModel
+
 interface AccountUseCase {
     // ユーザー登録
     fun createAccount(userId: String, userName: String, onSuccess: () -> Unit, onError: () -> Unit)
     // ユーザー検索
-    fun findAccountByUserId(userId: String, onSuccess: () -> Unit, onError: () -> Unit)
+    fun findAccountByUserId(userId: String, onSuccess: (accountList: List<FollowModel>) -> Unit, onError: () -> Unit)
 
     /*----------------------------------------
         フォロー

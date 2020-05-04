@@ -32,7 +32,7 @@ class AccountRepositoryImp : AccountRepository {
 
     // ユーザー検索
     override fun findAccountByUserId(userId: String, onSuccess: (userList: AccountDto) -> Unit, onError: () -> Unit) {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             try {
                 val userList = Provider.testApi().findAccount(userId)
                 onSuccess(userList)

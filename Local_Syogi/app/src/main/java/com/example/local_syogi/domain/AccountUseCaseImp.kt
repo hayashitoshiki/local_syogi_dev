@@ -1,7 +1,9 @@
 package com.example.local_syogi.domain
 
 import android.util.Log
+import com.example.local_syogi.data.entity.AccountEntity
 import com.example.local_syogi.data.remote.AccountRepository
+import com.example.local_syogi.domain.model.FollowModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,17 +27,24 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
         }
     }
     // ユーザー検索
-    override fun findAccountByUserId(userId: String, onSuccess: () -> Unit, onError: () -> Unit) {
-        Log.d(TAG, "接続")
-        GlobalScope.launch {
-            try {
-                repository.findAccountByUserId(userId, {
-                }, {
-                    Log.d(TAG, "取得失敗")
-                })
-            } catch (e: Exception) {
-                Log.d(TAG, "findAccountByUserId：Exception：" + e)
-            }
+    override fun findAccountByUserId(userId: String, onSuccess: (accountList: List<FollowModel>) -> Unit, onError: () -> Unit) {
+        try {
+            repository.findAccountByUserId(userId, {
+                val accountList = arrayListOf<FollowModel>()
+                it.data.forEach{
+                    accountList.add(
+                        FollowModel(
+                            it.userName,
+                            4
+                        ))
+                }
+                accountList.toList()
+                onSuccess(accountList)
+            }, {
+                Log.d(TAG, "取得失敗")
+            })
+        } catch (e: Exception) {
+            Log.d(TAG, "findAccountByUserId_repository：Exception：" + e)
         }
     }
 

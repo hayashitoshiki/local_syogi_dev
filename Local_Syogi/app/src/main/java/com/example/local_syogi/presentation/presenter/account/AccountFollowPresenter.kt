@@ -1,8 +1,12 @@
 package com.example.local_syogi.presentation.presenter.account
 
+import com.example.local_syogi.data.entity.AccountEntity
 import com.example.local_syogi.domain.AccountUseCase
 import com.example.local_syogi.domain.model.FollowModel
 import com.example.local_syogi.presentation.contact.account.AccountFollowContact
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AccountFollowPresenter(private val view: AccountFollowContact.View, private val accountUseCase: AccountUseCase) :
     AccountFollowContact.Presenter {
@@ -19,13 +23,21 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
             FollowModel("テスト6", 1),
             FollowModel("テスト7", 1))
         accountUseCase.findFollowByUserId("BBB", { test() }, { test() })
-        accountUseCase.findAccountByUserId("BBB", { test() }, { test() })
         accountUseCase.createFollow("AAA", "DDD", { test() }, { test() })
         accountUseCase.updateFollow("AAA", "DDD", { test() }, { test() })
         accountUseCase.deleteFollow("AAA", "DDD", { test() }, { test() })
         return followList
     }
     fun test() {
+    }
+
+    // アカウント検索処理
+    override fun findAccount(userId: String, callBack: (accountList: List<FollowModel>) -> Unit) {
+        accountUseCase.findAccountByUserId(userId, {
+            callBack(it)
+        }, {
+            // 見つからなかった時
+        })
     }
 
     // 承認待ちリスト取得
