@@ -72,8 +72,21 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
                     }else{
                         it.userId1
                     }
-                    followModel.add(FollowModel(userName, it.state))
+                    val state = when(it.state){
+                        1 -> if(userId == it.userId1) {
+                            1
+                        }else{
+                            2
+                        }
+                        2 -> 3
+                        else -> 4
+                    }
+                    followModel.add(FollowModel(userName, state))
                 }
+                followModel.add(FollowModel("友達", 0))
+                followModel.add(FollowModel("承認待ち", 0))
+                followModel.add(FollowModel("リクエスト", 0))
+                followModel.sortBy { it.status }
                 onSuccess(followModel.toList())
             }, {
                 Log.d(TAG, "取得失敗")
