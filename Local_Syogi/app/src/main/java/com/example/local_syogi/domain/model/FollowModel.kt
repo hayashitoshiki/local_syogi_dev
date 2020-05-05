@@ -10,4 +10,4 @@ package com.example.local_syogi.domain.model
  * 2・・・フォロワー　　
  */
 
-class FollowModel(val userName: String, val status: Int)
+class FollowModel(val userName: String, val userId: String, val status: Int)

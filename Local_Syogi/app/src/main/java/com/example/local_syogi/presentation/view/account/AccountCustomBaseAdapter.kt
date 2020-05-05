@@ -42,7 +42,7 @@ class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, 
         holder.userNameTextView?.text = items[position].userName
 
         holder.deleteButton?.text = getButtonName(items[position].status)
-        if (items[position].status == 0) {
+        if (items[position].status % 10 == 0) {
             holder.deleteButton?.visibility = View.GONE
             holder.userNameTextView?.textSize = 20F
         }
@@ -62,10 +62,10 @@ class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, 
     // ボタンの文字取得
     private fun getButtonName(state: Int): String{
         return when(state){
-            1 -> "取消"
-            2 -> "承認"
-            3 -> "削除"
-            4 -> "申請"
+            11 -> "削除"
+            21 -> "承認"
+            31 -> "取消"
+            41 -> "申請"
             else -> "不正"
         }
     }

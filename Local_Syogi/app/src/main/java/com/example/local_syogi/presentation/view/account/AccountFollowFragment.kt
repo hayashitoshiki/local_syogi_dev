@@ -51,10 +51,6 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             followListView.adapter = arrayAdapter1
         }
 
-//        followList = listOf(FollowModel("AAA", 1))
-//        arrayAdapter1 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, followList)
-//        followListView.adapter = arrayAdapter1
-
         pushButton.setOnClickListener{
             presenter.findAccount(searchEditText.text.toString()) {
                 accountList = it
@@ -68,9 +64,11 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             if(parentView.id == parentView.deleteButton.id){
                when(parentView.deleteButton.text.toString()) {
                     "削除", "取消" -> {
-                        presenter.deleteFollow(followList[position].userName)
+                        presenter.deleteFollow(followList[position].userId)
                     }
-                    //"承認" ->
+                    "承認" -> {
+                        presenter.updateFollow(followList[position].userId)
+                    }
                 }
             }
         }
@@ -79,8 +77,7 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
         searchListView.onItemClickListener = AdapterView.OnItemClickListener { _, parentView, position, _ ->
             parentView.deleteButton.setOnClickListener {
                 when(parentView.deleteButton.text.toString()) {
-                    "申請" -> presenter.addFollow(accountList[position].userName)
-                    //"承認" ->
+                    "申請" -> presenter.addFollow(accountList[position].userId)
                 }
             }
         }

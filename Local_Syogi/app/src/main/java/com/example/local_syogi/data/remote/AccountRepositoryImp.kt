@@ -45,7 +45,7 @@ class AccountRepositoryImp : AccountRepository {
 
     // フォロー関係作成
     override fun createFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
-        val follow = FollowEntity(userId1, userId2, 1)
+        val follow = FollowEntity("", userId1, "", userId2, 1)
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().createFollow(follow)
@@ -72,7 +72,7 @@ class AccountRepositoryImp : AccountRepository {
 
     // フォロー状態更新
     override fun updateFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
-        val follow = FollowEntity(userId1, userId2, 1)
+        val follow = FollowEntity("", userId1, "", userId2, 1)
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().updateFollow(follow)
@@ -86,7 +86,7 @@ class AccountRepositoryImp : AccountRepository {
 
     // フォロー解除
     override fun deleteFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
-        val follow = FollowEntity(userId1, userId2, 1)
+        val follow = FollowEntity("", userId1, "", userId2, 1)
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().deleteFollow(follow)
