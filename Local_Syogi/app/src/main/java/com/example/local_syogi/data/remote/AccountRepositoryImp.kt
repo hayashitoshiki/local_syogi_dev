@@ -73,26 +73,26 @@ class AccountRepositoryImp : AccountRepository {
     // フォロー状態更新
     override fun updateFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
         val follow = FollowEntity(userId1, userId2, 1)
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().updateFollow(follow)
                 onSuccess(state)
             } catch (e: Exception) {
-                Log.d(TAG, "updateFollow：Exception：" + e)
+                Log.d(TAG, "updateFollow：Repository:Exception：" + e)
                 onError()
             }
         }
     }
 
-    // 　フォロー解除
+    // フォロー解除
     override fun deleteFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
         val follow = FollowEntity(userId1, userId2, 1)
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().deleteFollow(follow)
                 onSuccess(state)
             } catch (e: Exception) {
-                Log.d(TAG, "deleteFollow：Exception：" + e)
+                Log.d(TAG, "deleteFollow：Repository:Exception：" + e)
                 onError()
             }
         }

@@ -12,6 +12,7 @@ import com.example.local_syogi.data.remote.AccountRepositoryImp
 import com.example.local_syogi.domain.AccountUseCaseImp
 import com.example.local_syogi.domain.model.FollowModel
 import com.example.local_syogi.presentation.contact.account.AccountFollowContact
+import kotlinx.android.synthetic.main.activity_game_setting.view.*
 import kotlinx.android.synthetic.main.list_item_follow.view.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -50,6 +51,10 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             followListView.adapter = arrayAdapter1
         }
 
+//        followList = listOf(FollowModel("AAA", 1))
+//        arrayAdapter1 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, followList)
+//        followListView.adapter = arrayAdapter1
+
         pushButton.setOnClickListener{
             presenter.findAccount(searchEditText.text.toString()) {
                 accountList = it
@@ -58,10 +63,25 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             }
         }
 
+        // フォローリストの各ボタンタップ
+        followListView.onItemClickListener = AdapterView.OnItemClickListener { _, parentView, position, _ ->
+            if(parentView.id == parentView.deleteButton.id){
+               when(parentView.deleteButton.text.toString()) {
+                    "削除", "取消" -> {
+                        presenter.deleteFollow(followList[position].userName)
+                    }
+                    //"承認" ->
+                }
+            }
+        }
+
         // フォロー申請ボタンタップ
         searchListView.onItemClickListener = AdapterView.OnItemClickListener { _, parentView, position, _ ->
             parentView.deleteButton.setOnClickListener {
-                presenter.addFollow(accountList[position].userName)
+                when(parentView.deleteButton.text.toString()) {
+                    "申請" -> presenter.addFollow(accountList[position].userName)
+                    //"承認" ->
+                }
             }
         }
 

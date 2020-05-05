@@ -2,6 +2,7 @@ package com.example.local_syogi.presentation.presenter.account
 
 import android.util.Log
 import com.example.local_syogi.data.entity.AccountEntity
+import com.example.local_syogi.data.remote.AccountRepositoryImp
 import com.example.local_syogi.domain.AccountUseCase
 import com.example.local_syogi.domain.AccountUseCaseImp
 import com.example.local_syogi.domain.AuthenticationUseCase
@@ -19,9 +20,6 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
         accountUseCase.findFollowByUserId(getUid(), {
             callBack(it)
         }, {})
-        accountUseCase.updateFollow("AAA", "DDD", { test() }, { test() })
-        accountUseCase.deleteFollow("AAA", "DDD", { test() }, { test() })
-
     }
     fun test() {
     }
@@ -40,6 +38,28 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
         accountUseCase.createFollow(getUid(), userId, {
             getFollowList{
                 view.resetSearchList()
+                view.updateFollowList(it)
+            }
+        }, {
+            // フォローできなかった時
+        })
+    }
+
+    // フォローリストアカウントの削除処理
+    override fun deleteFollow(userId: String) {
+        accountUseCase.deleteFollow(getUid(), userId, {
+            getFollowList{
+                view.updateFollowList(it)
+            }
+        }, {
+            // フォローできなかった時
+        })
+    }
+
+    // フォロー申請の認証処理
+    override fun updateFollow(userId: String) {
+        accountUseCase.updateFollow(getUid(), userId, {
+            getFollowList{
                 view.updateFollowList(it)
             }
         }, {

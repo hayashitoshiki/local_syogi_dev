@@ -79,7 +79,7 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
                             2
                         }
                         2 -> 3
-                        else -> 4
+                        else -> 10
                     }
                     followModel.add(FollowModel(userName, state))
                 }
@@ -97,30 +97,25 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
     }
     // フォロー状態更新
     override fun updateFollow(userId1: String, userId2: String, onSuccess: () -> Unit, onError: () -> Unit) {
-        Log.d(TAG, "接続")
-        GlobalScope.launch {
-            try {
-                repository.updateFollow(userId1, userId2, {
-                }, {
-                    Log.d(TAG, "取得失敗")
-                })
-            } catch (e: Exception) {
-                Log.d(TAG, "updateFollow：Exception：" + e)
-            }
+        try {
+            repository.updateFollow(userId1, userId2, {
+            }, {
+                Log.d(TAG, "取得失敗")
+            })
+        } catch (e: Exception) {
+            Log.d(TAG, "updateFollow：UseCase:Exception：" + e)
         }
     }
-    // 　フォロー解除
+    //　フォロー解除
     override fun deleteFollow(userId1: String, userId2: String, onSuccess: () -> Unit, onError: () -> Unit) {
-        Log.d("findAccountBy", "接続")
-        GlobalScope.launch {
-            try {
-                repository.deleteFollow(userId1, userId2, {
-                }, {
-                    Log.d(TAG, "取得失敗")
-                })
-            } catch (e: Exception) {
-                Log.d(TAG, "deleteFollow：Exception：" + e)
-            }
+        try {
+            repository.deleteFollow(userId1, userId2, {
+                onSuccess()
+            }, {
+                Log.d(TAG, "取得失敗")
+            })
+        } catch (e: Exception) {
+            Log.d(TAG, "deleteFollow：UseCase:Exception：" + e)
         }
     }
 }

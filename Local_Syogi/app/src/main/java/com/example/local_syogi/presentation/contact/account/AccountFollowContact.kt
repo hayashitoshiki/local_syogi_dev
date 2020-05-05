@@ -16,8 +16,12 @@ interface AccountFollowContact {
         fun getFollowList(callBack: (followList: List<FollowModel>) -> Unit)
         // アカウント検索処理
         fun findAccount(userId: String, callBack: (accountList: List<FollowModel>) -> Unit)
-        // アカウント検索処理
+        // フォローアカウント検索処理
         fun addFollow(userId: String)
+        // フォローアカウント削除処理
+        fun deleteFollow(userId: String)
+        // フォローアカウント認証処理
+        fun updateFollow(userId: String)
         // ユーザーのIDを取得
         fun getUid(): String
     }

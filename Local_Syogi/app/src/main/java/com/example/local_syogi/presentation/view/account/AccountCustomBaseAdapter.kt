@@ -52,7 +52,7 @@ class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, 
             (parent as ListView).performItemClick(
                 view,
                 position,
-                R.id.deleteButton.toLong()
+                holder.deleteButton!!.id.toLong()
             )
         }
 
@@ -65,6 +65,7 @@ class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, 
             1 -> "取消"
             2 -> "承認"
             3 -> "削除"
+            4 -> "申請"
             else -> "不正"
         }
     }
