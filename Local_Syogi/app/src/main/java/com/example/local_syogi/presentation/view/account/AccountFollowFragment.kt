@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
+import com.example.local_syogi.data.remote.AccountRepositoryImp
 import com.example.local_syogi.domain.AccountUseCaseImp
 import com.example.local_syogi.domain.model.FollowModel
 import com.example.local_syogi.presentation.contact.account.AccountFollowContact
@@ -22,7 +23,10 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
 
     private lateinit var searchEditText: EditText
     private lateinit var searchListView: ListView
+    private lateinit var followListView: ListView
+    private var followList = listOf<FollowModel>()
     private var accountList = listOf<FollowModel>()
+    private lateinit var arrayAdapter1:AccountCustomBaseAdapter
     private lateinit var arrayAdapter2:AccountCustomBaseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,22 +39,17 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_account_follow, container, false)
-        val followListView = view.findViewById(R.id.followList) as ListView
+        followListView = view.findViewById(R.id.followList) as ListView
         searchListView = view.findViewById(R.id.searchList) as ListView
         searchEditText = view.findViewById(R.id.searchEditText) as EditText
         val pushButton = view.findViewById(R.id.pushButton) as Button
 
-        val followList1: List<FollowModel> = presenter.getFollowList()
-        val followList2: List<FollowModel> = presenter.getFollowRequestList()
-        val followList3: List<FollowModel> = presenter.getFollowRequestMeList()
-        val followListAll = followList1 + followList2 + followList3
+        presenter.getFollowList {
+            followList = it
+            arrayAdapter1 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, followList)
+            followListView.adapter = arrayAdapter1
+        }
 
-
-        val arrayAdapter1 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, followListAll)
-        arrayAdapter2 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, accountList)
-
-        followListView.adapter = arrayAdapter1
-        searchListView.adapter = arrayAdapter2
         pushButton.setOnClickListener{
             presenter.findAccount(searchEditText.text.toString()) {
                 accountList = it
@@ -69,11 +68,18 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
         return view
     }
 
-    // フォローリストリセット
+    // 検索結果リストリセット
     override fun resetSearchList() {
         searchEditText.editableText.clear()
         accountList = listOf()
         arrayAdapter2 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, accountList)
         searchListView.adapter = arrayAdapter2
+    }
+
+    // フォローリスト更新
+    override fun updateFollowList(followList: List<FollowModel>) {
+        accountList = followList
+        arrayAdapter1 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, followList)
+        followListView.adapter = arrayAdapter1
     }
 }

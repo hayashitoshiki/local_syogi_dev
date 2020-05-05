@@ -59,12 +59,12 @@ class AccountRepositoryImp : AccountRepository {
 
     // フォロー中ユーザー取得
     override fun findFollowByUserId(userId: String, onSuccess: (userList: FollowDto) -> Unit, onError: () -> Unit) {
-    GlobalScope.launch {
+    GlobalScope.launch(Dispatchers.Main) {
         try {
             val userList = Provider.testApi().findFollow(userId)
             onSuccess(userList)
         } catch (e: Exception) {
-            Log.d(TAG, "findFollowByUserId：Exception：" + e)
+            Log.d(TAG, "findFollowByUserId：Repository:Exception：" + e)
             onError()
         }
     }

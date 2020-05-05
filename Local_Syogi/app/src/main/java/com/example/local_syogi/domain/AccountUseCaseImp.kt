@@ -62,17 +62,24 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
 
     }
     // フォロー中ユーザー取得
-    override fun findFollowByUserId(userId: String, onSuccess: () -> Unit, onError: () -> Unit) {
-        Log.d(TAG, "接続")
-        GlobalScope.launch {
-            try {
-                repository.findFollowByUserId(userId, {
-                }, {
-                    Log.d(TAG, "取得失敗")
-                })
-            } catch (e: Exception) {
-                Log.d(TAG, "findFollowByUserId：Exception：" + e)
-            }
+    override fun findFollowByUserId(userId: String, onSuccess: (List<FollowModel>) -> Unit, onError: () -> Unit) {
+        try {
+            repository.findFollowByUserId(userId, {
+                val followModel = arrayListOf<FollowModel>()
+                it.follow.forEach{
+                    val userName = if(userId == it.userId1){
+                        it.userId2
+                    }else{
+                        it.userId1
+                    }
+                    followModel.add(FollowModel(userName, it.state))
+                }
+                onSuccess(followModel.toList())
+            }, {
+                Log.d(TAG, "取得失敗")
+            })
+        } catch (e: Exception) {
+            Log.d(TAG, "findFollowByUserId：UseCase:Exception：" + e)
         }
     }
     // フォロー状態更新

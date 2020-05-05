@@ -15,21 +15,13 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
     AccountFollowContact.Presenter {
 
     // 友達リストを取得
-    override fun getFollowList(): List<FollowModel> {
-        val followList = listOf(
-            FollowModel("友達一覧", 0),
-            FollowModel("テスト1", 1),
-            FollowModel("テスト2", 1),
-            FollowModel("テスト3", 1),
-            FollowModel("テスト4", 1),
-            FollowModel("テスト5", 1),
-            FollowModel("テスト6", 1),
-            FollowModel("テスト7", 1))
-        accountUseCase.findFollowByUserId("BBB", { test() }, { test() })
-
+    override fun getFollowList(callBack: (followList: List<FollowModel>) -> Unit) {
+        accountUseCase.findFollowByUserId(getUid(), {
+            callBack(it)
+        }, {})
         accountUseCase.updateFollow("AAA", "DDD", { test() }, { test() })
         accountUseCase.deleteFollow("AAA", "DDD", { test() }, { test() })
-        return followList
+
     }
     fun test() {
     }
@@ -46,30 +38,13 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
     // アカウントフォロー処理
     override fun addFollow(userId: String) {
         accountUseCase.createFollow(getUid(), userId, {
-            // 成功処理
-            view.resetSearchList()
-            // フォロー更新（取得）
+            getFollowList{
+                view.resetSearchList()
+                view.updateFollowList(it)
+            }
         }, {
             // フォローできなかった時
         })
-    }
-
-    // 承認待ちリスト取得
-    override fun getFollowRequestList(): List<FollowModel> {
-        val followList = listOf(
-            FollowModel("リクエスト", 0),
-            FollowModel("テスト8", 2))
-        return followList
-    }
-
-    // 申請待ちリスト取得
-    override fun getFollowRequestMeList(): List<FollowModel> {
-        val followList = listOf(
-            FollowModel("承認待ち", 0),
-            FollowModel("テスト4", 3),
-            FollowModel("テスト5", 3),
-            FollowModel("テスト6", 3))
-        return followList
     }
 
     // ユーザーのIDを取得
