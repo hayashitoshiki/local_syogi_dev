@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
 import com.example.local_syogi.R
 import com.example.local_syogi.domain.model.FollowModel
+
 
 class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, private val items: List<FollowModel>) : BaseAdapter() {
     private val inflater: LayoutInflater
@@ -38,14 +40,34 @@ class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, 
         holder.deleteButton = view?.findViewById(R.id.deleteButton)
 
         holder.userNameTextView?.text = items[position].userName
-        holder.deleteButton?.text = items[position].getButtonName()
+
+        holder.deleteButton?.text = getButtonName(items[position].status)
         if (items[position].status == 0) {
             holder.deleteButton?.visibility = View.GONE
             holder.userNameTextView?.textSize = 20F
         }
         view!!.tag = holder
 
+        holder.deleteButton!!.setOnClickListener { view ->
+            (parent as ListView).performItemClick(
+                view,
+                position,
+                holder.deleteButton!!.id.toLong()
+            )
+        }
+
         return view
+    }
+
+    // ボタンの文字取得
+    private fun getButtonName(state: Int): String{
+        return when(state){
+            1 -> "取消"
+            2 -> "承認"
+            3 -> "削除"
+            4 -> "申請"
+            else -> "不正"
+        }
     }
 
     // ListViewの数

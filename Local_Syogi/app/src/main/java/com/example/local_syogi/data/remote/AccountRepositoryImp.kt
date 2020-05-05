@@ -24,7 +24,7 @@ class AccountRepositoryImp : AccountRepository {
                 val state = Provider.testApi().createAccount(account)
                 callBack(state)
             } catch (e: Exception) {
-                Log.d(TAG, "createAccount：Exception：" + e)
+                Log.d(TAG, "createAccount：Repository:Exception：" + e)
                 onError()
             }
         }
@@ -37,7 +37,7 @@ class AccountRepositoryImp : AccountRepository {
                 val userList = Provider.testApi().findAccount(userId)
                 onSuccess(userList)
             } catch (e: Exception) {
-                Log.d(TAG, "findAccountByUserId：Exception：" + e)
+                Log.d(TAG, "findAccountByUserId：Repository:Exception：" + e)
                 onError()
             }
         }
@@ -46,12 +46,12 @@ class AccountRepositoryImp : AccountRepository {
     // フォロー関係作成
     override fun createFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
         val follow = FollowEntity(userId1, userId2, 1)
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().createFollow(follow)
                 onSuccess(state)
             } catch (e: Exception) {
-                Log.d(TAG, "createFollow：Exception：" + e)
+                Log.d(TAG, "createFollow：Repository:Exception：" + e)
                 onError()
             }
         }
@@ -59,12 +59,12 @@ class AccountRepositoryImp : AccountRepository {
 
     // フォロー中ユーザー取得
     override fun findFollowByUserId(userId: String, onSuccess: (userList: FollowDto) -> Unit, onError: () -> Unit) {
-    GlobalScope.launch {
+    GlobalScope.launch(Dispatchers.Main) {
         try {
             val userList = Provider.testApi().findFollow(userId)
             onSuccess(userList)
         } catch (e: Exception) {
-            Log.d(TAG, "findFollowByUserId：Exception：" + e)
+            Log.d(TAG, "findFollowByUserId：Repository:Exception：" + e)
             onError()
         }
     }
@@ -73,26 +73,26 @@ class AccountRepositoryImp : AccountRepository {
     // フォロー状態更新
     override fun updateFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
         val follow = FollowEntity(userId1, userId2, 1)
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().updateFollow(follow)
                 onSuccess(state)
             } catch (e: Exception) {
-                Log.d(TAG, "updateFollow：Exception：" + e)
+                Log.d(TAG, "updateFollow：Repository:Exception：" + e)
                 onError()
             }
         }
     }
 
-    // 　フォロー解除
+    // フォロー解除
     override fun deleteFollow(userId1: String, userId2: String, onSuccess: (state: StatusDto) -> Unit, onError: () -> Unit) {
         val follow = FollowEntity(userId1, userId2, 1)
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             try {
                 val state = Provider.testApi().deleteFollow(follow)
                 onSuccess(state)
             } catch (e: Exception) {
-                Log.d(TAG, "deleteFollow：Exception：" + e)
+                Log.d(TAG, "deleteFollow：Repository:Exception：" + e)
                 onError()
             }
         }
