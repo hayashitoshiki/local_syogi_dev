@@ -82,7 +82,7 @@ class MyApplication : Application() {
         factory <SignInUpContact.Presenter> { (v: SignInUpContact.View) -> SignInUpPresenter(v, get(), get()) }
         factory <SignOutContact.Presenter> { (v: SignOutContact.View) -> SignOutPresenter(v, get()) }
         factory <AuthenticationBaseContact.Presenter> { (v: AuthenticationBaseContact.View) -> AuthenticationBasePresenter(get()) }
-        factory <AccountFollowContact.Presenter> { (v: AccountFollowContact.View) -> AccountFollowPresenter(v, get()) }
+        factory <AccountFollowContact.Presenter> { (v: AccountFollowContact.View) -> AccountFollowPresenter(v, get(), get()) }
 
         factory <SyogiLogicUseCase> { SyogiLogicUseCaseImp(get(), get()) }
         factory <AuthenticationUseCase> { AuthenticationUseCaseImp(get()) }

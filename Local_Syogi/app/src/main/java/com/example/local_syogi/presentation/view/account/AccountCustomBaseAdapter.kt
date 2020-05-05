@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
 import com.example.local_syogi.R
 import com.example.local_syogi.domain.model.FollowModel
+
 
 class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, private val items: List<FollowModel>) : BaseAdapter() {
     private val inflater: LayoutInflater
@@ -44,6 +46,14 @@ class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, 
             holder.userNameTextView?.textSize = 20F
         }
         view!!.tag = holder
+
+        holder.deleteButton!!.setOnClickListener { view ->
+            (parent as ListView).performItemClick(
+                view,
+                position,
+                R.id.deleteButton.toLong()
+            )
+        }
 
         return view
     }

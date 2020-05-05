@@ -44,23 +44,22 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
                 Log.d(TAG, "取得失敗")
             })
         } catch (e: Exception) {
-            Log.d(TAG, "findAccountByUserId_repository：Exception：" + e)
+            Log.d(TAG, "findAccountByUserId:UseCase：Exception：" + e)
         }
     }
 
     // フォロー関係作成
     override fun createFollow(userId1: String, userId2: String, onSuccess: () -> Unit, onError: () -> Unit) {
-        Log.d(TAG, "接続")
-        GlobalScope.launch {
-            try {
-                repository.createFollow(userId1, userId2, {
-                }, {
-                    Log.d(TAG, "取得失敗")
-                })
-            } catch (e: Exception) {
-                Log.d(TAG, "createFollow：Exception：" + e)
-            }
+        try {
+            repository.createFollow(userId1, userId2, {
+                onSuccess()
+            }, {
+                Log.d(TAG, "取得失敗")
+            })
+        } catch (e: Exception) {
+            Log.d(TAG, "createFollow:UseCase：Exception：" + e)
         }
+
     }
     // フォロー中ユーザー取得
     override fun findFollowByUserId(userId: String, onSuccess: () -> Unit, onError: () -> Unit) {
