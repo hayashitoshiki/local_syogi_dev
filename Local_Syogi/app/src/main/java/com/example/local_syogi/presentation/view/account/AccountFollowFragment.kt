@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.domain.model.FollowModel
@@ -21,6 +22,7 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
     private lateinit var searchEditText: EditText
     private lateinit var searchListView: ListView
     private lateinit var followListView: ListView
+    private lateinit var progressLayout: ConstraintLayout
     private var followList = listOf<FollowModel>()
     private var accountList = listOf<FollowModel>()
     private lateinit var arrayAdapter1: AccountCustomBaseAdapter
@@ -36,15 +38,17 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_account_follow, container, false)
-        followListView = view.findViewById(R.id.followList) as ListView
-        searchListView = view.findViewById(R.id.searchList) as ListView
-        searchEditText = view.findViewById(R.id.searchEditText) as EditText
+        followListView = view.findViewById(R.id.followList)
+        searchListView = view.findViewById(R.id.searchList)
+        searchEditText = view.findViewById(R.id.searchEditText)
+        progressLayout = view.findViewById(R.id.progressLayout)
         val pushButton = view.findViewById(R.id.pushButton) as Button
 
         presenter.getFollowList {
             followList = it
             arrayAdapter1 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, followList)
             followListView.adapter = arrayAdapter1
+            progressLayout.visibility = View.GONE
         }
 
         pushButton.setOnClickListener {
@@ -60,10 +64,16 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             if (parentView.id == parentView.deleteButton.id) {
                when (parentView.deleteButton.text.toString()) {
                     "削除", "取消" -> {
-                        presenter.deleteFollow(followList[position].userId)
+                        if(progressLayout.visibility != View.VISIBLE) {
+                            progressLayout.visibility = View.VISIBLE
+                            presenter.deleteFollow(followList[position].userId)
+                        }
                     }
                     "承認" -> {
-                        presenter.updateFollow(followList[position].userId)
+                        if(progressLayout.visibility != View.VISIBLE) {
+                            progressLayout.visibility = View.VISIBLE
+                            presenter.updateFollow(followList[position].userId)
+                        }
                     }
                 }
             }
@@ -73,7 +83,12 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
         searchListView.onItemClickListener = AdapterView.OnItemClickListener { _, parentView, position, _ ->
             parentView.deleteButton.setOnClickListener {
                 when (parentView.deleteButton.text.toString()) {
-                    "申請" -> presenter.addFollow(accountList[position].userId)
+                    "申請" -> {
+                        if(progressLayout.visibility != View.VISIBLE) {
+                            progressLayout.visibility = View.VISIBLE
+                            presenter.addFollow(accountList[position].userId)
+                        }
+                    }
                 }
             }
         }
@@ -91,6 +106,7 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
 
     // フォローリスト更新
     override fun updateFollowList(followList: List<FollowModel>) {
+        progressLayout.visibility = View.GONE
         accountList = followList
         arrayAdapter1 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, followList)
         followListView.adapter = arrayAdapter1
