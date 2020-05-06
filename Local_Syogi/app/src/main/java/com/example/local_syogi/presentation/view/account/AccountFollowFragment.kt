@@ -1,22 +1,18 @@
 package com.example.local_syogi.presentation.view.account
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.data.remote.AccountRepositoryImp
-import com.example.local_syogi.domain.AccountUseCaseImp
 import com.example.local_syogi.domain.model.FollowModel
 import com.example.local_syogi.presentation.contact.account.AccountFollowContact
 import kotlinx.android.synthetic.main.activity_game_setting.view.*
 import kotlinx.android.synthetic.main.list_item_follow.view.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-
 
 class AccountFollowFragment : Fragment(), AccountFollowContact.View {
 
@@ -27,8 +23,8 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
     private lateinit var followListView: ListView
     private var followList = listOf<FollowModel>()
     private var accountList = listOf<FollowModel>()
-    private lateinit var arrayAdapter1:AccountCustomBaseAdapter
-    private lateinit var arrayAdapter2:AccountCustomBaseAdapter
+    private lateinit var arrayAdapter1: AccountCustomBaseAdapter
+    private lateinit var arrayAdapter2: AccountCustomBaseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +47,7 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             followListView.adapter = arrayAdapter1
         }
 
-        pushButton.setOnClickListener{
+        pushButton.setOnClickListener {
             presenter.findAccount(searchEditText.text.toString()) {
                 accountList = it
                 arrayAdapter2 = AccountCustomBaseAdapter(context!!, R.layout.list_item_follow, accountList)
@@ -61,8 +57,8 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
 
         // フォローリストの各ボタンタップ
         followListView.onItemClickListener = AdapterView.OnItemClickListener { _, parentView, position, _ ->
-            if(parentView.id == parentView.deleteButton.id){
-               when(parentView.deleteButton.text.toString()) {
+            if (parentView.id == parentView.deleteButton.id) {
+               when (parentView.deleteButton.text.toString()) {
                     "削除", "取消" -> {
                         presenter.deleteFollow(followList[position].userId)
                     }
@@ -76,7 +72,7 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
         // フォロー申請ボタンタップ
         searchListView.onItemClickListener = AdapterView.OnItemClickListener { _, parentView, position, _ ->
             parentView.deleteButton.setOnClickListener {
-                when(parentView.deleteButton.text.toString()) {
+                when (parentView.deleteButton.text.toString()) {
                     "申請" -> presenter.addFollow(accountList[position].userId)
                 }
             }

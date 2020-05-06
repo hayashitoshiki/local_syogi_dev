@@ -11,7 +11,6 @@ import android.widget.TextView
 import com.example.local_syogi.R
 import com.example.local_syogi.domain.model.FollowModel
 
-
 class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, private val items: List<FollowModel>) : BaseAdapter() {
     private val inflater: LayoutInflater
     private lateinit var holder: ViewHolder
@@ -60,8 +59,8 @@ class AccountCustomBaseAdapter(context: Context?, private val resourcedId: Int, 
     }
 
     // ボタンの文字取得
-    private fun getButtonName(state: Int): String{
-        return when(state){
+    private fun getButtonName(state: Int): String {
+        return when (state) {
             11 -> "削除"
             21 -> "承認"
             31 -> "取消"
