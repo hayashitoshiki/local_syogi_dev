@@ -29,7 +29,7 @@ class SignInUpFragment : Fragment(), SignInUpContact.View {
         // ログインボタン
         val button = view.findViewById(R.id.sign_in_button) as Button
         button.setOnClickListener {
-            presenter.signIn("toshikihayashi4004@ezweb.ne.jp", "884884")
+            presenter.signIn(mEmailField1.text.toString(), mPasswordField1.text.toString())
         }
 
         // 新規作成ボタン

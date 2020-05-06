@@ -1,6 +1,5 @@
 package com.example.local_syogi.presentation.contact.account
 
-import com.example.local_syogi.data.entity.AccountEntity
 import com.example.local_syogi.domain.model.FollowModel
 
 interface AccountFollowContact {

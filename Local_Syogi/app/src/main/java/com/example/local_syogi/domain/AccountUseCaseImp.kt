@@ -1,12 +1,8 @@
 package com.example.local_syogi.domain
 
 import android.util.Log
-import com.example.local_syogi.data.entity.AccountEntity
 import com.example.local_syogi.data.remote.AccountRepository
 import com.example.local_syogi.domain.model.FollowModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseCase {
 
@@ -27,16 +23,20 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
         }
     }
     // ユーザー検索
-    override fun findAccountByUserId(userId: String, onSuccess: (accountList: List<FollowModel>) -> Unit, onError: () -> Unit) {
+    override fun findAccountByUserId(userId1: String, userId2: String, onSuccess: (accountList: List<FollowModel>) -> Unit, onError: () -> Unit) {
         try {
-            repository.findAccountByUserId(userId, {
+            repository.findAccountByUserId(userId2, {
                 val accountList = arrayListOf<FollowModel>()
-                it.data.forEach{
-                    accountList.add(
-                        FollowModel(
-                            it.userName,
-                            4
-                        ))
+                it.data.forEach {
+                    if (it.userId != userId1) {
+                        accountList.add(
+                            FollowModel(
+                                it.userName,
+                                it.userId,
+                                41
+                            )
+                        )
+                    }
                 }
                 accountList.toList()
                 onSuccess(accountList)
@@ -59,34 +59,33 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
         } catch (e: Exception) {
             Log.d(TAG, "createFollow:UseCase：Exception：" + e)
         }
-
     }
     // フォロー中ユーザー取得
     override fun findFollowByUserId(userId: String, onSuccess: (List<FollowModel>) -> Unit, onError: () -> Unit) {
         try {
             repository.findFollowByUserId(userId, {
                 val followModel = arrayListOf<FollowModel>()
-                it.follow.forEach{
-                    val userName = if(userId == it.userId1){
-                        it.userId2
-                    }else{
-                        it.userId1
+                it.follow.forEach { followEntity ->
+                    val (userName: String, userId: String) = if (userId == followEntity.userId1) {
+                        Pair(followEntity.userName2, followEntity.userId2)
+                    } else {
+                        Pair(followEntity.userName1, followEntity.userId1)
                     }
-                    val state = when(it.state){
-                        1 -> if(userId == it.userId1) {
-                            1
-                        }else{
-                            2
+                    val state = when (followEntity.state) {
+                        1 -> if (userId == followEntity.userId1) {
+                            21
+                        } else {
+                            31
                         }
-                        2 -> 3
-                        else -> 10
+                        2 -> 11
+                        else -> 100
                     }
-                    followModel.add(FollowModel(userName, state))
+                    followModel.add(FollowModel(userName, userId, state))
                 }
-                followModel.add(FollowModel("友達", 0))
-                followModel.add(FollowModel("承認待ち", 0))
-                followModel.add(FollowModel("リクエスト", 0))
-                followModel.sortBy { it.status }
+                followModel.add(FollowModel("友達", "", 10))
+                followModel.add(FollowModel("承認待ち", "", 20))
+                followModel.add(FollowModel("リクエスト", "", 30))
+                followModel.sortBy { it2 -> it2.status }
                 onSuccess(followModel.toList())
             }, {
                 Log.d(TAG, "取得失敗")
@@ -99,6 +98,7 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
     override fun updateFollow(userId1: String, userId2: String, onSuccess: () -> Unit, onError: () -> Unit) {
         try {
             repository.updateFollow(userId1, userId2, {
+                onSuccess()
             }, {
                 Log.d(TAG, "取得失敗")
             })
@@ -106,7 +106,7 @@ class AccountUseCaseImp(private val repository: AccountRepository) : AccountUseC
             Log.d(TAG, "updateFollow：UseCase:Exception：" + e)
         }
     }
-    //　フォロー解除
+    // 　フォロー解除
     override fun deleteFollow(userId1: String, userId2: String, onSuccess: () -> Unit, onError: () -> Unit) {
         try {
             repository.deleteFollow(userId1, userId2, {

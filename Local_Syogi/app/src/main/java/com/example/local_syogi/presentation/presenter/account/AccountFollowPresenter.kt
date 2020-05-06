@@ -1,18 +1,11 @@
 package com.example.local_syogi.presentation.presenter.account
 
-import android.util.Log
-import com.example.local_syogi.data.entity.AccountEntity
-import com.example.local_syogi.data.remote.AccountRepositoryImp
 import com.example.local_syogi.domain.AccountUseCase
-import com.example.local_syogi.domain.AccountUseCaseImp
 import com.example.local_syogi.domain.AuthenticationUseCase
 import com.example.local_syogi.domain.model.FollowModel
 import com.example.local_syogi.presentation.contact.account.AccountFollowContact
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
-class AccountFollowPresenter(private val view: AccountFollowContact.View, private val accountUseCase: AccountUseCase,private val auth: AuthenticationUseCase) :
+class AccountFollowPresenter(private val view: AccountFollowContact.View, private val accountUseCase: AccountUseCase, private val auth: AuthenticationUseCase) :
     AccountFollowContact.Presenter {
 
     // 友達リストを取得
@@ -26,7 +19,7 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
 
     // アカウント検索処理
     override fun findAccount(userId: String, callBack: (accountList: List<FollowModel>) -> Unit) {
-        accountUseCase.findAccountByUserId(userId, {
+        accountUseCase.findAccountByUserId(auth.getUid(), userId, {
             callBack(it)
         }, {
             // 見つからなかった時
@@ -36,7 +29,7 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
     // アカウントフォロー処理
     override fun addFollow(userId: String) {
         accountUseCase.createFollow(getUid(), userId, {
-            getFollowList{
+            getFollowList {
                 view.resetSearchList()
                 view.updateFollowList(it)
             }
@@ -48,7 +41,7 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
     // フォローリストアカウントの削除処理
     override fun deleteFollow(userId: String) {
         accountUseCase.deleteFollow(getUid(), userId, {
-            getFollowList{
+            getFollowList {
                 view.updateFollowList(it)
             }
         }, {
@@ -59,7 +52,7 @@ class AccountFollowPresenter(private val view: AccountFollowContact.View, privat
     // フォロー申請の認証処理
     override fun updateFollow(userId: String) {
         accountUseCase.updateFollow(getUid(), userId, {
-            getFollowList{
+            getFollowList {
                 view.updateFollowList(it)
             }
         }, {

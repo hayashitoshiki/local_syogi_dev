@@ -42,7 +42,7 @@ class SignInUpPresenter(val view: SignInUpContact.View, private val auth: Authen
                     account.createAccount(auth.getUid(), userName, {
                         Log.d(AccountUseCaseImp.TAG, "createAccount：")
                         view.setInformationView()
-                    },{
+                    }, {
                         view.showErrorToast()
                     })
                 }, {
