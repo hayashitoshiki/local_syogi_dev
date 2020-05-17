@@ -1,8 +1,8 @@
 package com.example.local_syogi.syogibase.data.repository
 
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.local.GameEntity
-import com.example.local_syogi.syogibase.data.local.RecordEntity
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.local.GameEntity
+import com.example.local_syogi.syogibase.data.entity.local.RecordEntity
 
 interface GameRecordRepository {
 

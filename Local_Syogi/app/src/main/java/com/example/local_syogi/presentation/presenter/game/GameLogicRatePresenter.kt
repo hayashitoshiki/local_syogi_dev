@@ -2,7 +2,7 @@ package com.example.local_syogi.presentation.presenter.game
 
 import com.example.local_syogi.domain.AuthenticationUseCase
 import com.example.local_syogi.presentation.contact.game.GameViewRateContact
-import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 

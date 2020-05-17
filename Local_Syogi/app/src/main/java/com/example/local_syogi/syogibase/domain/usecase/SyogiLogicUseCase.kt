@@ -1,6 +1,6 @@
 package com.example.local_syogi.syogibase.domain.usecase
 
-import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.model.GameModel
 import com.example.local_syogi.syogibase.util.Piece

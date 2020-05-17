@@ -1,7 +1,7 @@
 package com.example.local_syogi.syogibase.data.repository
 
-import com.example.local_syogi.syogibase.data.game.Cell
-import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.Cell
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.PieceMove
 

@@ -10,7 +10,7 @@ import android.widget.Spinner
 import android.widget.Switch
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.syogibase.data.game.GameSetting
+import com.example.local_syogi.syogibase.data.entity.game.GameSetting
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 
 /**

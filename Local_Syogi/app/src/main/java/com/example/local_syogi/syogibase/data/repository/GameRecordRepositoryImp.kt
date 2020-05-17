@@ -1,11 +1,11 @@
 package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
-import com.example.local_syogi.syogibase.data.game.GameSetting
-import com.example.local_syogi.syogibase.data.local.GameEntity
-import com.example.local_syogi.syogibase.data.local.RecordEntity
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.game.GameSetting
+import com.example.local_syogi.syogibase.data.entity.local.GameEntity
+import com.example.local_syogi.syogibase.data.entity.local.RecordEntity
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import java.time.LocalDateTime

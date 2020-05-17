@@ -2,11 +2,11 @@ package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
 import com.example.local_syogi.di.MyApplication
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
-import com.example.local_syogi.syogibase.data.remote.DtoEndInfo
-import com.example.local_syogi.syogibase.data.remote.DtoMove
-import com.example.local_syogi.syogibase.data.remote.DtoPlayer
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.remote.DtoEndInfo
+import com.example.local_syogi.syogibase.data.entity.remote.DtoMove
+import com.example.local_syogi.syogibase.data.entity.remote.DtoPlayer
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import com.google.gson.Gson
 import io.socket.client.IO
@@ -32,7 +32,10 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
         val socketUrl = "https://socket-sample-th.herokuapp.com/"
         val uri = URI(socketUrl)
         val sharedPreferences = GameSettingSharedPreferences(MyApplication.getInstance().applicationContext)
-        player = DtoPlayer("testA", GameMode.getModeInt() + sharedPreferences.getRateTimeLimit())
+        player = DtoPlayer(
+            "testA",
+            GameMode.getModeInt() + sharedPreferences.getRateTimeLimit()
+        )
 
         // 接続
         try {
@@ -129,7 +132,11 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
 
     // 勝敗を送信する
     override fun gameEndEmit(turn: Int, winType: Int) {
-        val jsonData = DtoEndInfo(turn, winType)
+        val jsonData =
+            DtoEndInfo(
+                turn,
+                winType
+            )
         val json = Gson().toJson(jsonData)
         socket.emit("gameEnd", json)
     }

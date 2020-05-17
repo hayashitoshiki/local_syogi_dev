@@ -1,8 +1,8 @@
 package com.example.local_syogi.syogibase.domain.usecase
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepository
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepository
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel

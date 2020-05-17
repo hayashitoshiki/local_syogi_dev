@@ -1,4 +1,4 @@
-package com.example.local_syogi.syogibase.data.remote
+package com.example.local_syogi.syogibase.data.entity.remote
 
 import com.example.local_syogi.syogibase.util.Piece
 

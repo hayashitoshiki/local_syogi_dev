@@ -1,10 +1,10 @@
 package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.game.Board
-import com.example.local_syogi.syogibase.data.game.Cell
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.game.Board
+import com.example.local_syogi.syogibase.data.entity.game.Cell
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 import com.example.local_syogi.syogibase.util.Piece

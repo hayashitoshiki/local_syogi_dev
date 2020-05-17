@@ -10,8 +10,8 @@ import android.view.View
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.game.GameViewFreeContact
 import com.example.local_syogi.presentation.presenter.game.GameLogicFreePresenter
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 import com.example.local_syogi.syogibase.data.repository.BoardRepositoryImp
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepositoryImp
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel

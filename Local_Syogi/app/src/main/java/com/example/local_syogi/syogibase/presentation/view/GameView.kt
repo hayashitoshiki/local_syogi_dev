@@ -8,8 +8,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 import com.example.local_syogi.syogibase.presentation.contact.GameViewContact
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE

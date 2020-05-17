@@ -14,7 +14,7 @@ import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.account.AuthenticationBaseFragment
 import com.example.local_syogi.presentation.view.account.NotLoginFragment
-import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.util.OnBackPressedListener
 import org.koin.android.ext.android.inject

@@ -3,6 +3,7 @@ package com.example.local_syogi.data.remote
 import android.util.Log
 import com.example.local_syogi.data.entity.AccountEntity
 import com.example.local_syogi.data.entity.FollowEntity
+import com.example.local_syogi.data.remote.api.Provider
 import com.example.local_syogi.data.remote.dto.AccountDto
 import com.example.local_syogi.data.remote.dto.FollowDto
 import com.example.local_syogi.data.remote.dto.StatusDto
@@ -59,15 +60,15 @@ class AccountRepositoryImp : AccountRepository {
 
     // フォロー中ユーザー取得
     override fun findFollowByUserId(userId: String, onSuccess: (userList: FollowDto) -> Unit, onError: () -> Unit) {
-    GlobalScope.launch(Dispatchers.Main) {
-        try {
-            val userList = Provider.testApi().findFollow(userId)
-            onSuccess(userList)
-        } catch (e: Exception) {
-            Log.d(TAG, "findFollowByUserId：Repository:Exception：" + e)
-            onError()
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val userList = Provider.testApi().findFollow(userId)
+                onSuccess(userList)
+            } catch (e: Exception) {
+                Log.d(TAG, "findFollowByUserId：Repository:Exception：" + e)
+                onError()
+            }
         }
-    }
     }
 
     // フォロー状態更新

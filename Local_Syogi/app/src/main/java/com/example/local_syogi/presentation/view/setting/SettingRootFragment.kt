@@ -17,7 +17,7 @@ import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.setting.SettingRootContact
 import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.game.GameRateActivity
-import com.example.local_syogi.syogibase.data.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
 import com.example.local_syogi.util.OnBackPressedListener
 import org.koin.android.ext.android.inject
