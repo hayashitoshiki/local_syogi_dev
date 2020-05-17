@@ -1,5 +1,9 @@
 package com.example.local_syogi.syogibase.data.entity.game
 
+/**
+ * ゲームモード設定管理クラス
+ */
+
 object GameMode {
 
     var rate = false

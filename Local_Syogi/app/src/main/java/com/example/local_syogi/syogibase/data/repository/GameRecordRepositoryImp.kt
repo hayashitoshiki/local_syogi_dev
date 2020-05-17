@@ -57,8 +57,6 @@ class GameRecordRepositoryImp : GameRecordRepository {
             game.whiteName = whiteName
             game.mode = GameMode.getModeInt()
             game.type = type
-            // レートのオンオフを切り替える
-            sharedPreferences.getHandyBlack()
             game.handyBlack = handyBlack
             game.handyWhite = handyWhite
             game.turnCount = logList.size
