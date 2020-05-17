@@ -10,7 +10,6 @@ import android.widget.Spinner
 import android.widget.Switch
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
-import com.example.local_syogi.syogibase.data.entity.game.GameSetting
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 
 /**
@@ -42,26 +41,26 @@ class SettingDetailsFragment : Fragment() {
         val whiteSpinner1 = view2.findViewById<Spinner>(R.id.whiteSpinner1)
         val whiteSpinner2 = view2.findViewById<Spinner>(R.id.whiteSpinner2)
         val sharedPreferences = GameSettingSharedPreferences(context!!)
-        val buttonList1 = arrayListOf<RadioButton>()
-        val buttonList2 = arrayListOf<RadioButton>()
+        val handyBlackList = arrayListOf<RadioButton>()
+        val handyWhiteList = arrayListOf<RadioButton>()
         val trySwitch = view2.findViewById<Switch>(R.id.trySwitch)
 
-        buttonList1.add(blackButton1)
-        buttonList1.add(blackButton2)
-        buttonList1.add(blackButton3)
-        buttonList1.add(blackButton4)
-        buttonList1.add(blackButton5)
-        buttonList1.add(blackButton6)
-        buttonList1.add(blackButton7)
-        buttonList1.add(blackButton8)
-        buttonList2.add(whiteButton1)
-        buttonList2.add(whiteButton2)
-        buttonList2.add(whiteButton3)
-        buttonList2.add(whiteButton4)
-        buttonList2.add(whiteButton5)
-        buttonList2.add(whiteButton6)
-        buttonList2.add(whiteButton7)
-        buttonList2.add(whiteButton8)
+        handyBlackList.add(blackButton1)
+        handyBlackList.add(blackButton2)
+        handyBlackList.add(blackButton3)
+        handyBlackList.add(blackButton4)
+        handyBlackList.add(blackButton5)
+        handyBlackList.add(blackButton6)
+        handyBlackList.add(blackButton7)
+        handyBlackList.add(blackButton8)
+        handyWhiteList.add(whiteButton1)
+        handyWhiteList.add(whiteButton2)
+        handyWhiteList.add(whiteButton3)
+        handyWhiteList.add(whiteButton4)
+        handyWhiteList.add(whiteButton5)
+        handyWhiteList.add(whiteButton6)
+        handyWhiteList.add(whiteButton7)
+        handyWhiteList.add(whiteButton8)
 
         // 詳細設定画面の初期設定
         // トライルルール
@@ -73,72 +72,24 @@ class SettingDetailsFragment : Fragment() {
         whiteSpinner2.setSelection(sharedPreferences.getSecondWhite())
         // 駒落ち
         when (sharedPreferences.getHandyBlack()) {
-            1 -> {
-                blackButton1.isChecked = true
-                GameSetting.handiBlack = 1
-            }
-            2 -> {
-                blackButton2.isChecked = true
-                GameSetting.handiBlack = 2
-            }
-            3 -> {
-                blackButton3.isChecked = true
-                GameSetting.handiBlack = 3
-            }
-            4 -> {
-                blackButton4.isChecked = true
-                GameSetting.handiBlack = 4
-            }
-            5 -> {
-                blackButton5.isChecked = true
-                GameSetting.handiBlack = 5
-            }
-            6 -> {
-                blackButton6.isChecked = true
-                GameSetting.handiBlack = 6
-            }
-            7 -> {
-                blackButton7.isChecked = true
-                GameSetting.handiBlack = 7
-            }
-            8 -> {
-                blackButton8.isChecked = true
-                GameSetting.handiBlack = 8
-            }
+            1 -> blackButton1.isChecked = true
+            2 -> blackButton2.isChecked = true
+            3 -> blackButton3.isChecked = true
+            4 -> blackButton4.isChecked = true
+            5 -> blackButton5.isChecked = true
+            6 -> blackButton6.isChecked = true
+            7 -> blackButton7.isChecked = true
+            8 -> blackButton8.isChecked = true
         }
         when (sharedPreferences.getHandyWhite()) {
-            1 -> {
-                whiteButton1.isChecked = true
-                GameSetting.handiWhite = 1
-            }
-            2 -> {
-                whiteButton2.isChecked = true
-                GameSetting.handiWhite = 2
-            }
-            3 -> {
-                whiteButton3.isChecked = true
-                GameSetting.handiWhite = 3
-            }
-            4 -> {
-                whiteButton4.isChecked = true
-                GameSetting.handiWhite = 4
-            }
-            5 -> {
-                whiteButton5.isChecked = true
-                GameSetting.handiWhite = 5
-            }
-            6 -> {
-                whiteButton6.isChecked = true
-                GameSetting.handiWhite = 6
-            }
-            7 -> {
-                whiteButton7.isChecked = true
-                GameSetting.handiWhite = 7
-            }
-            8 -> {
-                whiteButton8.isChecked = true
-                GameSetting.handiWhite = 8
-            }
+            1 -> whiteButton1.isChecked = true
+            2 -> whiteButton2.isChecked = true
+            3 -> whiteButton3.isChecked = true
+            4 -> whiteButton4.isChecked = true
+            5 -> whiteButton5.isChecked = true
+            6 -> whiteButton6.isChecked = true
+            7 -> whiteButton7.isChecked = true
+            8 -> whiteButton8.isChecked = true
         }
 
         // トライルール変更時イベント
@@ -183,29 +134,27 @@ class SettingDetailsFragment : Fragment() {
             }
         }
 
-        // ラジオボタン変更時のイベント
-        buttonList1.forEach { button ->
+        // 駒落ち設定変更時のイベント
+        handyBlackList.forEach { button ->
             button.setOnCheckedChangeListener { _, _ ->
                 if (button.isChecked) {
-                    buttonList1.filterNot { it == button }.forEach { btn ->
+                    handyBlackList.filterNot { it == button }.forEach { btn ->
                         btn.isChecked = false
                     }
                     val id: String = context!!.resources.getResourceEntryName(button.id).toString()
                     val mode = id.substring(id.length - 1).toInt()
-                    GameSetting.handiBlack = mode
                     sharedPreferences.setHandyBlack(mode)
                 }
             }
         }
-        buttonList2.forEach { button ->
+        handyWhiteList.forEach { button ->
             button.setOnCheckedChangeListener { _, _ ->
                 if (button.isChecked) {
-                    buttonList2.filterNot { it == button }.forEach { btn ->
+                    handyWhiteList.filterNot { it == button }.forEach { btn ->
                         btn.isChecked = false
                     }
                     val id: String = context!!.resources.getResourceEntryName(button.id).toString()
                     val mode = id.substring(id.length - 1).toInt()
-                    GameSetting.handiWhite = mode
                     sharedPreferences.setHandyWhite(mode)
                 }
             }

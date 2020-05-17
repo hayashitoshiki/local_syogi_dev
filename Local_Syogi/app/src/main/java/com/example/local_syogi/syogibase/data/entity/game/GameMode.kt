@@ -1,6 +1,9 @@
 package com.example.local_syogi.syogibase.data.entity.game
 
 object GameMode {
+
+    var rate = false
+
     var checkmate = false
     var annan = false
     var pieceLimit = false

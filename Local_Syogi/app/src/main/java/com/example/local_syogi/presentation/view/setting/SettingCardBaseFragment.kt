@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 
 class SettingCardBaseFragment : Fragment() {
 
@@ -23,8 +24,10 @@ class SettingCardBaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = if (mode == 1) {
+            GameMode.rate = false
             inflater.inflate(R.layout.fragment_select_normal, container, false)
         } else {
+            GameMode.rate = true
             inflater.inflate(R.layout.fragment_select_rate, container, false)
         }
         val usuallyButton: Button = view.findViewById(R.id.usualyButton)
