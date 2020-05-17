@@ -2,11 +2,11 @@ package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
 import com.example.local_syogi.di.MyApplication
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
-import com.example.local_syogi.syogibase.data.remote.DtoEndInfo
-import com.example.local_syogi.syogibase.data.remote.DtoMove
-import com.example.local_syogi.syogibase.data.remote.DtoPlayer
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.remote.EndInfoDto
+import com.example.local_syogi.syogibase.data.entity.remote.MoveDto
+import com.example.local_syogi.syogibase.data.entity.remote.PlayerDto
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import com.google.gson.Gson
 import io.socket.client.IO
@@ -26,13 +26,16 @@ import kotlinx.coroutines.withContext
 class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
     SocketRepository {
     private lateinit var socket: Socket
-    private lateinit var player: DtoPlayer
+    private lateinit var player: PlayerDto
 
     fun start() {
         val socketUrl = "https://socket-sample-th.herokuapp.com/"
         val uri = URI(socketUrl)
         val sharedPreferences = GameSettingSharedPreferences(MyApplication.getInstance().applicationContext)
-        player = DtoPlayer("testA", GameMode.getModeInt() + sharedPreferences.getRateTimeLimit())
+        player = PlayerDto(
+            "testA",
+            GameMode.getModeInt() + sharedPreferences.getRateTimeLimit()
+        )
 
         // 接続
         try {
@@ -85,7 +88,7 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
     private val onGameEnd = Emitter.Listener { json ->
         GlobalScope.launch(Dispatchers.Main) {
             val data = json[0].toString()
-            val dtoMove = Gson().fromJson(data, DtoEndInfo::class.java)
+            val dtoMove = Gson().fromJson(data, EndInfoDto::class.java)
             presenter.socketGameEnd(dtoMove.turn, dtoMove.winType)
         }
     }
@@ -93,7 +96,7 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
     // 相手が指した手を受信する
     private val onMove = Emitter.Listener { json ->
         val data = json[0].toString()
-        val dtoMove = Gson().fromJson(data, DtoMove::class.java)
+        val dtoMove = Gson().fromJson(data, MoveDto::class.java)
         GlobalScope.launch(Dispatchers.Main) {
                 val (oldY, oldX) =
                     when (dtoMove.toY) {
@@ -111,7 +114,7 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
 
     // 動かした手を送信する
     override fun moveEmit(gameLog: GameLog, countNumberBlack: Long) {
-        val jsonData = DtoMove(
+        val jsonData = MoveDto(
             gameLog.oldX,
             gameLog.oldY,
             gameLog.afterPiece,
@@ -129,7 +132,11 @@ class SocketRepositoryImp(val presenter: SocketRepository.presenter) :
 
     // 勝敗を送信する
     override fun gameEndEmit(turn: Int, winType: Int) {
-        val jsonData = DtoEndInfo(turn, winType)
+        val jsonData =
+            EndInfoDto(
+                turn,
+                winType
+            )
         val json = Gson().toJson(jsonData)
         socket.emit("gameEnd", json)
     }

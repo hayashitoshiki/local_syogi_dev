@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.local_syogi.R
-import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.data.repository.SocketRepository
 import com.example.local_syogi.syogibase.data.repository.SocketRepositoryImp
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
@@ -44,7 +44,9 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_rate)
         socketRepository =
-            SocketRepositoryImp(this)
+            SocketRepositoryImp(
+                this
+            )
         socketRepository.start()
         // 画面作成
         frame = this.findViewById(R.id.frame) as FrameLayout

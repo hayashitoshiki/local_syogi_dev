@@ -1,11 +1,12 @@
 package com.example.local_syogi.syogibase.data.repository
 
 import android.util.Log
-import com.example.local_syogi.syogibase.data.game.GameLog
-import com.example.local_syogi.syogibase.data.game.GameMode
-import com.example.local_syogi.syogibase.data.game.GameSetting
-import com.example.local_syogi.syogibase.data.local.GameEntity
-import com.example.local_syogi.syogibase.data.local.RecordEntity
+import com.example.local_syogi.di.MyApplication
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
+import com.example.local_syogi.syogibase.data.entity.local.GameEntity
+import com.example.local_syogi.syogibase.data.entity.local.RecordEntity
+import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import java.time.LocalDateTime
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter
 class GameRecordRepositoryImp : GameRecordRepository {
     // DBの宣言
     private lateinit var realm: Realm
+    private val sharedPreferences = GameSettingSharedPreferences(MyApplication.getInstance().applicationContext)
 
     companion object {
         private const val TAG = "Realm"
@@ -41,6 +43,11 @@ class GameRecordRepositoryImp : GameRecordRepository {
     override fun save(logList: MutableList<GameLog>, winner: Int, type: Int, blackName: String, whiteName: String, winType: Int) {
         val title = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss"))
         updateRealm()
+        val (handyBlack: Int, handyWhite: Int) = if(!GameMode.rate){
+            Pair(sharedPreferences.getHandyBlack(), sharedPreferences.getHandyWhite())
+        } else {
+            Pair(0, 0)
+        }
 
         realm.executeTransaction {
             val game = realm.createObject(GameEntity::class.java, title)
@@ -50,8 +57,8 @@ class GameRecordRepositoryImp : GameRecordRepository {
             game.whiteName = whiteName
             game.mode = GameMode.getModeInt()
             game.type = type
-            game.handyBlack = GameSetting.handiBlack
-            game.handyWhite = GameSetting.handiWhite
+            game.handyBlack = handyBlack
+            game.handyWhite = handyWhite
             game.turnCount = logList.size
             realm.copyToRealm(game)
         }

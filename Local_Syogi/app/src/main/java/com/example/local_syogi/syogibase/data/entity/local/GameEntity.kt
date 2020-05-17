@@ -1,4 +1,4 @@
-package com.example.local_syogi.syogibase.data.local
+package com.example.local_syogi.syogibase.data.entity.local
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

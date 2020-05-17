@@ -1,4 +1,4 @@
-package com.example.local_syogi.syogibase.data.local
+package com.example.local_syogi.syogibase.data.entity.local
 
 /**
  * 棋譜格納用クラス

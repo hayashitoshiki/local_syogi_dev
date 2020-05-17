@@ -1,7 +1,7 @@
 package com.example.local_syogi.syogibase.domain
 
-import com.example.local_syogi.syogibase.data.game.Board
-import com.example.local_syogi.syogibase.data.game.Cell
+import com.example.local_syogi.syogibase.data.entity.game.Board
+import com.example.local_syogi.syogibase.data.entity.game.Cell
 import com.example.local_syogi.syogibase.data.repository.BoardRepository
 import com.example.local_syogi.syogibase.data.repository.GameRecordRepository
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCaseImp

@@ -1,4 +1,4 @@
-package com.example.local_syogi.syogibase.data.game
+package com.example.local_syogi.syogibase.data.entity.game
 
 /**
  * マス目の情報クラス

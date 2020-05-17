@@ -1,4 +1,4 @@
-package com.example.local_syogi.syogibase.data.remote
+package com.example.local_syogi.syogibase.data.entity.remote
 
 /**
  * socket.ioに送るユーザー情報
@@ -13,4 +13,4 @@ package com.example.local_syogi.syogibase.data.remote
  *   const val LIMIT = 4
  *   const val TWOTIME = 5
  */
-class DtoPlayer(private val name: String, private val mode: Int)
+class PlayerDto(private val name: String, private val mode: Int)

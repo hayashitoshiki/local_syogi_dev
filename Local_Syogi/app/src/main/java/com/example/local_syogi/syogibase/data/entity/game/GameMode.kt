@@ -1,6 +1,13 @@
-package com.example.local_syogi.syogibase.data.game
+package com.example.local_syogi.syogibase.data.entity.game
+
+/**
+ * ゲームモード設定管理クラス
+ */
 
 object GameMode {
+
+    var rate = false
+
     var checkmate = false
     var annan = false
     var pieceLimit = false

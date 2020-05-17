@@ -1,6 +1,6 @@
 package com.example.local_syogi.syogibase.presentation.contact
 
-import com.example.local_syogi.syogibase.data.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameLog
 
 interface GameViewContact {
 

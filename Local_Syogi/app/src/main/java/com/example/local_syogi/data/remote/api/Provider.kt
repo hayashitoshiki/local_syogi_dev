@@ -1,8 +1,7 @@
-package com.example.local_syogi.data.remote
+package com.example.local_syogi.data.remote.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 /**
  * サーバー情報

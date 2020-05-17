@@ -1,4 +1,4 @@
-package com.example.local_syogi.data.remote
+package com.example.local_syogi.data.remote.api
 
 import com.example.local_syogi.data.entity.AccountEntity
 import com.example.local_syogi.data.entity.FollowEntity

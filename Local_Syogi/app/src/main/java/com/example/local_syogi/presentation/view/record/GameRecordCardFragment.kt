@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
 import com.example.local_syogi.presentation.view.account.NotLoginFragment
-import com.example.local_syogi.syogibase.data.game.GameMode.BACKMOVE
-import com.example.local_syogi.syogibase.data.game.GameMode.CHAOS
-import com.example.local_syogi.syogibase.data.game.GameMode.CHECKMATE
-import com.example.local_syogi.syogibase.data.game.GameMode.LIMIT
-import com.example.local_syogi.syogibase.data.game.GameMode.NORMAL
-import com.example.local_syogi.syogibase.data.game.GameMode.TWOTIME
+import com.example.local_syogi.syogibase.data.entity.game.GameMode.BACKMOVE
+import com.example.local_syogi.syogibase.data.entity.game.GameMode.CHAOS
+import com.example.local_syogi.syogibase.data.entity.game.GameMode.CHECKMATE
+import com.example.local_syogi.syogibase.data.entity.game.GameMode.LIMIT
+import com.example.local_syogi.syogibase.data.entity.game.GameMode.NORMAL
+import com.example.local_syogi.syogibase.data.entity.game.GameMode.TWOTIME
 
 class GameRecordCardFragment : Fragment() {
 
