@@ -184,16 +184,12 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
 
     // 手番(タイマー)チェンジ
     fun changeTimerBlack() {
-        if (countDownTimerWhite != null) {
-            countDownTimerWhite!!.cancel()
-        }
+        countDownTimerWhite?.cancel()
         countDownTimerBlack = CountDownBlack(countNumberBlack, 10) // countMillisを残り時間にセット
         countDownTimerBlack!!.start() // タイマーをスタート
     }
     fun changeTimerWhite() {
-        if (countDownTimerBlack != null) {
-            countDownTimerBlack!!.cancel()
-        }
+        countDownTimerBlack?.cancel()
         countDownTimerWhite = CountDownWhite(countNumberWhite, 10) // countMillisを残り時間にセット
         countDownTimerWhite!!.start() // タイマーをスタート
     }

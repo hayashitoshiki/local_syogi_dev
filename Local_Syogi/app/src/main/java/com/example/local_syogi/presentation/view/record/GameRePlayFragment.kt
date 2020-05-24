@@ -53,8 +53,7 @@ class GameRePlayFragment(private val log: MutableList<GameLog>, private val game
             AlertDialog.Builder(context).setCancelable(false)
                 .setMessage("感想戦を終了しますか？")
                 .setPositiveButton("はい") { _, _ ->
-                    val mFragment = parentFragment as GameRecordRootFragment
-                    mFragment.endRePlay()
+                    (parentFragment as GameRecordRootFragment).endRePlay()
                 }
                 .setNegativeButton("いいえ", null)
                 .create().show()

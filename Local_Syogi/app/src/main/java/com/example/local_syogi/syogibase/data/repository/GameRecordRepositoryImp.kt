@@ -50,32 +50,33 @@ class GameRecordRepositoryImp : GameRecordRepository {
         }
 
         realm.executeTransaction {
-            val game = realm.createObject(GameEntity::class.java, title)
-            game.winner = winner
-            game.winType = winType
-            game.blackName = blackName
-            game.whiteName = whiteName
-            game.mode = GameMode.getModeInt()
-            game.type = type
-            game.handyBlack = handyBlack
-            game.handyWhite = handyWhite
-            game.turnCount = logList.size
+            val game = realm.createObject(GameEntity::class.java, title).apply{
+                this.winner = winner
+                this.winType = winType
+                this.blackName = blackName
+                this.whiteName = whiteName
+                this.mode = GameMode.getModeInt()
+                this.type = type
+                this.handyBlack = handyBlack
+                this.handyWhite = handyWhite
+                this.turnCount = logList.size
+            }
             realm.copyToRealm(game)
         }
         for (log in logList) {
             realm.executeTransaction {
-                val record = realm.createObject(RecordEntity::class.java, getAutoIncrementIdByRecord(realm))
-                record.title = title
-                record.toX = log.oldX + 1
-                record.toY = log.oldY + 1
-                record.toPiece = log.afterPiece.nameJP
-                record.toTurn = log.afterTurn
-                record.fromX = log.newX + 1
-                record.fromY = log.newY + 1
-                record.fromPiece = log.beforpiece.nameJP
-                record.fromTurn = log.beforturn
-                record.evolution = log.evolution
-
+                val record = realm.createObject(RecordEntity::class.java, getAutoIncrementIdByRecord(realm)).apply {
+                    this.title = title
+                    this.toX = log.oldX + 1
+                    this.toY = log.oldY + 1
+                    this.toPiece = log.afterPiece.nameJP
+                    this.toTurn = log.afterTurn
+                    this.fromX = log.newX + 1
+                    this.fromY = log.newY + 1
+                    this.fromPiece = log.beforpiece.nameJP
+                    this.fromTurn = log.beforturn
+                    this.evolution = log.evolution
+                }
                 realm.copyToRealm(record)
             }
         }
