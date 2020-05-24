@@ -41,26 +41,27 @@ class SettingDetailsFragment : Fragment() {
         val whiteSpinner1 = view2.findViewById<Spinner>(R.id.whiteSpinner1)
         val whiteSpinner2 = view2.findViewById<Spinner>(R.id.whiteSpinner2)
         val sharedPreferences = GameSettingSharedPreferences(context!!)
-        val handyBlackList = arrayListOf<RadioButton>()
-        val handyWhiteList = arrayListOf<RadioButton>()
         val trySwitch = view2.findViewById<Switch>(R.id.trySwitch)
-
-        handyBlackList.add(blackButton1)
-        handyBlackList.add(blackButton2)
-        handyBlackList.add(blackButton3)
-        handyBlackList.add(blackButton4)
-        handyBlackList.add(blackButton5)
-        handyBlackList.add(blackButton6)
-        handyBlackList.add(blackButton7)
-        handyBlackList.add(blackButton8)
-        handyWhiteList.add(whiteButton1)
-        handyWhiteList.add(whiteButton2)
-        handyWhiteList.add(whiteButton3)
-        handyWhiteList.add(whiteButton4)
-        handyWhiteList.add(whiteButton5)
-        handyWhiteList.add(whiteButton6)
-        handyWhiteList.add(whiteButton7)
-        handyWhiteList.add(whiteButton8)
+        val handyBlackList = arrayListOf<RadioButton>().apply {
+            this.add(blackButton1)
+            this.add(blackButton2)
+            this.add(blackButton3)
+            this.add(blackButton4)
+            this.add(blackButton5)
+            this.add(blackButton6)
+            this.add(blackButton7)
+            this.add(blackButton8)
+        }
+        val handyWhiteList = arrayListOf<RadioButton>().apply {
+            this.add(whiteButton1)
+            this.add(whiteButton2)
+            this.add(whiteButton3)
+            this.add(whiteButton4)
+            this.add(whiteButton5)
+            this.add(whiteButton6)
+            this.add(whiteButton7)
+            this.add(whiteButton8)
+        }
 
         // 詳細設定画面の初期設定
         // トライルルール
