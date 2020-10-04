@@ -8,26 +8,19 @@ import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 
 class GameRecordListPresenter(private val view: GameRecordListContact.View, private val usecase: SyogiLogicUseCase) : GameRecordListContact.Presenter {
 
-    // 全部の対戦モードの対局取得
-    override fun getGameAll(): MutableList<GameModel> {
-        return usecase.getGameAll()
+    // オフライン対局の記譜取得
+    override fun getOfflineGameList(mode: Int): List<GameModel> {
+        return when (mode) {
+            0 -> usecase.getGameAll().filter { it.type == 1 }
+            else -> usecase.getGameByMode(mode).filter { it.type == 1 }
+        }
     }
-    override fun getOfflineGameAll(): List<GameModel> {
-        return usecase.getGameAll().filter { it.type == 1 }
-    }
-    override fun getOnlineGameAll(): List<GameModel> {
-        return usecase.getGameAll().filter { it.type == 2 }
-    }
-
-    // 指定の対戦モードの対局取得
-    override fun getGameByMode(mode: Int): MutableList<GameModel> {
-        return usecase.getGameByMode(mode)
-    }
-    override fun getOfflineGameByMode(mode: Int): List<GameModel> {
-        return usecase.getGameByMode(mode).filter { it.type == 1 }
-    }
-    override fun getOnlineGameByMode(mode: Int): List<GameModel> {
-        return usecase.getGameByMode(mode).filter { it.type == 2 }
+    // オンライン対局の記譜取得
+    override fun getOnlineGameList(mode: Int): List<GameModel> {
+        return when (mode) {
+            0 -> usecase.getGameAll().filter { it.type == 2 }
+            else -> usecase.getGameByMode(mode).filter { it.type == 2 }
+        }
     }
 
     // 指定のタイトルの対局取得

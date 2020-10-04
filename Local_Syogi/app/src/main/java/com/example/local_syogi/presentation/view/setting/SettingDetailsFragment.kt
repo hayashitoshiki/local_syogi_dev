@@ -11,6 +11,7 @@ import android.widget.Switch
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences
+import kotlinx.android.synthetic.main.fragment_setting_details_fragment.*
 
 /**
  * ゲーム選択画面　＞　詳細設定Fragment
@@ -19,48 +20,33 @@ import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPref
 class SettingDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view2 = inflater.inflate(R.layout.fragment_setting_details_fragment, container, false)
-        val blackButton1 = view2.findViewById<RadioButton>(R.id.blackRadioButton1)
-        val blackButton2 = view2.findViewById<RadioButton>(R.id.blackRadioButton2)
-        val blackButton3 = view2.findViewById<RadioButton>(R.id.blackRadioButton3)
-        val blackButton4 = view2.findViewById<RadioButton>(R.id.blackRadioButton4)
-        val blackButton5 = view2.findViewById<RadioButton>(R.id.blackRadioButton5)
-        val blackButton6 = view2.findViewById<RadioButton>(R.id.blackRadioButton6)
-        val blackButton7 = view2.findViewById<RadioButton>(R.id.blackRadioButton7)
-        val blackButton8 = view2.findViewById<RadioButton>(R.id.blackRadioButton8)
-        val whiteButton1 = view2.findViewById<RadioButton>(R.id.whiteRadioButton1)
-        val whiteButton2 = view2.findViewById<RadioButton>(R.id.whiteRadioButton2)
-        val whiteButton3 = view2.findViewById<RadioButton>(R.id.whiteRadioButton3)
-        val whiteButton4 = view2.findViewById<RadioButton>(R.id.whiteRadioButton4)
-        val whiteButton5 = view2.findViewById<RadioButton>(R.id.whiteRadioButton5)
-        val whiteButton6 = view2.findViewById<RadioButton>(R.id.whiteRadioButton6)
-        val whiteButton7 = view2.findViewById<RadioButton>(R.id.whiteRadioButton7)
-        val whiteButton8 = view2.findViewById<RadioButton>(R.id.whiteRadioButton8)
-        val blackSpinner1 = view2.findViewById<Spinner>(R.id.blackSpinner1)
-        val blackSpinner2 = view2.findViewById<Spinner>(R.id.blackSpinner2)
-        val whiteSpinner1 = view2.findViewById<Spinner>(R.id.whiteSpinner1)
-        val whiteSpinner2 = view2.findViewById<Spinner>(R.id.whiteSpinner2)
+        val view = inflater.inflate(R.layout.fragment_setting_details_fragment, container, false)
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         val sharedPreferences = GameSettingSharedPreferences(context!!)
-        val trySwitch = view2.findViewById<Switch>(R.id.trySwitch)
         val handyBlackList = arrayListOf<RadioButton>().apply {
-            this.add(blackButton1)
-            this.add(blackButton2)
-            this.add(blackButton3)
-            this.add(blackButton4)
-            this.add(blackButton5)
-            this.add(blackButton6)
-            this.add(blackButton7)
-            this.add(blackButton8)
+            this.add(blackRadioButton1)
+            this.add(blackRadioButton2)
+            this.add(blackRadioButton3)
+            this.add(blackRadioButton4)
+            this.add(blackRadioButton5)
+            this.add(blackRadioButton6)
+            this.add(blackRadioButton7)
+            this.add(blackRadioButton8)
         }
         val handyWhiteList = arrayListOf<RadioButton>().apply {
-            this.add(whiteButton1)
-            this.add(whiteButton2)
-            this.add(whiteButton3)
-            this.add(whiteButton4)
-            this.add(whiteButton5)
-            this.add(whiteButton6)
-            this.add(whiteButton7)
-            this.add(whiteButton8)
+            this.add(whiteRadioButton1)
+            this.add(whiteRadioButton2)
+            this.add(whiteRadioButton3)
+            this.add(whiteRadioButton4)
+            this.add(whiteRadioButton5)
+            this.add(whiteRadioButton6)
+            this.add(whiteRadioButton7)
+            this.add(whiteRadioButton8)
         }
 
         // 詳細設定画面の初期設定
@@ -73,24 +59,24 @@ class SettingDetailsFragment : Fragment() {
         whiteSpinner2.setSelection(sharedPreferences.getSecondWhite())
         // 駒落ち
         when (sharedPreferences.getHandyBlack()) {
-            1 -> blackButton1.isChecked = true
-            2 -> blackButton2.isChecked = true
-            3 -> blackButton3.isChecked = true
-            4 -> blackButton4.isChecked = true
-            5 -> blackButton5.isChecked = true
-            6 -> blackButton6.isChecked = true
-            7 -> blackButton7.isChecked = true
-            8 -> blackButton8.isChecked = true
+            1 -> blackRadioButton1.isChecked = true
+            2 -> blackRadioButton2.isChecked = true
+            3 -> blackRadioButton3.isChecked = true
+            4 -> blackRadioButton4.isChecked = true
+            5 -> blackRadioButton5.isChecked = true
+            6 -> blackRadioButton6.isChecked = true
+            7 -> blackRadioButton7.isChecked = true
+            8 -> blackRadioButton8.isChecked = true
         }
         when (sharedPreferences.getHandyWhite()) {
-            1 -> whiteButton1.isChecked = true
-            2 -> whiteButton2.isChecked = true
-            3 -> whiteButton3.isChecked = true
-            4 -> whiteButton4.isChecked = true
-            5 -> whiteButton5.isChecked = true
-            6 -> whiteButton6.isChecked = true
-            7 -> whiteButton7.isChecked = true
-            8 -> whiteButton8.isChecked = true
+            1 -> whiteRadioButton1.isChecked = true
+            2 -> whiteRadioButton2.isChecked = true
+            3 -> whiteRadioButton3.isChecked = true
+            4 -> whiteRadioButton4.isChecked = true
+            5 -> whiteRadioButton5.isChecked = true
+            6 -> whiteRadioButton6.isChecked = true
+            7 -> whiteRadioButton7.isChecked = true
+            8 -> whiteRadioButton8.isChecked = true
         }
 
         // トライルール変更時イベント
@@ -160,7 +146,6 @@ class SettingDetailsFragment : Fragment() {
                 }
             }
         }
-        return view2
     }
 
     companion object {

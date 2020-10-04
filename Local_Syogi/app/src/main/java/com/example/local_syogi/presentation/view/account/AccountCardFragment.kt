@@ -10,15 +10,20 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.account.SettingAccountContact
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 import kotlinx.android.synthetic.main.fragment_card_account.*
+import kotlinx.android.synthetic.main.fragment_card_account.allButton
+import kotlinx.android.synthetic.main.fragment_card_account.annnanButton
+import kotlinx.android.synthetic.main.fragment_card_account.chaosButton
+import kotlinx.android.synthetic.main.fragment_card_account.checkmateButton
+import kotlinx.android.synthetic.main.fragment_card_account.pieceLimitButton
+import kotlinx.android.synthetic.main.fragment_card_account.queenButton
+import kotlinx.android.synthetic.main.fragment_card_account.seccondButton
+import kotlinx.android.synthetic.main.fragment_card_account.usualyButton
 
 class AccountCardFragment : Fragment() {
 
     private val buttonList = arrayListOf<Button>()
-    private lateinit var rootFragment: AccountRootFragment
-    private lateinit var accountButton: Button
-    private var tab = -1
-    private var colorPrevious: Int = Color.parseColor("#795548")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,96 +31,78 @@ class AccountCardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_card_account, container, false)
-        accountButton = view.findViewById(R.id.accountButton)
-        val allButton: Button = view.findViewById(R.id.allButton)
-        val usuallyButton: Button = view.findViewById(R.id.usualyButton)
-        val annanButton: Button = view.findViewById(R.id.annnanButton)
-        val queenButton: Button = view.findViewById(R.id.queenButton)
-        val secondButton: Button = view.findViewById(R.id.seccondButton)
-        val checkmateButton: Button = view.findViewById(R.id.checkmateButton)
-        val pieceLimitButton: Button = view.findViewById(R.id.pieceLimitButton)
-        val chaosButton: Button = view.findViewById(R.id.chaosButton)
-        val followButton: Button = view.findViewById(R.id.accountFollowButton)
-        rootFragment = parentFragment as AccountRootFragment
-
-        buttonList.add(allButton)
-        buttonList.add(accountButton)
-        buttonList.add(usuallyButton)
-        buttonList.add(annanButton)
-        buttonList.add(queenButton)
-        buttonList.add(secondButton)
-        buttonList.add(checkmateButton)
-        buttonList.add(pieceLimitButton)
-        buttonList.add(chaosButton)
-        buttonList.add(followButton)
-        if (tab != -1) {
-            buttonList[tab].setTextColor(Color.parseColor("#795548"))
-        }
-
-        // ボタン押下
-        accountButton.setOnClickListener {
-            changeMode(accountButton, rootFragment.authFragment)
-        }
-        followButton.setOnClickListener {
-            changeMode(followButton,
-                AccountFollowFragment()
-            )
-        }
-        allButton.setOnClickListener { changeMode(allButton,
-            ResultListFragment.newInstance("総合成績")
-        ) }
-        usuallyButton.setOnClickListener { changeMode(usuallyButton,
-            ResultListFragment.newInstance(usuallyButton.text.toString())
-        ) }
-        annanButton.setOnClickListener { changeMode(annanButton,
-            ResultListFragment.newInstance(annnanButton.text.toString())
-        ) }
-        queenButton.setOnClickListener { changeMode(queenButton,
-            ResultListFragment.newInstance(queenButton.text.toString())
-        ) }
-        secondButton.setOnClickListener { changeMode(secondButton,
-            ResultListFragment.newInstance(secondButton.text.toString())
-        ) }
-        checkmateButton.setOnClickListener { changeMode(checkmateButton,
-            ResultListFragment.newInstance(checkmateButton.text.toString())
-        ) }
-        pieceLimitButton.setOnClickListener { changeMode(pieceLimitButton,
-            ResultListFragment.newInstance(pieceLimitButton.text.toString())
-        ) }
-        chaosButton.setOnClickListener { changeMode(chaosButton,
-            ResultListFragment.newInstance(chaosButton.text.toString())
-        ) }
         return view
     }
 
-    // タブ選択
-    private fun changeMode(button: Button, fragment: Fragment) {
-//        for (btn in buttonList) {
-//           // btn.setTextColor(Color.BLACK)
-//        }
-        if (tab != -1) {
-            buttonList[tab].setTextColor(colorPrevious)
-            buttonList[tab].setTypeface(null, Typeface.ITALIC)
-        }
-        tab = buttonList.indexOf(button)
-        colorPrevious = buttonList[tab].currentTextColor
-        button.setTextColor(Color.parseColor("#795548"))
-        button.typeface = Typeface.DEFAULT_BOLD
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-        if (button == accountButton || parentPresenter!!.isSession()) {
-            rootFragment.changeMode(fragment, tab)
-        } else {
-            rootFragment.changeMode(NotLoginFragment(), tab)
+        buttonList.add(allButton)
+        buttonList.add(accountButton)
+        buttonList.add(usualyButton)
+        buttonList.add(annnanButton)
+        buttonList.add(queenButton)
+        buttonList.add(seccondButton)
+        buttonList.add(checkmateButton)
+        buttonList.add(pieceLimitButton)
+        buttonList.add(chaosButton)
+        buttonList.add(accountFollowButton)
+
+        // ボタン押下
+        accountButton.setOnClickListener {
+            changeMode(accountButton, 1000)
+        }
+        accountFollowButton.setOnClickListener {
+            changeMode(it as Button, 2000)
+        }
+        allButton.setOnClickListener {
+            changeMode(it as Button, 0)
+        }
+        usualyButton.setOnClickListener {
+            changeMode(it as Button, GameMode.NORMAL)
+        }
+        annnanButton.setOnClickListener {
+            changeMode(it as Button, GameMode.BACKMOVE)
+        }
+        queenButton.setOnClickListener {
+            changeMode(it as Button, GameMode.CHAOS)
+        }
+        seccondButton.setOnClickListener {
+            changeMode(it as Button, GameMode.TWOTIME)
+        }
+        checkmateButton.setOnClickListener {
+            changeMode(it as Button, GameMode.CHECKMATE)
+        }
+        pieceLimitButton.setOnClickListener {
+            changeMode(it as Button, GameMode.LIMIT)
+        }
+        chaosButton.setOnClickListener {
+            changeMode(it as Button, GameMode.CHAOS)
         }
     }
 
+    // タブ選択
+    private fun changeMode(button: Button, mode: Int) {
+
+        buttonList.forEach { btn -> when (btn) {
+            button -> {
+                btn.setTextColor(Color.parseColor("#795548"))
+                btn.typeface = Typeface.DEFAULT_BOLD
+            }
+            else -> {
+                btn.setTextColor(Color.BLACK)
+                btn.setTypeface(null, Typeface.ITALIC)
+            }
+        } }
+        (parentFragment as? AccountRootFragment)?.changeMode(mode)
+
+    }
+
     companion object {
-        private var parentPresenter: SettingAccountContact.Presenter? = null
 
         @JvmStatic
         fun newInstance(parentPresenter: SettingAccountContact.Presenter): AccountCardFragment {
             val fragment = AccountCardFragment()
-            this.parentPresenter = parentPresenter
             return fragment
         }
     }

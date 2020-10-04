@@ -15,8 +15,6 @@ class AuthenticationBaseFragment : Fragment(), AuthenticationBaseContact.View {
 
     private val presenter: AuthenticationBaseContact.Presenter by inject { parametersOf(this) }
 
-    private var stop = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,9 +24,8 @@ class AuthenticationBaseFragment : Fragment(), AuthenticationBaseContact.View {
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        stop = false
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         if (presenter.isSession()) {
             setInformationView()
         } else {
@@ -39,7 +36,7 @@ class AuthenticationBaseFragment : Fragment(), AuthenticationBaseContact.View {
     // ログインViewを表示する
     fun setLoginView() {
         Log.d("Main", "ログイン")
-        if (isAdded && !stop) {
+        if (isAdded) {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
                     R.anim.fade_in,
@@ -54,7 +51,7 @@ class AuthenticationBaseFragment : Fragment(), AuthenticationBaseContact.View {
     fun setInformationView() {
         Log.d("Main", "設定画面")
 
-        if (isAdded && !stop) {
+        if (isAdded) {
             childFragmentManager.beginTransaction()
                 .setCustomAnimations(
                     R.anim.fade_in,
@@ -63,11 +60,6 @@ class AuthenticationBaseFragment : Fragment(), AuthenticationBaseContact.View {
                 .replace(R.id.fragment, SignOutFragment.newInstance())
                 .commit()
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        stop = true
     }
 
     companion object {

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
@@ -15,25 +14,18 @@ import com.example.local_syogi.presentation.view.MainActivity
 import com.example.local_syogi.presentation.view.account.AuthenticationBaseFragment
 import com.example.local_syogi.presentation.view.account.NotLoginFragment
 import com.example.local_syogi.syogibase.data.entity.game.GameLog
+import com.example.local_syogi.syogibase.data.entity.game.GameMode
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.util.OnBackPressedListener
+import kotlinx.android.synthetic.main.fragment_game_record_root.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPressedListener {
 
     private val presenter: GameRecordRootContact.Presenter by inject { parametersOf(this) }
-    lateinit var authFragment: AuthenticationBaseFragment
+    private lateinit var authFragment: AuthenticationBaseFragment
     private lateinit var accountTab: GameRecordCardFragment
-    private lateinit var tabFragment: FrameLayout
-    private lateinit var mainFrame: FrameLayout
-    private lateinit var main: MainActivity
-
-    private var tab = -1
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,11 +33,18 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_record_root, container, false)
-        main = activity as MainActivity
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        presenter.onStart()
+
+        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
+        val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_delay) as Animation
+
         authFragment = AuthenticationBaseFragment.newInstance()
-        accountTab = GameRecordCardFragment.newInstance(presenter)
-        tabFragment = view.findViewById(R.id.tab)
-        mainFrame = view.findViewById(R.id.fragment)
+        accountTab = GameRecordCardFragment.newInstance()
 
         if (isAdded) {
             childFragmentManager
@@ -53,17 +52,9 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
                 .add(R.id.tab, accountTab)
                 .commit()
         }
-        return view
-    }
 
-    override fun onStart() {
-        super.onStart()
-        presenter.onStart()
-        val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_slide_new) as Animation
-        val fadeDelay: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in_delay) as Animation
-
-        tabFragment.startAnimation(fade)
-        tabFragment.visibility = View.VISIBLE
+        tab.startAnimation(fade)
+        tab.visibility = View.VISIBLE
         mainFrame.startAnimation(fadeDelay)
         mainFrame.visibility = View.VISIBLE
     }
@@ -73,8 +64,7 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
             if (x2 - x < -10) {
                 if (y in 800..1200) {
                     closeActivity()
-                    val main = activity as MainActivity
-                    main.backFragment()
+                    (activity as MainActivity).backFragment()
                 } else {
                     // flipCard(1)
                 }
@@ -88,9 +78,10 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
     override fun setLoginViewFirst() {
         childFragmentManager
             .beginTransaction()
-            .add(R.id.fragment, NotLoginFragment())
+            .add(R.id.mainFrame, NotLoginFragment())
             .commit()
     }
+
     // 棋譜を表示する
     fun setRePlayView(log: MutableList<GameLog>, gameDetail: GameDetailSetitngModel) {
         childFragmentManager.beginTransaction()
@@ -104,6 +95,7 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
             .addToBackStack(null)
             .commit()
     }
+
     // 棋譜表示画面を閉じる
     fun endRePlay() {
         childFragmentManager.popBackStack()
@@ -138,23 +130,39 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
         val fade: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out_slide) as Animation
         val fadeOut: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_out) as Animation
 
-        tabFragment.startAnimation(fade)
-        tabFragment.visibility = View.INVISIBLE
+        tab.startAnimation(fade)
+        tab.visibility = View.INVISIBLE
         mainFrame.startAnimation(fadeOut)
         mainFrame.visibility = View.INVISIBLE
         // val act = activity as MainActivity
         // main.backFragment()
     }
 
-    fun changeMode(fragment: Fragment, tab: Int) {
-        childFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.fade_in_slide,
-                R.anim.fade_out_slide
-            )
-            .replace(R.id.fragment, fragment)
-            .commit()
-        this.tab = tab
+    // 成績表カード切り替え
+    fun changeMode(mode : Int) {
+        val fragment = when {
+            mode == 1000 -> authFragment
+            presenter.isSession() -> { when (mode) {
+                0 -> GameRecordListFragment.newInstance("総合成績", 0)
+                GameMode.NORMAL -> GameRecordListFragment.newInstance(resources.getString(R.string.syogi), GameMode.NORMAL)
+                GameMode.BACKMOVE -> GameRecordListFragment.newInstance(resources.getString(R.string.annnan_syogi), GameMode.BACKMOVE)
+                GameMode.CHAOS -> GameRecordListFragment.newInstance(resources.getString(R.string.chaos_syogi), GameMode.CHAOS)
+                GameMode.TWOTIME -> GameRecordListFragment.newInstance(resources.getString(R.string.secound_syogi), GameMode.TWOTIME)
+                GameMode.CHECKMATE -> GameRecordListFragment.newInstance(resources.getString(R.string.check_syogi), GameMode.CHECKMATE)
+                GameMode.LIMIT -> GameRecordListFragment.newInstance(resources.getString(R.string.piece_syogi), GameMode.LIMIT)
+                else -> null
+            } }
+            else -> NotLoginFragment()
+        }
+        fragment?.let {
+            childFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.fade_in_slide,
+                    R.anim.fade_out_slide
+                )
+                .replace(R.id.mainFrame, it)
+                .commit()
+        }
     }
 
     // BackKey

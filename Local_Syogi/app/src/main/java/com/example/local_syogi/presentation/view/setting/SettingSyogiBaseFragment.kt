@@ -40,10 +40,12 @@ class SettingSyogiBaseFragment : Fragment(), SettingSyogiBaseContact.View {
             7 -> inflater.inflate(R.layout.fragment_chaos_syogi, container, false)
             else -> inflater.inflate(R.layout.fragment_usually_syogi, container, false)
         }
+
         val button = view.findViewById(R.id.startButton) as Button
         val sharedPreferences = GameSettingSharedPreferences(context!!)
         radioButton3 = view.findViewById(R.id.radioButton3)
         radioButton5 = view.findViewById(R.id.radioButton5)
+
         when (sharedPreferences.getRateTimeLimit()) {
             3 * 60 * 1000 -> radioButton3.isChecked = true
             5 * 60 * 1000 -> radioButton5.isChecked = true
@@ -75,7 +77,8 @@ class SettingSyogiBaseFragment : Fragment(), SettingSyogiBaseContact.View {
                 sharedPreferences.setRateTimeLimit(5 * 60 * 1000)
             }
         }
-            return view
+
+        return view
     }
 
     fun setOnlineMode() {

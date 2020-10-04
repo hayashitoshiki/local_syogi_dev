@@ -5,20 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
 import com.example.local_syogi.presentation.view.game.GameFreeView
 import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
+import kotlinx.android.synthetic.main.fragment_game_play_back.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 class GameRePlayFragment(private val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : Fragment(), GamePlayBackContact.View {
 
     private val presenter: GamePlayBackContact.Presenter by inject { parametersOf(this) }
+    private lateinit var gameView: GameFreeView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,16 +26,16 @@ class GameRePlayFragment(private val log: MutableList<GameLog>, private val game
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_play_back, container, false)
-        val frame = view.findViewById(R.id.frame) as FrameLayout
-        val gameView = GameFreeView(context!!, frame.width, frame.height, log, gameDetail)
-        val backButton = view.findViewById<Button>(R.id.backButton)
-        val goButton = view.findViewById<Button>(R.id.goButton)
-        val backStartButton = view.findViewById<Button>(R.id.backStartButton)
-        val goEndButton = view.findViewById<Button>(R.id.goEndButton)
-        val endButton = view.findViewById<Button>(R.id.endButton)
+        gameView = GameFreeView(context!!, game_container.width, game_container.height, log, gameDetail)
+        game_container.addView(gameView)
 
-        frame.addView(gameView)
-        backButton.setOnClickListener {
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        backButton.setOnClickListener{
             gameView.backMove()
             gameView.invalidate()
         }
@@ -58,6 +58,5 @@ class GameRePlayFragment(private val log: MutableList<GameLog>, private val game
                 .setNegativeButton("いいえ", null)
                 .create().show()
         }
-        return view
     }
 }

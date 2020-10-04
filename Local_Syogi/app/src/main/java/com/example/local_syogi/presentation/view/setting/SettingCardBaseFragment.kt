@@ -14,10 +14,6 @@ class SettingCardBaseFragment : Fragment() {
 
     private val buttonList = arrayListOf<Button>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,13 +26,19 @@ class SettingCardBaseFragment : Fragment() {
             GameMode.rate = true
             inflater.inflate(R.layout.fragment_select_rate, container, false)
         }
-        val usuallyButton: Button = view.findViewById(R.id.usualyButton)
-        val annanButton: Button = view.findViewById(R.id.annnanButton)
-        val queenButton: Button = view.findViewById(R.id.queenButton)
-        val secondButton: Button = view.findViewById(R.id.seccondButton)
-        val checkmateButton: Button = view.findViewById(R.id.checkmateButton)
-        val pieceLimitButton: Button = view.findViewById(R.id.pieceLimitButton)
-        val chaosButton: Button = view.findViewById(R.id.chaosButton)
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val usuallyButton: Button = view!!.findViewById(R.id.usualyButton)
+        val annanButton: Button = view!!.findViewById(R.id.annnanButton)
+        val queenButton: Button = view!!.findViewById(R.id.queenButton)
+        val secondButton: Button = view!!.findViewById(R.id.seccondButton)
+        val checkmateButton: Button = view!!.findViewById(R.id.checkmateButton)
+        val pieceLimitButton: Button = view!!.findViewById(R.id.pieceLimitButton)
+        val chaosButton: Button = view!!.findViewById(R.id.chaosButton)
 
         buttonList.add(usuallyButton)
         buttonList.add(annanButton)
@@ -45,9 +47,6 @@ class SettingCardBaseFragment : Fragment() {
         buttonList.add(checkmateButton)
         buttonList.add(pieceLimitButton)
         buttonList.add(chaosButton)
-        if (tab != -1) {
-            buttonList[tab].setTextColor(Color.parseColor("#795548"))
-        }
 
         // ボタン押下
         usuallyButton.setOnClickListener { changeMode(usuallyButton,
@@ -71,7 +70,6 @@ class SettingCardBaseFragment : Fragment() {
         chaosButton.setOnClickListener { changeMode(chaosButton,
             SettingSyogiBaseFragment.newInstance(7, mode)
         ) }
-        return view
     }
 
     // タブ選択
@@ -81,8 +79,7 @@ class SettingCardBaseFragment : Fragment() {
         }
         button.setTextColor(Color.parseColor("#795548"))
         val tab = buttonList.indexOf(button)
-        val act = parentFragment as SettingRootFragment
-        act.changeMode(fragment, tab)
+        (parentFragment as SettingRootFragment).changeMode(fragment, tab)
     }
 
     companion object {
