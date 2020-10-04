@@ -3,14 +3,10 @@ package com.example.local_syogi.presentation.presenter.game
 import com.example.local_syogi.presentation.contact.game.GameViewFreeContact
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
 class GameLogicFreePresenter(private val view: GameViewFreeContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewFreeContact.Presenter {
-
-    companion object {
-        const val BLACK = 1
-        const val WHITE = 2
-        const val HINT = 3
-    }
 
     // 初期画面セット
     override fun setReplayView(gameDetail: GameDetailSetitngModel) {

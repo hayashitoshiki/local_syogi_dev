@@ -5,14 +5,12 @@ import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
+import com.example.local_syogi.syogibase.util.IntUtil.BLACK
+import com.example.local_syogi.syogibase.util.IntUtil.HINT
+import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
 class GameLogicRatePresenter(private val view: GameViewRateContact.View, private val syogiUseCase: SyogiLogicUseCase, private val firebase: AuthenticationUseCase) : GameViewRateContact.Presenter {
 
-    companion object {
-        const val BLACK = 1
-        const val WHITE = 2
-        const val HINT = 3
-    }
     private var startTurn: Int = 1
     private var blackName: String = ""
     private var whiteName: String = ""

@@ -5,21 +5,23 @@ import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.model.GameModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
+import com.example.local_syogi.syogibase.util.IntUtil.FREE
+import com.example.local_syogi.syogibase.util.IntUtil.RATE
 
 class GameRecordListPresenter(private val view: GameRecordListContact.View, private val usecase: SyogiLogicUseCase) : GameRecordListContact.Presenter {
 
     // オフライン対局の記譜取得
     override fun getOfflineGameList(mode: Int): List<GameModel> {
         return when (mode) {
-            0 -> usecase.getGameAll().filter { it.type == 1 }
-            else -> usecase.getGameByMode(mode).filter { it.type == 1 }
+            0 -> usecase.getGameAll().filter { it.type == FREE }
+            else -> usecase.getGameByMode(mode).filter { it.type == FREE }
         }
     }
     // オンライン対局の記譜取得
     override fun getOnlineGameList(mode: Int): List<GameModel> {
         return when (mode) {
-            0 -> usecase.getGameAll().filter { it.type == 2 }
-            else -> usecase.getGameByMode(mode).filter { it.type == 2 }
+            0 -> usecase.getGameAll().filter { it.type == RATE }
+            else -> usecase.getGameByMode(mode).filter { it.type == RATE }
         }
     }
 
