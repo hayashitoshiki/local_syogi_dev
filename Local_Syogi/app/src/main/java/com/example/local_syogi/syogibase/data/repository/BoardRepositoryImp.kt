@@ -11,8 +11,8 @@ import com.example.local_syogi.syogibase.util.Piece
 import com.example.local_syogi.syogibase.util.PieceMove
 
 class BoardRepositoryImp : BoardRepository {
-    private val board: Board =
-        Board()
+
+    private val board: Board = Board()
     private val logList = mutableListOf<GameLog>()
 
     private var previousX: Int = 0
@@ -27,8 +27,9 @@ class BoardRepositoryImp : BoardRepository {
     override fun setPre(x: Int, y: Int) {
         previousX = x
         previousY = y
-        if (y == 10 || y == -1) previousPiece = changeIntToPiece(x)
-        else previousPiece = board.cells[previousX][previousY].piece
+        previousPiece =
+            if (y == 10 || y == -1) changeIntToPiece(x)
+            else board.cells[previousX][previousY].piece
     }
 
     // 最新手を返す
@@ -240,6 +241,7 @@ class BoardRepositoryImp : BoardRepository {
     override fun getMove(x: Int, y: Int): Array<Array<PieceMove>> {
         return getPiece(x, y).getMove()
     }
+
     // 局面を取得
     override fun getBoard(): Array<Array<Cell>> {
         return board.cells

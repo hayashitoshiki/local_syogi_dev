@@ -2,7 +2,7 @@ package com.example.local_syogi.syogibase.data.entity.remote
 
 import com.example.local_syogi.syogibase.util.Piece
 
-class MoveDto(
+class Move(
     val toX: Int,
     val toY: Int,
     val toPiece: Piece,
