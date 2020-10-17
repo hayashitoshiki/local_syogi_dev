@@ -1,6 +1,6 @@
 package com.example.local_syogi.syogibase.data.entity.remote
 
-class EndInfoDto(
+class EndInfo(
     val turn: Int,
     val winType: Int
 )

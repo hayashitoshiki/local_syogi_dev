@@ -307,18 +307,18 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
             KYO ->
                 for (i in 0..8) {
                     for (j in 1..8) {
-                    val J = if (turn == BLACK) j else 8 - j
-                        if (boardRepository.getTurn(i, J) == 0) {
-                            setHint(newX, newY, i, J, turn)
+                        val k = if (turn == BLACK) j else 8 - j
+                        if (boardRepository.getTurn(i, k) == 0) {
+                            setHint(newX, newY, i, k, turn)
                         }
                     }
                 }
             KEI ->
                 for (i in 0..8) {
                     for (j in 2..8) {
-                        val J = if (turn == BLACK) j else 8 - j
-                        if (boardRepository.getTurn(i, J) == 0) {
-                            setHint(newX, newY, i, J, turn)
+                        val k = if (turn == BLACK) j else 8 - j
+                        if (boardRepository.getTurn(i, k) == 0) {
+                            setHint(newX, newY, i, k, turn)
                         }
                     }
                 }
@@ -330,10 +330,10 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
                         if (boardRepository.getTurn(i, j) == turn && boardRepository.getPiece(i, j) == FU) break
                         if (j == 8) {
                             for (k in 1..8) {
-                                val K = if (y == 10) k else k - 1
-                                if (boardRepository.getTurn(i, K) == 0 && !isCheckMateByPossessionFu(newX, newY, i, K, turn)) {
+                                val l = if (y == 10) k else k - 1
+                                if (boardRepository.getTurn(i, l) == 0 && !isCheckMateByPossessionFu(newX, newY, i, l, turn)) {
                                     xList.add(i)
-                                    yList.add(K)
+                                    yList.add(l)
                                    // setHint(newX, newY, i, K, turn)
                                 }
                             }
@@ -370,22 +370,19 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     // (駒の名前,手番,ヒントの表示)を返す
     override fun getCellTrun(x: Int, y: Int): Int {
         val cell = boardRepository.getCellInformation(x, y)
-        return if (cell.hint) {
-                3
-            } else if (cell.turn == BLACK) {
-                BLACK
-            } else if (cell.turn == WHITE) {
-                WHITE
-            } else {
-                4
-            }
+        return when {
+            cell.hint -> 3
+            cell.turn == BLACK -> BLACK
+            cell.turn == WHITE -> WHITE
+            else ->  4
+        }
     }
 
     // 指定した手番の持ち駒を返す
     override fun getPieceHand(turn: Int): MutableList<Pair<Piece, Int>> {
         val hold = mutableListOf<Pair<Piece, Int>>()
         var i = 0
-        boardRepository.getAllHoldPiece(turn).forEach { piece, count ->
+        boardRepository.getAllHoldPiece(turn).forEach { (piece, count) ->
             hold.add(i, Pair(piece, count))
             i++
         }
@@ -396,14 +393,17 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
     override fun getTurn(): Int {
         return turn
     }
+
     // 手番を設定する
     override fun setTurn(turn: Int) {
         this.turn = turn
     }
+
     // 最後のログを取得する
     override fun getLogLast(): GameLog {
         return boardRepository.getLogList()
     }
+
     // 動かす駒の元の位置をセットする
     override fun setPre(x: Int, y: Int) {
         boardRepository.setPre(x, y)
@@ -411,8 +411,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
 
     // 対局ログを返す
     override fun getLog(): MutableList<GameLog> {
-        val log = boardRepository.getLog()
-        return log
+        return boardRepository.getLog()
     }
 
     // 一手戻す
@@ -434,6 +433,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         }
         return titleList
     }
+
     // 特定の種類の棋譜リストを取得する
     override fun getGameByMode(mode: Int): MutableList<GameModel> {
         val titlesList = recordRepository.findTitleByMode(mode)
@@ -443,6 +443,7 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         }
         return titleList
     }
+
     // 指定した対局の棋譜を返す
     override fun getRecordByTitle(title: String): MutableList<GameLog> {
         val recordList = recordRepository.findRecordByTitle(title)
@@ -462,14 +463,12 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
         }
         return logList
     }
+
     // 指定した対局の設定取得
     override fun getRecordSettingByTitle(title: String): GameDetailSetitngModel {
         val recordList = recordRepository.findDetaileByTitle(title)
-        val gameDetail = GameDetailSetitngModel(
-            recordList.handyBlack!!,
-            recordList.handyWhite!!
-        )
-        return gameDetail
+
+        return GameDetailSetitngModel(recordList.handyBlack!!, recordList.handyWhite!!)
     }
 
     // 棋譜の手番変更
@@ -529,15 +528,17 @@ class SyogiLogicUseCaseImp(private val boardRepository: BoardRepository, private
 
     // トライルール判定
     override fun isTryKing(): Boolean {
-        val cell =
-            if (turn == BLACK) {
-                boardRepository.getCellInformation(4, 0)
-            } else {
-                boardRepository.getCellInformation(4, 8)
-            }
-        if ((cell.piece == GYOKU || cell.piece == OU) && cell.turn == turn) {
-            return true
+        val cell = when(turn) {
+            BLACK -> boardRepository.getCellInformation(4, 0)
+            WHITE -> boardRepository.getCellInformation(4, 8)
+            else -> null
         }
+        cell?.let {
+            if ((cell.piece == GYOKU || cell.piece == OU) && cell.turn == turn) {
+                return true
+            }
+        }
+
         return false
     }
 }

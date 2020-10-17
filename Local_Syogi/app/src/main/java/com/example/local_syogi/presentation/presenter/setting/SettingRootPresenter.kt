@@ -2,15 +2,12 @@ package com.example.local_syogi.presentation.presenter.setting
 
 import com.example.local_syogi.data.remote.FirebaseRepository
 import com.example.local_syogi.presentation.contact.setting.SettingRootContact
+import com.example.local_syogi.syogibase.util.IntUtil.FREE
+import com.example.local_syogi.syogibase.util.IntUtil.RATE
 
 class SettingRootPresenter(private val view: SettingRootContact.View, private val firebase: FirebaseRepository) : SettingRootContact.Presenter {
 
     private var mode = 1
-
-    companion object {
-        const val FREE = 1
-        const val RATE = 2
-    }
 
     // Modeリセット(これを入れないとなぜか初期化されない)
     override fun initMode() {
