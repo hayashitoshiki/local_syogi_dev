@@ -1,12 +1,12 @@
 package com.example.local_syogi.presentation.presenter.game
 
-import com.example.local_syogi.presentation.contact.game.GameViewFreeContact
+import com.example.local_syogi.presentation.contact.game.GameViewPlayBackContact
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCase
 import com.example.local_syogi.syogibase.util.IntUtil.BLACK
 import com.example.local_syogi.syogibase.util.IntUtil.WHITE
 
-class GameLogicFreePresenter(private val view: GameViewFreeContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewFreeContact.Presenter {
+class GameLogicPlayBackPresenter(private val view: GameViewPlayBackContact.View, private val syogiUseCase: SyogiLogicUseCase) : GameViewPlayBackContact.Presenter {
 
     // 初期画面セット
     override fun setReplayView(gameDetail: GameDetailSetitngModel) {
@@ -54,13 +54,12 @@ class GameLogicFreePresenter(private val view: GameViewFreeContact.View, private
         syogiUseCase.setBackMove()
         changeTurn()
     }
+
     // ターン変更
     private fun changeTurn() {
-        val turn = syogiUseCase.getTurn()
-        if (turn == BLACK) {
-            syogiUseCase.setTurn(WHITE)
-        } else {
-            syogiUseCase.setTurn(BLACK)
+        when (syogiUseCase.getTurn()) {
+            BLACK -> syogiUseCase.setTurn(WHITE)
+            WHITE -> syogiUseCase.setTurn(BLACK)
         }
     }
 }

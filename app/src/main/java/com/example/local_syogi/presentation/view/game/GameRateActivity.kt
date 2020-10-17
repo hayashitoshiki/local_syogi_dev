@@ -43,10 +43,7 @@ class GameRateActivity : AppCompatActivity(), SocketRepository.presenter {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_rate)
-        socketRepository =
-            SocketRepositoryImp(
-                this
-            )
+        socketRepository = SocketRepositoryImp(this)
         socketRepository.start()
         // 画面作成
         frame = this.findViewById(R.id.frame) as FrameLayout

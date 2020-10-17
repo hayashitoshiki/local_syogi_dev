@@ -2,7 +2,8 @@ package com.example.local_syogi.presentation.contact.game
 
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 
-interface GameViewFreeContact {
+interface GameViewPlayBackContact {
+
     interface View {
         // 将棋盤描画
         fun drawBoard()

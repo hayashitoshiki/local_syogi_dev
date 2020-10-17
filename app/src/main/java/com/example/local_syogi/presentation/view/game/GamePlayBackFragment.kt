@@ -31,7 +31,7 @@ class GamePlayBackFragment(private val log: MutableList<GameLog>, private val ga
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val gameView = GameFreeView(context!!, game_container.width, game_container.height, log, gameDetail)
+        val gameView = GamePlayBackView(context!!, game_container.width, game_container.height, log, gameDetail)
         game_container.addView(gameView)
 
         backButton.setOnClickListener {

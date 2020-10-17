@@ -8,28 +8,18 @@ import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import com.example.local_syogi.R
-import com.example.local_syogi.presentation.contact.game.GameViewFreeContact
-import com.example.local_syogi.presentation.presenter.game.GameLogicFreePresenter
+import com.example.local_syogi.presentation.contact.game.GameViewPlayBackContact
 import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.data.entity.game.GameMode
-import com.example.local_syogi.syogibase.data.repository.BoardRepositoryImp
-import com.example.local_syogi.syogibase.data.repository.GameRecordRepositoryImp
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
-import com.example.local_syogi.syogibase.domain.usecase.SyogiLogicUseCaseImp
 import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 
-class GameFreeView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : View(context), GameViewFreeContact.View,
-    KoinComponent {
+class GamePlayBackView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) :
+    KoinComponent,View(context), GameViewPlayBackContact.View {
 
-    // private val presenter:GameViewContact.Presenter by inject{ parametersOf(this) }
-    private val presenter: GameLogicFreePresenter =
-        GameLogicFreePresenter(
-            this as GameViewFreeContact.View,
-            SyogiLogicUseCaseImp(
-                BoardRepositoryImp(),
-                GameRecordRepositoryImp()
-            )
-        )
+    private val presenter: GameViewPlayBackContact.Presenter by inject{ parametersOf(this) }
 
     private lateinit var canvas: Canvas
     private val paint: Paint = Paint()
@@ -56,19 +46,24 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
     private val tokinBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_to)
     private val rect1 = Rect(0, 0, kingBmp.width, kingBmp.height)
 
+    // 将棋盤の幅
     private var bw: Float = if (width < height) {
         width.toFloat()
     } else {
         height.toFloat()
-    } // 将棋盤の幅
+    }
+    // 将棋盤の高さ
     private var bh: Float = if (width < height) {
         width.toFloat()
     } else {
         height.toFloat()
-    } // 将棋盤の高さ
-    private var cw: Float = bw / 9 // １マスの幅
-    private var ch: Float = bh / 9 // １マスの高さ
-    private val median = 3 // 盤の位置　中央値：３ 範囲：０～６
+    }
+    // １マスの幅
+    private var cw: Float = bw / 9
+    // １マスの高さ
+    private var ch: Float = bh / 9
+    // 盤の位置　中央値：３ 範囲：０～６
+    private val median = 2
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -87,10 +82,10 @@ class GameFreeView(context: Context, width: Int, height: Int, val log: MutableLi
 
         this.canvas = canvas
         canvas.save()
-        canvas.rotate(180f, (width / 2).toFloat(), cw * 2)
-        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * 5 / 2, paint)
+        canvas.rotate(180f, (width / 2).toFloat(), cw * median)
+        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * (median + 1), paint)
         canvas.restore()
-        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * 15, paint)
+        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * (median + 12), paint)
         canvas.translate(0f, cw * median)
         presenter.drawView()
 

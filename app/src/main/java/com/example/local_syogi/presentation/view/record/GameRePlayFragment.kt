@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
-import com.example.local_syogi.presentation.view.game.GameFreeView
+import com.example.local_syogi.presentation.view.game.GamePlayBackView
 import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import kotlinx.android.synthetic.main.fragment_game_play_back.*
@@ -18,7 +18,7 @@ import org.koin.core.parameter.parametersOf
 class GameRePlayFragment(private val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : Fragment(), GamePlayBackContact.View {
 
     private val presenter: GamePlayBackContact.Presenter by inject { parametersOf(this) }
-    private lateinit var gameView: GameFreeView
+    private lateinit var gameView: GamePlayBackView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,10 +26,13 @@ class GameRePlayFragment(private val log: MutableList<GameLog>, private val game
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_play_back, container, false)
-        gameView = GameFreeView(context!!, game_container.width, game_container.height, log, gameDetail)
-        game_container.addView(gameView)
-
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        gameView = GamePlayBackView(context!!, game_container.width, game_container.height, log, gameDetail)
+        game_container.addView(gameView)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

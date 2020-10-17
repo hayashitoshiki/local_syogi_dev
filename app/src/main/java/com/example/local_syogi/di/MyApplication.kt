@@ -15,6 +15,7 @@ import com.example.local_syogi.presentation.contact.account.SettingAccountContac
 import com.example.local_syogi.presentation.contact.account.SignInUpContact
 import com.example.local_syogi.presentation.contact.account.SignOutContact
 import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
+import com.example.local_syogi.presentation.contact.game.GameViewPlayBackContact
 import com.example.local_syogi.presentation.contact.game.GameViewRateContact
 import com.example.local_syogi.presentation.contact.record.GameRecordListContact
 import com.example.local_syogi.presentation.contact.record.GameRecordRootContact
@@ -24,6 +25,7 @@ import com.example.local_syogi.presentation.presenter.account.AuthenticationBase
 import com.example.local_syogi.presentation.presenter.account.SettingAccountPresenter
 import com.example.local_syogi.presentation.presenter.account.SignInUpPresenter
 import com.example.local_syogi.presentation.presenter.account.SignOutPresenter
+import com.example.local_syogi.presentation.presenter.game.GameLogicPlayBackPresenter
 import com.example.local_syogi.presentation.presenter.game.GameLogicRatePresenter
 import com.example.local_syogi.presentation.presenter.game.GamePlayBackPresenter
 import com.example.local_syogi.presentation.presenter.record.GameRecordListPresenter
@@ -72,6 +74,7 @@ class MyApplication : Application() {
     private val module: Module = module {
         factory <SettingSyogiBaseContact.Presenter> { (v: SettingSyogiBaseContact.View) -> SettingSyogiBasePresenter(v) }
         factory <GameViewContact.Presenter> { (v: GameViewContact.View) -> GameLogicPresenter(v, get()) }
+        factory <GameViewPlayBackContact.Presenter> { (v: GameViewPlayBackContact.View) -> GameLogicPlayBackPresenter(v, get()) }
         factory <GameViewRateContact.Presenter> { (v: GameViewRateContact.View) -> GameLogicRatePresenter(v, get(), get()) }
         factory <SettingAccountContact.Presenter> { (v: SettingAccountContact.View) -> SettingAccountPresenter(v, get()) }
         factory <SettingRootContact.Presenter> { (v: SettingRootContact.View) -> SettingRootPresenter(v, get()) }

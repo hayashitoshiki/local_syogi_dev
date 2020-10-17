@@ -1,4 +1,5 @@
 package com.example.local_syogi.syogibase.presentation.view
+
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.*
@@ -20,9 +21,9 @@ import org.koin.core.parameter.parametersOf
 class GameView(private val activity: GameActivity, context: Context, width: Int, height: Int) : View(context), GameViewContact.View,
     KoinComponent {
 
-    private val presenter: GameViewContact.Presenter by inject { parametersOf(this) }
-    private lateinit var canvas: Canvas
-    private val paint: Paint = Paint()
+     private val presenter: GameViewContact.Presenter by inject { parametersOf(this) }
+     private lateinit var canvas: Canvas
+     private val paint: Paint = Paint()
 
     // 画像定義
     private val kingBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_king)
@@ -41,19 +42,24 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
     private val tokinBmp = BitmapFactory.decodeResource(resources, R.drawable.syougi_to)
     private val rect1 = Rect(0, 0, kingBmp.width, kingBmp.height)
 
+    // 将棋盤の幅
     private val bw: Float = if (width < height) {
         width.toFloat()
     } else {
         height.toFloat()
-    } // 将棋盤の幅
+    }
+    // 将棋盤の高さ
     private val bh: Float = if (width < height) {
         width.toFloat()
     } else {
         height.toFloat()
-    } // 将棋盤の高さ
-    private val cw: Float = bw / 9 // １マスの幅
-    private val ch: Float = bh / 9 // １マスの高さ
-    private val median = 3 // 盤の位置　中央値：３ 範囲：０～６
+    }
+    // １マスの幅
+    private val cw: Float = bw / 9
+    // １マスの高さ
+    private val ch: Float = bh / 9
+    // 盤の位置　中央値：３ 範囲：０～６
+    private val median = 2
 
     private lateinit var soundPool: SoundPool
     private var soundOne = 0
@@ -70,10 +76,10 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
 
         this.canvas = canvas
         canvas.save()
-        canvas.rotate(180f, (width / 2).toFloat(), cw * 2)
-        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * 5 / 2, paint)
+        canvas.rotate(180f, (width / 2).toFloat(), cw * median)
+        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * (median + 1), paint)
         canvas.restore()
-        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * 15, paint)
+        canvas.drawText(GameMode.getModeText(), width / 2 - textWidth / 2, cw * (median + 12), paint)
         canvas.translate(0f, cw * median)
         presenter.drawView()
 
@@ -111,7 +117,6 @@ class GameView(private val activity: GameActivity, context: Context, width: Int,
     override fun drawBoard() {
         // 盤面セット
         val bmp = BitmapFactory.decodeResource(resources, R.drawable.free_grain_sub)
-        val rect1 = Rect(0, 0, bw.toInt(), bh.toInt())
         val rect2 = Rect(0, ch.toInt(), bw.toInt() + bw.toInt(), bh.toInt() + ch.toInt())
         canvas.drawBitmap(bmp, rect1, rect2, paint)
         // 駒台セット
