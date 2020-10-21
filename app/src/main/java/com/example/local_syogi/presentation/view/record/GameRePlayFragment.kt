@@ -1,10 +1,14 @@
 package com.example.local_syogi.presentation.view.record
 
 import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
@@ -14,6 +18,7 @@ import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import kotlinx.android.synthetic.main.fragment_game_play_back.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+
 
 class GameRePlayFragment(private val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : Fragment(), GamePlayBackContact.View {
 
@@ -53,13 +58,21 @@ class GameRePlayFragment(private val log: MutableList<GameLog>, private val game
             gameView.goMoveLast()
         }
         endButton.setOnClickListener {
-            AlertDialog.Builder(context).setCancelable(false)
-                .setMessage("感想戦を終了しますか？")
-                .setPositiveButton("はい") { _, _ ->
+            val customAlertView = layoutInflater.inflate(R.layout.dialog_custom, null)
+            val builder = AlertDialog.Builder(context).setView(customAlertView).create()
+            customAlertView.findViewById<TextView>(R.id.message)?.let{ it.text = "感想戦を終了しますか？"}
+            customAlertView.findViewById<Button>(R.id.positive_button)?.let { it.text = "はい"
+                it.setOnClickListener {
                     (parentFragment as GameRecordRootFragment).endRePlay()
+                    builder.dismiss()
                 }
-                .setNegativeButton("いいえ", null)
-                .create().show()
+            }
+            customAlertView.findViewById<Button>(R.id.negative_button)?.let { it.text = "いいえ"
+                it.setOnClickListener { builder.dismiss() }
+            }
+            builder.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            builder.show()
+            builder.window.setLayout(750, 400)
         }
     }
 }
