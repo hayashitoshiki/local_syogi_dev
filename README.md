@@ -1,10 +1,14 @@
 # local_syogi_dev
-様々な対戦が可能な将棋アプリ
+通信対戦含む様々な対戦が可能な将棋アプリ
 
 ## 主な機能
-* 認証系　　
+* 認証機能　　
 * CRUD  
-* ソケット通信  
+* ソケット通信(対戦)  
+* 将棋に関して
+  - [x] 千日手
+  - [x] トライルール
+  - [ ] 27点法
 
 ## 言語
 Kotlin
@@ -13,6 +17,7 @@ Kotlin
 MVP + CleanArcitecture
 
 ## 主な使用技術
+### ネイティブ(ライブラリ)
 * socket.io
 * Koin
 * Retrofit
@@ -22,6 +27,10 @@ MVP + CleanArcitecture
 * ktLint
 * firebase
 * realm
+### バックエンド
+* Node.js
+* Socket.IO
+* Hroku
 
 
 ## イメージ
