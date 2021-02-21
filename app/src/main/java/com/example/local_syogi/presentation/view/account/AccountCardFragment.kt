@@ -95,7 +95,6 @@ class AccountCardFragment : Fragment() {
             }
         } }
         (parentFragment as? AccountRootFragment)?.changeMode(mode)
-
     }
 
     companion object {

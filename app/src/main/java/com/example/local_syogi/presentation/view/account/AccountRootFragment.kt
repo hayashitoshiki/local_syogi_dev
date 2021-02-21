@@ -95,7 +95,7 @@ class AccountRootFragment : Fragment(), SettingAccountContact.View, OnBackPresse
     }
 
     // 各対戦成績表示
-    fun changeMode(mode : Int) {
+    fun changeMode(mode: Int) {
         val fragment = when {
             mode == 1000 -> authFragment
             presenter.isSession() -> { when (mode) {

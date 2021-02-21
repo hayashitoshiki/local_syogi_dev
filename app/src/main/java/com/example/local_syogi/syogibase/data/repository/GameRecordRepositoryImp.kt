@@ -43,14 +43,14 @@ class GameRecordRepositoryImp : GameRecordRepository {
     override fun save(logList: MutableList<GameLog>, winner: Int, type: Int, blackName: String, whiteName: String, winType: Int) {
         val title = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss"))
         updateRealm()
-        val (handyBlack: Int, handyWhite: Int) = if(!GameMode.rate){
+        val (handyBlack: Int, handyWhite: Int) = if (!GameMode.rate) {
             Pair(sharedPreferences.getHandyBlack(), sharedPreferences.getHandyWhite())
         } else {
             Pair(0, 0)
         }
 
         realm.executeTransaction {
-            val game = realm.createObject(GameEntity::class.java, title).apply{
+            val game = realm.createObject(GameEntity::class.java, title).apply {
                 this.winner = winner
                 this.winType = winType
                 this.blackName = blackName

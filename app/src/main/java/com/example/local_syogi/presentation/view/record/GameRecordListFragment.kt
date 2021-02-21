@@ -28,7 +28,7 @@ class GameRecordListFragment : Fragment(), GameRecordListContact.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val gameList1: List<GameModel> = presenter.getOnlineGameList(mode)
-        val gameList2: List<GameModel> =  presenter.getOfflineGameList(mode)
+        val gameList2: List<GameModel> = presenter.getOfflineGameList(mode)
         val arrayAdapter1 = CustomBaseAdapter(context!!, android.R.layout.simple_list_item_1, gameList1)
         val arrayAdapter2 = CustomBaseAdapter(context!!, android.R.layout.simple_list_item_1, gameList2)
 

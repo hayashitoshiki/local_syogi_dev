@@ -6,13 +6,17 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Displayed" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbcf6b40-6db6-4e99-a0a2-9d04e2b9dce7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/round_button_white.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_custom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -23,16 +27,134 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_3_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_3_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_components_16_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_components_16_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_realm_realm_android_library_4_2_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_realm_realm_android_library_4_2_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_koin_koin_android_ext_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_koin_koin_android_ext_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_koin_koin_android_scope_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_koin_koin_android_scope_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_koin_koin_android_viewmodel_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_koin_koin_android_viewmodel_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/Local_Syogi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Local_Syogi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/local_syogi/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/local_syogi/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/entity/AccountEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/entity/AccountEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/entity/FollowEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/entity/FollowEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/AccountRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/AccountRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/AccountRepositoryImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/AccountRepositoryImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/FirebaseRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/FirebaseRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/FirebaseRepositoryImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/FirebaseRepositoryImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/api/ApiService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/api/ApiService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/api/Provider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/api/Provider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/dto/AccountDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/dto/AccountDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/dto/FollowDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/dto/FollowDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/dto/StatusDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/data/remote/dto/StatusDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/di/MyApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/di/MyApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AccountUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AccountUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AccountUseCaseImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AccountUseCaseImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AuthenticationUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AuthenticationUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AuthenticationUseCaseImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/AuthenticationUseCaseImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/model/FollowModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/domain/model/FollowModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/AccountFollowContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/AccountFollowContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/AuthenticationBaseContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/AuthenticationBaseContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/SettingAccountContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/SettingAccountContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/SignInUpContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/SignInUpContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/SignOutContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/account/SignOutContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/game/GamePlayBackContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/game/GamePlayBackContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/game/GameViewPlayBackContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/game/GameViewPlayBackContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/game/GameViewRateContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/game/GameViewRateContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/record/GameRecordListContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/record/GameRecordListContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/record/GameRecordRootContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/record/GameRecordRootContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/setting/SettingCardBaseContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/setting/SettingCardBaseContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/setting/SettingRootContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/setting/SettingRootContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/setting/SettingSyogiBaseContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/contact/setting/SettingSyogiBaseContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/AccountFollowPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/AccountFollowPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/AuthenticationBasePresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/AuthenticationBasePresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/SettingAccountPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/SettingAccountPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/SignInUpPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/SignInUpPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/SignOutPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/account/SignOutPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/game/GameLogicPlayBackPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/game/GameLogicPlayBackPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/game/GameLogicRatePresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/game/GameLogicRatePresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/game/GamePlayBackPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/game/GamePlayBackPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/record/GameRecordListPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/record/GameRecordListPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/record/GameRecordRootPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/record/GameRecordRootPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/setting/SettingCardBasePresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/setting/SettingCardBasePresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/setting/SettingRootPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/setting/SettingRootPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/setting/SettingSyogiBasePresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/presenter/setting/SettingSyogiBasePresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/MainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/MainFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountCardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountCardFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountCustomBaseAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountCustomBaseAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountFollowFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountFollowFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountRootFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AccountRootFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AuthenticationBaseFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/AuthenticationBaseFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/NotLoginFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/NotLoginFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/ResultListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/ResultListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/SignInUpFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/SignInUpFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/SignOutFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/account/SignOutFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GamePlayBackFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GamePlayBackFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GamePlayBackView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GamePlayBackView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GameRateActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GameRateActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GameRateView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/game/GameRateView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/CustomBaseAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/CustomBaseAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRePlayFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRePlayFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRecordCardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRecordCardFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRecordListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRecordListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRecordRootFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/record/GameRecordRootFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/CustomFragmentPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/CustomFragmentPagerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/CustomViewPager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/CustomViewPager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingCardBaseFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingCardBaseFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingDetailsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingDetailsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingDetailsIconFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingDetailsIconFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingRootFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingRootFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingSyogiBaseFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/presentation/view/setting/SettingSyogiBaseFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/Board.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/Board.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/Cell.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/Cell.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/GameLog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/GameLog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/GameMode.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/game/GameMode.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/local/GameEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/local/GameEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/local/RecordEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/local/RecordEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/remote/EndInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/remote/EndInfo.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/remote/Move.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/remote/Move.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/remote/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/entity/remote/Player.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/BoardRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/BoardRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/BoardRepositoryImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/BoardRepositoryImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/GameRecordRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/GameRecordRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/GameRecordRepositoryImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/GameRecordRepositoryImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/SocketRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/SocketRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/SocketRepositoryImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/data/repository/SocketRepositoryImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/model/GameDetailSetitngModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/model/GameDetailSetitngModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/model/GameModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/model/GameModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/usecase/SyogiLogicUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/usecase/SyogiLogicUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/usecase/SyogiLogicUseCaseImp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/domain/usecase/SyogiLogicUseCaseImp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/contact/GameViewContact.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/contact/GameViewContact.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/presenter/GameLogicPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/presenter/GameLogicPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/GameActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/GameActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/GameSettingSharedPreferences.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/GameSettingSharedPreferences.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/GameView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/GameView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/WinLoseModal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/presentation/view/WinLoseModal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/util/IntUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/util/IntUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/util/Piece.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/util/Piece.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/util/PieceMove.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/syogibase/util/PieceMove.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/util/OnBackPressedListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/local_syogi/util/OnBackPressedListener.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/anim/fade_out_slide.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/anim/fade_out_slide.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/ExampleUnitTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/GameLogicRatePresenterTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/GameLogicRatePresenterTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/syogibase/domain/SyogiLogicUsecaseTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/syogibase/domain/SyogiLogicUsecaseTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/syogibase/presentation/presenter/GameLogicPresenterTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/example/local_syogi/syogibase/presentation/presenter/GameLogicPresenterTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_API_29" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -58,15 +180,21 @@
   <component name="ProjectId" id="1iz3tKCD549fcyHQj8SkxfDRdBA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android-custom-view/Users/hayashitoshiki/AndroidStudioProjects/local_syogi_dev/app/src/main/java/com/example/local_syogi/presentation/view/setting/CustomViewPager.kt_SELECTED" value="CustomViewPager" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1602896825570" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1610605391409" />
+    <property name="multi-representation-preview/Users/hayashitoshiki/AndroidStudioProjects/local_syogi_dev/app/src/main/java/com/example/local_syogi/presentation/view/setting/CustomViewPager.kt_selected" value="Custom views" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="settings.saveactions" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -74,7 +202,23 @@
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Android JUnit.SyogiLogicUsecaseTest">
+    <configuration name="SyogiLogicUsecaseTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.local_syogi.syogibase.domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.local_syogi.syogibase.domain" />
+      <option name="MAIN_CLASS_NAME" value="com.example.local_syogi.syogibase.domain.SyogiLogicUsecaseTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -82,7 +226,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -133,7 +277,33 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="local_syogi_dev [ktlintFormat]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="ktlintFormat" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Android JUnit.SyogiLogicUsecaseTest" />
+        <item itemvalue="Gradle.local_syogi_dev [ktlintFormat]" />
+      </list>
+    </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -148,53 +318,44 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="212" key="AndroidCreateResourceFileDialog" timestamp="1603200300794">
+    <state x="245" y="189" key="#PSD" timestamp="1613905284399">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="308" y="212" key="AndroidCreateResourceFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1603200300794" />
-    <state width="1398" height="203" key="GridCell.Tab.0.bottom" timestamp="1602918255904">
+    <state x="245" y="189" key="#PSD/0.0.1440.900@0.0.1440.900" timestamp="1613905284399" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1613906964315">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="203" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1602918255904" />
-    <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.23.1440.825@0.23.1440.825" timestamp="1602902852969" />
-    <state width="1398" height="203" key="GridCell.Tab.0.center" timestamp="1602918255903">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1613906964315" />
+    <state width="1398" height="203" key="GridCell.Tab.0.bottom/0.23.1440.827@0.23.1440.827" timestamp="1607942709397" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1613906964314">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="203" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1602918255903" />
-    <state width="1398" height="303" key="GridCell.Tab.0.center/0.23.1440.825@0.23.1440.825" timestamp="1602902852965" />
-    <state width="1398" height="203" key="GridCell.Tab.0.left" timestamp="1602918255902">
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1613906964314" />
+    <state width="1398" height="203" key="GridCell.Tab.0.center/0.23.1440.827@0.23.1440.827" timestamp="1607942709395" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1613906964313">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="203" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1602918255902" />
-    <state width="1398" height="303" key="GridCell.Tab.0.left/0.23.1440.825@0.23.1440.825" timestamp="1602902852964" />
-    <state width="1398" height="203" key="GridCell.Tab.0.right" timestamp="1602918255903">
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1613906964313" />
+    <state width="1398" height="203" key="GridCell.Tab.0.left/0.23.1440.827@0.23.1440.827" timestamp="1607942709394" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1613906964315">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="203" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602918255903" />
-    <state width="1398" height="303" key="GridCell.Tab.0.right/0.23.1440.825@0.23.1440.825" timestamp="1602902852968" />
-    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1602902852971">
-      <screen x="0" y="23" width="1440" height="825" />
-    </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.23.1440.825@0.23.1440.825" timestamp="1602902852971" />
-    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1602902852970">
-      <screen x="0" y="23" width="1440" height="825" />
-    </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.center/0.23.1440.825@0.23.1440.825" timestamp="1602902852970" />
-    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1602902852970">
-      <screen x="0" y="23" width="1440" height="825" />
-    </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.left/0.23.1440.825@0.23.1440.825" timestamp="1602902852970" />
-    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1602902852971">
-      <screen x="0" y="23" width="1440" height="825" />
-    </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.right/0.23.1440.825@0.23.1440.825" timestamp="1602902852971" />
-    <state x="221" y="89" key="SettingsEditor" timestamp="1602917786009">
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1613906964315" />
+    <state width="1398" height="203" key="GridCell.Tab.0.right/0.23.1440.827@0.23.1440.827" timestamp="1607942709396" />
+    <state x="221" y="89" key="SettingsEditor" timestamp="1613905581125">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602917786009" />
-    <state x="372" y="207" width="712" height="486" key="find.popup" timestamp="1603201036932">
+    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1613905581125" />
+    <state x="390" y="280" key="com.intellij.ide.util.TipDialog" timestamp="1613833956499">
+      <screen x="0" y="23" width="1440" height="816" />
+    </state>
+    <state x="390" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1605350479172" />
+    <state x="390" y="280" key="com.intellij.ide.util.TipDialog/0.23.1440.816@0.23.1440.816" timestamp="1613833956499" />
+    <state x="390" y="282" key="com.intellij.ide.util.TipDialog/0.23.1440.821@0.23.1440.821" timestamp="1613732065941" />
+    <state x="390" y="282" key="com.intellij.ide.util.TipDialog/0.23.1440.822@0.23.1440.822" timestamp="1606341997092" />
+    <state x="374" y="207" width="744" height="486" key="find.popup" timestamp="1613876126803">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="372" y="207" width="712" height="486" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1603201036932" />
+    <state x="374" y="207" width="744" height="486" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1613876126803" />
   </component>
 </project>

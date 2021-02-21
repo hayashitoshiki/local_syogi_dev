@@ -17,9 +17,9 @@ import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 
 class GamePlayBackView(context: Context, width: Int, height: Int, val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) :
-    KoinComponent,View(context), GameViewPlayBackContact.View {
+    KoinComponent, View(context), GameViewPlayBackContact.View {
 
-    private val presenter: GameViewPlayBackContact.Presenter by inject{ parametersOf(this) }
+    private val presenter: GameViewPlayBackContact.Presenter by inject { parametersOf(this) }
 
     private lateinit var canvas: Canvas
     private val paint: Paint = Paint()

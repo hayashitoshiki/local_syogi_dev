@@ -1,6 +1,7 @@
 package com.example.local_syogi.di
 
 import android.app.Application
+import android.util.Log
 import com.example.local_syogi.data.remote.AccountRepository
 import com.example.local_syogi.data.remote.AccountRepositoryImp
 import com.example.local_syogi.data.remote.FirebaseRepository
@@ -60,6 +61,7 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Log.d("TAG","Application onCreate")
         Realm.init(this)
         val config = RealmConfiguration.Builder().build()
 

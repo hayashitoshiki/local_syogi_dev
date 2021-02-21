@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.presentation.contact.game.GamePlayBackContact
-import com.example.local_syogi.presentation.view.record.GameRecordRootFragment
 import com.example.local_syogi.syogibase.data.entity.game.GameLog
 import com.example.local_syogi.syogibase.domain.model.GameDetailSetitngModel
 import com.example.local_syogi.syogibase.presentation.view.GameActivity
@@ -56,7 +55,7 @@ class GamePlayBackFragment(private val log: MutableList<GameLog>, private val ga
         endButton.setOnClickListener {
             val customAlertView = layoutInflater.inflate(R.layout.dialog_custom, null)
             val builder = AlertDialog.Builder(context).setView(customAlertView).create()
-            customAlertView.findViewById<TextView>(R.id.message)?.let{ it.text = "感想戦を終了しますか？"}
+            customAlertView.findViewById<TextView>(R.id.message)?.let { it.text = "感想戦を終了しますか？" }
             customAlertView.findViewById<Button>(R.id.positive_button)?.let { it.text = "はい"
                 it.setOnClickListener {
                     (activity as? GameActivity)?.end()

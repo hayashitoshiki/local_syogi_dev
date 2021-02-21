@@ -55,13 +55,13 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             if (parentView.id == parentView.deleteButton.id) {
                 when (parentView.deleteButton.text.toString()) {
                     "削除", "取消" -> {
-                        if(progressLayout.visibility != View.VISIBLE) {
+                        if (progressLayout.visibility != View.VISIBLE) {
                             progressLayout.visibility = View.VISIBLE
                             presenter.deleteFollow(followsList[position].userId)
                         }
                     }
                     "承認" -> {
-                        if(progressLayout.visibility != View.VISIBLE) {
+                        if (progressLayout.visibility != View.VISIBLE) {
                             progressLayout.visibility = View.VISIBLE
                             presenter.updateFollow(followsList[position].userId)
                         }
@@ -75,7 +75,7 @@ class AccountFollowFragment : Fragment(), AccountFollowContact.View {
             parentView.deleteButton.setOnClickListener {
                 when (parentView.deleteButton.text.toString()) {
                     "申請" -> {
-                        if(progressLayout.visibility != View.VISIBLE) {
+                        if (progressLayout.visibility != View.VISIBLE) {
                             progressLayout.visibility = View.VISIBLE
                             presenter.addFollow(accountsList[position].userId)
                         }

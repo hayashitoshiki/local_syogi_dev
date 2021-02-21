@@ -45,8 +45,8 @@ class SignOutFragment : Fragment(), SignOutContact.View {
 
         (parentFragment as? AuthenticationBaseFragment)?.let {
             it.setLoginView()
-        } ?:run {
-            Log.d("TAG","親フラグメントが一致しません")
+        } ?: run {
+            Log.d("TAG", "親フラグメントが一致しません")
         }
     }
 

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.RadioButton
 import android.widget.Spinner
-import android.widget.Switch
 import androidx.fragment.app.Fragment
 import com.example.local_syogi.R
 import com.example.local_syogi.syogibase.presentation.view.GameSettingSharedPreferences

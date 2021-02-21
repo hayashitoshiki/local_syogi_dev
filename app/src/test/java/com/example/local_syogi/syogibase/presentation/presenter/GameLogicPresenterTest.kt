@@ -151,7 +151,6 @@ class GameLogicPresenterTest {
         presenter.onTouchEvent(x, y)
         verify(useCase, times(1)).setMove(x, y - 1, false)
         verify(view, times(1)).playbackEffect()
-       // verify(view, times(1)).gameEnd(BLACK)
     }
 
     /**

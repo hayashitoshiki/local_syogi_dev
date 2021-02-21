@@ -139,7 +139,7 @@ class GameRecordRootFragment : Fragment(), GameRecordRootContact.View, OnBackPre
     }
 
     // 成績表カード切り替え
-    fun changeMode(mode : Int) {
+    fun changeMode(mode: Int) {
         val fragment = when {
             mode == 1000 -> authFragment
             presenter.isSession() -> { when (mode) {

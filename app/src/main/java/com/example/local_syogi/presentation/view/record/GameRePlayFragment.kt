@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_game_play_back.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-
 class GameRePlayFragment(private val log: MutableList<GameLog>, private val gameDetail: GameDetailSetitngModel) : Fragment(), GamePlayBackContact.View {
 
     private val presenter: GamePlayBackContact.Presenter by inject { parametersOf(this) }
@@ -43,7 +42,7 @@ class GameRePlayFragment(private val log: MutableList<GameLog>, private val game
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        backButton.setOnClickListener{
+        backButton.setOnClickListener {
             gameView.backMove()
             gameView.invalidate()
         }
@@ -60,7 +59,7 @@ class GameRePlayFragment(private val log: MutableList<GameLog>, private val game
         endButton.setOnClickListener {
             val customAlertView = layoutInflater.inflate(R.layout.dialog_custom, null)
             val builder = AlertDialog.Builder(context).setView(customAlertView).create()
-            customAlertView.findViewById<TextView>(R.id.message)?.let{ it.text = "感想戦を終了しますか？"}
+            customAlertView.findViewById<TextView>(R.id.message)?.let { it.text = "感想戦を終了しますか？" }
             customAlertView.findViewById<Button>(R.id.positive_button)?.let { it.text = "はい"
                 it.setOnClickListener {
                     (parentFragment as GameRecordRootFragment).endRePlay()
